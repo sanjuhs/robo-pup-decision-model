@@ -114,6 +114,26 @@ The facilitator's five-policy validation queue was interrupted when the user
 requested only one additional GPU training run. Partial outputs are not counted
 as completed training or evaluation results.
 
+## Browser presentation capture (2026-10-15)
+
+The bundled `runpod/5090-once` checkpoint was replayed through the real browser
+arena, with Close-up/follow camera and forward keyboard input. This was evaluation
+of existing weights; no new training or paid resources were used. In **6.018 wall
+seconds**, physics advanced **5.760 seconds** and the robot moved **2.012 m along
+world X**, without requesting a reset. Later frames encounter the crate; this is
+not a push-to-goal success or a flat-ground evaluation protocol.
+
+Chromium used **SwiftShader software WebGL** while recording at a 1440×1050 page
+size. The 41 sampled render frames had a **143.9 ms median** and **368.8 ms p95**
+frame interval (roughly 7 frames/s during capture). Buffered interpolation is
+refresh-rate independent, but this measurement does not demonstrate smooth
+30/60 FPS on hardware-accelerated browsers. Recording itself adds overhead.
+Raw timing, positions, camera targets, and expression telemetry
+are in [the capture record](../benchmarks/presentation-2026-10-15/measurements.json).
+The README GIF crops the viewport and loops the first 3.6 seconds at the original
+playback speed; repeated GIF frames do not represent extra physics steps. The
+linked WebM retains the full recorded page and captured duration.
+
 ## Cost
 
 CPU development incurred **$0 in Runpod GPU spend**. The two disposable GPU

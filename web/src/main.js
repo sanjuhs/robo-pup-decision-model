@@ -146,12 +146,12 @@ function buildScene(geoms) {
       panel.position.set(-.02,0,.078);
       mesh.add(panel);
       const tail = new THREE.Mesh(new THREE.CapsuleGeometry(.017,.15,3,8),new THREE.MeshStandardMaterial({color:'#b5d1a4'}));
-      tail.rotation.z = Math.PI/2;
-      tail.rotation.y = -.5;
-      tail.position.set(-.075,0,0);
+      const tailDirection = new THREE.Vector3(-1,0,.6).normalize();
+      tail.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),tailDirection);
+      tail.position.copy(tailDirection).multiplyScalar(.075);
       tail.castShadow = true;
       tailPivot = new THREE.Group();
-      tailPivot.position.set(-.26,0,.08);
+      tailPivot.position.set(-a+.005,0,.035);
       tailPivot.add(tail);
       mesh.add(tailPivot);
     }

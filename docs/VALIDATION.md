@@ -7,7 +7,7 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Check | Observed result |
 | --- | --- |
 | `ROBOPUP_MJX=1 bash scripts/setup.sh` | Passed frozen Python/npm installation, two checkpoint digest checks, browser build, operator CLI verification and Python tests; repeat runs preserve local outputs |
-| `pytest -q` | 15 passed, no skipped/disabled/expected failures; one upstream AnyIO deprecation warning |
+| `pytest -q` | 16 passed, no skipped/disabled/expected failures; one upstream AnyIO deprecation warning |
 | `ruff check src tests scripts` | Passed |
 | `npm run build` | Passed; one approximately 523 kB JS bundle produces Vite's size advisory |
 | `npm test` | 11 passed: eight browser checks including real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion, close-up/follow camera and frozen expressions on pause, mobile layout, five simultaneous browsers; three deterministic render timing/reset checks |
@@ -21,6 +21,8 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Resource cleanup | Both created pod IDs deleted, absence confirmed, zero own pods remaining; no persistent volumes created |
 | Billing | API calls succeeded but histories were empty at check time; aggregate GPU cost estimate $0.2769, not a final receipt |
 | Source credential check | No Runpod API-key pattern in tracked text files; account key was not passed into the GPU job |
+| Credential scanner regression | A synthetic key in a temporary Git repository fails the check; after deletion it still fails the history check; output never includes the value |
+| Actual browser recording | GPU checkpoint moved 2.012 m along world X over 5.760 simulated seconds without reset; headless software-WebGL capture median frame interval 143.9 ms. Raw telemetry is in `benchmarks/presentation-2026-10-15/` |
 
 GitHub Actions also passed on the earlier code revision
 `b7a5976e1049c3077edb734e475a83fe1b270b87`:

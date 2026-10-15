@@ -19,6 +19,12 @@ GPU-trained demo checkpoints are included. See the [raw benchmark evidence](docs
 for compilation/setup time, a failed attempt, costs, and limits. Following,
 pushing-to-goal, learned recovery, and Jev integration remain incomplete.
 
+![Actual GPU-trained policy in the browser close-up camera](docs/assets/trained-walk.gif)
+
+Actual browser capture of the bundled GPU-trained checkpoint, cropped and looped.
+[Full six-second recording](docs/assets/trained-walk.webm). Software WebGL capture
+was about 7 frames/s on this host; this is not a hardware-browser FPS benchmark.
+
 ## Start the yard
 
 Requires Linux, Python 3.11–3.13, Node 20.19+ or 22.12+, and `uv`.
@@ -111,6 +117,17 @@ Use the existing checkout in each isolated cloud task; no Git worktree is needed
 browser, verifies the pinned Runpod CLI checksum, and runs the Python tests.
 For frontend development, run the backend and `cd web && npm run dev` separately.
 Vite proxies API and WebSocket traffic to the backend on port 8000.
+
+Before publishing changes, run `uv run python scripts/check_public_secrets.py --history`.
+It checks tracked files and reachable history for common Runpod/GitHub token and
+private-key patterns without printing values. CI repeats the tracked-file check.
+This targeted check does not detect every possible secret. Keep real credentials
+in secure environment bindings; `.env` files and local artifacts are ignored.
+
+To record the actual trained walker, start the arena, then run
+`node web/scripts/record-demo.mjs` from the root. Chromium and system FFmpeg are
+required. It saves a video, screenshot, and timing/position measurements under a
+new `artifacts/presentation/` directory. Recording starts no training or cloud jobs.
 
 Original code and primitive geometry: [MIT](LICENSE). Dependencies retain their
 own licenses; see [third-party notices](THIRD_PARTY_NOTICES.md). The project is

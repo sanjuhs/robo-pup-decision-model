@@ -15,6 +15,14 @@ research prototype; the linked evidence describes what was actually tested.
   These expressions do not change the policy, leg motion, or physics.
 - Verify interpolation and camera response at simulated 30, 60, and 144 Hz,
   plus real-browser trained walking, follow-camera tracking, and pause behavior.
+- Add a reproducible real-browser recorder, a captured trained-walk preview, and
+  raw software-rendering measurements, including the observed frame-rate limit.
+
+### Public repository checks
+
+- Add a targeted credential-pattern check for tracked files and optional Git
+  history, run it in CI, and test that deleted historical fixtures are detected
+  without printing their values. This is not an exhaustive secret detector.
 
 ## 0.1.0 — 2026-10-15
 
