@@ -24,10 +24,10 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Credential scanner regression | A synthetic key in a temporary Git repository fails the check; after deletion it still fails the history check; output never includes the value |
 | Actual browser recording | GPU checkpoint moved 2.012 m along world X over 5.760 simulated seconds without reset; headless software-WebGL capture median frame interval 143.9 ms. Raw telemetry is in `benchmarks/presentation-2026-10-15/` |
 
-GitHub Actions passed on presentation revision
-`f4280ebce704ca44d8c87fc26ba42131345a06f4`:
-[prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38823206835).
-The earlier presentation revision `7e86dd3` also passed. These hosted runs are
+GitHub Actions passed on the pause-fix and CI-reporting revision
+`a15a6872e88df6816fef661b3e1404b2e4c51694`:
+[prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38823973896).
+The earlier presentation revisions `7e86dd3` and `f4280eb` also passed. These hosted runs are
 separate evidence from local testing. Later source revisions trigger their own
 checks; inspect their recorded conclusions before claiming them passed.
 
