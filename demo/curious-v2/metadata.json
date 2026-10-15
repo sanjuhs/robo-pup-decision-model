@@ -1,0 +1,23 @@
+{
+  "started_at": "2026-10-15T22:14:45.624013+00:00",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "torch": "2.9.0+cpu",
+  "cuda_available": false,
+  "revision": "550ac5f80a1bad950dcc7e550a727de891b77e7d",
+  "policy": "residual-analytic-trot-v1",
+  "training_device": "cpu",
+  "physics_device": "cpu",
+  "source_hashes": {
+    "__init__.py": "de836d1eb82384f77fd8696cfdc232600d9f1a4cfa888ca50a0ef4adec41c89f",
+    "experiments.py": "f67bf6e3ec20337331b32ab26c5fabebc57d6234efc745901e30c9bf45ec4d3c",
+    "train.py": "a43b58876bbd4ea612f91e6e80625c73dc3e777c8e12cc595e6c0ea680ac4a16",
+    "decisions.py": "e846e9227121fe935ddac0629abb494a2227ceb36005dd9c45573b506c1b3076",
+    "model.py": "0f94baa2fa79024cbf41934b8986363a3bf1d6f40c89bc8c870f787fdd3dcb34",
+    "benchmark.py": "9d855745039180382c59e8159c5faa750592e4f363380b001ca57ad97d4a069d",
+    "env.py": "d112b7647d08d90599a97c52984449e81cb9e92211b6ae8a8bf34ae076044ded",
+    "evaluate.py": "c37f5c9315dca2fa55cb7d32d8a280b0608a7e68f751eedaa849a55f0534dcc3",
+    "server.py": "8a64824931cac588bf42e6ced918aa9f5f0a2602fb69e3f5b58c145dd5a259d3"
+  },
+  "git_dirty": true
+}

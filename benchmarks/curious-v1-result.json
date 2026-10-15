@@ -1,0 +1,69 @@
+{
+  "requested_steps": 131072,
+  "actual_steps": 131072,
+  "training_seconds": 91.96609753000001,
+  "steps_per_second": 1425.220853339388,
+  "deadline_reached": false,
+  "evaluation": {
+    "protocol": "flat-forward-v1",
+    "target_speed_mps": 0.35,
+    "episode_seconds": 12,
+    "episodes": [
+      {
+        "seed": 1001,
+        "return": 436.8670925128286,
+        "steps": 600,
+        "mean_speed_mps": 0.025367276516684186,
+        "mean_squared_torque": 37.46678211285804,
+        "distance_m": 0.21453949001797587,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1002,
+        "return": 432.30145962734804,
+        "steps": 600,
+        "mean_speed_mps": 0.025099766638067084,
+        "mean_squared_torque": 37.324939700303574,
+        "distance_m": 0.2046234264535383,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1003,
+        "return": 439.7012829055065,
+        "steps": 600,
+        "mean_speed_mps": 0.022313815481950612,
+        "mean_squared_torque": 37.436868405651545,
+        "distance_m": 0.1690351739810761,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1004,
+        "return": 441.4457419291551,
+        "steps": 600,
+        "mean_speed_mps": 0.021614914858079814,
+        "mean_squared_torque": 37.39444456475318,
+        "distance_m": 0.17453376090461603,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1005,
+        "return": 439.7912975848254,
+        "steps": 600,
+        "mean_speed_mps": 0.027998452909328727,
+        "mean_squared_torque": 37.29586478264425,
+        "distance_m": 0.23039838038439997,
+        "fallen": false,
+        "survival_fraction": 1.0
+      }
+    ],
+    "mean_return": 438.0213749119327,
+    "mean_speed_mps": 0.024478845280822087,
+    "mean_distance_m": 0.19862604634832126,
+    "fall_rate": 0.0,
+    "mean_survival_fraction": 1.0
+  }
+}

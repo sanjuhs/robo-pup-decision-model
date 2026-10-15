@@ -1,0 +1,52 @@
+{
+  "policy": "analytic gait",
+  "protocol": "yard-behaviors-v1; one deterministic 30-second trial per behavior",
+  "criteria": {
+    "approach": "final distance <0.25m and no fall",
+    "follow": "mean distance over final 5s <0.5m and no fall",
+    "push": "crate within 0.25m of goal and no fall",
+    "stop": "displacement <0.15m and no fall"
+  },
+  "tasks": [
+    {
+      "behavior": "stop",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": true,
+      "final_target_distance_m": 1.0390664428533707,
+      "mean_target_distance_m": 1.0386103717504807,
+      "final_crate_to_goal_m": 1.5000000000013678,
+      "robot_displacement_m": 0.03952276953346847
+    },
+    {
+      "behavior": "approach",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": true,
+      "final_target_distance_m": 0.20793513366054975,
+      "mean_target_distance_m": 0.31349428109661803,
+      "final_crate_to_goal_m": 1.5000000000013678,
+      "robot_displacement_m": 0.7923904223360206
+    },
+    {
+      "behavior": "follow",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": false,
+      "final_target_distance_m": 1.4696914466037945,
+      "mean_target_distance_m": 0.7841921637251725,
+      "final_crate_to_goal_m": 1.5000000000013678,
+      "robot_displacement_m": 1.7094112429014143
+    },
+    {
+      "behavior": "push",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": false,
+      "final_target_distance_m": 0.5029592501484029,
+      "mean_target_distance_m": 0.4072202551259887,
+      "final_crate_to_goal_m": 1.1291768825194706,
+      "robot_displacement_m": 1.4409625318651182
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "requested_steps": 262144,
+  "actual_steps": 262144,
+  "training_seconds": 158.0083218110001,
+  "steps_per_second": 1659.0518587594433,
+  "deadline_reached": false,
+  "evaluation": {
+    "protocol": "flat-forward-v1",
+    "target_speed_mps": 0.35,
+    "episode_seconds": 12,
+    "episodes": [
+      {
+        "seed": 1001,
+        "return": 1137.4918711909775,
+        "steps": 600,
+        "mean_speed_mps": 0.3403145128916887,
+        "mean_squared_torque": 25.140171098275697,
+        "distance_m": 2.143975648642733,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1002,
+        "return": 1137.3785100134576,
+        "steps": 600,
+        "mean_speed_mps": 0.3408783638239071,
+        "mean_squared_torque": 25.138589480904443,
+        "distance_m": 2.113540836261556,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1003,
+        "return": 1135.4172321087149,
+        "steps": 600,
+        "mean_speed_mps": 0.3392041799700227,
+        "mean_squared_torque": 25.068478130803424,
+        "distance_m": 2.066228321400252,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1004,
+        "return": 1135.2925016042932,
+        "steps": 600,
+        "mean_speed_mps": 0.33871001346304286,
+        "mean_squared_torque": 25.13924715167048,
+        "distance_m": 2.1642989441387304,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1005,
+        "return": 1135.5835584352346,
+        "steps": 600,
+        "mean_speed_mps": 0.3390694332687101,
+        "mean_squared_torque": 25.06757713809631,
+        "distance_m": 2.179983023640971,
+        "fallen": false,
+        "survival_fraction": 1.0
+      }
+    ],
+    "mean_return": 1136.2327346705356,
+    "mean_speed_mps": 0.3396353006834743,
+    "mean_distance_m": 2.1336053548168485,
+    "fall_rate": 0.0,
+    "mean_survival_fraction": 1.0
+  }
+}

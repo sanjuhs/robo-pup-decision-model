@@ -1,0 +1,13 @@
+{
+  "physics_device": "cpu",
+  "python": "3.12.14",
+  "mujoco": "3.3.7",
+  "steps": 10000,
+  "seconds": 2.802632066000001,
+  "steps_per_second": 3568.074497296498,
+  "resets": 16,
+  "simulated_seconds": 200.0,
+  "control_hz": 50,
+  "physics_hz": 200,
+  "paid_gpu_spend_usd": 0
+}

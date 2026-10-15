@@ -1,0 +1,52 @@
+{
+  "policy": "artifacts/baseline/curious-v2/policy.zip",
+  "protocol": "yard-behaviors-v1; one deterministic 30-second trial per behavior",
+  "criteria": {
+    "approach": "final distance <0.25m and no fall",
+    "follow": "mean distance over final 5s <0.5m and no fall",
+    "push": "crate within 0.25m of goal and no fall",
+    "stop": "displacement <0.15m and no fall"
+  },
+  "tasks": [
+    {
+      "behavior": "stop",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": true,
+      "final_target_distance_m": 1.0390664428533707,
+      "mean_target_distance_m": 1.0386103717504807,
+      "final_crate_to_goal_m": 1.5000000000013678,
+      "robot_displacement_m": 0.03952276953346847
+    },
+    {
+      "behavior": "approach",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": true,
+      "final_target_distance_m": 0.19106812367653028,
+      "mean_target_distance_m": 0.23719823206294177,
+      "final_crate_to_goal_m": 1.5000000000013678,
+      "robot_displacement_m": 0.8611289283873896
+    },
+    {
+      "behavior": "follow",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": false,
+      "final_target_distance_m": 0.6005656659700783,
+      "mean_target_distance_m": 0.47590436693635,
+      "final_crate_to_goal_m": 1.4333631452992266,
+      "robot_displacement_m": 0.7664428149573598
+    },
+    {
+      "behavior": "push",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": false,
+      "final_target_distance_m": 1.785551347730509,
+      "mean_target_distance_m": 1.0187790733557502,
+      "final_crate_to_goal_m": 0.8837470517998853,
+      "robot_displacement_m": 2.6328702658881027
+    }
+  ]
+}

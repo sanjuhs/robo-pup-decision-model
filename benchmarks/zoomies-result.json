@@ -1,0 +1,69 @@
+{
+  "requested_steps": 262144,
+  "actual_steps": 262144,
+  "training_seconds": 177.016331368,
+  "steps_per_second": 1480.9029086419587,
+  "deadline_reached": false,
+  "evaluation": {
+    "protocol": "flat-forward-v1",
+    "target_speed_mps": 0.55,
+    "episode_seconds": 12,
+    "episodes": [
+      {
+        "seed": 1001,
+        "return": 1037.356299283517,
+        "steps": 600,
+        "mean_speed_mps": 0.5129860337588421,
+        "mean_squared_torque": 30.832473557697508,
+        "distance_m": 5.251350623416445,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1002,
+        "return": 1064.1800380600646,
+        "steps": 600,
+        "mean_speed_mps": 0.5196131850391427,
+        "mean_squared_torque": 30.645797543873456,
+        "distance_m": 5.93649672983962,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1003,
+        "return": 1008.3594459394842,
+        "steps": 600,
+        "mean_speed_mps": 0.49205916841433295,
+        "mean_squared_torque": 31.3073027850627,
+        "distance_m": 5.260800789354162,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1004,
+        "return": 1070.040168607216,
+        "steps": 600,
+        "mean_speed_mps": 0.5379527443048175,
+        "mean_squared_torque": 30.075068319232795,
+        "distance_m": 6.345886394451271,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1005,
+        "return": 1001.3550681759302,
+        "steps": 600,
+        "mean_speed_mps": 0.4853371010821952,
+        "mean_squared_torque": 31.458396662969342,
+        "distance_m": 5.33202572910321,
+        "fallen": false,
+        "survival_fraction": 1.0
+      }
+    ],
+    "mean_return": 1036.2582040132424,
+    "mean_speed_mps": 0.5095896465198662,
+    "mean_distance_m": 5.625312053232941,
+    "fall_rate": 0.0,
+    "mean_survival_fraction": 1.0
+  }
+}

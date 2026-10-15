@@ -1,0 +1,69 @@
+{
+  "requested_steps": 262144,
+  "actual_steps": 262144,
+  "training_seconds": 201.73417327899995,
+  "steps_per_second": 1299.4526199458176,
+  "deadline_reached": false,
+  "evaluation": {
+    "protocol": "flat-forward-v1",
+    "target_speed_mps": 0.2,
+    "episode_seconds": 12,
+    "episodes": [
+      {
+        "seed": 1001,
+        "return": 1156.9662804176448,
+        "steps": 600,
+        "mean_speed_mps": 0.20785877009356646,
+        "mean_squared_torque": 14.52700403125249,
+        "distance_m": 2.5065428165526304,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1002,
+        "return": 1159.5403877135466,
+        "steps": 600,
+        "mean_speed_mps": 0.21099309354594029,
+        "mean_squared_torque": 14.501093134162474,
+        "distance_m": 2.535029633195205,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1003,
+        "return": 1157.633819397295,
+        "steps": 600,
+        "mean_speed_mps": 0.20818575686687008,
+        "mean_squared_torque": 14.511148616053145,
+        "distance_m": 2.5173269156181286,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1004,
+        "return": 1158.623404288649,
+        "steps": 600,
+        "mean_speed_mps": 0.21535043093138262,
+        "mean_squared_torque": 14.507747175766053,
+        "distance_m": 2.5967691686504755,
+        "fallen": false,
+        "survival_fraction": 1.0
+      },
+      {
+        "seed": 1005,
+        "return": 1158.0896799284762,
+        "steps": 600,
+        "mean_speed_mps": 0.20931539410683536,
+        "mean_squared_torque": 14.519560795708742,
+        "distance_m": 2.526920694145949,
+        "fallen": false,
+        "survival_fraction": 1.0
+      }
+    ],
+    "mean_return": 1158.1707143491224,
+    "mean_speed_mps": 0.21034068910891895,
+    "mean_distance_m": 2.5365178456324777,
+    "fall_rate": 0.0,
+    "mean_survival_fraction": 1.0
+  }
+}

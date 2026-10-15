@@ -1,0 +1,9 @@
+{
+  "compile_seconds": 84.63019728199993,
+  "physics_device": "cpu",
+  "batched_control_steps": 50,
+  "batched_steps_per_second": 9.122458441685083,
+  "envs": 1,
+  "physics_hz": 200,
+  "control_hz": 50
+}
