@@ -91,6 +91,12 @@ class RoboPupEnv(gym.Env):
         for _ in range(4):
             mujoco.mj_step(self.model, self.data)
             if self.ball_geom >= 0 and not self.ball_touched:
+                # The complete robot fits inside a 1 m horizontal radius.
+                # Avoid traversing contact objects when the ball is far away.
+                dx = float(self.data.xpos[self.ball,0]-self.data.qpos[0])
+                dy = float(self.data.xpos[self.ball,1]-self.data.qpos[1])
+                if dx*dx+dy*dy > 1.:
+                    continue
                 for contact in self.data.contact:
                     if contact.geom1 == self.ball_geom:
                         other = contact.geom2

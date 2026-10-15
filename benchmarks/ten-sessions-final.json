@@ -1,0 +1,77 @@
+{
+  "protocol": "independent-stop-worlds-v1",
+  "participants": 10,
+  "sessions": [
+    {
+      "participant": 0,
+      "frames": 75,
+      "wall_seconds": 3.0179605679995802,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9940487731383685
+    },
+    {
+      "participant": 1,
+      "frames": 75,
+      "wall_seconds": 3.029815032999977,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9901594543972874
+    },
+    {
+      "participant": 2,
+      "frames": 75,
+      "wall_seconds": 3.025153506999686,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9916852130176109
+    },
+    {
+      "participant": 3,
+      "frames": 75,
+      "wall_seconds": 3.025297464999767,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9916380239323632
+    },
+    {
+      "participant": 4,
+      "frames": 75,
+      "wall_seconds": 3.030647435999981,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9898874954453709
+    },
+    {
+      "participant": 5,
+      "frames": 75,
+      "wall_seconds": 3.03061550800021,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9898979240621468
+    },
+    {
+      "participant": 6,
+      "frames": 75,
+      "wall_seconds": 3.0350231850002274,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9884603237387565
+    },
+    {
+      "participant": 7,
+      "frames": 75,
+      "wall_seconds": 3.0352125389999856,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9883986579036634
+    },
+    {
+      "participant": 8,
+      "frames": 75,
+      "wall_seconds": 3.042595212999913,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9860003681009019
+    },
+    {
+      "participant": 9,
+      "frames": 75,
+      "wall_seconds": 3.0396970940000756,
+      "simulated_seconds": 2.9999999999999565,
+      "real_time_ratio": 0.9869404441388336
+    }
+  ],
+  "note": "Short local WebSocket capacity probe, not a two-hour browser soak test"
+}

@@ -58,6 +58,14 @@ real time** over 75 frames per session. Five simultaneous browser instances also
 received independent advancing states. These short capacity tests do not establish
 two-hour reliability or ten simultaneous training jobs.
 
+A later check of the expanded physical yard exposed contact-sensor overhead
+(minimum ratio 0.815). A conservative 1 m broad-phase check now skips robot/ball
+contact-object traversal when contact is geometrically impossible. The final
+standalone ten-session probe measured a minimum **0.986 times real time**; a probe
+overlapping one additional browser ball-mission test measured **0.963**. All three
+records are retained. The physical ball-contact regression and browser mission
+still pass after this optimization.
+
 ## RTX 5090 attempt evidence
 
 The first authorized GPU attempt used an RTX 5090 (32,607 MiB reported by

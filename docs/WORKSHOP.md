@@ -11,7 +11,7 @@ prior is disclosed; this is residual PPO, not learning all locomotion from zero.
    a known baseline checkpoint. Read `BENCHMARKS.md` for actual local timings.
 3. Start `bash scripts/start.sh`. Give participants private port-forward access.
    Each tab is independent; changing one target does not move another participant's dog.
-   A short ten-session WebSocket probe measured a minimum real-time ratio of 0.989;
+   The final short ten-session WebSocket probe measured a minimum real-time ratio of 0.986;
    this is not a two-hour soak test. Five simultaneous browser renderers were also tested.
 4. Give each participant a unique ID and terminal access. This prototype trusts
    participants with the host filesystem; do not use it for mutually untrusted tenants.
