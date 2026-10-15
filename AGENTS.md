@@ -12,6 +12,7 @@
   was diagnosed, its pod deleted, and the same experiment retried after a regression
   test. Keep every attempt and cleanup record; do not hide failures or exceed the budget.
 - Keep changes small and commit related work together. Preserve raw failed runs.
+- Maintain CHANGELOG.md and README.md as capabilities or limitations change.
 - Required checks: `uv run pytest -q`, `uv run ruff check src tests scripts`,
   `cd web && npm ci --ignore-scripts && npm run build && npm test` when browser code changes.
 - Set writable cache directories in restricted cloud environments; see scripts/setup.sh.

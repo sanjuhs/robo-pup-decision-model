@@ -3,12 +3,20 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import './style.css';
 import './commands.css';
+import { PoseBuffer, smoothingAlpha } from './motion.js';
 
 const $ = (id) => document.getElementById(id);
 let socket, state, paused = false, followCamera = false, manual = false, selectedMode = 'stop';
 let toastTimer, lastPointer;
 const keys = new Set();
 const meshes = new Map();
+const poses = new PoseBuffer();
+const eyes = [];
+let tailPivot;
+const renderedRoot = new THREE.Vector3();
+const followShift = new THREE.Vector3();
+let lastFrame, focusDistance;
+const cameraOffset = new THREE.Vector3();
 const targetPos = new THREE.Vector3(2, 1, .02);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#142823');
@@ -113,15 +121,16 @@ function buildScene(geoms) {
     const mesh = new THREE.Mesh(geometry, material(geom.color, geom.name));
     mesh.castShadow = mesh.receiveShadow = true;
     scene.add(mesh);
-    meshes.set(geom.id, {mesh, target: new THREE.Vector3(), quaternion: new THREE.Quaternion(), initialized: false});
+    meshes.set(geom.id, mesh);
     if (geom.name === 'head') {
       for (const side of [-1,1]) {
         const eye = new THREE.Mesh(new THREE.SphereGeometry(.013, 12, 8), new THREE.MeshStandardMaterial({ color: '#122b27', roughness: .3 }));
         eye.position.set(.091, side*.052, .018);
         mesh.add(eye);
+        eyes.push(eye);
         const glint = new THREE.Mesh(new THREE.SphereGeometry(.004, 8, 8), new THREE.MeshBasicMaterial({ color:'#e7ffd2' }));
         glint.position.set(.101, side*.052-.004, .023);
-        mesh.add(glint);
+        eye.attach(glint);
         const ear = new THREE.Mesh(new RoundedBoxGeometry(.055, .035, .07, 2, .01), new THREE.MeshStandardMaterial({color:'#60765c'}));
         ear.position.set(-.035, side*.078, .09);
         ear.rotation.x = side*.2;
@@ -139,9 +148,12 @@ function buildScene(geoms) {
       const tail = new THREE.Mesh(new THREE.CapsuleGeometry(.017,.15,3,8),new THREE.MeshStandardMaterial({color:'#b5d1a4'}));
       tail.rotation.z = Math.PI/2;
       tail.rotation.y = -.5;
-      tail.position.set(-.33,0,.05);
+      tail.position.set(-.075,0,0);
       tail.castShadow = true;
-      mesh.add(tail);
+      tailPivot = new THREE.Group();
+      tailPivot.position.set(-.26,0,.08);
+      tailPivot.add(tail);
+      mesh.add(tailPivot);
     }
     if (geom.name === 'crate_geom') {
       const edges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(a*2+.002,b*2+.002,c*2+.002)),new THREE.LineBasicMaterial({color:'#744f29',transparent:true,opacity:.6}));
@@ -173,19 +185,16 @@ function updateState(next) {
   $('pet-state').textContent = next.needs_reset ? 'A little tumble. Reset posture?' : next.paused ? 'Taking a breather' : ({stop:'Standing by. Ready for a treat.',approach:'On a little adventure',follow:'Following my curiosity',push:'Testing a little nudge',manual:'You lead. I’ll try.',recover:'Finding my feet'}[next.behavior]);
   $('pet-status')?.classList.toggle('fallen',next.needs_reset);
   targetPos.set(next.target[0],next.target[1],.015);
+  const transforms = new Map();
   for (const geom of next.geoms) {
-    const item = meshes.get(geom.id);
-    if (!item) continue;
-    item.target.fromArray(geom.position);
     const r = geom.rotation;
     rotationMatrix.set(r[0],r[1],r[2],0,r[3],r[4],r[5],0,r[6],r[7],r[8],0,0,0,0,1);
-    item.quaternion.setFromRotationMatrix(rotationMatrix);
-    if (!item.initialized) {
-      item.mesh.position.copy(item.target);
-      item.mesh.quaternion.copy(item.quaternion);
-      item.initialized = true;
-    }
+    transforms.set(geom.id, {
+      position: new THREE.Vector3().fromArray(geom.position),
+      quaternion: new THREE.Quaternion().setFromRotationMatrix(rotationMatrix),
+    });
   }
+  poses.push({time: next.time, root: new THREE.Vector3().fromArray(next.position), transforms}, performance.now());
   // Expose only non-sensitive simulation telemetry for end-to-end verification.
   window.arenaTelemetry = { time: next.time, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy, missionComplete:next.mission_complete, ballTouched:next.ball_touched, position:next.position };
 }
@@ -234,29 +243,56 @@ const projected = new THREE.Vector3();
 function animate(time) {
   requestAnimationFrame(animate);
   if (!renderer) return;
-  for (const item of meshes.values()) {
-    item.mesh.position.lerp(item.target,.4);
-    item.mesh.quaternion.slerp(item.quaternion,.4);
-  }
-  treat.position.lerp(targetPos,.15);
-  treatCore.position.z = .18 + Math.sin(time*.003)*.035;
-  treatCore.rotation.z = time*.0006;
-  ring.scale.setScalar(1+Math.sin(time*.003)*.04);
-  if (state) {
-    projected.set(state.position[0],state.position[1],state.position[2]+.34);
-    if (followCamera) {
-      const desired = new THREE.Vector3(state.position[0],state.position[1],.2);
-      const shift = desired.clone().sub(controls.target).multiplyScalar(.035);
-      controls.target.add(shift);
-      camera.position.add(shift);
+  const dt = lastFrame === undefined ? 1/60 : Math.min(.1, (time-lastFrame)/1000);
+  lastFrame = time;
+  const pose = poses.sample(time);
+  let simTime = 0;
+  if (pose) {
+    const {from, to, alpha} = pose;
+    simTime = THREE.MathUtils.lerp(from.time, to.time, alpha);
+    renderedRoot.lerpVectors(from.root, to.root, alpha);
+    for (const [id, mesh] of meshes) {
+      const a = from.transforms.get(id), b = to.transforms.get(id);
+      if (!a || !b) continue;
+      mesh.position.lerpVectors(a.position, b.position, alpha);
+      mesh.quaternion.slerpQuaternions(a.quaternion, b.quaternion, alpha);
     }
-    projected.project(camera);
+  }
+  treat.position.lerp(targetPos, smoothingAlpha(dt, .1));
+  // Pet expression is decorative only. The torso and every leg use physics poses.
+  // Drive cosmetics from simulation time so Pause also freezes the expression.
+  treatCore.position.z = .18 + Math.sin(simTime*3)*.035;
+  treatCore.rotation.z = simTime*.6;
+  ring.scale.setScalar(1+Math.sin(simTime*3)*.04);
+  if (tailPivot) tailPivot.rotation.z = Math.sin(simTime*(state?.behavior==='stop'?3:8))*.22;
+  const blink = Math.max(.08, 1 - Math.exp(-Math.pow(((simTime+1.5)%4.7-2.35)/.065, 2)));
+  for (const eye of eyes) eye.scale.z = blink;
+  if (state && pose) {
+    if (followCamera) {
+      followShift.set(renderedRoot.x, renderedRoot.y, .2).sub(controls.target).multiplyScalar(smoothingAlpha(dt, .32));
+      controls.target.add(followShift);
+      camera.position.add(followShift);
+    }
+  }
+  if (focusDistance !== undefined) {
+    cameraOffset.copy(camera.position).sub(controls.target);
+    const distance = THREE.MathUtils.lerp(cameraOffset.length(), focusDistance, smoothingAlpha(dt, .22));
+    camera.position.copy(controls.target).add(cameraOffset.setLength(distance));
+    if (Math.abs(distance-focusDistance)<.001) focusDistance = undefined;
+  }
+  controls.dampingFactor = smoothingAlpha(dt, .23);
+  controls.update();
+  if (state && pose) {
+    projected.copy(renderedRoot).add(new THREE.Vector3(0,0,.34)).project(camera);
     const rect = $('viewport').getBoundingClientRect();
     $('world-label').style.left = `${(projected.x*.5+.5)*rect.width}px`;
     $('world-label').style.top = `${(-projected.y*.5+.5)*rect.height+$('viewport').offsetTop}px`;
-    $('world-label').style.opacity = Math.abs(projected.x)>1 || Math.abs(projected.y)>1 ? '0' : '1';
+    $('world-label').style.opacity = projected.z>1 || Math.abs(projected.x)>1 || Math.abs(projected.y)>1 ? '0' : '1';
+    window.arenaPresentation = {
+      time: simTime, position: renderedRoot.toArray(), cameraTarget: controls.target.toArray(),
+      followCamera, cameraDistance: camera.position.distanceTo(controls.target), tailAngle: tailPivot?.rotation.z, blink, interpolationMs: poses.delayMs,
+    };
   }
-  controls.update();
   renderer.render(scene,camera);
 }
 requestAnimationFrame(animate);
@@ -280,7 +316,14 @@ $('viewport').addEventListener('pointerup',(event)=>{
 for (const button of document.querySelectorAll('[data-mode]')) button.addEventListener('click',()=>chooseMode(button.dataset.mode));
 $('reset').onclick = () => {chooseMode('stop');send({reset:true});toast('Posture restored. This resets the simulation; self-righting is not learned.');};
 $('pause').onclick = () => { paused=!paused;send({paused});$('pause').textContent=paused?'▶ Resume':'Ⅱ Pause';$('pause').setAttribute('aria-label',paused?'Resume simulation':'Pause simulation'); };
-$('camera').onclick = () => {followCamera=!followCamera;$('camera').classList.toggle('active',followCamera);};
+function setFollowCamera(value) {
+  followCamera = value;
+  $('camera').classList.toggle('active',followCamera);
+  $('camera').setAttribute('aria-pressed',String(followCamera));
+}
+$('camera').onclick = () => setFollowCamera(!followCamera);
+$('frame-pup').onclick = () => { setFollowCamera(true); focusDistance=2.6; };
+controls?.addEventListener('start', () => { focusDistance=undefined; });
 $('policy').onchange = () => {send({policy:$('policy').value});$('policy-detail').textContent=$('policy').value==='gait'?'Rule-based decisions + an analytic gait. Select a trained policy to compare.':'Fresh residual PPO weights. Flat forward training only; other commands are experimental.';};
 $('command-form').onsubmit = (event) => {
   event.preventDefault();

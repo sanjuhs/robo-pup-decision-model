@@ -42,7 +42,8 @@ them. Linux is tested here; Windows and Apple Silicon installation are not yet
 validated. PyTorch 2.9 does not support every older CPU/OS combination.
 
 - Click the ground to drop a treat; select **Find a treat**.
-- Drag to orbit, scroll to zoom, or enable **Follow cam**.
+- Drag to orbit, scroll to zoom, or enable **Follow cam**. **Close-up** frames Miso
+  and follows along so you can inspect the gait.
 - **WASD** steers; **Space** requests a standing pose.
 - **Pause** freezes physics; **Reset posture** resets the world, including the crate.
 - Select a locally trained policy to compare it with the analytic gait.
@@ -54,7 +55,9 @@ validated. PyTorch 2.9 does not support every older CPU/OS combination.
 - **Experiments** reads actual run results; the UI does not start training or cloud resources.
 
 The physical robot and crate transforms come from MuJoCo. Decorative eyes, ears,
-tail, treat beacon, grid and painted boundary line are visual only. Obstacles and the crate
+tail, treat beacon, grid and painted boundary line are visual only. Tail wagging
+and blinking freeze with Pause. The renderer buffers snapshots by 60 ms and
+interpolates physical poses; it never invents extra locomotion. Obstacles and the crate
 collide physically. The ball has rolling friction and the yard has low physical
 boundary walls. The crate and ball are moved only by contact, never scripted forces.
 
@@ -80,6 +83,7 @@ creates paid infrastructure.
 
 - [Actual benchmark results](docs/BENCHMARKS.md), including the failed first run.
 - [Validation record and passing CI](docs/VALIDATION.md).
+- [Changelog](CHANGELOG.md).
 - [Feature status and limitations](docs/STATUS.md).
 - [Two-hour workshop for 5–10 participants](docs/WORKSHOP.md).
 - [Runpod setup, key handling, and approval plan](docs/RUNPOD.md).

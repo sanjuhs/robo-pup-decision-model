@@ -8,7 +8,7 @@ This file separates implemented paths from measured task success. See
 | Native headless MuJoCo physics | Tested; physical quadruped, contacts, crate, obstacles and ball |
 | PPO from fresh weights | Completed CPU runs; residual gait policies, not end-to-end torque learning |
 | First locomotion policy | Curious-v2: 0.340 m/s body-frame forward speed on five 12-second held-out trials; no falls |
-| Interactive browser | Tested desktop/mobile; live geometry, orbit/follow camera, keyboard, pause/reset, policy loading |
+| Interactive browser | Tested desktop/mobile; buffered physical geometry, orbit/follow camera, keyboard, pause/reset, policy loading. Cosmetic expressions are separate from learned locomotion. |
 | Multiple participants | Five simultaneous independent browser worlds tested; no shared-world collaboration |
 | Experiment comparison | Completed local runs discovered from real config/result files; compare equal protocols |
 | Plain-language commands | Local grammar; ball boop and behind-ball missions passed single deterministic physics trials; browser contact also verified |
@@ -28,5 +28,5 @@ Bundled, checksum-verified CPU and GPU-trained checkpoints are seeded by setup.
 The GPU-trained policy runs in the local CPU arena; participants do not need a
 GPU just to play. Following, pushing-to-goal and learned recovery are still unsolved.
 Windows/Apple Silicon installation and a full two-hour multi-user soak test were
-not run here. Hosted CI passed on the final code revision; see `VALIDATION.md`
+not run here. Hosted CI evidence is recorded in `VALIDATION.md`;
 for the source SHA and run link, separate from the local evidence.

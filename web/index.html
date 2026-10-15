@@ -21,7 +21,7 @@
 
         <div class="workspace" id="playground">
           <section class="arena-card" aria-label="Interactive 3D physics arena">
-            <div class="arena-top"><div><span class="live-indicator"></span><strong>The training yard</strong><span class="tag">MuJoCo · CPU</span></div><button id="camera" class="quiet-button" title="Toggle camera follow">◎ Follow cam</button></div>
+            <div class="arena-top"><div><span class="live-indicator"></span><strong>The training yard</strong><span class="tag">MuJoCo · CPU</span></div><div class="camera-actions"><button id="frame-pup" class="quiet-button" title="Close-up of Miso with camera follow">⌖ Close-up</button><button id="camera" aria-pressed="false" class="quiet-button" title="Toggle camera follow">◎ Follow cam</button></div></div>
             <div id="viewport" tabindex="0" aria-label="3D arena; click the ground to place a treat, drag to orbit, scroll to zoom"><canvas id="arena-canvas"></canvas><div id="renderer-error" hidden>WebGL is unavailable. Try a browser with hardware acceleration enabled.</div></div>
             <div class="arena-coordinate">YARD 01 <span>↗</span> FREE EXPLORATION</div>
             <div class="world-label" id="world-label"><span>●</span> MISO <small>your robot pup</small></div>

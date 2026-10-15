@@ -10,7 +10,7 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | `pytest -q` | 15 passed, no skipped/disabled/expected failures; one upstream AnyIO deprecation warning |
 | `ruff check src tests scripts` | Passed |
 | `npm run build` | Passed; one approximately 523 kB JS bundle produces Vite's size advisory |
-| `npm test` | 7 passed: real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion in the native arena, mobile layout, five simultaneous browsers |
+| `npm test` | 11 passed: eight browser checks including real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion, close-up/follow camera and frozen expressions on pause, mobile layout, five simultaneous browsers; three deterministic render timing/reset checks |
 | Post-optimization physical ball browser test | 1 passed; no contact assertions disabled |
 | `scripts/smoke.py` against saved startup | Passed health, built HTML, advancing real MuJoCo state and a functional control request |
 | `scripts/session_benchmark.py` | Final ten independent worlds: minimum 0.986 real-time ratio over 75 frames per session |
@@ -22,7 +22,7 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Billing | API calls succeeded but histories were empty at check time; aggregate GPU cost estimate $0.2769, not a final receipt |
 | Source credential check | No Runpod API-key pattern in tracked text files; account key was not passed into the GPU job |
 
-GitHub Actions also passed on final code revision
+GitHub Actions also passed on the earlier code revision
 `b7a5976e1049c3077edb734e475a83fe1b270b87`:
 [prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38821508980).
 This hosted run is separate evidence from local testing. Later source revisions

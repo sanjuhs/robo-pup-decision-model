@@ -84,6 +84,41 @@ test('GPU-trained checkpoint runs locomotion in the native browser arena',async(
   expect(await page.evaluate(()=>window.arenaTelemetry.needsReset)).toBe(false);
 });
 
+test('follow camera tracks a rendered trained walker and pause freezes its expression', async ({page}) => {
+  await page.setViewportSize({width:1440,height:1050});
+  await page.goto('/');
+  await page.waitForFunction(()=>window.arenaPresentation?.time>.1);
+  await page.locator('#policy').selectOption('runpod/5090-once');
+  await page.waitForFunction(()=>window.arenaTelemetry.policy==='runpod/5090-once');
+  const button = page.getByRole('button',{name:/Follow cam/});
+  await page.getByRole('button',{name:/Close-up/}).click();
+  await page.waitForFunction(()=>window.arenaPresentation.cameraDistance<2.7);
+  await expect(button).toHaveAttribute('aria-pressed','true');
+  await page.keyboard.down('w');
+  await page.waitForFunction(()=>window.arenaPresentation.position[0]>.6);
+  const moving = await page.evaluate(()=>({raw:window.arenaTelemetry, rendered:window.arenaPresentation}));
+  expect(moving.rendered.time).toBeLessThanOrEqual(moving.raw.time);
+  expect(moving.raw.time-moving.rendered.time).toBeLessThan(.25);
+  expect(Math.abs(moving.rendered.cameraTarget[0]-moving.rendered.position[0])).toBeLessThan(.3);
+  expect(moving.raw.needsReset).toBe(false);
+  await page.keyboard.up('w');
+  await page.getByRole('button',{name:'Pause simulation'}).click();
+  await page.waitForTimeout(300);
+  const frozen = await page.evaluate(()=>window.arenaPresentation);
+  await page.waitForTimeout(250);
+  const later = await page.evaluate(()=>window.arenaPresentation);
+  expect(later.time).toBe(frozen.time);
+  expect(later.position).toEqual(frozen.position);
+  expect(later.tailAngle).toBe(frozen.tailAngle);
+  expect(later.blink).toBe(frozen.blink);
+  await page.screenshot({path:'../artifacts/screens/trained-walker.png',fullPage:true});
+  await button.click();
+  const target = await page.evaluate(()=>window.arenaPresentation.cameraTarget);
+  await page.getByRole('button',{name:'Resume simulation'}).click();
+  await page.waitForTimeout(300);
+  expect(await page.evaluate(()=>window.arenaPresentation.cameraTarget)).toEqual(target);
+});
+
 test('mobile layout stays within the screen and guide opens', async ({ page }) => {
   await page.setViewportSize({width:390,height:844});
   await page.goto('/');
