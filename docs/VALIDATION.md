@@ -22,9 +22,9 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Billing | API calls succeeded but histories were empty at check time; aggregate GPU cost estimate $0.2769, not a final receipt |
 | Source credential check | No Runpod API-key pattern in tracked text files; account key was not passed into the GPU job |
 
-GitHub Actions also passed on code revision
-`b3122370cf8e4fda05357d50ca1ef98611d03e92`:
-[prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38820774086).
+GitHub Actions also passed on final code revision
+`b7a5976e1049c3077edb734e475a83fe1b270b87`:
+[prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38821508980).
 This hosted run is separate evidence from local testing. Later source revisions
 trigger their own checks; inspect their recorded conclusions before claiming them passed.
 

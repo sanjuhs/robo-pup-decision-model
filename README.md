@@ -79,6 +79,7 @@ creates paid infrastructure.
 ## Evidence and workshop
 
 - [Actual benchmark results](docs/BENCHMARKS.md), including the failed first run.
+- [Validation record and passing CI](docs/VALIDATION.md).
 - [Feature status and limitations](docs/STATUS.md).
 - [Two-hour workshop for 5–10 participants](docs/WORKSHOP.md).
 - [Runpod setup, key handling, and approval plan](docs/RUNPOD.md).

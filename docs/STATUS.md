@@ -28,5 +28,5 @@ Bundled, checksum-verified CPU and GPU-trained checkpoints are seeded by setup.
 The GPU-trained policy runs in the local CPU arena; participants do not need a
 GPU just to play. Following, pushing-to-goal and learned recovery are still unsolved.
 Windows/Apple Silicon installation and a full two-hour multi-user soak test were
-not run here. CI configuration is provided; its hosted result is tracked separately
-from the local test evidence.
+not run here. Hosted CI passed on the final code revision; see `VALIDATION.md`
+for the source SHA and run link, separate from the local evidence.
