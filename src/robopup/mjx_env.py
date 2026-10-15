@@ -98,7 +98,7 @@ class MJXVecEnv(VecEnv):
         self.state = self._reset_batch(jax.random.split(jax.random.PRNGKey(self.seed_value), self.num_envs))
         obs = jax.vmap(partial(observation, command=self.command, torso=self.torso))(
             self.state[0], self.state[1], self.state[2])
-        return np.asarray(obs, dtype=np.float32)
+        return np.array(obs, dtype=np.float32, copy=True)
 
     def step_async(self, actions):
         self.actions = actions
@@ -110,7 +110,10 @@ class MJXVecEnv(VecEnv):
         infos = [{"TimeLimit.truncated": bool(trunc[i]),
                   **({"terminal_observation": terminal[i]} if dones[i] else {})}
                  for i in range(self.num_envs)]
-        return np.asarray(obs, dtype=np.float32), np.asarray(rewards), np.asarray(dones), infos
+        # JAX host views are read-only. SB3 adds timeout bootstrap values to
+        # rewards in-place, and VecEnv consumers may modify observations/dones.
+        return (np.array(obs, dtype=np.float32, copy=True),
+                np.array(rewards, copy=True), np.array(dones, copy=True), infos)
 
     def close(self):
         pass

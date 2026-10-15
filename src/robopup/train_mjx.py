@@ -67,10 +67,13 @@ def main():
                  "envs": args.envs, "physics_hz": 200, "control_hz": 50}
     (args.out / "physics.json").write_text(json.dumps(benchmark, indent=2)+"\n")
     vector.state = (*vector.state[:3], vector.state[3]*0+vector.max_steps-1, vector.state[4])
-    reset_obs, _, done, info = vector.step(np.zeros((args.envs,12), dtype=np.float32))
+    reset_obs, rewards, done, info = vector.step(np.zeros((args.envs,12), dtype=np.float32))
     assert done.all() and np.isfinite(reset_obs).all()
     assert all(item.get("terminal_observation") is not None for item in info)
     assert np.asarray(vector.state[3]).max() == 0
+    # PPO bootstraps timeout rewards in-place. JAX host views must be copied.
+    rewards[done] += 1.
+    assert reset_obs.flags.writeable and done.flags.writeable
     vector.reset()
     print(json.dumps({"stage": "physics_probe", **benchmark}), flush=True)
     if args.probe_only:
@@ -81,7 +84,7 @@ def main():
     policy.set_logger(configure(str(args.out), ["csv"]))
     start = time.monotonic()
     callbacks = CallbackList([Deadline(args.max_minutes*60),
-        CheckpointCallback(save_freq=max(1, 131072//args.envs),
+        CheckpointCallback(save_freq=max(1, 32768//args.envs),
                            save_path=str(args.out / "checkpoints"), name_prefix="pup")])
     policy.learn(total_timesteps=args.steps, callback=callbacks)
     elapsed = time.monotonic()-start
