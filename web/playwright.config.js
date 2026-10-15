@@ -10,7 +10,7 @@ export default defineConfig({
     },
   },
   webServer: {
-    command: '../.venv/bin/uvicorn robopup.server:app --host 127.0.0.1 --port 8000',
+    command: 'MPLCONFIGDIR=/tmp/robopup-mpl XDG_CACHE_HOME=/workspace/.cache ../.venv/bin/uvicorn robopup.server:app --host 127.0.0.1 --port 8000',
     url: 'http://127.0.0.1:8000/api/health',
     reuseExistingServer: true,
   },

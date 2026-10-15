@@ -27,7 +27,10 @@ def arena_xml(obstacles: bool = False) -> str:
      </body>'''
     if obstacles:
         props += '''<geom name="obstacle_a" type="box" pos=".3 1.3 .2" size=".5 .16 .2" rgba=".45 .5 .65 1"/>
-        <geom name="obstacle_b" type="cylinder" pos="-1.4 -.8 .2" size=".22 .2" rgba=".45 .5 .65 1"/>'''
+        <geom name="obstacle_b" type="cylinder" pos="-1.4 -.8 .2" size=".22 .2" rgba=".45 .5 .65 1"/>
+        <body name="ball" pos="1.8 -1 .125"><freejoint name="ball_free"/>
+          <geom name="ball_geom" type="sphere" size=".12" mass=".15" friction=".7 .01 .002" rgba=".96 .44 .34 1"/>
+        </body>'''
     return f'''<mujoco model="RoboPup">
       <compiler angle="radian"/>
       <option timestep=".005" integrator="implicitfast" gravity="0 0 -9.81"/>

@@ -41,5 +41,5 @@ def decide(mode, position, yaw, upright, target, crate, manual=(0., 0.)):
                        math.cos(math.atan2(delta[1], delta[0])-yaw))
     if distance < .2:
         return Decision("stop", np.zeros(2), "Treat reached")
-    speed = min(.35, max(.18, distance*.6)) * max(0., math.cos(error))
+    speed = min(.35, max(.18, distance*.6)) if abs(error)<.5 else 0.
     return Decision(mode, np.array([speed, np.clip(error*1.5, -1.2, 1.2)]), reason)

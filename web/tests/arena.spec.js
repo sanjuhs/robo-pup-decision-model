@@ -23,7 +23,7 @@ test('renders live geometry, behavior controls, pause, reset and keyboard', asyn
   await page.keyboard.up('w');
   await page.keyboard.press('Space');
   await page.waitForFunction(()=>window.arenaTelemetry.behavior==='stop');
-  await page.waitForTimeout(350);
+  await expect(page.locator('#toast')).toBeHidden({timeout:5000});
   fs.mkdirSync('../artifacts/screens',{recursive:true});
   await page.screenshot({path:'../artifacts/screens/desktop.png',fullPage:true});
   expect(errors).toEqual([]);
@@ -42,6 +42,21 @@ test('shows real experiment results and can load a trusted checkpoint', async ({
   } else {
     await expect(page.getByText(/No experiments yet/)).toBeVisible();
   }
+});
+
+test('plain language ball commands are acknowledged without claiming completion',async({page})=>{
+  await page.goto('/');
+  await page.waitForFunction(()=>window.arenaTelemetry?.time>.1);
+  await page.getByLabel('Talk to Miso').fill('go eat ball');
+  await page.getByRole('button',{name:/Send/}).click();
+  await expect(page.locator('#toast')).toContainText("Robots don't eat balls");
+  await page.waitForFunction(()=>window.arenaTelemetry.behavior==='approach');
+  await page.getByLabel('Talk to Miso').fill('go behind the ball');
+  await page.getByRole('button',{name:/Send/}).click();
+  await expect(page.locator('#toast')).toContainText('far (+X) side');
+  await page.getByLabel('Talk to Miso').fill('stop');
+  await page.getByRole('button',{name:/Send/}).click();
+  await page.waitForFunction(()=>window.arenaTelemetry.behavior==='stop');
 });
 
 test('mobile layout stays within the screen and guide opens', async ({ page }) => {

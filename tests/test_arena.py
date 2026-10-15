@@ -37,7 +37,11 @@ def test_worlds_are_isolated():
             a.receive_json()
             b.receive_json()
             a.send_json({"target": [4., 4.], "mode": "approach"})
-            assert a.receive_json()["target"] == [4., 4.]
+            for _ in range(10):
+                state = a.receive_json()
+                if state.get("target") == [4., 4.]:
+                    break
+            assert state["target"] == [4., 4.]
             assert b.receive_json()["target"] == [2., 1.]
 
 

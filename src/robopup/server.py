@@ -16,6 +16,7 @@ import numpy as np
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from robopup.decisions import decide, follow_target
+from robopup.commands import interpret
 from robopup.env import RoboPupEnv
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -34,6 +35,7 @@ class Control(BaseModel):
     reset: bool = False
     paused: bool | None = None
     policy: str | None = None
+    text: str | None = Field(default=None, max_length=160)
 
 
 def runs():
@@ -91,6 +93,7 @@ async def arena(socket: WebSocket):
     obs, _ = env.reset(seed=7)
     mode, target, manual, paused = "stop", np.array([2., 1.]), (0., 0.), False
     policy, policy_name, last_control = None, "Analytic gait", 0.
+    waypoints = []
     try:
         await socket.send_json({"type": "scene", "geoms": env.scene()})
         while True:
@@ -100,8 +103,17 @@ async def arena(socket: WebSocket):
                 control = Control.model_validate(raw)
                 if control.mode is not None:
                     mode = control.mode
+                    waypoints = []
                 if control.target is not None:
                     target = np.clip(control.target, -5, 5)
+                    waypoints = []
+                if control.text is not None:
+                    command = interpret(control.text,
+                        env.data.xpos[env.ball] if env.ball >= 0 else None, env.data.qpos[:3])
+                    mode, waypoints = command.mode, command.waypoints
+                    if waypoints:
+                        target = np.asarray(waypoints.pop(0))
+                    await socket.send_json({"type": "reply", "message": command.reply})
                 manual = (control.forward, control.turn)
                 last_control = tick
                 if control.paused is not None:
@@ -109,6 +121,7 @@ async def arena(socket: WebSocket):
                 if control.reset:
                     obs, _ = env.reset(seed=7)
                     mode, manual = "stop", (0., 0.)
+                    waypoints = []
                 if control.policy is not None:
                     if control.policy == "gait":
                         policy, policy_name = None, "Analytic gait"
@@ -122,12 +135,18 @@ async def arena(socket: WebSocket):
                         await socket.send_json({"type": "error", "message": "Unknown trusted policy"})
             except asyncio.TimeoutError:
                 pass
-            except (ValidationError, ValueError, TypeError):
+            except ValidationError:
+                await socket.send_json({"type": "error", "message": "Invalid controls"})
+            except ValueError as error:
+                await socket.send_json({"type": "error", "message": str(error)[:200]})
+            except TypeError:
                 await socket.send_json({"type": "error", "message": "Invalid controls"})
             if mode == "manual" and tick-last_control > .5:
                 manual = (0., 0.)
             if mode == "follow":
                 target = follow_target(env.data.time)
+            if mode == "approach" and waypoints and np.linalg.norm(target-env.data.qpos[:2]) < .25:
+                target = np.asarray(waypoints.pop(0))
             rotation = env.data.xmat[env.torso].reshape(3, 3)
             decision = decide(mode, env.data.qpos[:3], math.atan2(rotation[1, 0], rotation[0, 0]),
                               env.upright, target, env.data.xpos[env.crate], manual)

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import './style.css';
+import './commands.css';
 
 const $ = (id) => document.getElementById(id);
 let socket, state, paused = false, followCamera = false, manual = false, selectedMode = 'stop';
@@ -148,6 +149,14 @@ function buildScene(geoms) {
       const tape = new THREE.Mesh(new THREE.BoxGeometry(a*2+.003,.035,c*2+.003),new THREE.MeshStandardMaterial({color:'#e3b479',roughness:.9}));
       mesh.add(tape);
     }
+    if (geom.name === 'ball_geom') {
+      for (const axis of [0,1,2]) {
+        const band = new THREE.Mesh(new THREE.TorusGeometry(a+.001,.005,6,32),new THREE.MeshStandardMaterial({color:'#ffe6bd',roughness:.8}));
+        if(axis===1)band.rotation.x=Math.PI/2;
+        if(axis===2)band.rotation.y=Math.PI/2;
+        mesh.add(band);
+      }
+    }
   }
 }
 
@@ -204,6 +213,7 @@ function connect() {
     if (message.type === 'scene') buildScene(message.geoms);
     else if (message.type === 'state') updateState(message);
     else if (message.type === 'error') toast(message.message);
+    else if (message.type === 'reply') toast(message.message);
   };
   socket.onclose = () => {
     $('connection-dot').classList.remove('connected');
@@ -272,6 +282,13 @@ $('reset').onclick = () => {chooseMode('stop');send({reset:true});toast('Posture
 $('pause').onclick = () => { paused=!paused;send({paused});$('pause').textContent=paused?'▶ Resume':'Ⅱ Pause';$('pause').setAttribute('aria-label',paused?'Resume simulation':'Pause simulation'); };
 $('camera').onclick = () => {followCamera=!followCamera;$('camera').classList.toggle('active',followCamera);};
 $('policy').onchange = () => {send({policy:$('policy').value});$('policy-detail').textContent=$('policy').value==='gait'?'Rule-based decisions + an analytic gait. Select a trained policy to compare.':'Fresh residual PPO weights. Flat forward training only; other commands are experimental.';};
+$('command-form').onsubmit = (event) => {
+  event.preventDefault();
+  const text=$('pet-command').value.trim();
+  if(!text)return;
+  manual=false;keys.clear();selectedMode='approach';
+  send({text});$('pet-command').value='';
+};
 
 window.addEventListener('keydown',(event)=>{
   if (['INPUT','SELECT','TEXTAREA'].includes(event.target.tagName)) return;

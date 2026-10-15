@@ -1,6 +1,7 @@
 """Validated experiment configuration and isolated participant output paths."""
 from pathlib import Path
 import re
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -14,7 +15,7 @@ class TrainConfig(BaseModel):
     energy_weight: float = Field(default=.002, ge=0, le=.1)
     learning_rate: float = Field(default=.0003, gt=0, le=.01)
     initial_log_std: float = Field(default=-2., ge=-4, le=0)
-    device: str = "cpu"
+    device: Literal["cpu", "cuda"] = "cpu"
 
 
 def participant_path(root: Path, participant: str, run: str) -> Path:

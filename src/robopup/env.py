@@ -30,6 +30,7 @@ class RoboPupEnv(gym.Env):
         self.phase = 0.
         self.torso = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "torso")
         self.crate = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "crate")
+        self.ball = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "ball")
 
     @property
     def upright(self):
@@ -111,6 +112,7 @@ class RoboPupEnv(gym.Env):
             "upright": self.upright,
             "speed": float(np.linalg.norm(self.data.qvel[:2])),
             "crate": self.data.xpos[self.crate].tolist(),
+            "ball": self.data.xpos[self.ball].tolist() if self.ball >= 0 else None,
             "geoms": [{"id": i, "position": self.data.geom_xpos[i].tolist(),
                        "rotation": self.data.geom_xmat[i].tolist()}
                       for i in range(1, self.model.ngeom)],
