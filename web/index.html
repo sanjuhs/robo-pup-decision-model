@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111918" />
+    <meta name="description" content="Raise a little robot. Run real physics. Teach a new policy. An open robotics playground." />
+    <title>RoboPup Arena · A little dog. A big experiment.</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23b9f579'/%3E%3Ctext x='6' y='29' font-size='28'%3E🐾%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="RoboPup Arena home"><span class="brand-mark">r<span>p</span></span><span>robopup<span class="brand-light"> / arena</span></span></a>
+        <nav aria-label="Workspace"><button class="nav-active" id="arena-tab">Playground</button><button id="experiments-tab">Experiments <span id="run-count">0</span></button><button id="guide-tab">Field guide ↗</button></nav>
+        <div class="connection"><span id="connection-dot" class="status-dot"></span><span id="connection-text">Connecting</span><span class="version">v0.1 / lab</span></div>
+      </header>
+
+      <main>
+        <section class="page-heading"><div><p class="eyebrow">THE ROBOT LEARNING PLAYGROUND</p><h1>A little dog. <span>A big experiment.</span></h1><p>Meet your next research partner. Teach it a trick, then let curiosity take over.</p></div><div class="physics-badge"><span class="orbit-icon">◎</span><div>Real physics.<br/><strong>Very good dog.</strong></div></div></section>
+
+        <div class="workspace" id="playground">
+          <section class="arena-card" aria-label="Interactive 3D physics arena">
+            <div class="arena-top"><div><span class="live-indicator"></span><strong>The training yard</strong><span class="tag">MuJoCo · CPU</span></div><button id="camera" class="quiet-button" title="Toggle camera follow">◎ Follow cam</button></div>
+            <div id="viewport" tabindex="0" aria-label="3D arena; click the ground to place a treat, drag to orbit, scroll to zoom"><canvas id="arena-canvas"></canvas><div id="renderer-error" hidden>WebGL is unavailable. Try a browser with hardware acceleration enabled.</div></div>
+            <div class="arena-coordinate">YARD 01 <span>↗</span> FREE EXPLORATION</div>
+            <div class="world-label" id="world-label"><span>●</span> MISO <small>your robot pup</small></div>
+            <div class="arena-hint"><span class="mouse-icon">⌖</span> Click the ground to drop a treat <span class="hint-divider">/</span> Drag to orbit · Scroll to zoom</div>
+            <div class="arena-bottom"><div><span class="tiny-square"></span><span id="sim-time">0.0 s</span><span class="subtle">SIM TIME</span></div><div class="arena-actions"><button id="reset">↺ Reset posture</button><button id="pause" aria-label="Pause simulation">Ⅱ Pause</button></div></div>
+          </section>
+
+          <aside class="pet-panel">
+            <div class="pet-title"><div class="pet-avatar">⌁</div><div><p class="eyebrow">YOUR RESEARCH COMPANION</p><h2>Miso <span>01</span></h2></div><span class="pet-star">✳</span></div>
+            <div class="pet-status"><span id="pet-state">Getting comfortable</span><span class="state-pip"></span></div>
+            <div class="metrics"><div><span class="metric-label">SPEED</span><strong id="speed">0.00 <small>m/s</small></strong><div class="meter"><i id="speed-meter"></i></div></div><div><span class="metric-label">BALANCE</span><strong id="balance">— <small>%</small></strong><div class="meter mint"><i id="balance-meter"></i></div></div></div>
+            <div class="panel-section"><div class="section-title"><h3>What shall we try?</h3><span>BEHAVIORS</span></div><div class="behavior-grid">
+              <button data-mode="approach"><span class="behavior-icon">⌖</span><strong>Find a treat</strong><small>Approach a target</small></button>
+              <button data-mode="follow"><span class="behavior-icon">↝</span><strong>Follow along</strong><small>Chase the beacon</small></button>
+              <button data-mode="push"><span class="behavior-icon">▧</span><strong>A little nudge</strong><small>Push · experimental</small></button>
+              <button data-mode="stop" class="selected"><span class="behavior-icon">Ⅱ</span><strong>Stay, Miso</strong><small>Hold a standing pose</small></button>
+            </div></div>
+            <div class="panel-section policy-section"><div class="section-title"><h3>A mind of its own</h3><span>POLICY</span></div><label class="sr-only" for="policy">Motor policy</label><select id="policy"><option value="gait">Analytic trot · no learned weights</option></select><p id="policy-detail">Rule-based decisions + an analytic gait. Select a trained policy to compare.</p></div>
+            <div class="thought"><span>✧</span><div><span class="eyebrow">MISO'S FIELD NOTES</span><p id="thought">A new yard. So many possibilities.</p></div></div>
+            <div class="keyboard-hint"><div><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><p>Take the lead.<br/><strong>WASD to steer · Space to stay</strong></p></div>
+          </aside>
+        </div>
+
+        <section class="under-grid"><div class="lab-note"><span class="note-symbol">✳</span><div><span class="eyebrow">SMALL STEPS, REAL SCIENCE</span><h3>Every good trick starts with a little trial and error.</h3><p>Train a fresh PPO policy, give it a personality, and compare it with the pack.</p></div><button id="training-guide">Start an experiment <span>↗</span></button></div><div class="honesty-note"><span>01 / RESEARCH PROTOTYPE</span><p>Flat-ground locomotion is evaluated separately. Following, pushing, and turning are experimental. Reset restores posture; self-righting is not learned.</p></div></section>
+
+        <section id="experiments" hidden><div class="section-title"><h2>The pack's progress</h2><button id="refresh-runs">↻ Refresh results</button></div><p class="experiment-note">Local runs · flat-forward-v1 · five held-out seeds. Compare policies with the same target speed. No invented scores.</p><div id="runs-table"></div><div class="command-card"><p class="eyebrow">YOUR FIRST EXPERIMENT</p><code>uv run robopup-train --participant your-name --run first-trick --config configs/curious.json</code><p>Fresh weights. Isolated checkpoints. A measured result. Open the field guide for the two-hour workshop.</p></div></section>
+
+        <section id="guide" class="guide" hidden><button id="close-guide" class="close-guide" aria-label="Close field guide">×</button><p class="eyebrow">FIELD GUIDE / QUICK START</p><h2>Teach. Measure. Repeat.</h2><ol><li><strong>Make a connection.</strong> The browser streams actual MuJoCo geometry. Each tab has its own world.</li><li><strong>Drop a treat.</strong> Click the ground, then select Find a treat. WASD lets you steer manually; Space asks Miso to stay.</li><li><strong>Train a fresh policy.</strong> In the repository, run the command in Experiments. Choose curious, gentle, or zoomies; use a unique participant/run name.</li><li><strong>Bring it to the yard.</strong> Refresh Experiments, then select the checkpoint in the policy menu. Learned policies were trained for flat forward motion; turning and object interactions can fail.</li><li><strong>Look at evidence.</strong> Read docs/BENCHMARKS.md and docs/STATUS.md. A trained checkpoint is not proof of a solved behavior.</li></ol><p class="guide-footnote">No training or paid infrastructure starts from this page. The Jev-inspired behavior selector is currently transparent rules. No decision model or GPU physics is claimed.</p></section>
+      </main>
+      <footer><span class="footer-mark">rp</span><span>Built for curious humans & very good robots.</span><span>OPEN LAB <i>·</i> MuJoCo + PPO + Three.js</span></footer>
+      <div id="toast" role="status" hidden></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
