@@ -1,0 +1,9 @@
+{
+  "seed": 19,
+  "total_steps": 131072,
+  "n_envs": 4,
+  "target_speed": 0.2,
+  "energy_weight": 0.008,
+  "learning_rate": 0.0003,
+  "device": "cpu"
+}
