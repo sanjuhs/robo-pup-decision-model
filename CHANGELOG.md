@@ -23,6 +23,15 @@ research prototype; the linked evidence describes what was actually tested.
 - Add a targeted credential-pattern check for tracked files and optional Git
   history, run it in CI, and test that deleted historical fixtures are detected
   without printing their values. This is not an exhaustive secret detector.
+- Emit browser test failures as GitHub check annotations as well as ordinary
+  logs, so a restricted development host can inspect the failing assertion.
+
+### Fixed
+
+- Keep paused render timestamps bit-for-bit constant across interpolation
+  intervals. Weighted sums of identical timestamps previously introduced tiny
+  rounding differences and intermittently failed the strict pause assertion.
+  Keep the browser assertion and cover the fractional-interval regression.
 
 ## 0.1.0 — 2026-10-15
 

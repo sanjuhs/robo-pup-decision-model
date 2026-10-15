@@ -33,3 +33,11 @@ test('camera smoothing has the same response across refresh rates', () => {
     expect(position).toBeCloseTo(1 - Math.exp(-1 / .32), 10);
   }
 });
+
+test('paused render time stays bit-for-bit constant across fractional intervals', () => {
+  const time = 4.599999999999924;
+  const buffer = new PoseBuffer();
+  buffer.push({time}, 0);
+  buffer.push({time}, 40);
+  for (let now = 60; now <= 100; now += .37) expect(buffer.sample(now).time).toBe(time);
+});

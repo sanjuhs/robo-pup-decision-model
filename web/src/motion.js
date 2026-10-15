@@ -21,7 +21,9 @@ export class PoseBuffer {
     const second = this.frames[1] ?? first;
     const span = second.receivedAt - first.receivedAt;
     const alpha = span > 0 ? Math.max(0, Math.min(1, (at - first.receivedAt) / span)) : 0;
-    return { from: first.pose, to: second.pose, alpha };
+    // Unlike a*(1-alpha)+b*alpha, this stays bit-for-bit constant when paused.
+    const time = first.pose.time + (second.pose.time - first.pose.time) * alpha;
+    return { from: first.pose, to: second.pose, alpha, time };
   }
 }
 

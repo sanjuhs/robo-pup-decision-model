@@ -7,6 +7,9 @@ const python=process.platform==='win32'?'../.venv/Scripts/python.exe':'../.venv/
 export default defineConfig({
   testDir: './tests',
   workers: 1,
+  // Keep failures inspectable through GitHub check annotations when log-storage
+  // redirects are unavailable in a restricted development environment.
+  reporter: process.env.CI ? [['list'], ['github']] : 'list',
   use: {
     baseURL: 'http://127.0.0.1:8000',
     launchOptions: {

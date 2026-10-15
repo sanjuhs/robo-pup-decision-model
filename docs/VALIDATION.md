@@ -10,7 +10,7 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | `pytest -q` | 16 passed, no skipped/disabled/expected failures; one upstream AnyIO deprecation warning |
 | `ruff check src tests scripts` | Passed |
 | `npm run build` | Passed; one approximately 523 kB JS bundle produces Vite's size advisory |
-| `npm test` | 11 passed: eight browser checks including real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion, close-up/follow camera and frozen expressions on pause, mobile layout, five simultaneous browsers; three deterministic render timing/reset checks |
+| `npm test` | 12 passed: eight browser checks including real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion, close-up/follow camera and frozen expressions on pause, mobile layout, five simultaneous browsers; four deterministic render timing/reset checks |
 | Post-optimization physical ball browser test | 1 passed; no contact assertions disabled |
 | `scripts/smoke.py` against saved startup | Passed health, built HTML, advancing real MuJoCo state and a functional control request |
 | `scripts/session_benchmark.py` | Final ten independent worlds: minimum 0.986 real-time ratio over 75 frames per session |
@@ -24,11 +24,24 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Credential scanner regression | A synthetic key in a temporary Git repository fails the check; after deletion it still fails the history check; output never includes the value |
 | Actual browser recording | GPU checkpoint moved 2.012 m along world X over 5.760 simulated seconds without reset; headless software-WebGL capture median frame interval 143.9 ms. Raw telemetry is in `benchmarks/presentation-2026-10-15/` |
 
-GitHub Actions also passed on the earlier code revision
-`b7a5976e1049c3077edb734e475a83fe1b270b87`:
-[prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38821508980).
-This hosted run is separate evidence from local testing. Later source revisions
-trigger their own checks; inspect their recorded conclusions before claiming them passed.
+GitHub Actions passed on presentation revision
+`f4280ebce704ca44d8c87fc26ba42131345a06f4`:
+[prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38823206835).
+The earlier presentation revision `7e86dd3` also passed. These hosted runs are
+separate evidence from local testing. Later source revisions trigger their own
+checks; inspect their recorded conclusions before claiming them passed.
+
+One intermediate run, [`1a1f7c2`](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38823098708),
+failed its browser-test step despite the local pass. GitHub exposed only the
+step's exit code; downloading detailed logs redirected to a storage host blocked
+by this environment. A subsequent local run reproduced an intermittent failure
+in the new strict pause assertion: a weighted sum of identical timestamps changed
+the final floating-point bit. The render clock now uses a delta interpolation
+that stays exactly constant when paused, with a fractional-interval regression
+test. The original remote assertion is still unavailable, so that run cannot be
+conclusively attributed to the same cause. CI now uses Playwright's GitHub reporter
+to expose future failing assertions as check annotations. No assertions or tests
+were disabled or loosened.
 
 ## Scope of the evidence
 

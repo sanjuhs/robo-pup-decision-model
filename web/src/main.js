@@ -249,7 +249,7 @@ function animate(time) {
   let simTime = 0;
   if (pose) {
     const {from, to, alpha} = pose;
-    simTime = THREE.MathUtils.lerp(from.time, to.time, alpha);
+    simTime = pose.time;
     renderedRoot.lerpVectors(from.root, to.root, alpha);
     for (const [id, mesh] of meshes) {
       const a = from.transforms.get(id), b = to.transforms.get(id);
