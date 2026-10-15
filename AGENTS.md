@@ -7,12 +7,14 @@
 - Paid infrastructure requires explicit user approval. Total GPU experimentation
   ceiling: $30. Do not provision or start billable resources just to make a test pass.
   The user authorized one paid GPU training run in this session. That authorization
-  is being used for a single disposable RTX 5090 pod with a 25-minute monitor;
+  completed on a disposable RTX 5090 pod with a 25-minute monitor;
   do not start additional policy experiments. A failed MJX/SB3 interface attempt
   was diagnosed, its pod deleted, and the same experiment retried after a regression
   test. Keep every attempt and cleanup record; do not hide failures or exceed the budget.
 - Keep changes small and commit related work together. Preserve raw failed runs.
 - Maintain CHANGELOG.md and README.md as capabilities or limitations change.
+- Before pushing, run `uv run python scripts/check_public_secrets.py --history`.
+  This catches selected token/private-key patterns; never print matched values.
 - Required checks: `uv run pytest -q`, `uv run ruff check src tests scripts`,
   `cd web && npm ci --ignore-scripts && npm run build && npm test` when browser code changes.
 - Set writable cache directories in restricted cloud environments; see scripts/setup.sh.
