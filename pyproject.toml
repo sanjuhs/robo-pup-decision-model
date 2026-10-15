@@ -21,6 +21,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest==8.4.2", "httpx==0.28.1", "ruff==0.14.0"]
+mjx = ["mujoco-mjx==3.3.7", "jax==0.7.2"]
+cuda = ["jax[cuda12]==0.7.2"]
 
 [project.scripts]
 robopup-train = "robopup.train:main"
