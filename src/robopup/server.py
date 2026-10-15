@@ -94,6 +94,8 @@ async def arena(socket: WebSocket):
     mode, target, manual, paused = "stop", np.array([2., 1.]), (0., 0.), False
     policy, policy_name, last_control = None, "Analytic gait", 0.
     waypoints = []
+    mission = None
+    mission_complete = False
     try:
         await socket.send_json({"type": "scene", "geoms": env.scene()})
         while True:
@@ -104,13 +106,19 @@ async def arena(socket: WebSocket):
                 if control.mode is not None:
                     mode = control.mode
                     waypoints = []
+                    mission, mission_complete = None, False
                 if control.target is not None:
                     target = np.clip(control.target, -5, 5)
                     waypoints = []
+                    mission, mission_complete = None, False
                 if control.text is not None:
                     command = interpret(control.text,
                         env.data.xpos[env.ball] if env.ball >= 0 else None, env.data.qpos[:3])
                     mode, waypoints = command.mode, command.waypoints
+                    mission = command.goal
+                    mission_complete = False
+                    if mission == "ball":
+                        env.ball_touched = False
                     if waypoints:
                         target = np.asarray(waypoints.pop(0))
                     await socket.send_json({"type": "reply", "message": command.reply})
@@ -122,6 +130,7 @@ async def arena(socket: WebSocket):
                     obs, _ = env.reset(seed=7)
                     mode, manual = "stop", (0., 0.)
                     waypoints = []
+                    mission, mission_complete = None, False
                 if control.policy is not None:
                     if control.policy == "gait":
                         policy, policy_name = None, "Analytic gait"
@@ -147,6 +156,16 @@ async def arena(socket: WebSocket):
                 target = follow_target(env.data.time)
             if mode == "approach" and waypoints and np.linalg.norm(target-env.data.qpos[:2]) < .25:
                 target = np.asarray(waypoints.pop(0))
+            if mission == "ball" and env.ball_touched and not mission_complete:
+                mission_complete = True
+                mode = "stop"
+                await socket.send_json({"type": "reply", "message": "Ball booped! Contact detected in MuJoCo."})
+            if mission == "behind_ball" and not waypoints and not mission_complete and env.ball >= 0:
+                ball = env.data.xpos[env.ball]
+                if env.data.qpos[0] > ball[0]+.35 and abs(env.data.qpos[1]-ball[1])<.45:
+                    mission_complete = True
+                    mode = "stop"
+                    await socket.send_json({"type": "reply", "message": "Made it behind the ball (+X side)."})
             rotation = env.data.xmat[env.torso].reshape(3, 3)
             decision = decide(mode, env.data.qpos[:3], math.atan2(rotation[1, 0], rotation[0, 0]),
                               env.upright, target, env.data.xpos[env.crate], manual)
@@ -166,6 +185,7 @@ async def arena(socket: WebSocket):
                           "reason": decision.reason, "target": target.tolist(),
                           "paused": paused, "policy": policy_name,
                           "needs_reset": env.data.qpos[2] < .19 or env.upright < .35})
+            state.update({"mission": mission, "mission_complete": mission_complete})
             await socket.send_json(state)
             await asyncio.sleep(max(0., .04-(asyncio.get_running_loop().time()-tick)))
     except (WebSocketDisconnect, RuntimeError):

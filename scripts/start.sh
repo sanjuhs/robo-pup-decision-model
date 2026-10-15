@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-export MPLCONFIGDIR="${MPLCONFIGDIR:-/workspace/.cache/matplotlib}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-/workspace/.cache}"
+export MPLCONFIGDIR="${MPLCONFIGDIR:-$PWD/.cache/matplotlib}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$PWD/.cache}"
 if [[ ! -f web/dist/index.html ]]; then
   printf '%s\n' 'Browser bundle missing. Run bash scripts/setup.sh first.' >&2
   exit 1

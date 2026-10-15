@@ -32,3 +32,16 @@ def test_ball_is_a_dynamic_physical_body():
     for _ in range(30):
         env.step(np.zeros(12))
     assert env.data.xpos[env.ball,0] > initial+.1
+
+
+def test_robot_ball_contact_is_recorded_and_reset():
+    import mujoco
+    env = RoboPupEnv(obstacles=True)
+    env.reset(seed=1)
+    qpos = env.model.jnt_qposadr[env.model.body_jntadr[env.ball]]
+    env.data.qpos[qpos:qpos+3] = [.45,0.,.46]
+    mujoco.mj_forward(env.model,env.data)
+    env.step(np.zeros(12))
+    assert env.ball_touched
+    env.reset(seed=1)
+    assert not env.ball_touched

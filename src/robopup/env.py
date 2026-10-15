@@ -31,6 +31,8 @@ class RoboPupEnv(gym.Env):
         self.torso = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "torso")
         self.crate = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "crate")
         self.ball = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "ball")
+        self.ball_geom = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_GEOM, "ball_geom")
+        self.ball_touched = False
 
     @property
     def upright(self):
@@ -66,6 +68,7 @@ class RoboPupEnv(gym.Env):
         super().reset(seed=seed)
         mujoco.mj_resetData(self.model, self.data)
         self.steps, self.phase = 0, 0.
+        self.ball_touched = False
         self.command[:] = (self.target_speed, 0.)
         self.previous_action[:] = 0
         self.data.qpos[7:19] = self.gait()
@@ -87,6 +90,17 @@ class RoboPupEnv(gym.Env):
                                    self.model.jnt_range[1:13, 1])
         for _ in range(4):
             mujoco.mj_step(self.model, self.data)
+            if self.ball_geom >= 0 and not self.ball_touched:
+                for contact in self.data.contact:
+                    if contact.geom1 == self.ball_geom:
+                        other = contact.geom2
+                    elif contact.geom2 == self.ball_geom:
+                        other = contact.geom1
+                    else:
+                        continue
+                    body = self.model.geom_bodyid[other]
+                    if self.model.body_rootid[body] == self.torso:
+                        self.ball_touched = True
         self.steps += 1
         rotation = self.data.xmat[self.torso].reshape(3, 3)
         local_v = rotation.T @ self.data.qvel[:3]
@@ -113,6 +127,7 @@ class RoboPupEnv(gym.Env):
             "speed": float(np.linalg.norm(self.data.qvel[:2])),
             "crate": self.data.xpos[self.crate].tolist(),
             "ball": self.data.xpos[self.ball].tolist() if self.ball >= 0 else None,
+            "ball_touched": self.ball_touched,
             "geoms": [{"id": i, "position": self.data.geom_xpos[i].tolist(),
                        "rotation": self.data.geom_xmat[i].tolist()}
                       for i in range(1, self.model.ngeom)],

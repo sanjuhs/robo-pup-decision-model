@@ -10,6 +10,7 @@ class PetCommand:
     mode: str
     reply: str
     waypoints: list[list[float]] = field(default_factory=list)
+    goal: str | None = None
 
 
 def interpret(text: str, ball, position) -> PetCommand:
@@ -29,12 +30,12 @@ def interpret(text: str, ball, position) -> PetCommand:
             # Behind is defined as the +X side. Route around the near side of the ball.
             side = -1. if position[1] <= y else 1.
             points = [[x-.65, y+side*.7], [x+.7, y+side*.7], [x+.7, y]]
-            return PetCommand("approach", "I'll try to go around to the far (+X) side of the ball.", points)
-        offset = np.asarray(position[:2], dtype=float)-np.asarray(ball[:2], dtype=float)
-        offset /= max(float(np.linalg.norm(offset)), 1e-6)
-        point = (np.asarray(ball[:2])+.35*offset).tolist()
+            return PetCommand("approach", "I'll try to go around to the far (+X) side of the ball.", points, "behind_ball")
+        # Aim for the ball itself; the physics contact sensor ends the mission.
+        # A stand-off target can stop before a foot actually reaches the ball.
+        point = np.asarray(ball[:2], dtype=float).tolist()
         reply = "I'll investigate the ball. Robots don't eat balls!" if words & {"eat", "sniff"} else "I'll try to reach the ball."
-        return PetCommand("approach", reply, [point])
+        return PetCommand("approach", reply, [point], "ball")
     if "follow" in words:
         return PetCommand("follow", "I'll try to follow the moving beacon; this skill is experimental.")
     if words & {"push", "nudge"}:

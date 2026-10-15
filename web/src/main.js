@@ -169,7 +169,7 @@ function updateState(next) {
   $('balance').innerHTML = `${balance} <small>%</small>`;
   $('speed-meter').style.width = `${Math.min(100,next.speed/.6*100)}%`;
   $('balance-meter').style.width = `${balance}%`;
-  $('thought').textContent = next.reason;
+  $('thought').textContent = next.mission_complete ? 'Mission complete. Measured in the physics world.' : next.reason;
   $('pet-state').textContent = next.needs_reset ? 'A little tumble. Reset posture?' : next.paused ? 'Taking a breather' : ({stop:'Standing by. Ready for a treat.',approach:'On a little adventure',follow:'Following my curiosity',push:'Testing a little nudge',manual:'You lead. I’ll try.',recover:'Finding my feet'}[next.behavior]);
   $('pet-status')?.classList.toggle('fallen',next.needs_reset);
   targetPos.set(next.target[0],next.target[1],.015);
@@ -187,7 +187,7 @@ function updateState(next) {
     }
   }
   // Expose only non-sensitive simulation telemetry for end-to-end verification.
-  window.arenaTelemetry = { time: next.time, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy };
+  window.arenaTelemetry = { time: next.time, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy, missionComplete:next.mission_complete, ballTouched:next.ball_touched };
 }
 
 function send(data) {
