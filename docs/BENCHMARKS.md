@@ -29,6 +29,11 @@ Native analytic-gait throughput: **10,000 control steps in 2.803 s = 3,568 steps
 including resets, at 50 Hz control / 200 Hz physics. This is aggregate simulation
 throughput, not a training FPS or a GPU result.
 
+The curious-v2 intermediate checkpoint at 131,072 steps was re-evaluated without
+further training: mean body-frame speed **0.359 m/s**, 0/5 falls, mean return 1065.5,
+mean world-X displacement 3.712 m. This supports the shorter workshop step budget;
+it is an intermediate checkpoint from the longer run, not an independent training seed.
+
 The optional MJX backend completed a CPU compiled probe (one world, 50 batched
 control steps): **84.63 s compilation**, **9.12 steps/s** after compilation. CPU MJX
 is much slower than native MuJoCo for this small batch; that is why it is optional.
@@ -40,17 +45,74 @@ are retained; the latest controller is rechecked separately. Stop passed and a
 nearby approach passed; follow and pushing failed the recorded success criteria.
 Pushing can physically move the crate without delivering it to the goal.
 
+Ball missions have separate criteria. In the original ball-command final-distance
+trial, the ball rolled away and the approach check failed; that record is retained.
+The revised yard adds physical rolling friction and walls, plus contact-based
+completion for a boop. In `ball-missions-v2.json`, curious-v2 contacted the ball in
+**13.64 s** and reached the +X side in **20.96 s**, without falling. Each is only one
+deterministic trial. A live browser trial independently confirmed actual ball contact.
+The behind criterion is X > ball X + 0.35 m and |Y − ball Y| < 0.45 m after waypoints.
+
+Ten independent stop-mode WebSocket worlds advanced at a minimum **0.989 times
+real time** over 75 frames per session. Five simultaneous browser instances also
+received independent advancing states. These short capacity tests do not establish
+two-hour reliability or ten simultaneous training jobs.
+
+## RTX 5090 attempt evidence
+
+The first authorized GPU attempt used an RTX 5090 (32,607 MiB reported by
+`nvidia-smi`), driver 595.91.07, JAX 0.7.2 and MuJoCo MJX 3.3.7. Its physics probe
+measured **10,046 batched control steps/s** across 128 worlds after **81.31 s** of
+compilation. PPO then failed at its first episode timeout because JAX host rewards
+were read-only. Progress reached 73,728 completed logged steps; there is no final
+policy or success claim for that attempt. The defect was fixed with writable
+boundary arrays and a regression test. The same experiment was retried.
+
+The first pod was deleted and absence verified. Its 333.68-second monitor interval
+at the reported $1.19/hour gives an estimated **$0.1103 GPU charge**, excluding
+provider billing adjustments/storage. This is an estimate, not an invoice. Raw
+lifecycle, hardware, source hashes, configuration, progress, and failure status
+are retained in `benchmarks/runpod-attempt-1/`.
+
+The corrected attempt completed **1,048,576 steps in 121.723 s = 8,614 training
+steps/s**. Compilation took **83.055 s**; its 128-world physics probe measured
+**11,560 batched control steps/s**. Native CPU evaluation on both the pod and the
+development machine returned the same five-seed summary: **0.3368 m/s**, mean return
+1061.4, mean world-X displacement **3.656 m**, and **0/5 falls**. The checkpoint and
+its source/configuration metadata are retained and bundled with the project.
+These use different vectorization, rollout and solver settings from the CPU run;
+the FPS figures are not a controlled hardware-only speedup claim.
+
+The GPU policy's first ball-boop trial stopped 0.533 m from the ball without contact.
+A stand-off navigation target was insufficient to guarantee foot contact. The
+controller now targets the ball itself and reports completion only on an actual MuJoCo contact,
+without changing the contact success criterion. Failed intermediate controller
+trials remain in the attempt-2 directory. No additional training was used for this correction.
+
+With the final controller, CPU curious-v2 booped the ball in **6.38 s** and went
+behind it in **20.96 s**. The GPU-trained policy reached the +X side in **16.84 s**,
+but **did not contact the ball within 60 s**, even after reaching 0.199 m away.
+The flat-ground policy is not a general interaction skill. Use curious-v2 for the
+validated ball-boop demo; keep the GPU policy's failure visible when comparing behaviors.
+
+The corrected pod was deleted after artifact retrieval; absence was verified again
+with the CLI. Lifecycle intervals give an aggregate **$0.2769 estimated GPU charge**
+for the failed and successful attempts. The billing API returned empty histories
+for both IDs at the check time, so a final invoice/storage-inclusive amount is
+not yet available. No pod or persistent volume was retained. This is well below
+the $30 ceiling, based on the observed rate and elapsed intervals.
+
 The facilitator's five-policy validation queue was interrupted when the user
 requested only one additional GPU training run. Partial outputs are not counted
 as completed training or evaluation results.
 
 ## Cost
 
-Paid resources created so far: none at this measurement checkpoint. CPU development
-incurred **$0 in Runpod GPU spend**. This does not estimate the platform's own host
-cost. Read-only Runpod access succeeded; the inspected secure-cloud catalog quoted
-RTX 5090 at $1.19/hour and H100 SXM at $3.99/hour. Catalog prices are not a billing
-receipt, confirmed availability, or storage-inclusive quote. Total GPU ceiling: $30.
+CPU development incurred **$0 in Runpod GPU spend**. The two disposable GPU
+attempts have an aggregate estimated $0.2769 charge as described above, with final
+billing not yet posted. This does not estimate the platform's own development-host
+cost. The selected pod response reported $1.19/hour. No H100 was provisioned.
+Catalog and elapsed-time estimates are not a storage-inclusive receipt. Total GPU ceiling: $30.
 
 ## Reproduce
 

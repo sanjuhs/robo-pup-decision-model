@@ -6,6 +6,11 @@
   output, documentation, or examples. Runpod uses a secure `RUNPOD_API_KEY` binding.
 - Paid infrastructure requires explicit user approval. Total GPU experimentation
   ceiling: $30. Do not provision or start billable resources just to make a test pass.
+  The user authorized one paid GPU training run in this session. That authorization
+  is being used for a single disposable RTX 5090 pod with a 25-minute monitor;
+  do not start additional policy experiments. A failed MJX/SB3 interface attempt
+  was diagnosed, its pod deleted, and the same experiment retried after a regression
+  test. Keep every attempt and cleanup record; do not hide failures or exceed the budget.
 - Keep changes small and commit related work together. Preserve raw failed runs.
 - Required checks: `uv run pytest -q`, `uv run ruff check src tests scripts`,
   `cd web && npm ci --ignore-scripts && npm run build && npm test` when browser code changes.

@@ -1,0 +1,13 @@
+{
+  "seed": 7,
+  "total_steps": 1048576,
+  "n_envs": 128,
+  "target_speed": 0.35,
+  "energy_weight": 0.002,
+  "backend": "mjx",
+  "device": "cpu",
+  "initial_log_std": -2.0,
+  "n_steps": 64,
+  "physics_friction": 0.9,
+  "solver": "CG/10/4"
+}

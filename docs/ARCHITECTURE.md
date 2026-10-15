@@ -42,6 +42,12 @@ trained self-righting controller. Stop uses an analytic standing pose, even when
 a learned policy is selected. The current PPO policies were trained only for
 forward flat-ground commands, so turning and other commands are distribution shifts.
 
+The local command grammar accepts ball approach, behind-ball waypoints, follow,
+push, stop, and recovery requests. It is not an LLM. Ball-boop completion requires
+actual robot/ball contact; behind-ball completion requires the robot to be on the
+ball's +X side by more than 0.35 m, within 0.45 m on Y, after consuming waypoints.
+The ball has rolling friction and low physical perimeter walls contain it.
+
 The moving follow beacon travels at 0.072 m/s. Push aligns behind a crate and
 commands contact toward a goal at (3,0); it is a heuristic, not a learned manipulation
 skill. Behavior trials record both successes and failures.
@@ -63,10 +69,27 @@ worlds, TLS termination, or collaborative shared-world synchronization.
 
 1. Add commanded yaw/velocity curricula and long-horizon drift penalties.
 2. Train separate approach/push/recovery skills with task-specific held-out tests.
-3. Add a MuJoCo Playground MJX/Warp path using a supported quadruped environment;
-   benchmark against the native baseline on approved GPU hardware.
+3. Extend the optional custom MJX backend, already probed on RTX 5090, with domain
+   randomization parity and a standard Playground benchmark environment.
 4. Define a policy transfer boundary: Playground policies cannot be loaded into
    this custom model without matching robot, observations, actions, and normalization.
 5. Add an optional Jev-compatible physical-judgment adapter after collecting
    counterfactual outcomes. Keep network/model calls out of the motor-control loop;
    measure calibration, latency, and budget independently. No Jev weights are downloaded now.
+
+## Optional GPU physics
+
+`MJXVecEnv` batches the same primitive robot and 50-value observation / 12-value
+action interface on the JAX device. `train_mjx` refuses a CPU device when
+`--require-gpu` is set. It records compile time separately and checks a forced
+timeout/reset before learning. Writable copies at the SB3 boundary are necessary:
+PPO modifies timeout rewards in-place. The first GPU attempt exposed this defect;
+it is regression-tested and retained in the evidence.
+
+GPU training uses 128 worlds, 64-step rollouts, batch size 1024, fixed friction 0.9,
+and a CG solver with 10 iterations / 4 line-search iterations. Native CPU training
+uses four worlds, 256-step rollouts, batch size 256, randomized friction, and the
+native default solver. Their raw throughputs are useful operational measurements,
+not a controlled hardware speedup comparison. PPO optimization remains on CPU;
+the physics is GPU accelerated. The saved SB3 checkpoint can be evaluated on the
+native environment without CUDA or JAX.

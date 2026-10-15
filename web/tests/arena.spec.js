@@ -59,6 +59,31 @@ test('plain language ball commands are acknowledged without claiming completion'
   await page.waitForFunction(()=>window.arenaTelemetry.behavior==='stop');
 });
 
+test('trained policy completes a physical ball boop through the browser',async({page})=>{
+  test.setTimeout(60000);
+  await page.goto('/');
+  await page.waitForFunction(()=>window.arenaTelemetry?.time>.1);
+  await page.locator('#policy').selectOption('baseline/curious-v2');
+  await page.waitForFunction(()=>window.arenaTelemetry.policy==='baseline/curious-v2');
+  await page.getByLabel('Talk to Miso').fill('go to the ball');
+  await page.getByRole('button',{name:/Send/}).click();
+  await page.waitForFunction(()=>window.arenaTelemetry.missionComplete,{},{timeout:45000});
+  expect(await page.evaluate(()=>window.arenaTelemetry.ballTouched)).toBe(true);
+  await expect(page.locator('#thought')).toContainText('Mission complete');
+});
+
+test('GPU-trained checkpoint runs locomotion in the native browser arena',async({page})=>{
+  await page.goto('/');
+  await page.waitForFunction(()=>window.arenaTelemetry?.time>.1);
+  await page.locator('#policy').selectOption('runpod/5090-once');
+  await page.waitForFunction(()=>window.arenaTelemetry.policy==='runpod/5090-once');
+  const start=await page.evaluate(()=>window.arenaTelemetry.position[0]);
+  await page.keyboard.down('w');
+  await page.waitForFunction(x=>window.arenaTelemetry.position[0]>x+.3,start,{timeout:10000});
+  await page.keyboard.up('w');
+  expect(await page.evaluate(()=>window.arenaTelemetry.needsReset)).toBe(false);
+});
+
 test('mobile layout stays within the screen and guide opens', async ({ page }) => {
   await page.setViewportSize({width:390,height:844});
   await page.goto('/');

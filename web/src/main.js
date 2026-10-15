@@ -187,7 +187,7 @@ function updateState(next) {
     }
   }
   // Expose only non-sensitive simulation telemetry for end-to-end verification.
-  window.arenaTelemetry = { time: next.time, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy, missionComplete:next.mission_complete, ballTouched:next.ball_touched };
+  window.arenaTelemetry = { time: next.time, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy, missionComplete:next.mission_complete, ballTouched:next.ball_touched, position:next.position };
 }
 
 function send(data) {

@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-10-15T22:46:46.428434+00:00",
+  "python": "3.12.3",
+  "jax": "0.7.2",
+  "jax_devices": [
+    "cuda:0"
+  ],
+  "torch": "2.9.0+cpu",
+  "physics_device": "gpu",
+  "training_device": "cpu",
+  "source_hashes": {
+    "__init__.py": "de836d1eb82384f77fd8696cfdc232600d9f1a4cfa888ca50a0ef4adec41c89f",
+    "benchmark.py": "9d855745039180382c59e8159c5faa750592e4f363380b001ca57ad97d4a069d",
+    "commands.py": "12e81459a728c5e497ab6a16efd0b69f8b6f0ea1bda7248389fc0574471d0964",
+    "decisions.py": "2c8f45085e9924f0fbb3b36101bda325da7a43ba2f5a2595d504f04c4a22c875",
+    "env.py": "6adf17d7e5d0cf9318d2e01a96ef066bdd05f04c77aee8baf877e7c8c25f4505",
+    "evaluate.py": "c37f5c9315dca2fa55cb7d32d8a280b0608a7e68f751eedaa849a55f0534dcc3",
+    "experiments.py": "e59f2c596157a2fa6d73723f55f19ee620ceffce6ccc1493286b8f7bf3e7dc35",
+    "mjx_env.py": "8e009e316956382d538490b28ae7bd152317b882a15fd35349a7a5a0f002e615",
+    "model.py": "b207ad43fa5f290427828508992ee0c1b1f2da75bc421f48ca5c2c83c39b7990",
+    "server.py": "288115baf52263fd6d08d25e6811fc05a1ddf25d12e054e1d5ad567981d0abca",
+    "tasks.py": "fc92114cef1b957c0250fea3deb4cb6ac8f740636d790e794745c2974773cfe5",
+    "train.py": "a43b58876bbd4ea612f91e6e80625c73dc3e777c8e12cc595e6c0ea680ac4a16",
+    "train_mjx.py": "16d33030c91378c7a12b7a3d37e54a11c3e66abb97eca42db1bc24a18a15095a"
+  }
+}

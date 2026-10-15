@@ -7,6 +7,8 @@ meshes are redistributed.
 Dependencies retain their own licenses:
 
 - MuJoCo — Apache-2.0, Google DeepMind.
+- Optional MuJoCo MJX and JAX — Apache-2.0. NVIDIA CUDA libraries installed for
+  GPU use retain their own NVIDIA license terms; they are not vendored in this repository.
 - Stable-Baselines3 — MIT, Antonin Raffin and contributors.
 - Gymnasium — MIT, OpenAI and Farama Foundation.
 - Three.js — MIT, three.js authors (full notice in `web/THREE_LICENSE.txt`).

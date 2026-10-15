@@ -1,0 +1,62 @@
+{
+  "protocol": "flat-forward-v1",
+  "target_speed_mps": 0.35,
+  "episode_seconds": 12,
+  "episodes": [
+    {
+      "seed": 1001,
+      "return": 1039.6396553311722,
+      "steps": 600,
+      "mean_speed_mps": 0.3235020088017288,
+      "mean_squared_torque": 27.0270765161504,
+      "distance_m": 3.51429663452619,
+      "fallen": false,
+      "survival_fraction": 1.0
+    },
+    {
+      "seed": 1002,
+      "return": 1050.859299729362,
+      "steps": 600,
+      "mean_speed_mps": 0.34445861476379147,
+      "mean_squared_torque": 26.903245142960458,
+      "distance_m": 3.8393026747515333,
+      "fallen": false,
+      "survival_fraction": 1.0
+    },
+    {
+      "seed": 1003,
+      "return": 1074.2140567322574,
+      "steps": 600,
+      "mean_speed_mps": 0.3304361442061023,
+      "mean_squared_torque": 26.669395900740835,
+      "distance_m": 3.464168690393512,
+      "fallen": false,
+      "survival_fraction": 1.0
+    },
+    {
+      "seed": 1004,
+      "return": 1076.5505815308784,
+      "steps": 600,
+      "mean_speed_mps": 0.3550273659126668,
+      "mean_squared_torque": 26.427710872017368,
+      "distance_m": 3.902439323811417,
+      "fallen": false,
+      "survival_fraction": 1.0
+    },
+    {
+      "seed": 1005,
+      "return": 1065.886271094372,
+      "steps": 600,
+      "mean_speed_mps": 0.33062290304530156,
+      "mean_squared_torque": 26.850905502171567,
+      "distance_m": 3.5622792403371553,
+      "fallen": false,
+      "survival_fraction": 1.0
+    }
+  ],
+  "mean_return": 1061.4299728836086,
+  "mean_speed_mps": 0.3368094073459182,
+  "mean_distance_m": 3.6564973127639617,
+  "fall_rate": 0.0,
+  "mean_survival_fraction": 1.0
+}

@@ -11,15 +11,22 @@ This file separates implemented paths from measured task success. See
 | Interactive browser | Tested desktop/mobile; live geometry, orbit/follow camera, keyboard, pause/reset, policy loading |
 | Multiple participants | Five simultaneous independent browser worlds tested; no shared-world collaboration |
 | Experiment comparison | Completed local runs discovered from real config/result files; compare equal protocols |
-| Plain-language commands | Local grammar and physical ball; parsing/control routing tested; task success evaluated separately |
+| Plain-language commands | Local grammar; ball boop and behind-ball missions passed single deterministic physics trials; browser contact also verified |
 | Approach | Nearby static-target trial passed; arbitrary navigation not solved |
 | Follow and push | Experimental controller; failed recorded trials; no general success claim |
 | Stop/recover | Analytic standing pose and explicit simulation reset; no learned self-righting |
 | Jev decision model | License/inspiration audited; no model weights, training, or inference integrated |
-| MJX backend | Optional batched adapter added; CPU compiled finite-state probe passed; GPU validation pending |
+| MJX backend | CPU and RTX 5090 probes passed, including forced timeout/reset; writable-array regression tested |
 | Runpod | CLI checksum and read-only authentication verified; live catalog inspected |
-| RTX 5090 GPU training | One authorized run being prepared; no success claim before results |
+| RTX 5090 GPU training | One completed experiment: 1,048,576 steps in 121.7 s; native CPU recheck 0.337 m/s, no falls in five trials. One failed interface attempt retained. Both pods deleted. |
 
 The research server has no user accounts and binds to loopback by default. Host
 it behind private port-forwarding. It is not a public production service. The
 hardware model is original primitive geometry, not a validated real robot.
+
+Bundled, checksum-verified CPU and GPU-trained checkpoints are seeded by setup.
+The GPU-trained policy runs in the local CPU arena; participants do not need a
+GPU just to play. Following, pushing-to-goal and learned recovery are still unsolved.
+Windows/Apple Silicon installation and a full two-hour multi-user soak test were
+not run here. CI configuration is provided; its hosted result is tracked separately
+from the local test evidence.

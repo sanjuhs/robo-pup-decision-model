@@ -1,0 +1,44 @@
+{
+  "protocol": "ball-commands-v1; one 60-second deterministic trial each",
+  "policy": "curious-v2",
+  "trials": [
+    {
+      "command": "go to the ball",
+      "seconds": 60.00000000001224,
+      "success": false,
+      "fallen": false,
+      "final_ball_distance_m": 11.694575515411382,
+      "robot_xyz": [
+        1.5460247542514707,
+        -0.6462225719879376,
+        0.39135656651225803
+      ],
+      "ball_xyz": [
+        1.5653614506196154,
+        -12.340782101009667,
+        0.11971153136462688
+      ],
+      "remaining_waypoints": 0,
+      "final_waypoint_distance_m": 0.19101105391715478
+    },
+    {
+      "command": "go behind the ball",
+      "seconds": 60.00000000001224,
+      "success": true,
+      "fallen": false,
+      "final_ball_distance_m": 0.8254803091514735,
+      "robot_xyz": [
+        2.6094188487473433,
+        -0.8379541173329671,
+        0.3913565665137443
+      ],
+      "ball_xyz": [
+        1.8,
+        -1.0,
+        0.11971153136462688
+      ],
+      "remaining_waypoints": 0,
+      "final_waypoint_distance_m": 0.19552839320807552
+    }
+  ]
+}

@@ -7,10 +7,17 @@ fresh PPO policies, and inspectable experiment results. Inspired by
 [robo-jev](https://github.com/STEERIX-home/robo-jev)'s separation of physical judgment
 and motor control. This repository's decision layer currently uses rules.
 
-**Prototype, not a hardware controller.** Native physics runs on CPU. PPO learns
-joint-target residuals around an analytic trot, starting with fresh network weights.
-No pretrained locomotion weights are required for training. GPU physics, RTX 5090
-performance, learned recovery, and Jev integration are not yet validated.
+![The RoboPup Arena browser prototype](docs/assets/arena.png)
+
+**Prototype, not a hardware controller.** The local arena runs on CPU; optional
+MJX physics runs on GPU. PPO learns joint-target residuals around an analytic trot,
+starting with fresh network weights. No pretrained weights are required for training.
+
+An RTX 5090 experiment completed **1,048,576 steps in 121.7 seconds**, then averaged
+**0.337 m/s with no falls in five 12-second native-CPU trials**. Both CPU and
+GPU-trained demo checkpoints are included. See the [raw benchmark evidence](docs/BENCHMARKS.md)
+for compilation/setup time, a failed attempt, costs, and limits. Following,
+pushing-to-goal, learned recovery, and Jev integration remain incomplete.
 
 ## Start the yard
 
@@ -26,16 +33,30 @@ port-forward from your development environment. Do not expose this unauthenticat
 research server directly to the public Internet. Each browser tab receives an
 independent simulated world. Use one Uvicorn worker.
 
+The browser demo needs no GPU. For a manual local setup (including PowerShell),
+run `uv sync --frozen --extra dev`, then `uv run python scripts/seed_demo.py` from
+the root. Run `npm ci --ignore-scripts` and `npm run build`
+inside `web/`, then `uv run uvicorn robopup.server:app --host 127.0.0.1 --port 8000`
+from the repository root. Set writable cache directories if your host restricts
+them. Linux is tested here; Windows and Apple Silicon installation are not yet
+validated. PyTorch 2.9 does not support every older CPU/OS combination.
+
 - Click the ground to drop a treat; select **Find a treat**.
 - Drag to orbit, scroll to zoom, or enable **Follow cam**.
 - **WASD** steers; **Space** requests a standing pose.
 - **Pause** freezes physics; **Reset posture** resets the world, including the crate.
 - Select a locally trained policy to compare it with the analytic gait.
+- Talk to Miso: **go to the ball**, **go behind the ball**, **follow me**, **push the crate**, **stop**.
+  This is a local command grammar. Ball missions report completion from physics
+  contacts or measured position; free-form language understanding is not implemented.
+- Select **baseline / curious-v2** for the validated ball-boop demo. The GPU-trained
+  policy is validated for flat-ground locomotion and can fail the contact task.
 - **Experiments** reads actual run results; the UI does not start training or cloud resources.
 
 The physical robot and crate transforms come from MuJoCo. Decorative eyes, ears,
-tail, treat beacon, and yard boundary are visual only. Obstacles and the crate
-collide physically. The crate is moved only by contact, never a scripted force.
+tail, treat beacon, grid and painted boundary line are visual only. Obstacles and the crate
+collide physically. The ball has rolling friction and the yard has low physical
+boundary walls. The crate and ball are moved only by contact, never scripted forces.
 
 ## Train your first policy
 

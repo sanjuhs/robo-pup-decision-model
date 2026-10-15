@@ -1,0 +1,21 @@
+{
+  "ref": "5d342fa06656af81c5478d57c311289d43305095",
+  "gpu": "RTX 5090",
+  "catalog_rate_usd_hour": 1.19,
+  "ttl_seconds": 1500,
+  "max_experiment_usd": 5,
+  "total_budget_usd": 30,
+  "paid_training_runs_allowed": 1,
+  "create_requested_at": 1792103686.112515,
+  "pod_id": "vnwpb4jiczyv5w",
+  "cost": 1.19,
+  "job_exit_code": 1,
+  "artifact_bundle_sha256": "76173b1b36e49a389bba1580ed8a4b6ec3080bb434cfb621525fac6e9615484d",
+  "artifacts_retrieved": true,
+  "delete_request_confirmed": true,
+  "delete_requested_at": 1792104019.7897215,
+  "monitor_seconds": 333.68,
+  "gpu_cost_estimate_usd": 0.11029977777777777,
+  "cost_is_estimate_not_invoice": true,
+  "pod_absent_after_delete": true
+}

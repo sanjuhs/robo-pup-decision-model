@@ -1,0 +1,52 @@
+{
+  "policy": "artifacts/runpod/5090-once/policy.zip",
+  "protocol": "yard-behaviors-v1; one deterministic 30-second trial per behavior",
+  "criteria": {
+    "approach": "final distance <0.25m and no fall",
+    "follow": "mean distance over final 5s <0.5m and no fall",
+    "push": "crate within 0.25m of goal and no fall",
+    "stop": "displacement <0.15m and no fall"
+  },
+  "tasks": [
+    {
+      "behavior": "stop",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": true,
+      "final_target_distance_m": 1.0390664428533707,
+      "mean_target_distance_m": 1.0386103717504807,
+      "final_crate_to_goal_m": 1.5000000000013678,
+      "robot_displacement_m": 0.03952276953346847
+    },
+    {
+      "behavior": "approach",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": true,
+      "final_target_distance_m": 0.19876569810706493,
+      "mean_target_distance_m": 0.2346162689131442,
+      "final_crate_to_goal_m": 1.5000000000013678,
+      "robot_displacement_m": 0.8012608855569585
+    },
+    {
+      "behavior": "follow",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": false,
+      "final_target_distance_m": 1.4538515881265646,
+      "mean_target_distance_m": 0.7022387100554145,
+      "final_crate_to_goal_m": 1.47756934671692,
+      "robot_displacement_m": 1.5289182082078145
+    },
+    {
+      "behavior": "push",
+      "seconds": 29.999999999998316,
+      "fallen": false,
+      "success": false,
+      "final_target_distance_m": 2.3670842289500618,
+      "mean_target_distance_m": 0.7803527005313754,
+      "final_crate_to_goal_m": 4.200405750072141,
+      "robot_displacement_m": 1.9255998094673907
+    }
+  ]
+}

@@ -11,6 +11,8 @@ prior is disclosed; this is residual PPO, not learning all locomotion from zero.
    a known baseline checkpoint. Read `BENCHMARKS.md` for actual local timings.
 3. Start `bash scripts/start.sh`. Give participants private port-forward access.
    Each tab is independent; changing one target does not move another participant's dog.
+   A short ten-session WebSocket probe measured a minimum real-time ratio of 0.989;
+   this is not a two-hour soak test. Five simultaneous browser renderers were also tested.
 4. Give each participant a unique ID and terminal access. This prototype trusts
    participants with the host filesystem; do not use it for mutually untrusted tenants.
 5. Avoid running ten optimizers at once. Queue jobs; begin with one training job,
@@ -43,6 +45,12 @@ uv run robopup-train --participant alice --run curious-02 --seed 101 --steps 262
 # A fair recheck uses the same evaluation target speed and episode protocol.
 uv run robopup-evaluate --model artifacts/alice/curious-02/policy.zip --speed .35 --out artifacts/alice/curious-02/recheck.json
 ```
+
+The shipped curious-v2 checkpoint is available after setup, so the arena can be
+demonstrated immediately. Select it and try `go to the ball` or `go behind the ball`.
+Both passed one deterministic headless trial; ball contact also passed a live
+browser trial. Following and pushing remain experimental. A command being
+recognized does not prove that its activity was completed.
 
 Participants can copy `configs/curious.json` to a new file and change one variable.
 Profiles `gentle` and `zoomies` intentionally use different speeds/energy penalties;

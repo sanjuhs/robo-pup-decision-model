@@ -1,0 +1,9 @@
+{
+  "compile_seconds": 81.3117290980299,
+  "physics_device": "gpu",
+  "batched_control_steps": 6400,
+  "batched_steps_per_second": 10046.40129833343,
+  "envs": 128,
+  "physics_hz": 200,
+  "control_hz": 50
+}

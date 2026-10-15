@@ -1,0 +1,48 @@
+{
+  "protocol": "ball-missions-v2; one deterministic trial, maximum 60s per command",
+  "policy": "artifacts/baseline/curious-v2/policy.zip",
+  "criteria": {
+    "go to ball": "MuJoCo contact between robot and ball, no fall",
+    "go behind ball": "all waypoints used; robot on +X side by >0.35m, Y within 0.45m; no fall"
+  },
+  "trials": [
+    {
+      "command": "go to the ball",
+      "seconds": 6.379999999999886,
+      "success": true,
+      "fallen": false,
+      "ball_contact": true,
+      "final_ball_distance_m": 0.43051608138579006,
+      "remaining_waypoints": 0,
+      "robot_xyz": [
+        1.5701586490049906,
+        -0.6403929890809772,
+        0.39264546470874195
+      ],
+      "ball_xyz": [
+        1.8035103338628544,
+        -1.0021817223297786,
+        0.12095046461069253
+      ]
+    },
+    {
+      "command": "go behind the ball",
+      "seconds": 20.960000000000115,
+      "success": true,
+      "fallen": false,
+      "ball_contact": false,
+      "final_ball_distance_m": 0.9214066722109676,
+      "remaining_waypoints": 0,
+      "robot_xyz": [
+        2.605543784637771,
+        -0.552686388954745,
+        0.38294560087480556
+      ],
+      "ball_xyz": [
+        1.8,
+        -1.0,
+        0.11987426961354077
+      ]
+    }
+  ]
+}

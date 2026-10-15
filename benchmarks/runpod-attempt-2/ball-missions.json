@@ -1,0 +1,48 @@
+{
+  "protocol": "ball-missions-v2; one deterministic trial, maximum 60s per command",
+  "policy": "artifacts/runpod/5090-once/policy.zip",
+  "criteria": {
+    "go to ball": "MuJoCo contact between robot and ball, no fall",
+    "go behind ball": "all waypoints used; robot on +X side by >0.35m, Y within 0.45m; no fall"
+  },
+  "trials": [
+    {
+      "command": "go to the ball",
+      "seconds": 60.00000000001224,
+      "success": false,
+      "fallen": false,
+      "ball_contact": false,
+      "final_ball_distance_m": 0.19927229667019153,
+      "remaining_waypoints": 0,
+      "robot_xyz": [
+        1.652409030857038,
+        -0.8661106649219062,
+        0.39135656651204415
+      ],
+      "ball_xyz": [
+        1.8,
+        -1.0,
+        0.11987426961354077
+      ]
+    },
+    {
+      "command": "go behind the ball",
+      "seconds": 16.840000000000934,
+      "success": true,
+      "fallen": false,
+      "ball_contact": false,
+      "final_ball_distance_m": 0.8717365089222601,
+      "remaining_waypoints": 0,
+      "robot_xyz": [
+        2.54893209738154,
+        -0.5538775341908263,
+        0.39124316998576514
+      ],
+      "ball_xyz": [
+        1.8,
+        -1.0,
+        0.11987426961354077
+      ]
+    }
+  ]
+}
