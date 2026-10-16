@@ -1,4 +1,4 @@
-# Runpod: one authorized GPU experiment
+# Runpod experiments and lifecycle safeguards
 
 The total GPU experimentation budget is **$30**. The user subsequently authorized paid work within this budget and requested
 one training experiment. One initial MJX/SB3 interface attempt failed; its pod
@@ -8,6 +8,39 @@ $30 total ceiling. That extension was trained/tested on this CPU host with no ne
 Runpod resources. This historical GPU runbook does not start further services.
 The checked-in scripts do not provision pods; `gpu_job.sh` runs only inside an
 already authorized, externally monitored disposable pod.
+
+
+## Newly authorized planner experiment (2026-10-16)
+
+The user explicitly authorized continuing GPU experimentation within the **same
+$30 session total**, after the earlier estimated $0.2769 motor experiment.
+The next experiment targets a versioned RGB/text/state planner candidate, not a
+new GPU claim for the existing CPU-trained model. The current demo stays on v2
+until independent language/state and physical-goal checks justify promotion.
+
+- One RTX 5090, no automatic retry/fallback. Current read-only catalog: $1.19/hour.
+- External lifecycle monitor: 40 minutes, actual hourly GPU rate must be ≤$1.50.
+  Inner bootstrap/job timeout: 35 minutes; training timeout: 25 minutes.
+- Reserve $1 for prior usage and allocate $3 for this attempt, including $0.20
+  storage headroom. These are conservative allocation bounds, not final receipts.
+- No account key in the pod, no public ports, no persistent volume. The local
+  monitor accepts an environment binding or hidden in-memory credential input.
+- `scripts/runpod_planner_experiment.py` creates the paid resource, retrieves and
+  verifies the artifact archive, deletes only its pod and confirms absence.
+  Never run it without authorization; it is not part of normal setup/tests.
+- `scripts/gpu_planner_job.sh` pins the source commit, uses the provider CUDA
+  PyTorch build and hash-locked non-Torch dependencies, generates 6,000 scenes
+  with 20 actual analytic-movement steps each, and trains the candidate. CUDA is
+  mandatory; GPU hardware, utilization, versions, source/data hashes, initialization
+  lineage and failed/successful validation are retained. The provider Torch build
+  is an explicit dependency exception to the laptop CPU wheel, not a hidden lock change.
+- Freeze the new final-test templates before training. Keep final testing out of
+  checkpoint selection; compare v2 and v3 on those same new scenes/phrases. The
+  older v2 final test becomes development/regression evidence for later models.
+
+At preparation time, only a three-step CPU smoke training run and regression tests
+have run. No candidate quality/GPU timing claim is established by that smoke test.
+Actual paid-run outcome and cleanup will be recorded separately in `benchmarks/`.
 
 ## Credentials and read-only access
 

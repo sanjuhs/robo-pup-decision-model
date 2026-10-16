@@ -59,6 +59,15 @@ def encode_scene_instruction(text, length=96):
 
 
 class ScenePlanner(nn.Module):
+    version = TRAINED_VERSION
+    vocabulary = VOCABULARY
+
+    def encode_instruction(self, text):
+        return encode_scene_instruction(text)
+
+    def encode_state(self, states):
+        return self.state(states)
+
     def __init__(self, width=96, layers=2):
         super().__init__()
         self.width, self.layers = width, layers
@@ -121,7 +130,7 @@ class ScenePlanner(nn.Module):
             (
                 visual,
                 self.text(text),
-                self.state(states).unsqueeze(1),
+                self.encode_state(states).unsqueeze(1),
                 self.queries.expand(b, -1, -1),
             ),
             dim=1,
@@ -157,13 +166,18 @@ def load_planner(directory: Path):
     path = directory / "planner.pt"
     if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
         raise ValueError("Planner checksum mismatch")
-    vocabulary = directory / "vocabulary.json"
-    if vocabulary.exists() and json.loads(vocabulary.read_text()) != VOCABULARY:
-        raise ValueError("Planner vocabulary mismatch")
     checkpoint = torch.load(path, map_location="cpu", weights_only=True)
-    if checkpoint["version"] != TRAINED_VERSION:
-        raise ValueError("Unsupported planner checkpoint")
-    model = ScenePlanner(**checkpoint["architecture"])
+    if checkpoint["version"] == TRAINED_VERSION:
+        model = ScenePlanner(**checkpoint["architecture"])
+    else:
+        from robopup.planner_v3 import ArenaPlannerV3, VERSION
+
+        if checkpoint["version"] != VERSION:
+            raise ValueError("Unsupported planner checkpoint")
+        model = ArenaPlannerV3(**checkpoint["architecture"])
+    vocabulary = directory / "vocabulary.json"
+    if vocabulary.exists() and json.loads(vocabulary.read_text()) != model.vocabulary:
+        raise ValueError("Planner vocabulary mismatch")
     model.load_state_dict(checkpoint["state_dict"])
     model.eval()
     return model, checkpoint
@@ -174,7 +188,7 @@ def infer(model, image, instruction, observation, energy=1.0, progress=0.0, yaw=
     with torch.inference_mode():
         out = model(
             torch.from_numpy(image.copy()).permute(2, 0, 1).float().unsqueeze(0) / 255,
-            encode_scene_instruction(instruction).unsqueeze(0),
+            model.encode_instruction(instruction).unsqueeze(0),
             torch.from_numpy(state).unsqueeze(0),
         )
     skills = out["skill_logits"][0].softmax(-1)

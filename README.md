@@ -120,6 +120,11 @@ scaffold. It is distinct from the trained `ScenePlanner` running in the arena.
 The Python backend is still required: a fully offline browser/phone bundle and
 photoreal canine rig have not been built.
 
+A further **user-authorized RTX 5090 planner experiment** is being prepared inside
+the same $30 total ceiling. The current demo remains the tested v2 checkpoint;
+candidate architecture/smoke checks are not evidence of improved task success.
+See [the capped experiment protocol](docs/RUNPOD.md#newly-authorized-planner-experiment-2026-10-16).
+
 ## Train your first policy
 
 ```bash

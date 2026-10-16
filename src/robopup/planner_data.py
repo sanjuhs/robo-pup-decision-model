@@ -105,7 +105,7 @@ def labels(intent, energy, held):
     return skills, objects, offsets
 
 
-def generate(out: Path, scenes=1800, seed=61):
+def generate(out: Path, scenes=1800, seed=61, rollout_steps=0):
     out.mkdir(parents=True, exist_ok=False)
     rng = np.random.default_rng(seed)
     env = PetEnv()
@@ -143,6 +143,8 @@ def generate(out: Path, scenes=1800, seed=61):
             env.data.qvel[:6] = rng.normal(0, 0.05, 6)
             env.command[:] = rng.uniform([0, -0.2], [0.45, 0.2])
             mujoco.mj_forward(env.model, env.data)
+            for _ in range(rollout_steps):
+                env.step(np.zeros(12))
             image, mask = camera.capture(labels=True)
             images.append(image)
             masks.append(mask)
@@ -159,6 +161,7 @@ def generate(out: Path, scenes=1800, seed=61):
     report = {
         "seed": seed,
         "scenes": scenes,
+        "rollout_steps_per_scene": rollout_steps,
         "seconds": time.monotonic() - start,
         "source": "actual orthographic MuJoCo RGB and segmentation; random scene poses",
         "split": "first 80% train; remaining scenes validation; separate held-out instruction templates",
@@ -174,5 +177,6 @@ if __name__ == "__main__":
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--scenes", type=int, default=1800)
     p.add_argument("--seed", type=int, default=61)
+    p.add_argument("--rollout-steps", type=int, default=0)
     a = p.parse_args()
-    print(json.dumps(generate(a.out, a.scenes, a.seed), indent=2))
+    print(json.dumps(generate(a.out, a.scenes, a.seed, a.rollout_steps), indent=2))

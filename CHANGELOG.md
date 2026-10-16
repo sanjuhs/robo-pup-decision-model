@@ -5,6 +5,18 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Authorized GPU planner candidate
+
+- Add a versioned 241,816-parameter candidate with explicit needs encoding,
+  expanded compositional English curriculum and motion-frame training data.
+  Keep the existing trained demo and v2 loading compatible.
+- Add CUDA-required training, frozen test templates, source/data/initialization
+  hashes, a hash-locked GPU runtime export and a 40-minute deletion monitor.
+- The user authorized a further Runpod experiment inside the total $30 ceiling.
+  CPU smoke and compatibility checks passed; paid results and deployment decisions
+  will be recorded after actual training/evaluation.
+
+
 ### Trained arena brain and voice — 2026-10-16
 
 - Train and bundle a 232,414-parameter RGB/text/state transformer with six plan
