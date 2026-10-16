@@ -1,0 +1,22 @@
+{
+  "training_source_ref": "356fd1830ac39cbe3a2faf39fde75de1e81df7c1",
+  "protocol": "docs/GPU_PLANNER_EXPERIMENT.md#manual-corrective-experiment-v4-frozen-before-retraining",
+  "evaluation_source_sha256": "13af7a86020070013e27fbf6f8019cfc9fc3c6fcf78ae55226f0a285493bcdcb",
+  "final_scene_seed": 94871,
+  "all_500_scenes_are_test": true,
+  "language_samples": 6000,
+  "evaluation_seed": 384,
+  "frozen_template_source_sha256": "2ab0381fc7c69743010e431b4d28ba514ce0c76da4fadb9cf93db70074a11971",
+  "physical_seeds": [
+    707,
+    808,
+    909
+  ],
+  "physical_seconds": 120,
+  "baseline_first_skill": 0.5981666666666666,
+  "baseline_intent": 0.9166666666666666,
+  "baseline_physical_passes": 24,
+  "baseline_physical_trials": 24,
+  "v3_failed_test_became_development_evidence": true,
+  "selection_uses_only_training_validation": true
+}

@@ -1,0 +1,132 @@
+{
+  "model_sha256": "e17d046cb211990fc2f9ba4cb466ae683084c98a03d4298729a3d93163395392",
+  "dataset_sha256": "0373d3e561a65b4729fb08c356bf0d42de7c1686318880c09234054c0f096e36",
+  "scenes": 500,
+  "samples": 6000,
+  "templates": {
+    "stop": "hey little puppy would you please stay still here",
+    "approach": "can you please go and sniff the red ball for me",
+    "behind": "please walk behind that little red ball for me miso",
+    "fetch": "could you please collect the toy ball and bring it back home",
+    "follow": "miso would you please follow that purple beacon for me",
+    "push": "hey puppy please push that orange box to the ring",
+    "walk": "could you take a slow walk forward for me",
+    "run": "miso could you sprint straight ahead please",
+    "jump": "hey little puppy please take a hop now",
+    "rest": "would you please take a little rest break miso",
+    "drop": "miso would you release that little red ball please",
+    "unsupported": "could you tell me what is behind that orange box"
+  },
+  "metrics": {
+    "intent": 0.9166666666666666,
+    "first_skill": 0.5981666666666666,
+    "horizon_skill": 0.6186666666666667,
+    "object": 0.8594722222222222
+  },
+  "offset_error_m": 0.06141509004765087,
+  "per_intent_accuracy": {
+    "stop": 1.0,
+    "approach": 1.0,
+    "behind": 1.0,
+    "fetch": 1.0,
+    "follow": 1.0,
+    "push": 1.0,
+    "walk": 1.0,
+    "run": 1.0,
+    "jump": 1.0,
+    "rest": 1.0,
+    "drop": 1.0,
+    "unsupported": 0.0
+  },
+  "pixel_iou": [
+    0.9907155632972717,
+    0.8577834963798523,
+    0.7047713994979858,
+    0.6108307242393494,
+    0.8061443567276001
+  ],
+  "visible_object_centroid_mae_m": 0.07103892697148628,
+  "visible_object_recall": 0.9994972347913524,
+  "interventions": {
+    "fetch": {
+      "intent": "fetch",
+      "row": {
+        "skill": "retrieve",
+        "object": "ball",
+        "delta": [
+          -1.3531421422958374,
+          0.2804507315158844
+        ],
+        "object_delta": [
+          -1.379333734512329,
+          0.23114417493343353
+        ],
+        "duration_s": 1.0,
+        "confidence": 0.9207332134246826,
+        "visible": true
+      }
+    },
+    "push": {
+      "intent": "push",
+      "row": {
+        "skill": "push",
+        "object": "crate",
+        "delta": [
+          1.728736162185669,
+          0.05283542349934578
+        ],
+        "object_delta": [
+          1.7263388633728027,
+          0.03985949605703354
+        ],
+        "duration_s": 1.0,
+        "confidence": 0.9994137287139893,
+        "visible": true
+      }
+    },
+    "low_energy": {
+      "intent": "fetch",
+      "row": {
+        "skill": "rest",
+        "object": "none",
+        "delta": [
+          0.007719842251390219,
+          0.018519826233386993
+        ],
+        "object_delta": [
+          0.0,
+          0.0
+        ],
+        "duration_s": 1.0,
+        "confidence": 0.9984824061393738,
+        "visible": true
+      }
+    },
+    "held": {
+      "intent": "fetch",
+      "row": {
+        "skill": "return",
+        "object": "home",
+        "delta": [
+          -0.6825737953186035,
+          -0.9464510083198547
+        ],
+        "object_delta": [
+          -0.7248865962028503,
+          -0.9853336215019226
+        ],
+        "duration_s": 1.0,
+        "confidence": 0.9977078437805176,
+        "visible": true
+      }
+    },
+    "blank_rgb": {
+      "visible": false
+    },
+    "shifted_rgb": {
+      "expected_x_shift_m": 0.5,
+      "measured_x_shift_m": 0.4999998211860657
+    }
+  },
+  "scope": "All supplied independent scenes and selected frozen templates; no retraining on this final test. Bounded arena vision/language."
+}
