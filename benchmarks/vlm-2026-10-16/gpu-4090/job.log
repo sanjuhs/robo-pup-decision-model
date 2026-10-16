@@ -1,0 +1,280 @@
+ROBOPUP_STAGE:vlm-bootstrap
+Cloning into 'robopup'...
+HEAD is now at 8ca421b Verify real Qwen fetch-hop mission and select available GPU after catalog diagnosis
+W: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+debconf: delaying package configuration, since apt-utils is not installed
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 49245 files and directories currently installed.)
+Preparing to unpack .../0-libgl1-mesa-dri_25.2.8-0ubuntu0.24.04.4_amd64.deb ...
+Unpacking libgl1-mesa-dri:amd64 (25.2.8-0ubuntu0.24.04.4) over (25.2.8-0ubuntu0.24.04.2) ...
+Preparing to unpack .../1-libglx-mesa0_25.2.8-0ubuntu0.24.04.4_amd64.deb ...
+Unpacking libglx-mesa0:amd64 (25.2.8-0ubuntu0.24.04.4) over (25.2.8-0ubuntu0.24.04.2) ...
+Preparing to unpack .../2-libgbm1_25.2.8-0ubuntu0.24.04.4_amd64.deb ...
+Unpacking libgbm1:amd64 (25.2.8-0ubuntu0.24.04.4) over (25.2.8-0ubuntu0.24.04.2) ...
+Preparing to unpack .../3-mesa-libgallium_25.2.8-0ubuntu0.24.04.4_amd64.deb ...
+Unpacking mesa-libgallium:amd64 (25.2.8-0ubuntu0.24.04.4) over (25.2.8-0ubuntu0.24.04.2) ...
+Selecting previously unselected package libegl-mesa0:amd64.
+Preparing to unpack .../4-libegl-mesa0_25.2.8-0ubuntu0.24.04.4_amd64.deb ...
+Unpacking libegl-mesa0:amd64 (25.2.8-0ubuntu0.24.04.4) ...
+Selecting previously unselected package libegl1:amd64.
+Preparing to unpack .../5-libegl1_1.7.0-1build1_amd64.deb ...
+Unpacking libegl1:amd64 (1.7.0-1build1) ...
+Setting up mesa-libgallium:amd64 (25.2.8-0ubuntu0.24.04.4) ...
+Setting up libgbm1:amd64 (25.2.8-0ubuntu0.24.04.4) ...
+Setting up libgl1-mesa-dri:amd64 (25.2.8-0ubuntu0.24.04.4) ...
+Setting up libegl-mesa0:amd64 (25.2.8-0ubuntu0.24.04.4) ...
+Setting up libegl1:amd64 (1.7.0-1build1) ...
+Setting up libglx-mesa0:amd64 (25.2.8-0ubuntu0.24.04.4) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
+Collecting absl-py@ https://files.pythonhosted.org/packages/b3/7d/01e62f59e4166af1be6238d9f2b7f3453630c51b8044b412d05b5606532a/absl_py-2.5.1-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 3))
+  Downloading absl_py-2.5.1-py3-none-any.whl (137 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 137.7/137.7 kB 4.1 MB/s eta 0:00:00
+Collecting accelerate@ https://files.pythonhosted.org/packages/77/85/85951bc0f9843e2c10baaa1b6657227056095de08f4d1eea7d8b423a6832/accelerate-1.11.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 4))
+  Downloading accelerate-1.11.0-py3-none-any.whl (375 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 375.8/375.8 kB 20.2 MB/s eta 0:00:00
+Collecting annotated-types@ https://files.pythonhosted.org/packages/99/91/8acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90/annotated_types-0.8.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 5))
+  Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Collecting anyio@ https://files.pythonhosted.org/packages/12/b8/4bd346e22b28902df4d651910f5242c28d84e4a5c2435ca5c3f797ed7e2e/anyio-4.15.1-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 6))
+  Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 132.1/132.1 kB 44.2 MB/s eta 0:00:00
+Collecting certifi@ https://files.pythonhosted.org/packages/71/4c/3db2b8021bd6f2f0ceb0e088d6b2d49147671f25832fb17970e9b583d742/certifi-2022.12.7-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 7))
+  Downloading certifi-2022.12.7-py3-none-any.whl (155 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 155.3/155.3 kB 49.4 MB/s eta 0:00:00
+Collecting cffi@ https://files.pythonhosted.org/packages/b1/db/dceb9dd5b231e1da801793f8acc9f3c52a7e1afe40bb1aae37e02b0faad5/cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 8))
+  Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 221.8/221.8 kB 57.1 MB/s eta 0:00:00
+Collecting charset-normalizer@ https://files.pythonhosted.org/packages/db/51/a507c856293ab05cdc1db77ff4bc1268ddd39f29e7dc4919aa497f0adbec/charset_normalizer-2.1.1-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 9))
+  Downloading charset_normalizer-2.1.1-py3-none-any.whl (39 kB)
+Collecting click@ https://files.pythonhosted.org/packages/58/50/6c0d534c5f134586a8e1ba4e330569e32f057e33372ae556463212fb4cd3/click-8.5.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 10))
+  Downloading click-8.5.0-py3-none-any.whl (125 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 125.3/125.3 kB 44.7 MB/s eta 0:00:00
+Collecting cloudpickle@ https://files.pythonhosted.org/packages/88/39/799be3f2f0f38cc727ee3b4f1445fe6d5e4133064ec2e4115069418a5bb6/cloudpickle-3.1.2-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 11))
+  Downloading cloudpickle-3.1.2-py3-none-any.whl (22 kB)
+Collecting contourpy@ https://files.pythonhosted.org/packages/78/f9/b6831508960d559581c448532ba4df312217072975486dbf2b24fcc5b76f/contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 12))
+  Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (383 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 383.2/383.2 kB 66.9 MB/s eta 0:00:00
+Collecting cycler@ https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 13))
+  Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Collecting etils@ https://files.pythonhosted.org/packages/5a/3d/589663aeeacd59bb2f3e8596bfd3e81cf0fb18d70bb433199041f469771b/etils-1.14.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 14))
+  Downloading etils-1.14.0-py3-none-any.whl (172 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 172.9/172.9 kB 58.2 MB/s eta 0:00:00
+Collecting farama-notifications@ https://files.pythonhosted.org/packages/7c/f0/21f81892e4ed10f4ec3ef2e7cf8635fb76e7c0907c55d0da66be50094760/farama_notifications-0.0.6-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 15))
+  Downloading farama_notifications-0.0.6-py3-none-any.whl (2.9 kB)
+Collecting fastapi@ https://files.pythonhosted.org/packages/ce/70/584c4d7cad80f5e833715c0a29962d7c93b4d18eed522a02981a6d1b6ee5/fastapi-0.119.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 16))
+  Downloading fastapi-0.119.0-py3-none-any.whl (107 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 107.1/107.1 kB 34.0 MB/s eta 0:00:00
+Collecting filelock@ https://files.pythonhosted.org/packages/a7/8e/50f46a9c0ce8d2861a394c1347caae037ea0431d2f67d7feb151cbc4649a/filelock-3.32.3-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 17))
+  Downloading filelock-3.32.3-py3-none-any.whl (98 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.9/98.9 kB 35.3 MB/s eta 0:00:00
+Collecting fonttools@ https://files.pythonhosted.org/packages/c1/e0/ec9e4cc868c514deb02233aa1047a6aeb9350d3ee012862f58eec10ef834/fonttools-4.67.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 18))
+  Downloading fonttools-4.67.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 117.5 MB/s eta 0:00:00
+Collecting fsspec@ https://files.pythonhosted.org/packages/fd/3c/6a2bf344106328fd04963664a60b9bb6496fc25df8e962fcdc1367285fb9/fsspec-2026.7.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 19))
+  Using cached fsspec-2026.7.0-py3-none-any.whl (206 kB)
+Collecting glfw@ https://files.pythonhosted.org/packages/69/84/1b98671314ea5f40397586b6cd14db913de3196333be558fdc177e61708f/glfw-2.10.2-py2.py3-none-manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 20))
+  Downloading glfw-2.10.2-py2.py3-none-manylinux_2_28_x86_64.whl (248 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 248.5/248.5 kB 63.0 MB/s eta 0:00:00
+Collecting gymnasium@ https://files.pythonhosted.org/packages/c7/53/39cd8c2f85e213fce1f32367c4bdbd3402d3bcde7d0826a1172a0f2c5cc0/gymnasium-1.2.2-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 21))
+  Downloading gymnasium-1.2.2-py3-none-any.whl (952 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 952.1/952.1 kB 117.5 MB/s eta 0:00:00
+Collecting h11@ https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 22))
+  Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Collecting hf-xet@ https://files.pythonhosted.org/packages/a3/4c/2bf3b66c215d409655f28de1622393dde04c9461280d48c7924bb3b2decd/hf_xet-1.7.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 23))
+  Downloading hf_xet-1.7.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.2/4.2 MB 136.8 MB/s eta 0:00:00
+Collecting httptools@ https://files.pythonhosted.org/packages/85/3f/642113e9882f53158ecddf58003d25f18ded2c210ed23bf6eb663d4d51c3/httptools-0.9.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 24))
+  Downloading httptools-0.9.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (552 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 552.8/552.8 kB 94.8 MB/s eta 0:00:00
+Collecting huggingface-hub@ https://files.pythonhosted.org/packages/a8/af/48ac8483240de756d2438c380746e7130d1c6f75802ef22f3c6d49982787/huggingface_hub-0.36.2-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 25))
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 102.8 MB/s eta 0:00:00
+Collecting idna@ https://files.pythonhosted.org/packages/fc/34/3030de6f1370931b9dbb4dad48f6ab1015ab1d32447850b9fc94e60097be/idna-3.4-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 26))
+  Downloading idna-3.4-py3-none-any.whl (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.5/61.5 kB 22.5 MB/s eta 0:00:00
+Collecting jinja2@ https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 27))
+  Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 41.0 MB/s eta 0:00:00
+Collecting kiwisolver@ https://files.pythonhosted.org/packages/fc/f4/dadfec469313c7f428efa7e84b4aba9732f813c13ea7131a24b7b008ef57/kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 28))
+  Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 124.8 MB/s eta 0:00:00
+Collecting markupsafe@ https://files.pythonhosted.org/packages/3c/2e/8d0c2ab90a8c1d9a24f0399058ab8519a3279d1bd4289511d74e909f060e/markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 29))
+  Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Collecting matplotlib@ https://files.pythonhosted.org/packages/b8/90/2b3fd67ee273163faeda6d514be70b5596eaa0fd77b60ffc294ad0b34f5f/matplotlib-3.11.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 30))
+  Downloading matplotlib-3.11.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 80.1 MB/s eta 0:00:00
+Collecting mpmath@ https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 31))
+  Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)
+Collecting mujoco@ https://files.pythonhosted.org/packages/27/45/f59df4d11130799bbded258ead963d7d58c93430b90ad93fc4b109e90179/mujoco-3.3.7-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 32))
+  Downloading mujoco-3.3.7-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 114.7 MB/s eta 0:00:00
+Collecting networkx@ https://files.pythonhosted.org/packages/9e/c9/b2622292ea83fbb4ec318f5b9ab867d0a28ab43c5717bb85b0a5f6b3b0a4/networkx-3.6.1-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 33))
+  Using cached networkx-3.6.1-py3-none-any.whl (2.1 MB)
+Collecting numpy@ https://files.pythonhosted.org/packages/f9/58/30a85127bfee6f108282107caf8e06a1f0cc997cb6b52cdee699276fcce4/numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 34))
+  Downloading numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 94.7 MB/s eta 0:00:00
+Collecting packaging@ https://files.pythonhosted.org/packages/08/aa/cc0199a5f0ad350994d660967a8efb233fe0416e4639146c089643407ce6/packaging-24.1-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 35))
+  Downloading packaging-24.1-py3-none-any.whl (53 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.0/54.0 kB 17.7 MB/s eta 0:00:00
+Collecting pandas@ https://files.pythonhosted.org/packages/cb/67/0c0f18e38d7f2d2af8c24b3315bc4046e73bbdd4a5540405506671ad0c0d/pandas-3.0.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 36))
+  Downloading pandas-3.0.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (10.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.8/10.8 MB 148.9 MB/s eta 0:00:00
+Collecting pillow@ https://files.pythonhosted.org/packages/84/21/a35af28dcc61f37ed850a2d64c65c701321dfbf25085e469d5559360cbbf/pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 37))
+  Using cached pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+Collecting pocketsphinx@ https://files.pythonhosted.org/packages/b7/49/d1e2e6617299ea16c369fdb116263e5a42bdb78813f1ee842c219064f1f8/pocketsphinx-5.0.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 38))
+  Downloading pocketsphinx-5.0.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (29.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 29.2/29.2 MB 107.2 MB/s eta 0:00:00
+Collecting psutil@ https://files.pythonhosted.org/packages/b5/70/5d8df3b09e25bce090399cf48e452d25c935ab72dad19406c77f4e828045/psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 39))
+  Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (155 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 155.6/155.6 kB 49.3 MB/s eta 0:00:00
+Collecting pycparser@ https://files.pythonhosted.org/packages/90/11/0e6f11117525ff0eec40ebac3d313376f102df93ca44ad9e893ee85e4f89/pycparser-3.11-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 40))
+  Downloading pycparser-3.11-py3-none-any.whl (51 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 51.2/51.2 kB 17.0 MB/s eta 0:00:00
+Collecting pydantic@ https://files.pythonhosted.org/packages/6c/98/468cb649f208a6f1279448e6e5247b37ae79cf5e4041186f1e2ef3d16345/pydantic-2.12.2-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 41))
+  Downloading pydantic-2.12.2-py3-none-any.whl (460 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 460.6/460.6 kB 96.3 MB/s eta 0:00:00
+Collecting pydantic-core@ https://files.pythonhosted.org/packages/f0/83/06d001f8043c336baea7fd202a9ac7ad71f87e1c55d8112c50b745c40324/pydantic_core-2.41.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 42))
+  Downloading pydantic_core-2.41.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 159.5 MB/s eta 0:00:00
+Collecting pyopengl@ https://files.pythonhosted.org/packages/de/e4/1ba6f44e491c4eece978685230dde56b14d51a0365bc1b774ddaa94d14cd/pyopengl-3.1.10-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 43))
+  Downloading pyopengl-3.1.10-py3-none-any.whl (3.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 169.5 MB/s eta 0:00:00
+Collecting pyparsing@ https://files.pythonhosted.org/packages/38/bb/d215ee7c73b61497b28a5503f9f53523f294fcc936762b7caf90e0c1c2b5/pyparsing-3.3.3-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 44))
+  Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 126.4/126.4 kB 50.1 MB/s eta 0:00:00
+Collecting python-dateutil@ https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 45))
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 69.5 MB/s eta 0:00:00
+Collecting python-dotenv@ https://files.pythonhosted.org/packages/60/d1/38f3a3405989a89ac18390803e70c6ad7c7760da4f9b83cbeca0c44a0c72/python_dotenv-1.2.4-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 46))
+  Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+Collecting pyyaml@ https://files.pythonhosted.org/packages/8b/9d/b3589d3877982d4f2329302ef98a8026e7f4443c765c46cfecc8858c6b4b/pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 47))
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 130.9 MB/s eta 0:00:00
+Collecting regex@ https://files.pythonhosted.org/packages/26/83/d2fbd2e4e3afb1167daa825187d196f313cbaa1a4768f311fb041bb0e3d2/regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 48))
+  Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.8/807.8 kB 115.6 MB/s eta 0:00:00
+Collecting requests@ https://files.pythonhosted.org/packages/ca/91/6d9b8ccacd0412c08820f72cebaa4f0c0441b5cda699c90f618b6f8a1b42/requests-2.28.1-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 49))
+  Downloading requests-2.28.1-py3-none-any.whl (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.8/62.8 kB 25.9 MB/s eta 0:00:00
+Collecting safetensors@ https://files.pythonhosted.org/packages/28/50/f203ff3a3ddfe19308efc83c5a3a29ed02bf786732ec35e68bf9162f3365/safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 50))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 516.0/516.0 kB 114.8 MB/s eta 0:00:00
+Collecting setuptools@ https://files.pythonhosted.org/packages/54/21/f43f0a1fa8b06b32812e0975981f4677d28e0f3271601dc88ac5a5b83220/setuptools-78.1.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 51))
+  Downloading setuptools-78.1.0-py3-none-any.whl (1.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 150.3 MB/s eta 0:00:00
+Collecting six@ https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 52))
+  Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Collecting sounddevice@ https://files.pythonhosted.org/packages/72/1f/62eef605172bddc1017508469a12f75bc7c4194ece35c734f822795f53b1/sounddevice-0.5.6-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 53))
+  Downloading sounddevice-0.5.6-py3-none-any.whl (32 kB)
+Collecting stable-baselines3@ https://files.pythonhosted.org/packages/89/df/6b074e5b8e8437aac0b05e12749565f4613152016daddd45d414269b09d6/stable_baselines3-2.7.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 54))
+  Downloading stable_baselines3-2.7.0-py3-none-any.whl (187 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 187.2/187.2 kB 53.1 MB/s eta 0:00:00
+Collecting starlette@ https://files.pythonhosted.org/packages/be/72/2db2f49247d0a18b4f1bb9a5a39a0162869acf235f3a96418363947b3d46/starlette-0.48.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 55))
+  Downloading starlette-0.48.0-py3-none-any.whl (73 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.7/73.7 kB 27.0 MB/s eta 0:00:00
+Collecting sympy@ https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 56))
+  Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)
+Collecting tokenizers@ https://files.pythonhosted.org/packages/2e/76/932be4b50ef6ccedf9d3c6639b056a967a86258c6d9200643f01269211ca/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 57))
+  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 162.5 MB/s eta 0:00:00
+Collecting tqdm@ https://files.pythonhosted.org/packages/48/5d/acf5905c36149bbaec41ccf7f2b68814647347b72075ac0b1fe3022fdc73/tqdm-4.66.5-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 58))
+  Downloading tqdm-4.66.5-py3-none-any.whl (78 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.4/78.4 kB 5.2 MB/s eta 0:00:00
+Collecting transformers@ https://files.pythonhosted.org/packages/03/b8/e484ef633af3887baeeb4b6ad12743363af7cce68ae51e938e00aaa0529d/transformers-4.57.6-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 59))
+  Downloading transformers-4.57.6-py3-none-any.whl (12.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 49.7 MB/s eta 0:00:00
+Collecting typing-extensions@ https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 60))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 14.5 MB/s eta 0:00:00
+Collecting typing-inspection@ https://files.pythonhosted.org/packages/67/81/4add07e5172b7ac40d8ed5ff580409a7801a4fe26d529bdd915401dabfbe/typing_inspection-0.4.4-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 61))
+  Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Collecting urllib3@ https://files.pythonhosted.org/packages/65/0c/cc6644eaa594585e5875f46f3c83ee8762b647b51fc5b0fb253a242df2dc/urllib3-1.26.13-py2.py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 62))
+  Downloading urllib3-1.26.13-py2.py3-none-any.whl (140 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 140.6/140.6 kB 53.8 MB/s eta 0:00:00
+Collecting uvicorn@ https://files.pythonhosted.org/packages/85/cd/584a2ceb5532af99dd09e50919e3615ba99aa127e9850eafe5f31ddfdb9a/uvicorn-0.37.0-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 63))
+  Downloading uvicorn-0.37.0-py3-none-any.whl (67 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 68.0/68.0 kB 28.9 MB/s eta 0:00:00
+Collecting uvloop@ https://files.pythonhosted.org/packages/51/27/c1d2f9fa977f8f42ea294604166df10e0027e6dc6cd17f85ede386c9bf36/uvloop-0.23.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 64))
+  Downloading uvloop-0.23.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 161.7 MB/s eta 0:00:00
+Collecting watchfiles@ https://files.pythonhosted.org/packages/8a/cf/e3ad894ed5909a7c44b0707e89bc25d19a3d78b3a7aec846119443b6ae56/watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 65))
+  Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (458 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 458.4/458.4 kB 109.3 MB/s eta 0:00:00
+Collecting websockets@ https://files.pythonhosted.org/packages/03/c0/a6d8be9c43e4456fb9597fdf8b5e0ce1f0a5df41503acce6d869536e4e23/websockets-17.2-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 66))
+  Downloading websockets-17.2-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (225 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 225.3/225.3 kB 74.7 MB/s eta 0:00:00
+Collecting zipp@ https://files.pythonhosted.org/packages/20/38/f5c473fe9b90c8debdd29ea68d5add0289f1936d6f923b6b9cc0b931194c/zipp-3.19.2-py3-none-any.whl (from -r configs/gpu-vlm-runtime-direct-cp312.txt (line 67))
+  Downloading zipp-3.19.2-py3-none-any.whl (9.0 kB)
+Installing collected packages: pyopengl, pocketsphinx, glfw, farama-notifications, zipp, websockets, watchfiles, uvloop, uvicorn, urllib3, typing-inspection, transformers, tqdm, tokenizers, starlette, stable-baselines3, sounddevice, six, setuptools, safetensors, requests, regex, python-dotenv, pyparsing, pydantic-core, pydantic, pycparser, pandas, packaging, numpy, mujoco, matplotlib, kiwisolver, idna, huggingface-hub, httptools, hf-xet, gymnasium, fonttools, filelock, fastapi, etils, cycler, contourpy, cloudpickle, click, charset-normalizer, certifi, annotated-types, accelerate, absl-py
+  Attempting uninstall: urllib3
+    Found existing installation: urllib3 2.7.0
+    Not uninstalling urllib3 at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'urllib3'. No files were found to uninstall.
+  Attempting uninstall: six
+    Found existing installation: six 1.16.0
+    Not uninstalling six at /usr/lib/python3/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'six'. No files were found to uninstall.
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 84.0.0
+    Not uninstalling setuptools at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'setuptools'. No files were found to uninstall.
+  Attempting uninstall: requests
+    Found existing installation: requests 2.34.2
+    Not uninstalling requests at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'requests'. No files were found to uninstall.
+  Attempting uninstall: pyparsing
+    Found existing installation: pyparsing 3.1.1
+    Not uninstalling pyparsing at /usr/lib/python3/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'pyparsing'. No files were found to uninstall.
+  Attempting uninstall: pycparser
+    Found existing installation: pycparser 3.0
+    Not uninstalling pycparser at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'pycparser'. No files were found to uninstall.
+  Attempting uninstall: packaging
+    Found existing installation: packaging 26.3
+    Not uninstalling packaging at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'packaging'. No files were found to uninstall.
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.5.2
+    Not uninstalling numpy at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'numpy'. No files were found to uninstall.
+  Attempting uninstall: idna
+    Found existing installation: idna 3.19
+    Not uninstalling idna at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'idna'. No files were found to uninstall.
+  Attempting uninstall: filelock
+    Found existing installation: filelock 3.32.6
+    Not uninstalling filelock at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'filelock'. No files were found to uninstall.
+  Attempting uninstall: charset-normalizer
+    Found existing installation: charset-normalizer 3.5.1
+    Not uninstalling charset-normalizer at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'charset-normalizer'. No files were found to uninstall.
+  Attempting uninstall: certifi
+    Found existing installation: certifi 2026.7.22
+    Not uninstalling certifi at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/vlm-env
+    Can't uninstall 'certifi'. No files were found to uninstall.
+Successfully installed absl-py-2.5.1 accelerate-1.11.0 annotated-types-0.8.0 certifi-2022.12.7 charset-normalizer-2.1.1 click-8.5.0 cloudpickle-3.1.2 contourpy-1.4.0 cycler-0.12.1 etils-1.14.0 farama-notifications-0.0.6 fastapi-0.119.0 filelock-3.32.3 fonttools-4.67.0 glfw-2.10.2 gymnasium-1.2.2 hf-xet-1.7.0 httptools-0.9.0 huggingface-hub-0.36.2 idna-3.4 kiwisolver-1.5.1 matplotlib-3.11.2 mujoco-3.3.7 numpy-2.3.4 packaging-24.1 pandas-3.0.6 pocketsphinx-5.0.4 pycparser-3.11 pydantic-2.12.2 pydantic-core-2.41.4 pyopengl-3.1.10 pyparsing-3.3.3 python-dotenv-1.2.4 regex-2026.9.29 requests-2.28.1 safetensors-0.8.0 setuptools-78.1.0 six-1.17.0 sounddevice-0.5.6 stable-baselines3-2.7.0 starlette-0.48.0 tokenizers-0.22.2 tqdm-4.66.5 transformers-4.57.6 typing-inspection-0.4.4 urllib3-1.26.13 uvicorn-0.37.0 uvloop-0.23.0 watchfiles-1.3.0 websockets-17.2 zipp-3.19.2
+ROBOPUP_STAGE:vlm-download-public-checkpoint
+{"model": "Qwen/Qwen3-VL-2B-Instruct", "revision": "89644892e4d85e24eaac8bacfd4f463576704203", "license": "apache-2.0", "files": 11, "bytes": 4266647442, "manifest": "/workspace/vlm-checkpoint/robopup-model-manifest.json"}
+ROBOPUP_STAGE:vlm-real-camera-inference
+`torch_dtype` is deprecated! Use `dtype` instead!
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+/workspace/vlm-env/lib/python3.12/site-packages/transformers/models/qwen3_vl/modeling_qwen3_vl.py:610: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /workspace/cache/torch/kernels. This warning will appear only once per process. (Triggered internally at /pytorch/aten/src/ATen/native/cuda/jit_utils.cpp:1487.)
+  total_tokens = int(torch.prod(grid_thw, dim=1).sum().item())
+ROBOPUP_STAGE:{"case": "multi-step", "valid_mission": true}
+ROBOPUP_STAGE:{"case": "after-fetch-replan", "valid_mission": true}
+ROBOPUP_STAGE:{"case": "visual-choice", "valid_mission": true}
+ROBOPUP_STAGE:{"case": "visual-choice-blank", "valid_mission": true}
+ROBOPUP_STAGE:{"case": "visual-choice-turned", "valid_mission": true}
+ROBOPUP_STAGE:{"case": "low-energy", "valid_mission": true}
+ROBOPUP_STAGE:{"case": "crate-and-hop", "valid_mission": true}
+ROBOPUP_STAGE:vlm-closed-loop-native-physics
+ROBOPUP_STAGE:{"mission_phase": "thinking", "current_step": 0, "sim_seconds": 0.0}
+`torch_dtype` is deprecated! Use `dtype` instead!
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+ROBOPUP_STAGE:{"mission_phase": "executing", "current_step": 0, "sim_seconds": 0.020000000000000018}
+ROBOPUP_STAGE:{"mission_phase": "thinking", "current_step": 1, "sim_seconds": 18.38000000000053}
+ROBOPUP_STAGE:{"mission_phase": "executing", "current_step": 1, "sim_seconds": 18.400000000000524}
+ROBOPUP_STAGE:{"mission_phase": "thinking", "current_step": 2, "sim_seconds": 19.98000000000021}
+ROBOPUP_STAGE:{"mission_phase": "complete", "current_step": 3, "sim_seconds": 19.98000000000021}
+{"output": "/workspace/job-results/runpod/mission/result.json", "success": true, "complete": true, "wall_seconds": 23.451824568212032}
+ROBOPUP_STAGE:vlm-inference-complete

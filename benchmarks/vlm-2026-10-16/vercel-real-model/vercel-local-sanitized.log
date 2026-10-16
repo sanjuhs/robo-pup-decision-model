@@ -1,0 +1,43 @@
+Vercel CLI 64.3.1 (Node.js 24.19.0)
+WARNING! Running dev server in local mode without a project setup:
+  - Environment variables will not be pulled from Vercel
+  - Project settings are defined by local configuration
+
+To link your project, run `vercel dev` without `-L` or `--local` or `vercel link`.
+Detected services:
+• app      [FastAPI]  
+• web      [Vite]     
+• planner  [FastAPI]  
+> Available at:
+  http://127.0.0.1:3010
+[web]     Synchronizing dependencies...
+[app]     [90mSynchronizing dependencies...[0m
+[planner] [90mSynchronizing dependencies...[0m
+[web]     
+[web]       VITE v7.3.7  ready in 328 ms
+[web]     
+[web]       ➜  Local:   http://localhost:43419/
+[web]       ➜  Network: use --host to expose
+[app]     INFO:     Will watch for changes in these directories: ['/workspace/robo-pup-decision-model/services/app']
+[app]     INFO:     Uvicorn running on http://127.0.0.1:42779 (Press CTRL+C to quit)
+[app]     INFO:     Started reloader process [42974] using StatReload
+[planner] INFO:     Will watch for changes in these directories: ['/workspace/robo-pup-decision-model/services/planner']
+[planner] INFO:     Uvicorn running on http://127.0.0.1:44457 (Press CTRL+C to quit)
+[planner] INFO:     Started reloader process [42973] using StatReload
+[app]     INFO:     Started server process [42977]
+[app]     INFO:     Waiting for application startup.
+[app]     INFO:     Application startup complete.
+[planner] INFO:     Started server process [42978]
+[planner] INFO:     Waiting for application startup.
+[planner] INFO:     Application startup complete.
+> Local resources:
+  Vercel Queues   http://127.0.0.1:4782
+  Vercel Schedules http://127.0.0.1:4784
+  Runtime Cache   http://127.0.0.1:4783/v1/suspense-cache/
+[app]     INFO:     127.0.0.1:0 - "GET /api/health HTTP/1.1" 200 OK
+[planner] INFO:     127.0.0.1:58694 - "GET /status HTTP/1.1" 200 OK
+[app]     INFO:     HTTP Request: GET http://127.0.0.1:44457/status "HTTP/1.1 200 OK"
+[app]     INFO:     127.0.0.1:0 - "GET /api/vlm HTTP/1.1" 200 OK
+[planner] INFO:     127.0.0.1:58700 - "POST /plan HTTP/1.1" 200 OK
+[app]     INFO:     HTTP Request: POST http://127.0.0.1:44457/plan "HTTP/1.1 200 OK"
+[app]     INFO:     127.0.0.1:0 - "POST /api/plan HTTP/1.1" 200 OK
