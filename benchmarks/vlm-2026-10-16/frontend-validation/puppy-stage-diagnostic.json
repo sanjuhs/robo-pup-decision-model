@@ -1,0 +1,462 @@
+{
+  "logs": [
+    {
+      "label": "initial",
+      "wall_s": 4.23723724,
+      "state": {
+        "sim_s": 1.119999999999998,
+        "position": [
+          -0.03745204380178395,
+          -0.00491539988468486,
+          0.3913457066520585
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "stop",
+        "focus": "BODY",
+        "focus_id": "",
+        "camera": 5.764980485656463
+      }
+    },
+    {
+      "label": "robot_screenshot",
+      "wall_s": 5.768955124,
+      "state": {
+        "sim_s": 2.5599999999999676,
+        "position": [
+          -0.03925095323483647,
+          -0.0056438154528058344,
+          0.3913480504204376
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "stop",
+        "focus": "BODY",
+        "focus_id": "",
+        "camera": 5.764980485656451
+      }
+    },
+    {
+      "label": "puppy_selected",
+      "wall_s": 6.236675298,
+      "state": {
+        "sim_s": 2.679999999999965,
+        "position": [
+          -0.03927899118728598,
+          -0.005674806681660081,
+          0.3913478510076147
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "stop",
+        "focus": "BODY",
+        "focus_id": "",
+        "camera": 5.76498048565645
+      }
+    },
+    {
+      "label": "close_up",
+      "wall_s": 9.163505252999999,
+      "state": {
+        "sim_s": 5.5199999999999045,
+        "position": [
+          -0.03929165555869059,
+          -0.006022487881336528,
+          0.39134296960776016
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "stop",
+        "focus": "BUTTON",
+        "focus_id": "frame-pup",
+        "camera": 2.666437775659814
+      }
+    },
+    {
+      "label": "policy_selected",
+      "wall_s": 9.236784516,
+      "state": {
+        "sim_s": 5.599999999999903,
+        "position": [
+          -0.039288407758082095,
+          -0.006026634858277615,
+          0.39134286979319477
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "stop",
+        "focus": "BUTTON",
+        "focus_id": "frame-pup",
+        "camera": 2.666437775659814
+      }
+    },
+    {
+      "label": "walking_0",
+      "wall_s": 9.748096096,
+      "state": {
+        "sim_s": 6.079999999999893,
+        "position": [
+          0.014494238392006559,
+          0.012433000919655216,
+          0.386998881242894
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "manual",
+        "focus": "BUTTON",
+        "focus_id": "frame-pup",
+        "camera": 2.6267671367972616
+      }
+    },
+    {
+      "label": "walking_1",
+      "wall_s": 10.263867728,
+      "state": {
+        "sim_s": 6.5999999999998815,
+        "position": [
+          0.17535428393400732,
+          0.015820726680303772,
+          0.39078282578292073
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "manual",
+        "focus": "BUTTON",
+        "focus_id": "frame-pup",
+        "camera": 2.6092694157407896
+      }
+    },
+    {
+      "label": "walking_2",
+      "wall_s": 10.772547849999999,
+      "state": {
+        "sim_s": 6.999999999999873,
+        "position": [
+          0.3062241540611599,
+          0.053663477075673385,
+          0.38121306533705
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "manual",
+        "focus": "BUTTON",
+        "focus_id": "frame-pup",
+        "camera": 2.603461563448393
+      }
+    },
+    {
+      "label": "walking_3",
+      "wall_s": 11.27596535,
+      "state": {
+        "sim_s": 7.479999999999863,
+        "position": [
+          0.46245834138941305,
+          0.09917736016011013,
+          0.3821648450365488
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "manual",
+        "focus": "BUTTON",
+        "focus_id": "frame-pup",
+        "camera": 2.6021971803871673
+      }
+    },
+    {
+      "label": "walking_4",
+      "wall_s": 11.825357128,
+      "state": {
+        "sim_s": 8.039999999999857,
+        "position": [
+          0.6394265985937359,
+          0.16371786709765274,
+          0.3848888077307517
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "manual",
+        "focus": "BUTTON",
+        "focus_id": "frame-pup",
+        "camera": 2.6010303537283708
+      }
+    },
+    {
+      "label": "walking_5",
+      "wall_s": 12.338748557999999,
+      "state": {
+        "sim_s": 8.519999999999932,
+        "position": [
+          0.7972496869629696,
+          0.22668327666567936,
+          0.3826632826291056
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": false,
+        "behavior": "manual",
+        "focus": "BUTTON",
+        "focus_id": "frame-pup",
+        "camera": 2.6006540030357868
+      }
+    },
+    {
+      "label": "paused",
+      "wall_s": 12.891105755,
+      "state": {
+        "sim_s": 8.839999999999982,
+        "position": [
+          0.8300537706308719,
+          0.22323606325572012,
+          0.3914179459479791
+        ],
+        "policy": "baseline/curious-v2",
+        "paused": true,
+        "behavior": "manual",
+        "focus": "BUTTON",
+        "focus_id": "pause",
+        "camera": 2.6006540030357845
+      }
+    }
+  ],
+  "sent": [
+    {
+      "wall": 9.227722175999999,
+      "policy": "baseline/curious-v2"
+    },
+    {
+      "wall": 9.24778211,
+      "mode": "manual"
+    },
+    {
+      "wall": 9.253097912,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 9.326881317,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 9.424851815,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 9.537742640000001,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 9.634254834,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 9.723937721,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 9.823948114,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 9.932665494,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.026022918999999,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.126594912,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.229547447,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.32690987,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.428095399,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.603135579,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.629417679,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.723873974,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.826705061999998,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 10.929200596000001,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.026993687000001,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.124922148,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.225990127,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.325413829999999,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.427370715999999,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.524423048000001,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.624894245,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.724267613,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.824228116,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 11.923964351,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 12.024293297,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 12.128515898,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 12.223793701999998,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 12.32532195,
+      "mode": "manual",
+      "forward": 0.35,
+      "turn": 0
+    },
+    {
+      "wall": 12.347799196,
+      "mode": "manual",
+      "forward": 0,
+      "turn": 0
+    },
+    {
+      "wall": 12.432571894,
+      "mode": "manual",
+      "forward": 0,
+      "turn": 0
+    },
+    {
+      "wall": 12.523929376,
+      "mode": "manual",
+      "forward": 0,
+      "turn": 0
+    },
+    {
+      "wall": 12.624621046,
+      "mode": "manual",
+      "forward": 0,
+      "turn": 0
+    },
+    {
+      "wall": 12.701405379,
+      "paused": true
+    },
+    {
+      "wall": 12.753710500999999,
+      "mode": "manual",
+      "forward": 0,
+      "turn": 0
+    },
+    {
+      "wall": 12.848232698,
+      "mode": "manual",
+      "forward": 0,
+      "turn": 0
+    }
+  ]
+}

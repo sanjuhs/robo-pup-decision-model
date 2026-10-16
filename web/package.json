@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
-    "test": "playwright test"
+    "test": "playwright test",
+    "check:vlm": "node scripts/check-vlm.mjs"
   },
   "dependencies": {
     "three": "0.180.0"

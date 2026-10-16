@@ -1,0 +1,39 @@
+{
+  "schema": "observed-browser-suite-diagnosis-v1",
+  "initial_full_suite": {
+    "source": "parent-reported process31295 final Playwright output, corroborated by inspected failure page context",
+    "passed": 20,
+    "failed": 1,
+    "duration_seconds_approx": 126,
+    "failed_test": "research robot has a physical pickup and optional puppy skin preserves the physical world",
+    "failure": "Test timeout of 30000 ms at web/tests/puppy.spec.js:22 waiting for position[0] > .35 after W keydown",
+    "observed_page_context": {
+      "simulation_time_seconds": 6.5,
+      "speed_meters_per_second": 0.23,
+      "behavior": "manual",
+      "appearance": "puppy",
+      "focused_control": "Close-up"
+    },
+    "llm_inference_active": false
+  },
+  "targeted_unchanged_repeat": {
+    "passed": 1,
+    "failed": 0,
+    "test_duration_seconds": 13.4,
+    "trace": "Retained locally at artifacts/frontend-suite-diagnosis/targeted-puppy-passing-trace.zip",
+    "trace_sha256": "c01be6a8c2c1cb16c2ee7e0b71caf93b5b1c3e1267b4cba73c9d7e22bbb277b4"
+  },
+  "test_assertions_changed": false,
+  "test_timeout_changed": false,
+  "diagnosis": "The initial full run exceeded the total test wall budget while the robot was already moving. Independent diagnostics observed W commands and forward movement with the Close-up button focused. The unchanged targeted test passed in 13.4 seconds; the unchanged isolated full suite subsequently passed all 21 tests, including the puppy test in 11.0 seconds. Cumulative scheduling delay is plausible; a functional control defect was not reproduced. No assertion, physical threshold or timeout was changed.",
+  "isolated_unchanged_full_repeat": {
+    "passed": 21,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "duration_seconds": 117.84716,
+    "raw_report": "isolated-full-suite.json",
+    "assertions_changed": false,
+    "timeouts_changed": false
+  }
+}

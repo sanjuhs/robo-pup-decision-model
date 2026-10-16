@@ -1,0 +1,11 @@
+{
+  "source": "Unmodified actual first-run Chromium frames and original frames.ffconcat timestamps",
+  "encoding": "libvpx-vp9 cpu-used4 row-mt1 crf36",
+  "fast_encoding_wall_seconds": 93.27797729500162,
+  "original_duration_s": 388.24,
+  "fast_duration_s": 388.24,
+  "original_video_bytes": 1596379,
+  "fast_video_bytes": 1700907,
+  "original_capture_harness_success": false,
+  "frame_time_values_unchanged": true
+}

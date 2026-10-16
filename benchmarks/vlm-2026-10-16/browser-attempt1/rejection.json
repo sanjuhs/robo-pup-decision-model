@@ -1,0 +1,17 @@
+{
+  "attempt": "browser-attempt1",
+  "harness_schema": "robopup-genuine-vlm-browser-v1",
+  "harness_success": false,
+  "error": "The expression evaluated to a falsy value:\n\n  assert.ok(Math.hypot(...final.ball.slice(0,2))<.6 && final.ball[2]<.19)\n",
+  "mission_reported_complete": true,
+  "physical_fetch_completion_snapshot_recorded": false,
+  "post_hop_ball_position": [
+    -0.75844798035137,
+    0.52602351284314,
+    0.11987426961354083
+  ],
+  "reason": "The v1 harness asserted the released ball stayed within 0.6 m of home after a subsequent hop. It did not record ball position at fetch completion. This failed attempt is preserved and cannot retroactively certify the independent fetch-position check. The v2 harness captures release transitions and fetch-completion physics before hop, while retaining measured hop/landing checks.",
+  "raw_video_retained_locally": "artifacts/vlm-browser-real/capture/fetch.webm",
+  "total_wall_seconds_includes_video_encoding": 675.863,
+  "raw_video": "actual-run.webm"
+}

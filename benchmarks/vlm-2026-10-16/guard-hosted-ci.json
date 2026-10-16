@@ -1,0 +1,103 @@
+{
+  "recorded_at": "2026-10-16T15:09:32.523607+00:00",
+  "run_id": 38921051265,
+  "source_ref": "2c0eeffa58ccf35fde7ae0ca00aecbd8a0f684f5",
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38921051265",
+  "jobs": [
+    {
+      "name": "native-arena",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python3 scripts/check_public_secrets.py",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run sudo apt-get update && sudo apt-get install -y libegl1 libgl1-mesa-dri",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run ROBOPUP_MJX=1 bash scripts/setup.sh",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv run --frozen --extra dev --extra mjx ruff check src scripts tests services",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npx playwright install --with-deps chromium",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "scope": "Hosted CPU prototype suite; optional actual Qwen inference/browser benchmark is separate."
+}

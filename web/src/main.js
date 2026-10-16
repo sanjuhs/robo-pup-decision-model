@@ -245,6 +245,12 @@ function updateBrain(next) {
   $('planner-phase').dataset.phase=phase;
   if(generative) {
     $('vlm-provider').textContent=brain?.provider??'Backend model configuration';
+    const grounding=brain?.eye_grounding;
+    $('vlm-grounding').hidden=!grounding;
+    if(grounding){
+      const visible=grounding.visible_objects?.length?grounding.visible_objects.join(', '):'No target confidently visible';
+      $('vlm-grounding').textContent=`Activation eye check: ${visible}. ${grounding.limitation??'Limited arena color check; general object recognition is not established.'}`;
+    }
     $('vlm-raw-response').textContent=brain?.raw_response||'No model response received yet.';
     $('vlm-limitation').textContent=brain?.limitation??'The VLM proposes bounded skills. Physics verifies completion; generated text is not proof of a completed goal.';
   }

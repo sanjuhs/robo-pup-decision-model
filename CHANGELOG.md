@@ -5,6 +5,20 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Inspectable browser missions
+
+- Show the limited activation-eye visibility check alongside the real Qwen plan;
+  highlight the runtime's actual `running` step status.
+- Add an opt-in genuine-model browser check with independent fetch-completion
+  snapshots, contact/lift/release, hop/landing and raw response traces. Preserve
+  the first failed capture and its overly late ball-position assertion.
+- Retain a full-suite puppy-test timeout and diagnostics. The unchanged test
+  passed independently, and the isolated full suite then passed 21/21 in 117.85 s
+  with no assertion or timeout changes. Python suite: 222 passed; backend-source
+  hosted CI also passed. Actual final Qwen browser capture remains separate.
+- Keep original recording timestamps while reducing VP9 encoding overhead;
+  report mission duration separately from video finalization.
+
 ### Measured generative GPU execution and retained vision failure
 
 - Execute the genuine Qwen fetch → hop → stop loop on Runpod in 23.45 wall

@@ -19,6 +19,6 @@ export async function recordPage(context,page,out) {
     if(frames.length<2)throw new Error('Insufficient actual browser frames');
     const concat=frames.map((f,i)=>`file '${f.file}'\nduration ${Math.max(.001,(frames[i+1]?.time??f.time+.04)-f.time)}`).join('\n');
     fs.writeFileSync(path.join(out,'frames.ffconcat'),concat+'\n');
-    execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-f','concat','-safe','0','-i',path.join(out,'frames.ffconcat'),'-c:v','libvpx-vp9','-crf','36','-b:v','0',path.join(out,'fetch.webm')]);
+    execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-f','concat','-safe','0','-i',path.join(out,'frames.ffconcat'),'-c:v','libvpx-vp9','-cpu-used','4','-row-mt','1','-crf','36','-b:v','0',path.join(out,'fetch.webm')]);
   };
 }
