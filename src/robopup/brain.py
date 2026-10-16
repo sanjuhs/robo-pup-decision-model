@@ -10,7 +10,7 @@ from PIL import Image
 import torch
 
 from robopup.executor import GoalExecutor, heading
-from robopup.scene_planner import TRAINED_VERSION, infer, load_planner
+from robopup.scene_planner import infer, load_planner
 from robopup.vision import PlannerCamera
 
 MODEL_DIR = Path(__file__).resolve().parents[2] / "demo" / "arena-planner"
@@ -77,7 +77,7 @@ class BrainSession:
             **self.executor.status(),
             "camera_png": self.latest_png,
             "inference_ms": self.inference_ms,
-            "model": TRAINED_VERSION,
+            "model": trained_model()[1]["version"],
             "vision": "learned arena pixel segmentation; orthographic 96x96 RGB",
             "energy": "virtual play-energy, not a battery measurement",
         }

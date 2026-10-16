@@ -56,3 +56,34 @@ full actual versions are recorded. CUDA must be available; CPU fallback is an er
 The current demo remains on the previously validated checkpoint until these
 checks finish. Actual results, cost/cleanup and a promotion or rejection decision
 will be added after the run; no expected improvement is described as measured.
+
+## v3 measured outcome and rejected application gate
+
+v3 trained on RTX 5090 / PyTorch 2.9.0+cu129 in 95.49 seconds (8,000 steps).
+New-test first action rose from 38.3% to 96.867%, intent from 58.4% to 97.417%.
+Both models passed 23/24 fresh physical trials; both held on an occluded ball.
+However the application regression at a settled seed-42 pose returned retrieve
+instead of return when held=1. The original assertion was retained. **v3 was not
+promoted**. Its checkpoint, all reports, CUDA utilization and confirmed pod
+deletion are retained. New GPU estimate $0.1976, about $0.4745 aggregate with
+prior GPU usage; this is not an invoice.
+
+## Manual corrective experiment v4 (frozen before retraining)
+
+This is a deliberate second experiment after diagnosis, not an automatic retry.
+The user-authorized $30 total still applies. Reuse the same 40-minute/$3 allocation
+and deletion monitor, initialize matching tensors from the rejected v3 checkpoint,
+and train a new learned decoder from scratch. That decoder takes predicted intent,
+energy, held state and slot index. Motor measurements and yaw cannot change its
+action logits when predicted intent/needs stay fixed. This is a learned neural
+module trained from labels, not a handcoded action table. The transformer still
+predicts intent and the RGB classifier grounds object targets.
+
+Use 6,000 new scenes, seed6119, 50% static / 50% 20-step motion frames. Train
+8,000 steps, batch128, seed521; initialize from demo/arena-planner-v3. Broaden
+question/prefix compositions. Keep v3 test results as development evidence.
+Freeze FINAL_TEST4 before this run, exclude those exact strings from training,
+and evaluate all 500 new mixed scenes (seed94871) ×12 templates, evaluator seed384.
+Compare v2 and v4 on the same data; physical seeds707/808/909 and unchanged
+120-second criteria. Also require the original held-state application regression,
+all Python checks and browser integration. Retain failed models and trials.

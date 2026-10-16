@@ -153,9 +153,13 @@ if __name__ == "__main__":
     p.add_argument("--model", type=Path, required=True)
     p.add_argument("--data", type=Path, required=True)
     p.add_argument("--out", type=Path, required=True)
-    p.add_argument("--curriculum", choices=["v2", "v3"], default="v2")
+    p.add_argument("--curriculum", choices=["v2", "v3", "v4"], default="v2")
     a = p.parse_args()
-    if a.curriculum == "v3":
+    if a.curriculum == "v4":
+        from robopup.planner_curriculum import FINAL_TEST4
+
+        templates = FINAL_TEST4
+    elif a.curriculum == "v3":
         from robopup.planner_curriculum import FINAL_TEST
 
         templates = FINAL_TEST

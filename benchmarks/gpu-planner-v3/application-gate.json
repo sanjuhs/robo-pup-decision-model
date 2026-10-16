@@ -1,0 +1,12 @@
+{
+  "promoted": false,
+  "python_tests": {
+    "passed": 28,
+    "failed": 1
+  },
+  "failed_test": "test_learned_modalities_change_plan_and_unseen_object_abstains",
+  "input": "settled PetEnv seed42, fetch the ball, energy1, held1",
+  "expected_first_skill": "return",
+  "actual_first_skill": "retrieve",
+  "decision": "Keep original regression assertion and default v2; manual architecture correction requires a new untouched final test"
+}

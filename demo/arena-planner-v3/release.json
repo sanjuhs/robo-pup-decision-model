@@ -1,0 +1,18 @@
+{
+  "release": "arena-rgb-transformer-v3",
+  "weights_sha256": "99761f96d8dd2e3a95dedd490200c29686f0750db508586114263675cc7d8637",
+  "training_source_ref": "48b432325d031f1bf6722c4af3e404d2011bea40",
+  "initialization_sha256": "e17d046cb211990fc2f9ba4cb466ae683084c98a03d4298729a3d93163395392",
+  "training_data_sha256": "0b602920a0aac4ca5a49fda238c37f6a8b593df962bfafa520814fe9341552b7",
+  "training_device": "NVIDIA GeForce RTX 5090",
+  "training_seconds": 95.48963016499329,
+  "checkpoint_selection": "training validation only; final test was not used to select or retrain",
+  "initialization": "v2 shared weights reused; pixel encoder frozen; new motor normalization and explicit needs encoder",
+  "comparison": "benchmarks/gpu-planner-v3/candidate-final-test.json",
+  "physical_goals": "benchmarks/gpu-planner-v3/candidate-physical.json",
+  "gates": "benchmarks/gpu-planner-v3/promotion-gates.json",
+  "previous_default": "demo/arena-planner-v2",
+  "license": "MIT",
+  "application_checks": "rejected: held=1 counterfactual predicts retrieve on settled pose",
+  "default": false
+}

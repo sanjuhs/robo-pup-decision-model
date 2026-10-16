@@ -12,21 +12,26 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from robopup.planner_curriculum import FINAL_TEST, VALIDATION, training_phrases
+from robopup.planner_curriculum import FINAL_TEST, FINAL_TEST4, VALIDATION, training_phrases
 from robopup.planner_data import labels
-from robopup.planner_v3 import ArenaPlannerV3, VERSION
+from robopup.planner_v3 import ArenaPlannerV3
+from robopup.planner_v4 import ArenaPlannerV4
 from robopup.scene_planner import INTENTS, PLAN_SKILLS, load_planner
 
 
-def train(data, out, initialize, steps=8000, batch_size=128, seed=419, device="cuda"):
+def train(
+    data, out, initialize, steps=8000, batch_size=128, seed=419, device="cuda", architecture="v3"
+):
     out.mkdir(parents=True, exist_ok=False)
     if device == "cuda" and not torch.cuda.is_available():
         raise RuntimeError("CUDA is required: no CPU fallback for paid experiment")
     torch.set_num_threads(2)
     torch.manual_seed(seed)
     rng = np.random.default_rng(seed)
+    model_class = ArenaPlannerV4 if architecture == "v4" else ArenaPlannerV3
+    version = model_class.version
     metadata = {
-        "version": VERSION,
+        "version": version,
         "seed": seed,
         "steps": steps,
         "batch_size": batch_size,
@@ -41,20 +46,20 @@ def train(data, out, initialize, steps=8000, batch_size=128, seed=419, device="c
             p.name: hashlib.sha256(p.read_bytes()).hexdigest()
             for p in Path(__file__).parent.glob("*.py")
         },
-        "final_test_templates_frozen_before_training": FINAL_TEST,
+        "final_test_templates_frozen_before_training": FINAL_TEST4
+        if architecture == "v4"
+        else FINAL_TEST,
         "gpu": torch.cuda.get_device_name(0) if device == "cuda" else None,
         "cuda": torch.version.cuda,
         "gpu_capability": list(torch.cuda.get_device_capability()) if device == "cuda" else None,
     }
     (out / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
-    model = ArenaPlannerV3().to(device)
+    model = model_class().to(device)
     old, _ = load_planner(initialize)
     reusable = {
         k: v
         for k, v in old.state_dict().items()
-        if k in model.state_dict()
-        and v.shape == model.state_dict()[k].shape
-        and not k.startswith("state.")
+        if k in model.state_dict() and v.shape == model.state_dict()[k].shape
     }
     model.load_state_dict(reusable, strict=False)
     for p in model.pixel.parameters():
@@ -184,7 +189,7 @@ def train(data, out, initialize, steps=8000, batch_size=128, seed=419, device="c
                 best_step = step
                 torch.save(
                     {
-                        "version": VERSION,
+                        "version": version,
                         "architecture": {"width": 96, "layers": 2},
                         "state_dict": best_state,
                         "report": {
@@ -221,12 +226,12 @@ def train(data, out, initialize, steps=8000, batch_size=128, seed=419, device="c
         "validation_samples_per_check": 1536,
         "selection": "best sum of validation intent + first skill + object accuracy; final templates unused",
         "gpu_peak_allocated_bytes": torch.cuda.max_memory_allocated() if device == "cuda" else None,
-        "perception": "Frozen v2 pixel encoder; shared weights fine-tuned except motor normalization; explicit needs encoder is new",
+        "perception": "Frozen arena pixel encoder; matching initialization tensors reused; architecture version specifies state/decision decoder",
         "training_phrase_counts": {i: len(p) for i, p in zip(INTENTS, phrases)},
     }
     torch.save(
         {
-            "version": VERSION,
+            "version": version,
             "architecture": {"width": 96, "layers": 2},
             "state_dict": best_state,
             "report": report,
@@ -250,9 +255,13 @@ if __name__ == "__main__":
     p.add_argument("--batch-size", type=int, default=128)
     p.add_argument("--seed", type=int, default=419)
     p.add_argument("--device", choices=["cpu", "cuda"], default="cuda")
+    p.add_argument("--architecture", choices=["v3", "v4"], default="v3")
     a = p.parse_args()
     print(
         json.dumps(
-            train(a.data, a.out, a.initialize, a.steps, a.batch_size, a.seed, a.device), indent=2
+            train(
+                a.data, a.out, a.initialize, a.steps, a.batch_size, a.seed, a.device, a.architecture
+            ),
+            indent=2,
         )
     )

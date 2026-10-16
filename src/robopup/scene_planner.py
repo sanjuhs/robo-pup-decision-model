@@ -145,6 +145,9 @@ class ScenePlanner(nn.Module):
         )
         hidden = self.norm(self.transformer(tokens + self.position, src_key_padding_mask=padding))
         plan = hidden[:, -6:]
+        return self.decode_plan(plan, hidden, objects, pixels, states)
+
+    def decode_plan(self, plan, hidden, objects, pixels, states):
         object_logits = self.object(plan)
         delta = self.offset(plan).tanh()
         selected = torch.einsum("bhk,bkd->bhd", object_logits.softmax(-1), objects[..., :2])
@@ -171,10 +174,12 @@ def load_planner(directory: Path):
         model = ScenePlanner(**checkpoint["architecture"])
     else:
         from robopup.planner_v3 import ArenaPlannerV3, VERSION
+        from robopup.planner_v4 import ArenaPlannerV4, VERSION as VERSION4
 
-        if checkpoint["version"] != VERSION:
+        classes = {VERSION: ArenaPlannerV3, VERSION4: ArenaPlannerV4}
+        if checkpoint["version"] not in classes:
             raise ValueError("Unsupported planner checkpoint")
-        model = ArenaPlannerV3(**checkpoint["architecture"])
+        model = classes[checkpoint["version"]](**checkpoint["architecture"])
     vocabulary = directory / "vocabulary.json"
     if vocabulary.exists() and json.loads(vocabulary.read_text()) != model.vocabulary:
         raise ValueError("Planner vocabulary mismatch")

@@ -5,6 +5,9 @@ from robopup.planner_data import PHRASES
 PREFIXES = (
     "",
     "miso ",
+    "would you ",
+    "would you please ",
+    "hey puppy ",
     "hey miso ",
     "please ",
     "could you ",
@@ -134,6 +137,29 @@ FINAL_TEST = {
 }
 
 
+FINAL_TEST4 = {
+    "stop": "hey little puppy would you please stay still here",
+    "approach": "can you please go and sniff the red ball for me",
+    "behind": "please walk behind that little red ball for me miso",
+    "fetch": "could you please collect the toy ball and bring it back home",
+    "follow": "miso would you please follow that purple beacon for me",
+    "push": "hey puppy please push that orange box to the ring",
+    "walk": "could you take a slow walk forward for me",
+    "run": "miso could you sprint straight ahead please",
+    "jump": "hey little puppy please take a hop now",
+    "rest": "would you please take a little rest break miso",
+    "drop": "miso would you release that little red ball please",
+    "unsupported": "could you tell me what is behind that orange box",
+}
+ROOTS["unsupported"].extend(
+    f"{question} {obj}"
+    for question in ("what is", "what is behind", "tell me what is behind")
+    for obj in ("the ball", "the crate", "the orange box", "the moon")
+)
+
+
 def training_phrases(intent):
-    excluded = {v.lower() for v in (*VALIDATION.values(), *FINAL_TEST.values())}
+    excluded = {
+        v.lower() for v in (*VALIDATION.values(), *FINAL_TEST.values(), *FINAL_TEST4.values())
+    }
     return sorted({p + r + s for p in PREFIXES for r in ROOTS[intent] for s in SUFFIXES} - excluded)

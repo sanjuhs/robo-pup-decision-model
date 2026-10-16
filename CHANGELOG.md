@@ -5,6 +5,17 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### GPU candidate evidence and manual correction
+
+- v3 completed actual RTX 5090 training in 95.49 seconds; new-test first action
+  improved 38.3% →96.867%. Both models passed 23/24 new physical trials.
+- Reject v3 as default because the existing settled-pose held-object regression
+  failed (retrieve instead of return). Preserve the assertion, checkpoint and
+  failed application record; default stays v2. Pod deleted and absence verified.
+- Add a v4 neural decoder that keeps task/needs decisions independent of nuisance
+  motor measurements, plus mixed static/moving training scenes and a newly frozen
+  final test. Prepare a second manually diagnosed, capped experiment inside $30.
+
 ### Authorized GPU planner candidate
 
 - Add a versioned 241,816-parameter candidate with explicit needs encoding,

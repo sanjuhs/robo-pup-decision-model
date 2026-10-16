@@ -27,7 +27,7 @@ TTL = 40 * 60
 MAX_RATE = 1.5
 
 
-def run(out):
+def run(out, candidate="v3"):
     out.mkdir(parents=True, exist_ok=False)
     key = os.environ.get("RUNPOD_API_KEY") or getpass.getpass(
         "Runpod credential (hidden; memory only): "
@@ -38,6 +38,7 @@ def run(out):
     record = {
         "source_ref": ref,
         "gpu": "RTX 5090",
+        "candidate": candidate,
         "ttl_seconds": TTL,
         "total_session_budget_usd": 30,
         "prior_spend_reserve_usd": 1,
@@ -139,14 +140,17 @@ def run(out):
         )
         return True
 
-    bootstrap = (ROOT / "scripts/gpu_planner_job.sh").read_bytes()
+    bootstrap = (
+        ROOT
+        / ("scripts/gpu_planner_v4_job.sh" if candidate == "v4" else "scripts/gpu_planner_job.sh")
+    ).read_bytes()
     command = (
         "mkdir -p /workspace && printf %s "
         + base64.b64encode(bootstrap).decode()
         + " | base64 -d > /workspace/gpu_planner_job.sh && bash /workspace/gpu_planner_job.sh"
     )
     body = {
-        "name": "robopup-planner-v3-" + ref[:7] + "-" + secrets.token_hex(3),
+        "name": "robopup-planner-" + candidate + "-" + ref[:7] + "-" + secrets.token_hex(3),
         "image": "runpod/pytorch:1.2.0-cu1290-torch290-ubuntu2404",
         "cloud": "SECURE",
         "gpu": {"id": "NVIDIA GeForce RTX 5090", "count": 1, "minCudaVersion": "12.9"},
@@ -291,5 +295,6 @@ def run(out):
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument("--candidate", choices=["v3", "v4"], default="v3")
     args = p.parse_args()
-    run(args.out)
+    run(args.out, args.candidate)

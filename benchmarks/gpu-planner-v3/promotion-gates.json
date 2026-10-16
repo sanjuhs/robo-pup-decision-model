@@ -1,0 +1,69 @@
+{
+  "eligible_for_application_checks": true,
+  "gates": {
+    "first_action_improves": true,
+    "intent_does_not_decline": true,
+    "physical_success_does_not_decline": true,
+    "no_individual_task_loses_passes": true,
+    "rgb_shift_grounded": true,
+    "blank_rgb_not_visible": true,
+    "low_energy_rest": true,
+    "held_object_returns": true
+  },
+  "baseline_metrics": {
+    "intent": 0.584,
+    "first_skill": 0.383,
+    "horizon_skill": 0.38458333333333333,
+    "object": 0.6458611111111111
+  },
+  "candidate_metrics": {
+    "intent": 0.9741666666666666,
+    "first_skill": 0.9686666666666667,
+    "horizon_skill": 0.9734166666666667,
+    "object": 0.9718055555555556
+  },
+  "physical_by_task": {
+    "approach": {
+      "baseline": 2,
+      "candidate": 2,
+      "trials": 3
+    },
+    "behind": {
+      "baseline": 3,
+      "candidate": 3,
+      "trials": 3
+    },
+    "fetch": {
+      "baseline": 3,
+      "candidate": 3,
+      "trials": 3
+    },
+    "follow": {
+      "baseline": 3,
+      "candidate": 3,
+      "trials": 3
+    },
+    "jump": {
+      "baseline": 3,
+      "candidate": 3,
+      "trials": 3
+    },
+    "push": {
+      "baseline": 3,
+      "candidate": 3,
+      "trials": 3
+    },
+    "run": {
+      "baseline": 3,
+      "candidate": 3,
+      "trials": 3
+    },
+    "walk": {
+      "baseline": 3,
+      "candidate": 3,
+      "trials": 3
+    }
+  },
+  "physical_regressions": [],
+  "scope": "Small bounded arena test. Eligibility does not replace application checks or establish general vision/language competence."
+}
