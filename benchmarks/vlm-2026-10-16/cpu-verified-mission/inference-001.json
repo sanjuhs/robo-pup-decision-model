@@ -1,0 +1,58 @@
+{
+  "index": 1,
+  "phase": "response",
+  "instruction": "Your remaining mission is: jump, then stop. Verified completed steps: [{\"action\": \"fetch\", \"object\": \"ball\"}]. Those completed tasks are finished; do not include them again. Inspect the fresh image and return only the remaining tasks in order. You may first rest, look or turn if necessary.",
+  "energy": 0.8867282718741344,
+  "held": false,
+  "image": "eye-001.png",
+  "image_sha256": "bd084dd9d6b868bec7b06ffc3e12820e5a1c6836d23e75bbed24519f64d18e13",
+  "eye_rgb_sha256": "1946fdc3c021e2810b2d6a5fe94e5208343f0503403c1df82b4e6aac044f652d",
+  "image_saved_before_model_call": true,
+  "actual_generated_response_received": true,
+  "valid_mission": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Jump and then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 61273.37350200105,
+      "queue": 0.003283999831182882,
+      "total": 61275.71127600095
+    },
+    "metadata": {
+      "input_tokens": 1151,
+      "output_tokens": 60,
+      "device": "cpu",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "bfloat16",
+      "cpu_threads_config": 4,
+      "cpu_threads": 4,
+      "max_generation_seconds": 180,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": null,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "mission": {
+    "summary": "Jump and then stop.",
+    "steps": [
+      {
+        "action": "jump",
+        "object": "none"
+      },
+      {
+        "action": "stop",
+        "object": "none"
+      }
+    ]
+  }
+}

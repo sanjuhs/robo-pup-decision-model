@@ -143,7 +143,8 @@ def provider_error_categories(text, status):
     }
 
 
-def run(out, input_dir):
+def run(out, input_dir, gpu="5090"):
+    gpu_id = {"5090": "NVIDIA GeForce RTX 5090", "4090": "NVIDIA GeForce RTX 4090"}[gpu]
     packed, count = pack_inputs(input_dir)
     ref = subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip()
     public_input_dir = tracked_input_directory(input_dir, ref, packed)
@@ -167,7 +168,7 @@ def run(out, input_dir):
     if not key:
         raise ValueError("Runpod credential is missing")
     record = {
-        "source_ref": ref, "gpu": "RTX 5090", "experiment": "real-generative-vlm-inference",
+        "source_ref": ref, "gpu": "RTX " + gpu, "experiment": "real-generative-vlm-inference",
         "ttl_seconds": TTL, "total_session_budget_usd": 30,
         "prior_spend_reserve_usd": 1, "experiment_allocation_usd": ALLOCATION,
         "maximum_gpu_rate_usd_hour": MAX_RATE, "storage_reserve_usd": .2,
@@ -280,7 +281,7 @@ def run(out, input_dir):
     body = {
         "name": "robopup-vlm-" + ref[:7] + "-" + secrets.token_hex(3),
         "image": "runpod/pytorch:1.2.0-cu1290-torch290-ubuntu2404", "cloud": "SECURE",
-        "gpu": {"id": "NVIDIA GeForce RTX 5090", "count": 1, "minCudaVersion": "12.9"},
+        "gpu": {"id": gpu_id, "count": 1, "minCudaVersion": "12.9"},
         "disk": 30, "entrypoint": ["/bin/bash", "-lc"], "cmd": [command],
         "env": {"ROBOPUP_REF": ref, "ROBOPUP_INPUT_DIR": public_input_dir,
                 "PYTHONUNBUFFERED": "1"}, "startSsh": False,
@@ -409,5 +410,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--input-dir", type=Path, required=True)
+    parser.add_argument("--gpu", choices=("5090", "4090"), default="5090")
     args = parser.parse_args()
-    run(args.out, args.input_dir)
+    run(args.out, args.input_dir, args.gpu)

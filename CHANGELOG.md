@@ -5,6 +5,17 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Genuine CPU mission verified
+
+- The corrected Qwen loop completed fetch → hop → stop using three actual
+  robot-eye/model calls in 183.27 wall seconds, 19.98 execution simulation seconds.
+  Contact/lift/return/release and powered hop/landing all passed. Simulation was
+  paused during inference; this is not interactive browser latency evidence.
+- Retain both failed RTX 5090 allocation requests (HTTP500/400), with no pods
+  observed after reconciliation. The live catalog reports no CUDA12.9 stock for
+  RTX5090; manually select the available RTX4090 for the same capped experiment.
+  Selection is explicit; the monitor does not automatically retry/fall back.
+
 ### Corrective mission memory and model hosting
 
 - Preserve the genuine CPU closed-loop failure: Qwen repeatedly reintroduced
