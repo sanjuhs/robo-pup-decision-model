@@ -9,7 +9,7 @@ import numpy as np
 import torch
 
 from robopup.planner_data import labels
-from robopup.scene_planner import INTENTS, encode_scene_instruction, infer, load_planner
+from robopup.scene_planner import INTENTS, infer, load_planner
 
 TEST_PHRASES = {
     "stop": "miso please wait here",
@@ -27,11 +27,12 @@ TEST_PHRASES = {
 }
 
 
-def evaluate(model_dir, data_dir, out):
+def evaluate(model_dir, data_dir, out, templates=None):
     if out.exists():
         raise FileExistsError(out)
     torch.set_num_threads(2)
     model, _ = load_planner(model_dir)
+    phrases = TEST_PHRASES if templates is None else templates
     source = np.load(data_dir / "scenes.npz")
     rng = np.random.default_rng(384)
     counts = dict(intent=0, first_skill=0, horizon_skill=0, object=0)
@@ -86,7 +87,7 @@ def evaluate(model_dir, data_dir, out):
                 offsets = torch.tensor(np.stack([v[2] for v in expected]))
                 result = model(
                     images,
-                    encode_scene_instruction(TEST_PHRASES[intent]).repeat(n, 1),
+                    model.encode_instruction(phrases[intent]).repeat(n, 1),
                     torch.from_numpy(state),
                 )
                 correct = int((result["intent_logits"].argmax(-1) == index).sum())
@@ -129,7 +130,7 @@ def evaluate(model_dir, data_dir, out):
         "dataset_sha256": hashlib.sha256((data_dir / "scenes.npz").read_bytes()).hexdigest(),
         "scenes": len(source["images"]),
         "samples": count,
-        "templates": TEST_PHRASES,
+        "templates": phrases,
         "metrics": {
             k: v / (count * 6 if k in ("horizon_skill", "object") else count)
             for k, v in counts.items()
@@ -140,7 +141,7 @@ def evaluate(model_dir, data_dir, out):
         "visible_object_centroid_mae_m": float(np.mean(distances)),
         "visible_object_recall": visible_recall[0] / visible_recall[1],
         "interventions": cases,
-        "scope": "All independent seed-927 scenes; unseen phrase compositions in the fixed arena vocabulary. No retraining on this test. Not general vision/language validation.",
+        "scope": "All supplied independent scenes and selected frozen templates; no retraining on this final test. Bounded arena vision/language.",
     }
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2) + "\n")
@@ -152,5 +153,12 @@ if __name__ == "__main__":
     p.add_argument("--model", type=Path, required=True)
     p.add_argument("--data", type=Path, required=True)
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument("--curriculum", choices=["v2", "v3"], default="v2")
     a = p.parse_args()
-    print(json.dumps(evaluate(a.model, a.data, a.out), indent=2))
+    if a.curriculum == "v3":
+        from robopup.planner_curriculum import FINAL_TEST
+
+        templates = FINAL_TEST
+    else:
+        templates = None
+    print(json.dumps(evaluate(a.model, a.data, a.out, templates), indent=2))

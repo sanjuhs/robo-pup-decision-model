@@ -1,0 +1,23 @@
+{
+  "training_source_ref": "48b432325d031f1bf6722c4af3e404d2011bea40",
+  "protocol": "docs/GPU_PLANNER_EXPERIMENT.md",
+  "evaluation_source_sha256": "9b65be520488f6b6217792235d6fe270cf5db5ea679ae272fe52bc9c6af35dcb",
+  "final_scene_seed": 73921,
+  "all_500_scenes_are_test": true,
+  "language_samples": 6000,
+  "evaluation_seed": 384,
+  "frozen_template_source_sha256": "7aa9a80ce6d938320c9156695e7a31bc9db7ba8a9112cc333df696716e6bdbf4",
+  "physical_seeds": [
+    404,
+    505,
+    606
+  ],
+  "physical_seconds": 120,
+  "gpu_image_digest_observed_from_system_logs": "sha256:cbf48bdd597b143bff333beeda3c95d82fa3f7faa98910eff9356f3eb4aa1fb8",
+  "gpu_image_digest_observed_utc": "2026-10-16T08:20:32Z",
+  "baseline_first_skill": 0.383,
+  "baseline_intent": 0.584,
+  "baseline_physical_passes": 23,
+  "baseline_physical_trials": 24,
+  "selection_uses_only_training_validation": true
+}
