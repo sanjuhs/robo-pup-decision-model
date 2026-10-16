@@ -22,6 +22,9 @@
   A zero-test run, open port, or saved checkpoint does not prove a behavior works.
 - Native simulation is CPU; current policies are residual PPO around an analytic
   gait. Stop uses an analytic stance. Reset is not learned self-righting.
+- The puppy skin changes rendering only; never fabricate physical root/leg motion.
+  `MultimodalPlanner` is an untrained tensor scaffold disconnected from the server;
+  never present it as trained perception, language understanding, or a live policy.
 - Update docs/STATUS.md and docs/BENCHMARKS.md when evidence or scope changes.
   Do not claim GPU timings, costs, task success, Jev integration, or overnight
   unattended execution without direct evidence.

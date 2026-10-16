@@ -75,6 +75,26 @@ collision robot. All leg poses still come from MuJoCo. The skin uses 18,248
 triangles and a shared, generated 256×256 fur-bump texture, with no external asset
 downloads. This is a rendering upgrade, not an anatomically validated dog rig.
 
+## Which model is running?
+
+The trained motor policy is a **15,705-parameter MLP**, not a transformer. Its
+deterministic actor has 8,204 parameters; the checkpoint archive also contains
+the critic and training state. Bundled files are **219 KiB** (CPU curious-v2) and
+**254 KiB** (RTX 5090). Weights are in this repository's `demo/` directories,
+copied into local `artifacts/` by setup. Nothing is hosted on Hugging Face.
+
+The live controller takes numerical proprioception, uses rule-based task
+decisions, and parses a small text-command grammar. It does not consume images
+or voice. The RTX 5090 accelerated MJX physics; the small PPO optimizer ran on CPU.
+See the [model card and exact weight inventory](docs/MODEL_CARD.md).
+
+A separate **769,149-parameter multimodal transformer scaffold** now accepts
+image history, text tokens and numeric state and emits six proposed skill slots.
+It is **untrained and disconnected from the live arena**. Its tensor/gradient
+tests do not establish perception, instruction understanding, or planning ability.
+The [vision, voice, energy and skill roadmap](docs/MULTIMODAL.md) explains how to
+build that next layer, including what walk/run/jump and physical fetch require.
+
 ## Train your first policy
 
 ```bash
@@ -102,6 +122,8 @@ creates paid infrastructure.
 - [Two-hour workshop for 5–10 participants](docs/WORKSHOP.md).
 - [Runpod setup, key handling, and approval plan](docs/RUNPOD.md).
 - [Architecture and research path](docs/ARCHITECTURE.md).
+- [Model sizes, weight locations, and current inputs](docs/MODEL_CARD.md).
+- [Multimodal transformer and skill roadmap](docs/MULTIMODAL.md).
 - [Upstream license audit](docs/UPSTREAM_AUDIT.md).
 
 ```bash

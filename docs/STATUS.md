@@ -17,6 +17,8 @@ This file separates implemented paths from measured task success. See
 | Follow and push | Experimental controller; failed recorded trials; no general success claim |
 | Stop/recover | Analytic standing pose and explicit simulation reset; no learned self-righting |
 | Jev decision model | License/inspiration audited; no model weights, training, or inference integrated |
+| Multimodal transformer scaffold | 769,149 random-initialized parameters; image/text/state tensor and gradient tests pass. No trained checkpoint, semantic perception, task success or live integration. |
+| Vision / voice | No camera frames or audio enter the live controller; rendering is not perception |
 | MJX backend | CPU and RTX 5090 probes passed, including forced timeout/reset; writable-array regression tested |
 | Runpod | CLI checksum and read-only authentication verified; live catalog inspected |
 | RTX 5090 GPU training | One completed experiment: 1,048,576 steps in 121.7 s; native CPU recheck 0.337 m/s, no falls in five trials. One failed interface attempt retained. Both pods deleted. |

@@ -85,6 +85,17 @@ worlds, TLS termination, or collaborative shared-world synchronization.
    counterfactual outcomes. Keep network/model calls out of the motor-control loop;
    measure calibration, latency, and budget independently. No Jev weights are downloaded now.
 
+## Multimodal planner research boundary
+
+The trained 15,705-parameter motor MLP is separate from the new
+`MultimodalPlanner` scaffold. The latter has 769,149 random-initialized parameters,
+RGB-patch/history, byte-text and state encoders, a transformer, and horizon heads.
+Only tensor contracts/gradients are tested. It is not imported by the arena
+server, has no trained checkpoint and must not be used for live control.
+See [the model card](MODEL_CARD.md) for exact sizes and
+[the multimodal design](MULTIMODAL.md) for closed-loop execution, data collection,
+calibration, unavailable-skill masking and perception evaluation requirements.
+
 ## Optional GPU physics
 
 `MJXVecEnv` batches the same primitive robot and 50-value observation / 12-value

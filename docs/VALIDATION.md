@@ -7,10 +7,10 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Check | Observed result |
 | --- | --- |
 | `ROBOPUP_MJX=1 bash scripts/setup.sh` | Passed frozen Python/npm installation, two checkpoint digest checks, browser build, operator CLI verification and Python tests; repeat runs preserve local outputs |
-| `pytest -q` | 16 passed, no skipped/disabled/expected failures; one upstream AnyIO deprecation warning |
+| `pytest -q` | 19 passed, no skipped/disabled/expected failures; one upstream AnyIO deprecation warning |
 | `ruff check src tests scripts` | Passed |
-| `npm run build` | Passed; one approximately 523 kB JS bundle produces Vite's size advisory |
-| `npm test` | 13 passed: nine browser checks including real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion, close-up/follow camera and frozen expressions on pause, mobile layout, five simultaneous browsers, golden-puppy walking/appearance isolation; four deterministic render timing/reset checks |
+| `npm run build` | Passed; one approximately 547 kB JS bundle produces Vite's size advisory |
+| `npm test` | 14 passed: nine browser checks including real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion, close-up/follow camera and frozen expressions on pause, mobile layout, five simultaneous browsers, golden-puppy walking/appearance isolation; five deterministic render timing/reset/idle-camera checks |
 | Post-optimization physical ball browser test | 1 passed; no contact assertions disabled |
 | `scripts/smoke.py` against saved startup | Passed health, built HTML, advancing real MuJoCo state and a functional control request |
 | `scripts/session_benchmark.py` | Final ten independent worlds: minimum 0.986 real-time ratio over 75 frames per session |
@@ -22,6 +22,8 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Billing | API calls succeeded but histories were empty at check time; aggregate GPU cost estimate $0.2769, not a final receipt |
 | Source credential check | No Runpod API-key pattern in tracked text files; account key was not passed into the GPU job |
 | Credential scanner regression | A synthetic key in a temporary Git repository fails the check; after deletion it still fails the history check; output never includes the value |
+| Model inventory | Both trusted bundled policies loaded on CPU; 15,705 total parameters each, 8,204 in the deterministic actor; exact bytes and SHA-256 digests recorded in `benchmarks/model-inventory.json` |
+| Multimodal planner prototype | Three tensor-contract tests: image/text/state gradient paths, finite bounded horizon outputs, instruction padding/UTF-8 tokens and invalid input/config rejection. No trained weights, live inference, perception or planning success. |
 | Actual browser recording | GPU checkpoint moved 2.012 m along world X over 5.760 simulated seconds without reset; headless software-WebGL capture median frame interval 143.9 ms. Raw telemetry is in `benchmarks/presentation-2026-10-15/` |
 
 GitHub Actions passed on the pause-fix and CI-reporting revision
@@ -42,6 +44,14 @@ test. The original remote assertion is still unavailable, so that run cannot be
 conclusively attributed to the same cause. CI now uses Playwright's GitHub reporter
 to expose future failing assertions as check annotations. No assertions or tests
 were disabled or loosened.
+
+The [first golden-puppy hosted run](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38861840424)
+exposed a second rounding issue: OrbitControls' unbounded target-radius clamp
+changed the last floating-point bit of an idle target after follow was disabled.
+The check annotation identified the exact assertion. An adapter now preserves
+the prior target when there is no interaction/follow and controls report no
+change; real pan/orbit/follow updates remain enabled. The strict browser assertion
+is retained and an idle/active update regression was added.
 
 ## Scope of the evidence
 

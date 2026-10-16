@@ -15,6 +15,16 @@ research prototype; the linked evidence describes what was actually tested.
 - Test trained walking, appearance isolation and paused puppy expressions, and
   publish an actual browser screenshot, recording and measured render limitations.
 
+### Multimodal research foundation — 2026-10-16
+
+- Add an explicitly untrained 769,149-parameter transformer with RGB-history,
+  byte-token text, numerical-state inputs and a six-slot skill-plan output.
+  It has no trained checkpoint and cannot control the live arena.
+- Test tensor bounds/shapes, invalid input rejection and gradients through all
+  three input modalities; these are not learned-task evaluations.
+- Publish exact MLP/checkpoint counts, a reproducible inspection command, weight
+  locations, RTX 5090 usage details, and the vision/voice/energy/skill roadmap.
+
 ### Presentation
 
 - Buffer physical poses by 60 ms and interpolate every body over the same pair
@@ -37,6 +47,10 @@ research prototype; the linked evidence describes what was actually tested.
   logs, so a restricted development host can inspect the failing assertion.
 
 ### Fixed
+
+- Preserve the camera target exactly when OrbitControls reports no change,
+  avoiding round-off drift with follow disabled while retaining real user input.
+  Keep the strict camera test and add an idle/active-input regression check.
 
 - Keep paused render timestamps bit-for-bit constant across interpolation
   intervals. Weighted sums of identical timestamps previously introduced tiny

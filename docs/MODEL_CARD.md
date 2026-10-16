@@ -1,0 +1,104 @@
+# What is the model?
+
+Measured 2026-10-16. Reproduce with
+`uv run python scripts/inspect_models.py --out artifacts/model-inventory.json`.
+The committed [inventory](../benchmarks/model-inventory.json) includes checkpoint
+hashes and exact counts; the command does not download or train anything.
+
+## Trained motor controller
+
+Both bundled policies use the same small Stable-Baselines3 actor/critic MLP.
+PPO is the training algorithm; it does not imply a transformer architecture.
+
+| Item | CPU curious-v2 | RTX 5090 policy |
+| --- | ---: | ---: |
+| Checkpoint path | `demo/curious-v2/policy.zip` | `demo/5090-once/policy.zip` |
+| Archive bytes | 224,113 (219 KiB) | 259,942 (254 KiB) |
+| Total policy parameters | 15,705 | 15,705 |
+| Raw float32 policy parameter bytes | 62,820 | 62,820 |
+| Deterministic actor parameters | 8,204 | 8,204 |
+| Raw deterministic actor parameter bytes | 32,816 | 32,816 |
+
+The actor is `50 → 64 → 64 → 12`, with Tanh hidden activations. A separate
+`50 → 64 → 64 → 1` critic estimates value during training; 12 learned log-standard
+deviations specify the training action distribution. Archive size includes
+training/optimizer state and metadata, so different archive sizes do not imply
+different network architectures. The raw actor size excludes normalization/runtime
+code, the analytic gait, physics, browser, activations, and Python/PyTorch.
+
+The 50 inputs are six base velocities, three orientation/gravity values, 12
+joint positions, 12 joint velocities, two commands, sine/cosine gait phase,
+body height, and 12 previous actions. The 12 outputs are bounded joint-target
+residuals scaled by 0.3 radians and added to an analytic diagonal trot.
+The policy acts at 50 Hz; physics steps at 200 Hz. It has no RGB, microphone,
+language encoder, transformer, object detector, memory, or learned fetch skill.
+
+The live hierarchy separately reads privileged simulator positions to choose
+speed/yaw commands. Text commands are parsed by a local grammar. Drawing a
+camera image in Three.js does not mean the policy receives or understands it.
+The metric called energy is a squared-torque penalty, not a measured battery
+level or joules. Stop uses an analytic stance; reset restores the world.
+
+## Where are the weights?
+
+The checkpoints are committed to this GitHub repository with SHA-256 sidecars.
+Setup verifies and copies them into `artifacts/baseline/curious-v2/` and
+`artifacts/runpod/5090-once/`. New participant runs save their own `policy.zip`
+and intermediate checkpoints under `artifacts/<participant>/<run>/`.
+
+Nothing has been published to Hugging Face. A Hugging Face **model repository**
+would store weights; a **Space** would host an app. Neither is required here.
+No external model service is called by the live arena. SB3/PyTorch checkpoints
+must only be loaded from trusted authors; their deserialization is not a sandbox.
+
+## Was the RTX 5090 actually used?
+
+Yes. The recorded [hardware probe](../benchmarks/runpod-attempt-2/hardware.csv)
+reports NVIDIA GeForce RTX 5090 with 32,607 MiB. The recorded JAX device is
+`cuda:0`. MJX batched physics ran on GPU, while the small PPO optimizer ran on CPU.
+The completed experiment took 121.7 learning seconds for 1,048,576 transitions;
+83.1 seconds of JAX compilation and provisioning time are separate.
+
+One interface attempt failed before the repaired retry. Both pods were deleted.
+Their aggregate estimated GPU charge is $0.2769 at the recorded $1.19/hour rate;
+this is not a final billing receipt. It did not train a 2B vision-language model.
+See [the complete evidence and limitations](BENCHMARKS.md).
+
+## Three-dimensional character versus neural model
+
+The golden puppy is original procedural Three.js artwork: 18,248 triangles,
+382,736 bytes of unique geometry buffers, 18 physical attachments, and a generated
+256×256 fur-bump texture. There is no downloaded GLB or texture asset. The whole
+browser JS build, including Three.js, is about 547 kB / 141 kB gzip. Those values
+are separate from the neural checkpoint and do not include Python dependencies.
+
+The look is stylized, not photoreal. Its simple articulated segments inherit the
+robot's leg poses, not a detailed anatomical canine skeleton. A production canine
+asset would need an audited license, a rig, physically consistent retargeting,
+better fur/skin shading, and measured mobile performance. A 5–15 MB compressed
+character is a possible delivery target, not an existing file or benchmark.
+
+## Can it run entirely on a phone or in an offline tab?
+
+The browser renderer runs on the device, but MuJoCo and policy inference currently
+run in a local Python server. A small policy does not make the entire stack small:
+PyTorch and other installed runtime packages are much larger than its weights.
+A phone can display a reachable private backend; a fully offline, browser-only
+simulation/inference bundle has not been built or tested.
+
+That path would require browser physics/WASM plus a deterministic actor export
+(for example ONNX), the exact gait/observation interface, numerical parity tests,
+and real device benchmarks. Merely exporting the 32 KiB actor is insufficient.
+
+## New transformer foundation
+
+`src/robopup/planner.py` now implements a **769,149-parameter** multimodal
+transformer scaffold (3,076,596 raw float32 parameter bytes, about 2.93 MiB).
+It accepts image history, byte-tokenized text, and numerical state and produces
+six proposed action slots. Tensor shapes, finite values, bounds, and gradients
+are tested. **It has random initialization, no trained checkpoint, and no
+demonstrated visual/language/planning competence. It is not connected to the
+arena.** No random planner weights are distributed or advertised as a policy.
+
+The [multimodal roadmap](MULTIMODAL.md) describes what training, perception,
+skill control, and evaluation still need to be built.
