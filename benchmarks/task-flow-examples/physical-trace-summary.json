@@ -1,0 +1,136 @@
+{
+  "source": "benchmarks/gpu-planner-v4/candidate-physical.json",
+  "source_sha256": "f4bf9d92df00c94c8b1a3255bc6f8f3b3a6ffeb9a9eeb5487c4d68e78aefb95d",
+  "scope": "Derived views of existing real compact-v4 physical trials; not new evaluation, training data or Qwen execution",
+  "trials": 24,
+  "all_passed": true,
+  "fetch_seed_707": {
+    "success": true,
+    "simulated_seconds": 19.5200000000003,
+    "maximum_ball_height_m": 0.3556691845215114,
+    "grasp_count": 1,
+    "phase_changes": [
+      {
+        "simulated_seconds": 0.0,
+        "executor_phase": "planning",
+        "physically_held": false,
+        "first_v4_proposal": {
+          "skill": "retrieve",
+          "object": "ball",
+          "delta": [
+            1.8270230293273926,
+            -1.0000053644180298
+          ],
+          "object_delta": [
+            1.8484270572662354,
+            -0.9933087229728699
+          ],
+          "duration_s": 1.0,
+          "confidence": 0.9992282390594482,
+          "visible": true
+        }
+      },
+      {
+        "simulated_seconds": 0.5,
+        "executor_phase": "retrieving",
+        "physically_held": false,
+        "first_v4_proposal": {
+          "skill": "retrieve",
+          "object": "ball",
+          "delta": [
+            1.8496887683868408,
+            -1.0053527355194092
+          ],
+          "object_delta": [
+            1.8709458112716675,
+            -0.9986107349395752
+          ],
+          "duration_s": 1.0,
+          "confidence": 0.9992300271987915,
+          "visible": true
+        }
+      },
+      {
+        "simulated_seconds": 5.7,
+        "executor_phase": "returning",
+        "physically_held": true,
+        "first_v4_proposal": {
+          "skill": "return",
+          "object": "home",
+          "delta": [
+            -1.3722659349441528,
+            0.7185549736022949
+          ],
+          "object_delta": [
+            -1.3315393924713135,
+            0.7110279202461243
+          ],
+          "duration_s": 1.0,
+          "confidence": 0.999415397644043,
+          "visible": true
+        }
+      },
+      {
+        "simulated_seconds": 16.82,
+        "executor_phase": "settling",
+        "physically_held": true,
+        "first_v4_proposal": {
+          "skill": "return",
+          "object": "home",
+          "delta": [
+            -0.19528347253799438,
+            0.15739625692367554
+          ],
+          "object_delta": [
+            -0.15643824636936188,
+            0.15194575488567352
+          ],
+          "duration_s": 1.0,
+          "confidence": 0.999458372592926,
+          "visible": true
+        }
+      },
+      {
+        "simulated_seconds": 17.86,
+        "executor_phase": "lowering",
+        "physically_held": true,
+        "first_v4_proposal": {
+          "skill": "return",
+          "object": "home",
+          "delta": [
+            -0.21727526187896729,
+            0.16146190464496613
+          ],
+          "object_delta": [
+            -0.17768481373786926,
+            0.15524092316627502
+          ],
+          "duration_s": 1.0,
+          "confidence": 0.9994432330131531,
+          "visible": true
+        }
+      },
+      {
+        "simulated_seconds": 18.38,
+        "executor_phase": "release",
+        "physically_held": false,
+        "first_v4_proposal": {
+          "skill": "retrieve",
+          "object": "ball",
+          "delta": [
+            -0.4912163019180298,
+            0.37538257241249084
+          ],
+          "object_delta": [
+            -0.47324463725090027,
+            0.383074551820755
+          ],
+          "duration_s": 1.0,
+          "confidence": 0.9992662072181702,
+          "visible": true
+        }
+      }
+    ]
+  },
+  "interpretation": "At release the v4 proposal returns to retrieve/ball because held is false. Persistent programmed release-phase logic verifies completion instead of starting retrieval again."
+}

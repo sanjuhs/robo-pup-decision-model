@@ -17,6 +17,7 @@ It was not trained as another foundation model. A separate historical
 `MultimodalPlanner` scaffold remains untrained and is not used by the arena.
 
 [Exact sizes, checkpoint paths and licenses](MODEL_CARD.md).
+[Concrete task examples, input/output data and Qwen dispatch](TASK_FLOW.md).
 
 ## Where PPO is used
 

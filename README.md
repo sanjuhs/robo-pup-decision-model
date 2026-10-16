@@ -49,6 +49,7 @@ its overhead RGB camera. This is a hierarchy, not an end-to-end learned robot po
 
 | Your question | Read this |
 | --- | --- |
+| What do motor control, arena skills and Qwen each decide? | [Concrete task examples, data and step-by-step flow](docs/TASK_FLOW.md) |
 | What is closest to RoboJev, and what differs? | [Source-audited RoboJev comparison](docs/ROBOJEV_COMPARISON.md) |
 | How do robot eyes become sequential decisions? | [VLM architecture and decision flow](docs/VLM_GUIDE.md) |
 | Which weights, sizes and licenses are used? | [Model card](docs/MODEL_CARD.md) and [VLM model guide](docs/VLM_GUIDE.md#where-the-weights-live-and-how-large-they-are) |

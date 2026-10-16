@@ -1,0 +1,25 @@
+task,seed,success,simulated_seconds,maximum_ball_height_m,grasp_count,hop_flight_seconds,reason
+approach,707,True,5.48,0.0,0,0.0,Ball contact verified in MuJoCo
+approach,808,True,5.5,0.0,0,0.0,Ball contact verified in MuJoCo
+approach,909,True,5.74,0.0,0,0.0,Ball contact verified in MuJoCo
+behind,707,True,30.36,0.0,0,0.0,Behind-ball position verified (+X side)
+behind,808,True,49.02,0.0,0,0.0,Behind-ball position verified (+X side)
+behind,909,True,89.68,0.0,0,0.0,Behind-ball position verified (+X side)
+fetch,707,True,19.52,0.3556691845215114,1,0.0,"Fetch complete: contact, lift, return and release verified"
+fetch,808,True,18.34,0.49183723025005216,1,0.0,"Fetch complete: contact, lift, return and release verified"
+fetch,909,True,18.54,0.35410526987352947,1,0.0,"Fetch complete: contact, lift, return and release verified"
+push,707,True,16.32,0.0,0,0.0,Crate-to-ring position verified
+push,808,True,31.9,0.0,0,0.0,Crate-to-ring position verified
+push,909,True,13.28,0.0,0,0.0,Crate-to-ring position verified
+follow,707,True,35.02,0.0,0,0.0,RGB transformer: follow · beacon
+follow,808,True,35.02,0.0,0,0.0,RGB transformer: follow · beacon
+follow,909,True,35.02,0.0,0,0.0,RGB transformer: follow · beacon
+walk,707,True,2.48,0.0,0,0.0,Walk distance reached
+walk,808,True,2.5,0.0,0,0.0,Walk distance reached
+walk,909,True,2.48,0.0,0,0.0,Walk distance reached
+run,707,True,3.22,0.0,0,0.0,Run distance reached
+run,808,True,3.04,0.0,0,0.0,Run distance reached
+run,909,True,2.78,0.0,0,0.0,Run distance reached
+jump,707,True,1.62,0.0,0,0.27999999999999997,Hop and landing verified from contacts
+jump,808,True,1.62,0.0,0,0.27999999999999997,Hop and landing verified from contacts
+jump,909,True,1.62,0.0,0,0.27999999999999997,Hop and landing verified from contacts

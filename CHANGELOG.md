@@ -5,6 +5,14 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Inspectable task flow
+
+- Explain the distinction between learned arena proposals, programmed skill
+  execution and PPO leg residuals, with actual Qwen dispatch and replanning.
+- Publish eight explicitly labeled diagnostic v4 predictions plus a derived
+  24-trial CSV and fetch-phase trace. No new training or physical benchmark is
+  claimed by these explanatory exports.
+
 ### Illustrated model explanation
 
 - Add diagrams distinguishing PPO motor training, supervised arena planning,
