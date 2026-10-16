@@ -5,6 +5,18 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Genuine guarded browser mission
+
+- Complete actual Qwen fetch → hop → stop through the browser, with the fresh-eye
+  guard, independent physical completion snapshots and three real model calls.
+  CPU mission duration was 403.79 s; setup and 147.21 s video finalization are
+  reported separately. Publish the complete unsped recording and raw checks.
+- Retain the earlier failed capture and failed image-conditional probes. One
+  successful canonical mission does not establish general visual reasoning.
+- Verify actual local Vercel gateway → injected internal-planner binding →
+  authenticated native Qwen inference. This checks real model transport locally;
+  personal-account Vercel publication remains pending credentials/routing review.
+
 ### Credential publication guard
 
 - Extend the selected-pattern public scanner to current Hugging Face and Vercel
@@ -23,7 +35,7 @@ research prototype; the linked evidence describes what was actually tested.
 - Retain a full-suite puppy-test timeout and diagnostics. The unchanged test
   passed independently, and the isolated full suite then passed 21/21 in 117.85 s
   with no assertion or timeout changes. Python suite: 222 passed; backend-source
-  hosted CI also passed. Actual final Qwen browser capture remains separate.
+  hosted CI also passed. Genuine Qwen browser evidence is recorded separately.
 - Keep original recording timestamps while reducing VP9 encoding overhead;
   report mission duration separately from video finalization.
 

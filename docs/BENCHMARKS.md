@@ -6,6 +6,76 @@ thread for the historical compact-policy runs. This machine has no GPU. The
 new Qwen CPU trial below uses four threads. Other training/browser work overlapped
 some runs; these are development measurements, not isolated hardware benchmarks.
 
+## Genuine guarded browser mission: one actual end-to-end pass
+
+Raw [result, images and full recording](../benchmarks/vlm-2026-10-16/browser-guarded)
+come from clean source `8ef5721cbdefe36f7f575ca0d721d9d74f66fdc0`. Actual Qwen3-VL
+inference, the fresh-eye gate, MuJoCo physics and Three.js/Chromium completed
+fetch → jump → stop with **no model-response fixture and no world reset**.
+
+| Measurement | Actual result |
+| --- | --- |
+| Mission wall time | **403.790 s**, excluding **6.005 s** setup |
+| Page start to observed completion | **409.637 s** |
+| Real CPU model calls | **161.999 s**, **110.580 s**, **104.788 s**; BF16/four threads with software-WebGL recording sharing the host |
+| Maximum held-ball height | **0.3621 m**, with physical contact/grasp observed |
+| Fetch-completion ball distance | **0.3901 m** from home, released and grounded before hop |
+| Hop/landing | **0.28 s** flight; four final foot contacts; upright above 0.9999 |
+| Post-hop ball distance | **0.5531 m**, recorded separately from fetch completion |
+| Physics while thinking | Continued standing; final sim time 357.32 s includes setup/waiting/skills |
+| Original-time recording | **405.32 s**, no cropping, wait removal or speed change |
+| Capture finalization/encoding | **147.207 s** additional |
+| Whole harness wall time | **558.902 s**, including setup, screenshots and encoding |
+
+The prior failed [browser harness](../benchmarks/vlm-2026-10-16/browser-attempt1)
+remains preserved. The corrected harness measures return/release at fetch
+completion, then independently measures the later physical hop and final state.
+This run verifies one canonical guarded workflow. Its long waits are visible in
+the recording; it does not establish responsive GPU browser inference, concurrent
+VLM capacity or broad visual competence. The unchanged raw Qwen conditional-image
+failure remains reported below. Earlier CPU/GPU headless timings paused physics
+during generation and are not directly comparable to this browser experiment.
+
+## Actual local Vercel planning chain
+
+Raw [service-chain result and provenance](../benchmarks/vlm-2026-10-16/vercel-real-model)
+record one actual `Stop.` request with robot-eye PNG through real Vercel CLI
+`dev -L`: gateway → automatically injected private `PLANNER_URL` → authenticated
+native `/v1/chat/completions` → loaded Qwen3-VL CPU inference. All six checks
+passed, returning HTTP 200 and a validated stop/none plan.
+
+Request wall time was **42.4086 s** after model warmup; the entire local
+startup/request/cleanup took **49.6287 s**. The service returns validated plan
+JSON, not original raw model text. This test performed **planning only**, with
+`physics_executed=false`; the summary's past tense is not physical completion.
+All seven helper-owned ports were confirmed closed; native port 8000 remained.
+This is one local-service measurement, not a cloud private-binding deployment or
+a general latency benchmark. No Vercel cloud login was used.
+
+## Current application verification
+
+The latest full Python suite passed **226 tests in 23.60 seconds**, with explicit
+dev/MJX/VLM extras; Ruff passed for source/tests/scripts/services. The earlier
+222-test result remains historical. The unchanged isolated browser/render suite
+passed **21/21 in 117.847 seconds**. Its first full attempt had twenty passes and
+a 30-second puppy-control timeout; the unchanged targeted test and full repeat
+passed. Assertions, physical thresholds and test timeouts were retained. The
+[raw reports and diagnosis](../benchmarks/vlm-2026-10-16/frontend-validation)
+record the failure as well as the passing repeats.
+
+[Hosted guard-source CI](../benchmarks/vlm-2026-10-16/guard-hosted-ci.json) passed
+for `2c0eeffa58ccf35fde7ae0ca00aecbd8a0f684f5`; final runtime/frontend source
+`8ef5721cbdefe36f7f575ca0d721d9d74f66fdc0` also passed, with the
+[final CI record](../benchmarks/vlm-2026-10-16/final-runtime-hosted-ci.json) retained.
+The [latest full 226-test pass](../benchmarks/vlm-2026-10-16/final-local-validation.json)
+includes the later credential-scanner changes. That source `77bf40c1f0819cab5175621d3090d2991b850eae`
+also passed hosted full prototype checks; its
+[raw CI conclusion](../benchmarks/vlm-2026-10-16/final-published-source-ci.json)
+is retained separately from actual-model measurements.
+Browser-suite VLM fixtures verify integration, while the
+separate actual-Qwen capture above supplies the canonical genuine-model browser
+outcome and timing. Both the first rejected capture and corrected pass remain.
+
 ## Current native eye-visibility guard: limited developmental probe
 
 After the failed Qwen visual condition below, native step activation now checks

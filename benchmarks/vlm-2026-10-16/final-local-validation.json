@@ -1,0 +1,26 @@
+{
+  "recorded_at": "2026-10-16T15:25:19.286023+00:00",
+  "source_ref": "77bf40c1f0819cab5175621d3090d2991b850eae",
+  "python": {
+    "command": "uv run --extra dev --extra mjx --extra vlm pytest -q",
+    "passed": 226,
+    "failed": 0,
+    "seconds": 23.6,
+    "warnings": 5,
+    "warning_scope": "Existing third-party deprecation warnings"
+  },
+  "lint": {
+    "command": "uv run ruff check src tests scripts services",
+    "passed": true
+  },
+  "browser": {
+    "source_ref": "8ef5721cbdefe36f7f575ca0d721d9d74f66fdc0",
+    "passed": 21,
+    "seconds": 117.847,
+    "raw_record": "frontend-validation/isolated-full-suite.json",
+    "production_src_web_services_unchanged_since_browser_source": true
+  },
+  "actual_vlm_browser_record": "browser-guarded/result.json",
+  "actual_local_services_model_record": "vercel-real-model/result.json",
+  "limitation": "A successful supported mission and local services test do not establish general VLM visual reasoning, production deployment or workshop concurrency."
+}

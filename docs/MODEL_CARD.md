@@ -40,6 +40,13 @@ inference, and its thresholds are not probability calibration. The small
 the same colored arena objects and renderer; it is not evidence of general VLM
 vision improvement. No new training was performed for this guard.
 
+With that guard active, an [actual browser mission](../benchmarks/vlm-2026-10-16/browser-guarded/)
+completed fetch → hop → stop in **403.79 wall seconds**, excluding setup/video
+encoding, using three genuine model calls. Physics kept running while thinking;
+Chromium used software WebGL on the same CPU. Independent fetch-completion and
+hop/landing checks passed. This single mission does not establish arbitrary
+visual goals, mobile performance or multi-user VLM capacity.
+
 See [the VLM guide](VLM_GUIDE.md), [RoboJev comparison](ROBOJEV_COMPARISON.md) and
 [deployment services](DEPLOYMENT.md) for the difference between generative
 planning, the small learned controller below, analytic mechanics and hosting.

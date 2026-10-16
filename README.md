@@ -80,6 +80,14 @@ follow when their target lacks confident visual evidence. Blank and turned-away
 views are rejected. This is limited to the arena's colors; it does not make Qwen
 a reliable visual reasoner. [Guard, masks and fresh-view probes](benchmarks/vlm-2026-10-16/eye-grounding/).
 
+The guarded mission also **passed in the actual browser** with contact, lift,
+return/release, hop and landing checked independently. It took **403.79 wall
+seconds on CPU** while software WebGL recorded the arena; physics kept running
+while Qwen thought. [Watch the full unsped run](benchmarks/vlm-2026-10-16/browser-guarded/actual-run.webm)
+or inspect its [raw responses and physical checks](benchmarks/vlm-2026-10-16/browser-guarded/).
+This is one canonical mission, with slow CPU inference rather than production
+interactive latency. The earlier failed browser attempt remains published.
+
 To move closer to RoboJev, keep three layers explicit: **Qwen plans the mission,
 a judgment layer decides whether the next action is justified, and physical
 controllers execute and verify it**. A learned, calibrated RoboJev-style judgment

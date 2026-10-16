@@ -6,6 +6,14 @@ A real model-generated fetch → hop → stop mission passed on CPU and an RTX 4
 The GPU trial took **23.45 wall seconds for 19.98 simulated seconds**, with physics
 deliberately paused during VLM inference; this is not a real-time browser result.
 
+A separate **genuine guarded browser mission passed** on the CPU backend:
+fetch → hop → stop in **403.790 mission wall seconds**, with physics continuing
+in a standing pose during the model waits. Three real Qwen calls and independent
+contact/lift/release/landing checks are retained with the
+[full actual recording](../benchmarks/vlm-2026-10-16/browser-guarded/actual-run.webm).
+This confirms one complete browser workflow, with long CPU waits; it does not
+establish interactive GPU latency or broad VLM task reliability.
+
 **Reliable visual planning remains incomplete:** a conditional command produced
 the same look/fetch/stop plan for real, blank and turned images. The blank-image
 response violated the visibility condition, despite valid JSON.
@@ -39,10 +47,12 @@ and the evidence.
 | Voice | Offline English PocketSphinx command grammar; synthetic fixture tested. Transcript requires Send; human accent/noise accuracy unmeasured |
 | Browser presentation | Original procedural research robot with head optics and the existing contact-gated magnetic lifting tool; alternate golden-puppy skin remains selectable. Geometry follows physical poses |
 | Appearance boundary | No photoreal dog, downloaded anatomical asset or independently simulated six-axis picking arm is claimed |
-| Browser checks | 21 browser/render checks passed, including VLM UI/provider fixtures and actual native-v4 physics. Fixture responses do not establish actual Qwen browser success |
+| Application checks | Latest full Python suite: **226 passed in 23.60 s**, with explicit dev/MJX/VLM extras; Ruff passed. Isolated browser suite: **21/21 in 117.847 s**; initial timeout retained |
+| Genuine VLM browser | Guarded actual-Qwen mission passed on CPU with no model-response fixture or reset; **403.790 s** mission wall, **0.3621 m** held lift, fetch release **0.3901 m** from home, **0.28 s** hop flight and four-foot landing |
 | Participants | Independent browser worlds and fresh-policy experiments. Earlier five-browser isolation and short compact-v4 capacity probes passed; no shared world or VLM multi-user capacity measurement |
 | Local model serving | Private `/v1/chat/completions` route serves the configured local VLM; mandatory workshop key, bounded inline PNG/text requests and two pending/running serving slots. Controlled-adapter HTTP tests cover its contract |
-| Deployment | Three Vercel services prepared; actual `vercel dev -L` routing/binding checks passed locally. Non-root 1.41 GB CPU container passed EGL, HTTP and authenticated advancing WebSocket smoke checks |
+| Local Vercel model chain | Real `vercel dev -L` gateway → injected private planner binding → native Qwen passed a camera/text stop-plan request in **42.4086 s**, six checks true; planning only, no physics. Seven helper ports closed afterward |
+| Deployment | Three Vercel services prepared. Non-root 1.41 GB CPU container passed EGL, HTTP and authenticated advancing WebSocket smoke checks; cloud publication remains separate |
 | Hosted Vercel | Not published. Personal-account authentication is unavailable and the requested service/route review remains outstanding; local routing is not a deployed service |
 | GPU evidence | Actual RTX 4090 VLM inference and physical mission passed; seven static outputs valid JSON, visual condition failed. Two RTX 5090 allocations failed; earlier RTX 5090 motor/planner training remains recorded |
 | Spending / cleanup | New RTX 4090 estimate $0.08326; cumulative confirmed-experiment estimate $0.79004 of $30. Latest pod deleted/absence verified; all six confirmed experiment pods deleted. Final invoices/storage reconciliation pending |
@@ -56,12 +66,26 @@ research scaffold. The small live model is `ArenaPlannerV4`; the optional large
 model is an unchanged pretrained Qwen checkpoint. Their checkpoints and training
 claims are separate.
 
-The previously completed full local Python run passed 207 tests, with a later
-monitor regression passing separately. The expanded suite for the new eye guard
-and current hosted CI require their own recorded conclusions. The first genuine
-browser capture failed its post-hop final-ball harness check and is retained; a
-corrected capture is not claimed passed before its result. Historical hosted v4
-validation remains linked in [VALIDATION.md](VALIDATION.md).
+The latest full local suite passed **226 Python tests in 23.60 seconds**, with
+explicit dev/MJX/VLM extras; the browser/render suite passed **21 checks**. The first browser-suite run had twenty passes and a puppy-control
+30-second timeout; the unchanged targeted and isolated full reruns passed, without
+altering assertions, physical thresholds or test timeouts. That fixture-based
+suite is separate from the passing genuine-Qwen browser mission. Its first actual
+capture failed a post-hop final-ball harness check and remains retained. The
+corrected capture independently records fetch completion before the later hop;
+[its result and original-time video](../benchmarks/vlm-2026-10-16/browser-guarded)
+passed without a response fixture or world reset.
+
+Hosted checks passed for guard source `2c0eeffa58ccf35fde7ae0ca00aecbd8a0f684f5`
+([run 38921051265](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38921051265)).
+The final runtime/frontend source `8ef5721cbdefe36f7f575ca0d721d9d74f66fdc0`
+also passed [run 38921897635](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38921897635).
+The latest [full local 226-test record](../benchmarks/vlm-2026-10-16/final-local-validation.json)
+includes the credential-scanner changes. Its source
+`77bf40c1f0819cab5175621d3090d2991b850eae` also **passed**
+[run 38923264485](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38923264485),
+with the [raw conclusion](../benchmarks/vlm-2026-10-16/final-published-source-ci.json)
+retained. Exact source-specific scope and failures are in [VALIDATION.md](VALIDATION.md).
 
 Not validated: real hardware, sim-to-real, arbitrary objects/language/terrain,
 long-horizon obstacle avoidance, reliable image-conditioned decision quality,

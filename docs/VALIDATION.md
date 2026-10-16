@@ -4,6 +4,105 @@ Validated on the development Linux machine with Python 3.12.14, Node 24.19.0,
 MuJoCo 3.3.7, PyTorch 2.9.0 CPU and optional JAX 0.7.2. Runpod hardware and source
 hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 
+## Genuine guarded browser mission: passed
+
+The corrected [browser record](../benchmarks/vlm-2026-10-16/browser-guarded)
+passed on clean runtime source
+`8ef5721cbdefe36f7f575ca0d721d9d74f66fdc0`. It used actual pretrained Qwen inference,
+the native activation-image guard, MuJoCo physics and Chromium SwiftShader/Three.js;
+no model-response HTTP/WebSocket fixture was supplied. The request was "Fetch the
+red ball, then hop, then stop."
+
+- Mission wall time was **403.790 seconds**, excluding **6.005 seconds setup**.
+  Page start to first observed completion was **409.637 seconds**. Actual CPU BF16
+  model calls took **161.999, 110.580 and 104.788 seconds**, while a 1440px software
+  WebGL capture shared the host. This is not an isolated inference benchmark.
+- Physical contact/grasp and held-to-released transitions were independently
+  recorded. Maximum held-ball height was **0.3621 m**. At fetch completion the
+  released, grounded ball was **0.3901 m** from home, before the later hop.
+- Hop flight was **0.28 s**, with four feet in contact after landing and upright
+  alignment above 0.9999. All three steps completed without world reset. The
+  post-hop ball distance was separately recorded as **0.5531 m**.
+- **Physics continued standing during inference.** Final simulation time was
+  357.32 seconds including setup, waiting and active skills; it is not movement
+  duration. Earlier headless CPU/GPU trials paused physics while thinking, so
+  their timings are not directly comparable to this browser workflow.
+- The [full actual video](../benchmarks/vlm-2026-10-16/browser-guarded/actual-run.webm)
+  lasts **405.32 seconds**, preserving original CDP timestamps without cropping,
+  skipping waits or speeding up motion. Encoding/finalization added **147.207 s**;
+  total harness wall time including setup/screenshots/encoding was **558.902 s**.
+  Raw result, harness hash, frame timestamps, video metadata and checksums are
+  retained alongside thinking/carrying/completion screenshots.
+
+This verifies **one canonical guarded browser mission**, with substantial CPU
+waiting. It does not establish reliable raw Qwen visual reasoning: the failed
+blank/real/turned-image conditional probes remain unchanged. The gate remains
+limited to the colored arena; mobile FPS, human voice, concurrent VLM throughput,
+GPU browser responsiveness and a deployed Vercel service are untested by this run.
+The rejected first browser harness and original evidence remain published.
+
+## Real local Vercel gateway-to-model chain: passed
+
+The [actual service-chain record](../benchmarks/vlm-2026-10-16/vercel-real-model)
+uses source `77bf40c1f0819cab5175621d3090d2991b850eae`, Vercel CLI 64.3.1
+`dev -L`, the real public gateway and Vercel's injected private planner URL
+`http://127.0.0.1:44457`. The helper did not manually set `PLANNER_URL`. A saved
+384×384 robot-eye PNG and "Stop." traveled through `/api/plan` → internal
+`/plan` → authenticated native `/v1/chat/completions` → actual loaded Qwen CPU
+inference. No fixture supplied the model answer.
+
+The request returned **HTTP 200** and a validated stop/none plan; all **six
+checks passed**. Wall time was **42.4086 seconds** after model warmup, with
+**49.6287 seconds** for startup/request/cleanup. The planner returns parsed JSON,
+so the saved gateway result does not pretend to contain raw generative text.
+The generated summary's past-tense wording does not establish physical action:
+`physics_executed` was explicitly **false**.
+
+The [cleanup check](../benchmarks/vlm-2026-10-16/vercel-real-model/cleanup-verification.json)
+confirmed all seven helper-owned service/resource ports closed, while native
+port 8000 remained open. Keys were excluded from the evidence. The gateway and
+internal planner loaded no weights. This validates one **local development**
+planning chain with an actual injected binding, not a Vercel cloud deployment,
+deployed private-network connectivity or a production latency guarantee. Personal
+Vercel authentication and the requested service/route review remain outstanding.
+
+## Current application checks and source-specific CI
+
+- Latest full local Python suite: **226 passed in 23.60 seconds**, with explicit
+  `--extra dev --extra mjx --extra vlm`. The earlier 222-test run is historical.
+- Ruff passed across `src`, `tests`, `scripts` and `services`.
+- The isolated full frontend suite passed **21/21 in 117.847 seconds**, with no
+  skipped/flaky/failed cases. The first full attempt passed twenty tests and hit
+  the existing 30-second puppy-control test timeout. An unchanged targeted repeat
+  passed, followed by the unchanged full pass. No assertions, physical thresholds
+  or timeout budgets were modified. The [diagnosis and raw full report](../benchmarks/vlm-2026-10-16/frontend-validation)
+  preserve both the failure and the successful reruns; scheduling delay is a
+  plausible diagnosis, not a conclusively reproduced root cause.
+- The frontend checks include actual native-v4 physics and controlled VLM
+  UI/provider fixtures. They do not establish genuine-Qwen browser success; that
+  successful genuine capture is evaluated separately above.
+
+Hosted guard-source checks **passed** for
+`2c0eeffa58ccf35fde7ae0ca00aecbd8a0f684f5`:
+[run 38921051265](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38921051265).
+The [raw job/step record](../benchmarks/vlm-2026-10-16/guard-hosted-ci.json)
+records successful frozen setup, lint and browser checks. It explicitly excludes
+the optional actual-Qwen inference/browser benchmark.
+The final runtime/frontend source
+`8ef5721cbdefe36f7f575ca0d721d9d74f66fdc0` also **passed**
+[run 38921897635](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38921897635).
+Its [raw final CI record](../benchmarks/vlm-2026-10-16/final-runtime-hosted-ci.json)
+keeps the hosted CPU/browser-suite conclusion separate from actual-Qwen browser
+inference. The later credential-scanner source
+`77bf40c1f0819cab5175621d3090d2991b850eae` adds Hugging Face/Vercel patterns; the
+latest full local **226-test** pass includes it. Its hosted full prototype checks
+also **passed** in
+[run 38923264485](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38923264485).
+The [raw published-source CI record](../benchmarks/vlm-2026-10-16/final-published-source-ci.json)
+and [final local commands/results](../benchmarks/vlm-2026-10-16/final-local-validation.json)
+are retained. Actual model/browser and local-service inference remain the separate
+measured records above; hosted fixture checks do not substitute for them.
+
 ## Current native activation-image guard
 
 The [eye-grounding probe](../benchmarks/vlm-2026-10-16/eye-grounding/probe.json)
@@ -35,8 +134,8 @@ failed original response remains unchanged.
 Native mission budgets now allow **360 simulated execution seconds**, excluding
 model-wait time, plus a **30-minute wall limit**. The earlier headless CPU/GPU
 mission records below preceded this activation guard and are not retroactively
-presented as a fresh guarded-model evaluation. The full new application suite
-and corrected browser run require their own results.
+presented as a fresh guarded-model evaluation. The application checks above passed;
+the corrected genuine-model browser run separately passed as recorded above.
 
 The first genuine browser capture is retained as
 [`browser-attempt1`](../benchmarks/vlm-2026-10-16/browser-attempt1). Its mission
@@ -117,10 +216,10 @@ retain the unedited responses, image hashes, timing, physical trace and outcomes
   and rejects plans that change the remembered remainder. That is an application
   prompt/validation fix; the Qwen weights were not optimized.
 
-Before the new activation guard, the completed full local Python suite passed
+Before the activation guard, the completed full local Python suite passed
 **207 tests**; a monitor regression subsequently passed its targeted test. The
-expanded guarded-application suite and current hosted CI require their own
-recorded conclusions, not inference from those earlier runs.
+intermediate expanded run passed **222 tests**. The latest full run passed
+**226 tests**, as recorded above; earlier counts remain historical evidence.
 Ruff, frozen dependency installation and browser build passed. All **21 browser/
 render checks** passed, including the VLM UI using controlled provider fixtures,
 original physics/real-v4 fetch, head-camera inspection, robot/puppy skin parity

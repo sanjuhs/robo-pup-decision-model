@@ -1,0 +1,33 @@
+{
+  "source_artifact_directory": "artifacts/vercel-real-qwen-plan-attempt1",
+  "source_ref": "77bf40c1f0819cab5175621d3090d2991b850eae",
+  "source_commit_url": "https://github.com/sanjuhs/robo-pup-decision-model/commit/77bf40c1f0819cab5175621d3090d2991b850eae",
+  "copied_files_unchanged": true,
+  "credentials_included": false,
+  "weights_included": false,
+  "actual_model_inference": true,
+  "cloud_deployment": false,
+  "physics_executed": false,
+  "files": [
+    {
+      "path": "result.json",
+      "bytes": 4604,
+      "sha256": "52b9cf5b71e55a6598df141ead4f4f15a390d867a52393c54b985e457ef50879"
+    },
+    {
+      "path": "vercel-local-sanitized.log",
+      "bytes": 2253,
+      "sha256": "f9d626b6e5c0041c629f2adf6845896664bee9dc734a8093fe6b3898184c5adb"
+    },
+    {
+      "path": "probe-helper.py",
+      "bytes": 12505,
+      "sha256": "2bdbf7b72170df5225123a5792d0ffd7a54e735ed2b1da2215d1a5b17b44dc47"
+    },
+    {
+      "path": "eye-start.png",
+      "bytes": 12901,
+      "sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396"
+    }
+  ]
+}

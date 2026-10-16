@@ -13,6 +13,16 @@ records establish each one, configuration and contract tests alone do not prove
 VLM task competence. See [VALIDATION.md](VALIDATION.md) for the recorded checks and
 [STATUS.md](STATUS.md) for the current release's scope.
 
+**Actual guarded browser result:** a complete real-Qwen fetch → hop → stop mission
+passed with the native eye gate, MuJoCo and Three.js, without a response fixture
+or world reset. It took **403.790 mission wall seconds**, excluding setup, with
+real CPU calls of **161.999, 110.580 and 104.788 seconds**. Physics kept standing
+during the waits. Independent checks recorded contact, a **0.3621 m** held lift,
+release **0.3901 m** from home at fetch completion, and **0.28 s** flight followed
+by a four-foot landing. The [uncropped original-time recording and result](../benchmarks/vlm-2026-10-16/browser-guarded)
+retain the waiting as well as motion. This is one canonical pass with long CPU
+latency, not a general visual-reasoning or GPU browser-responsiveness claim.
+
 **Measured genuine-model result:** the corrected native CPU trial of "Fetch the
 red ball, then hop, then stop" passed all twelve physical/trace checks with three
 actual Qwen calls. It took **183.27 wall seconds for 19.98 simulated seconds**;
@@ -186,8 +196,9 @@ The [saved probe](../benchmarks/vlm-2026-10-16/eye-grounding/probe.json) include
 seven recorded views and seventeen fresh physical views. Offline renderer IDs
 were used only to score the fresh images (visible truth: at least 64 pixels).
 The 18 positive / 50 negative object-view results with zero observed mistakes
-are a small developmental check in the same renderer and color domain. They do
-not establish general visual recognition or successful guarded physical missions.
+are a small developmental check in the same renderer and color domain. The probe
+alone does not establish general visual recognition or a physical mission; the
+separate actual browser result above verifies one guarded sequence.
 
 ## Where the weights live and how large they are
 
@@ -220,9 +231,11 @@ uv sync --frozen --extra dev --extra vlm
 uv run --extra vlm python scripts/download_vlm.py
 ```
 
-The script resolves `main` to a commit before downloading. For a later replay,
-pass the recorded revision with `--revision`. It never downloads weights merely
-because a browser makes an inference request.
+The default Qwen download is pinned to
+`89644892e4d85e24eaac8bacfd4f463576704203`; other explicitly selected models default
+to `main`, which is resolved to an immutable commit before downloading. An explicit
+`--revision` overrides the selection and is recorded in the manifest. The runtime
+never downloads weights merely because a browser makes an inference request.
 
 The lock currently includes `huggingface-hub==0.36.2`. Its CLI commands are
 `hf auth login` and `hf download`. For an operator who wants the direct Hub CLI,
@@ -231,6 +244,7 @@ RoboPup provenance manifest:
 
 ```bash
 uv run --extra vlm hf download Qwen/Qwen3-VL-2B-Instruct \
+  --revision 89644892e4d85e24eaac8bacfd4f463576704203 \
   --local-dir artifacts/vlm/Qwen3-VL-2B-Instruct
 ```
 
@@ -306,7 +320,30 @@ server, and a long-lived native physics/WebSocket server are different services.
 A browser physics demonstration must be labeled separately from the evaluated
 MuJoCo/PPO path; results do not transfer automatically between engines.
 
+The [actual local Vercel service-chain probe](../benchmarks/vlm-2026-10-16/vercel-real-model)
+also passed: real gateway `/api/plan` → Vercel-injected internal planner URL →
+authenticated native model endpoint → actual loaded Qwen CPU inference. It sent
+a saved robot-eye image and "Stop.", returned HTTP 200 with a validated stop plan,
+and passed six checks in **42.4086 request wall seconds** after warmup. Total
+startup/request/cleanup was **49.6287 seconds**; all seven helper ports closed,
+leaving the native backend running. This is **planning only**, not a physical
+stop assertion or a hosted cloud deployment. The record contains returned parsed
+plan JSON; it does not invent unavailable raw model text.
+
 ## Read the evidence at the right level
+
+The latest full application suite passed **226 Python tests in 23.60 seconds**
+with explicit dev/MJX/VLM extras, and an unchanged isolated **21-test browser/render
+suite** passed. The earlier frontend timeout and
+successful unchanged repeats are retained in the
+[frontend validation records](../benchmarks/vlm-2026-10-16/frontend-validation).
+Guard and final runtime/frontend hosted CI passed; [VALIDATION.md](VALIDATION.md)
+records their exact sources. The credential-scanner source also passed hosted
+full prototype checks, with [raw CI evidence](../benchmarks/vlm-2026-10-16/final-published-source-ci.json)
+and the [measured full 226-test local run](../benchmarks/vlm-2026-10-16/final-local-validation.json)
+retained. Controlled VLM tests remain fixtures; the separate [actual guarded browser capture](../benchmarks/vlm-2026-10-16/browser-guarded)
+provides the independently verified genuine-model outcome.
+
 
 - [`tests/test_vlm_protocol.py`](../tests/test_vlm_protocol.py) verifies strict
   structured-output parsing and supported skill pairs. It does not run a VLM.
@@ -353,4 +390,5 @@ service rather than per-user authentication or a public inference business.
 Point the internal Vercel planner's `ROBOPUP_VLM_BASE_URL` at the backend's HTTPS
 `/v1` URL and set `ROBOPUP_VLM_API_KEY` to its private workshop key. Keep that key
 in server-side secret settings. This makes the hostable integration concrete;
-cloud publication and actual provider latency still require their own validation.
+the actual local model-service chain is validated above. Cloud publication and
+deployed provider latency still require their own validation.

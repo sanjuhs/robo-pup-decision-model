@@ -1,0 +1,129 @@
+{
+  "schema": "robopup-real-local-vercel-planner-v1",
+  "source_ref": "77bf40c1f0819cab5175621d3090d2991b850eae",
+  "scope": "Local Vercel development services calling authenticated native Qwen; not a cloud deployment",
+  "chain": [
+    "app /api/plan",
+    "injected PLANNER_URL internal planner /plan",
+    "native /v1/chat/completions",
+    "actual local Qwen3-VL-2B-Instruct"
+  ],
+  "cli": "Vercel 64.3.1 dev -L",
+  "cloud_login_used": false,
+  "planner_url_manually_set": false,
+  "instruction": "Stop.",
+  "image_sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396",
+  "image_file": "eye-start.png",
+  "workshop_key_from_private_file": true,
+  "credentials_in_evidence": false,
+  "physics_executed": false,
+  "raw_model_text_available": false,
+  "response_note": "The planner validates actual model text and returns parsed plan JSON; full gateway JSON is retained here, not fabricated raw model text.",
+  "success": true,
+  "source_file_sha256": {
+    "services/app/app.py": "89baed5fd4daec2c4c2659d20242733b057e2e26a7f4efda88bc966757f6af65",
+    "services/planner/app.py": "6c897e78a88680c6894b8d31cbf6da153ab1df829b81378ff98311f9134f41d1",
+    "src/robopup/vlm_api.py": "da5f0473db16dbb81c6e9216f438bf872a3398c9549452ea9d328f6b649c439c",
+    "src/robopup/vlm_runtime.py": "dc6f700dcdbe5178cd0aca3f01e9f4a8720b0bbbfb3c4de92a58600f8a96b7c9",
+    "vercel.json": "d3e2fe9b0fcda243cd8befd27a8768916edecd2a5b1c46549eb26cfe345bf70c"
+  },
+  "native_status_before": {
+    "ready": true,
+    "phase": "ready",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "ready",
+    "reason": "Local VLM loaded; mission JSON is validated separately before execution",
+    "provider": "transformers-local",
+    "model_loaded": true,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local VLM loaded; mission JSON is validated separately before execution",
+    "last_error": null,
+    "dtype_config": "bfloat16",
+    "cpu_threads_config": 4,
+    "max_generation_seconds": 180
+  },
+  "planner_bundle_prepared": true,
+  "gateway_health": {
+    "status": "ok",
+    "service": "app",
+    "role": "HTTP gateway only",
+    "physics": "external MuJoCo backend required",
+    "backend_configured": true,
+    "planner_binding_configured": true,
+    "simulation_running_here": false,
+    "model_weights_loaded_here": false
+  },
+  "actual_injected_planner_urls": [
+    "http://127.0.0.1:44457"
+  ],
+  "internal_planner_status_via_binding": {
+    "service": "planner",
+    "provider": "openai-compatible",
+    "configured": true,
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "model_loaded_here": false,
+    "inference_verified": false,
+    "detail": "Remote inference is verified per successful request; no local weights are bundled"
+  },
+  "model_request_started": true,
+  "http_status": 200,
+  "gateway_response": {
+    "plan": {
+      "summary": "The robot has stopped, so no further actions are possible.",
+      "steps": [
+        {
+          "action": "stop",
+          "object": "none"
+        }
+      ]
+    },
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "openai-compatible",
+    "timing_ms": {
+      "generation": 42106.337208002515,
+      "load": 0.0,
+      "queue": 0.0018950013327412307,
+      "total": 42113.874056001805
+    },
+    "image": {
+      "width": 384,
+      "height": 384,
+      "source": "request-camera-rgb"
+    },
+    "inference_verified": true,
+    "physics_executed": false
+  },
+  "request_wall_seconds": 42.40861054799825,
+  "checks": {
+    "injected_binding_verified": true,
+    "actual_model_reported": true,
+    "provider_inference_verified": true,
+    "no_physics_execution": true,
+    "expected_stop_plan": true,
+    "actual_eye_dimensions": true
+  },
+  "native_status_after": {
+    "ready": true,
+    "phase": "ready",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "ready",
+    "reason": "Local VLM loaded; mission JSON is validated separately before execution",
+    "provider": "transformers-local",
+    "model_loaded": true,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local VLM loaded; mission JSON is validated separately before execution",
+    "last_error": null,
+    "dtype_config": "bfloat16",
+    "cpu_threads_config": 4,
+    "max_generation_seconds": 180
+  },
+  "owned_vercel_processes_stopped": true,
+  "owned_children_requiring_forced_cleanup": [],
+  "wall_seconds": 49.62867189899771
+}

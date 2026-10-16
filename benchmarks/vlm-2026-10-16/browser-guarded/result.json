@@ -1,0 +1,945 @@
+{
+  "schema": "robopup-genuine-vlm-browser-v2",
+  "success": true,
+  "model_response_fixture": false,
+  "physics": "native MuJoCo backend",
+  "renderer": "Chromium SwiftShader",
+  "instruction": "Fetch the red ball, then hop, then stop.",
+  "phases": [
+    {
+      "phase": "thinking",
+      "current_step": 0,
+      "wall_seconds": 7.251,
+      "sim_seconds": 2.2799999999999736
+    },
+    {
+      "phase": "executing",
+      "current_step": 0,
+      "wall_seconds": 170.09,
+      "sim_seconds": 136.6799999999482
+    },
+    {
+      "phase": "thinking",
+      "current_step": 1,
+      "wall_seconds": 191.861,
+      "sim_seconds": 156.43999999993022
+    },
+    {
+      "phase": "executing",
+      "current_step": 1,
+      "wall_seconds": 302.721,
+      "sim_seconds": 258.91999999983705
+    },
+    {
+      "phase": "thinking",
+      "current_step": 2,
+      "wall_seconds": 304.513,
+      "sim_seconds": 260.5199999998356
+    },
+    {
+      "phase": "complete",
+      "current_step": 3,
+      "wall_seconds": 409.637,
+      "sim_seconds": 357.31999999974755
+    }
+  ],
+  "responses": [
+    {
+      "raw_text": "```json\n{\n  \"summary\": \"Fetch the red ball, then hop, then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+      "model": "Qwen/Qwen3-VL-2B-Instruct",
+      "provider": "transformers-local",
+      "inference_ms": 161999.04834599874,
+      "current_step": 0
+    },
+    {
+      "raw_text": "```json\n{\n  \"summary\": \"Jump and then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+      "model": "Qwen/Qwen3-VL-2B-Instruct",
+      "provider": "transformers-local",
+      "inference_ms": 110580.05065299949,
+      "current_step": 1
+    },
+    {
+      "raw_text": "```json\n{\n  \"summary\": \"The mission is complete as the required tasks have been executed. No further actions are needed.\",\n  \"steps\": [\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+      "model": "Qwen/Qwen3-VL-2B-Instruct",
+      "provider": "transformers-local",
+      "inference_ms": 104788.33624600156,
+      "current_step": 3
+    }
+  ],
+  "metrics": {
+    "ever_touched": true,
+    "ever_held": true,
+    "maximum_held_ball_height": 0.36210389463017695,
+    "ball_home_distance_at_fetch_completion": 0.390051151151873,
+    "ball_home_distance_after_hop": 0.5531098690741739
+  },
+  "physical_events": [
+    {
+      "event": "grasp_contact",
+      "wall_seconds": 175.45,
+      "sim_seconds": 141.63999999994368,
+      "ball": [
+        1.805295343362845,
+        -1.0025613711901054,
+        0.12799863370006515
+      ],
+      "position": [
+        1.3093889316005283,
+        -0.6932252684859069,
+        0.3941857054499574
+      ],
+      "held": true,
+      "ball_touched": true,
+      "upright": 0.9998132557294499,
+      "foot_contacts": [
+        "fl",
+        "fr",
+        "rl"
+      ],
+      "needs_reset": false,
+      "jump_flight_seconds": 0,
+      "jump_max_height": 0
+    },
+    {
+      "event": "release",
+      "wall_seconds": 190.445,
+      "sim_seconds": 155.19999999993135,
+      "ball": [
+        -0.2739968777281697,
+        0.16484627062812232,
+        0.12196780880419363
+      ],
+      "position": [
+        0.24627740934822587,
+        -0.12786345886863637,
+        0.3912667643940328
+      ],
+      "held": false,
+      "ball_touched": true,
+      "upright": 0.9999973243803304,
+      "foot_contacts": [
+        "fl",
+        "fr",
+        "rl",
+        "rr"
+      ],
+      "needs_reset": false,
+      "jump_flight_seconds": 0,
+      "jump_max_height": 0
+    }
+  ],
+  "step_completions": [
+    {
+      "index": 0,
+      "action": "fetch",
+      "object": "ball",
+      "wall_seconds": 191.861,
+      "sim_seconds": 156.43999999993022,
+      "ball": [
+        -0.3255355253692455,
+        0.21486396216553075,
+        0.11987426961354077
+      ],
+      "position": [
+        0.2467842457521612,
+        -0.1279934218474765,
+        0.3913250655333473
+      ],
+      "held": false,
+      "ball_touched": true,
+      "upright": 0.9999939941166849,
+      "foot_contacts": [
+        "fl",
+        "fr",
+        "rl",
+        "rr"
+      ],
+      "needs_reset": false,
+      "jump_flight_seconds": 0,
+      "jump_max_height": 0
+    },
+    {
+      "index": 1,
+      "action": "jump",
+      "object": "none",
+      "wall_seconds": 304.513,
+      "sim_seconds": 260.5199999998356,
+      "ball": [
+        -0.44399397373277705,
+        0.32984826595910416,
+        0.11987426961354078
+      ],
+      "position": [
+        0.06964736608081827,
+        -0.04382027492045316,
+        0.3930478107784648
+      ],
+      "held": false,
+      "ball_touched": false,
+      "upright": 0.9999892267060524,
+      "foot_contacts": [
+        "fl",
+        "fr",
+        "rl",
+        "rr"
+      ],
+      "needs_reset": false,
+      "jump_flight_seconds": 0.27999999999999997,
+      "jump_max_height": 0.46299071379134266
+    },
+    {
+      "index": 2,
+      "action": "stop",
+      "object": "none",
+      "wall_seconds": 409.636,
+      "sim_seconds": 357.31999999974755,
+      "ball": [
+        -0.44399397373277705,
+        0.32984826595910416,
+        0.11987426961354078
+      ],
+      "position": [
+        0.07370597715077393,
+        -0.04539501122966706,
+        0.3913396381523872
+      ],
+      "held": false,
+      "ball_touched": false,
+      "upright": 0.9999907044950478,
+      "foot_contacts": [
+        "fl",
+        "fr",
+        "rl",
+        "rr"
+      ],
+      "needs_reset": false,
+      "jump_flight_seconds": 0.27999999999999997,
+      "jump_max_height": 0.46299071379134266
+    }
+  ],
+  "errors": [],
+  "source_ref": "8ef5721cbdefe36f7f575ca0d721d9d74f66fdc0",
+  "runtime_source_clean": true,
+  "harness_sha256": "ee3497611fb75c26b13e7da937b2656b52da1d3517624a9f2e4d0f417a8bcff2",
+  "initial_runtime": {
+    "ready": true,
+    "phase": "available",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "available",
+    "reason": "Local checkpoint available; it has not been loaded or tested by this process",
+    "provider": "transformers-local",
+    "model_loaded": false,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local checkpoint available; it has not been loaded or tested by this process",
+    "last_error": null,
+    "dtype_config": "bfloat16",
+    "cpu_threads_config": 4,
+    "max_generation_seconds": 180
+  },
+  "setup_wall_seconds": 6.005,
+  "mission_wall_seconds": 403.79,
+  "final": {
+    "time": 357.43999999974744,
+    "position": [
+      0.07370597715077393,
+      -0.04539501122966707,
+      0.3913396381523872
+    ],
+    "upright": 0.9999907044950478,
+    "speed": 6.378010410587235e-16,
+    "crate": [
+      0.8374775233490906,
+      0.09027373806892107,
+      0.13992049380696558
+    ],
+    "ball": [
+      -0.44399397373277705,
+      0.32984826595910416,
+      0.11987426961354078
+    ],
+    "ball_touched": false,
+    "geoms": [
+      {
+        "id": 1,
+        "position": [
+          0.3,
+          1.3,
+          0.2
+        ],
+        "rotation": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": 2,
+        "position": [
+          -1.4,
+          -0.8,
+          0.2
+        ],
+        "rotation": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": 3,
+        "position": [
+          0,
+          5.3,
+          0.12
+        ],
+        "rotation": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": 4,
+        "position": [
+          0,
+          -5.3,
+          0.12
+        ],
+        "rotation": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": 5,
+        "position": [
+          5.3,
+          0,
+          0.12
+        ],
+        "rotation": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": 6,
+        "position": [
+          -5.3,
+          0,
+          0.12
+        ],
+        "rotation": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": 7,
+        "position": [
+          0,
+          0,
+          0.002
+        ],
+        "rotation": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "id": 8,
+        "position": [
+          0.07370597715077393,
+          -0.04539501122966707,
+          0.3913396381523872
+        ],
+        "rotation": [
+          -0.9183190983614931,
+          -0.39582111538167264,
+          0.003959571004909303,
+          0.39581743602453445,
+          -0.9183276346805689,
+          -0.0017066695506131372,
+          0.004311719320399755,
+          2.194425197110661e-16,
+          0.9999907044950478
+        ]
+      },
+      {
+        "id": 9,
+        "position": [
+          -0.210794762646068,
+          0.07723159380816103,
+          0.4376758528439883
+        ],
+        "rotation": [
+          -0.9183190983614931,
+          -0.39582111538167264,
+          0.003959571004909303,
+          0.39581743602453445,
+          -0.9183276346805689,
+          -0.0017066695506131372,
+          0.004311719320399755,
+          2.194425197110661e-16,
+          0.9999907044950478
+        ]
+      },
+      {
+        "id": 10,
+        "position": [
+          -0.194901477202712,
+          -0.08751450797270663,
+          0.3923313335960792
+        ],
+        "rotation": [
+          -0.9183190983614932,
+          -0.39168728141156467,
+          0.05719359374048952,
+          0.3958174360245345,
+          -0.910202908940084,
+          0.12189840809449749,
+          0.004311719320399754,
+          0.1345798578444297,
+          0.9908933701156121
+        ]
+      },
+      {
+        "id": 11,
+        "position": [
+          -0.15843011279701655,
+          -0.11630196877138924,
+          0.30378122530054247
+        ],
+        "rotation": [
+          -0.844727785395458,
+          -0.3916872814115646,
+          -0.3647136440569545,
+          0.2977564014986753,
+          -0.910202908940084,
+          0.287874607986826,
+          -0.4447202423405582,
+          0.13457985784442966,
+          0.8855010829553673
+        ]
+      },
+      {
+        "id": 12,
+        "position": [
+          -0.17370237350921391,
+          -0.13626848861674862,
+          0.12429274083544264
+        ],
+        "rotation": [
+          -0.7770024147073483,
+          -0.39168728141156456,
+          0.49279642969421733,
+          0.4055529052434271,
+          -0.910202908940084,
+          -0.0840089614602212,
+          0.4814499855515272,
+          0.13457985784442966,
+          0.8660797730434578
+        ]
+      },
+      {
+        "id": 13,
+        "position": [
+          -0.22544599862710674,
+          -0.1274475476634254,
+          0.03335436466587957
+        ],
+        "rotation": [
+          -0.7770024147073483,
+          -0.39168728141156456,
+          0.49279642969421733,
+          0.4055529052434271,
+          -0.910202908940084,
+          -0.0840089614602212,
+          0.4814499855515272,
+          0.13457985784442966,
+          0.8660797730434578
+        ]
+      },
+      {
+        "id": 14,
+        "position": [
+          -0.08011335374202697,
+          0.17880050608465833,
+          0.39233133359607913
+        ],
+        "rotation": [
+          -0.9183190983614928,
+          -0.39275304832433744,
+          -0.04934649548321537,
+          0.39581743602453445,
+          -0.9097435379789809,
+          -0.12528069461991975,
+          0.004311719320399754,
+          -0.13457985784442883,
+          0.9908933701156118
+        ]
+      },
+      {
+        "id": 15,
+        "position": [
+          -0.03414213639426503,
+          0.17205324764781538,
+          0.3037812253005424
+        ],
+        "rotation": [
+          -0.7964984372793356,
+          -0.39275304832433744,
+          -0.45971217347761933,
+          0.40965124858119395,
+          -0.9097435379789811,
+          0.06747258436842968,
+          -0.44472024234055835,
+          -0.13457985784442886,
+          0.8855010829553672
+        ]
+      },
+      {
+        "id": 16,
+        "position": [
+          -0.03011345479112308,
+          0.19686601828184483,
+          0.12429274083544263
+        ],
+        "rotation": [
+          -0.8283613742903412,
+          -0.39275304832433744,
+          0.3994527213773333,
+          0.28639718049633667,
+          -0.9097435379789809,
+          -0.3005717054368804,
+          0.481449985551527,
+          -0.13457985784442886,
+          0.8660797730434577
+        ]
+      },
+      {
+        "id": 17,
+        "position": [
+          -0.07205599053574308,
+          0.22842604735271727,
+          0.03335436466587957
+        ],
+        "rotation": [
+          -0.8283613742903412,
+          -0.39275304832433744,
+          0.3994527213773333,
+          0.28639718049633667,
+          -0.9097435379789809,
+          -0.3005717054368804,
+          0.481449985551527,
+          -0.13457985784442886,
+          0.8660797730434577
+        ]
+      },
+      {
+        "id": 18,
+        "position": [
+          0.22752530804357482,
+          -0.26959052854399246,
+          0.3903479427086953
+        ],
+        "rotation": [
+          -0.9183190983614931,
+          -0.3898333940971747,
+          0.06870195362004804,
+          0.3958174360245345,
+          -0.9062189760090005,
+          0.14864630792644037,
+          0.004311719320399754,
+          0.1636981746015375,
+          0.9865010474949465
+        ]
+      },
+      {
+        "id": 19,
+        "position": [
+          0.2625649463849397,
+          -0.3006264973117994,
+          0.30197943934041327
+        ],
+        "rotation": [
+          -0.8516174606813275,
+          -0.38983339409717477,
+          -0.35039638341364876,
+          0.28713068764165506,
+          -0.9062189760090006,
+          0.3103596876780696,
+          -0.4385244222128548,
+          0.16369817460153752,
+          0.8836850336828199
+        ]
+      },
+      {
+        "id": 20,
+        "position": [
+          0.2441822632743504,
+          -0.3249652339669097,
+          0.12346548321541848
+        ],
+        "rotation": [
+          -0.7675732877840453,
+          -0.3898333940971747,
+          0.5087840138281353,
+          0.4179699458594031,
+          -0.9062189760090006,
+          -0.06378316297806377,
+          0.4859345349310738,
+          0.16369817460153746,
+          0.8585281214925028
+        ]
+      },
+      {
+        "id": 21,
+        "position": [
+          0.19075994182239617,
+          -0.318268001854213,
+          0.033320030458705685
+        ],
+        "rotation": [
+          -0.7675732877840453,
+          -0.3898333940971747,
+          0.5087840138281353,
+          0.4179699458594031,
+          -0.9062189760090006,
+          -0.06378316297806377,
+          0.4859345349310738,
+          0.16369817460153746,
+          0.8585281214925028
+        ]
+      },
+      {
+        "id": 22,
+        "position": [
+          0.34231343150425986,
+          -0.0032755144866275163,
+          0.3903479427086952
+        ],
+        "rotation": [
+          -0.918319098361493,
+          -0.3911297552389238,
+          -0.06088963911269209,
+          0.39581743602453445,
+          -0.9056602134348535,
+          -0.1520136018259516,
+          0.004311719320399757,
+          -0.16369817460153588,
+          0.9865010474949466
+        ]
+      },
+      {
+        "id": 23,
+        "position": [
+          0.3889361882260626,
+          -0.007437985881067673,
+          0.3019794393404132
+        ],
+        "rotation": [
+          -0.7935044865233588,
+          -0.3911297552389238,
+          -0.46622756721802705,
+          0.4219561126351674,
+          -0.9056602134348535,
+          0.041624713944401565,
+          -0.4385244222128549,
+          -0.16369817460153588,
+          0.8836850336828198
+        ]
+      },
+      {
+        "id": 24,
+        "position": [
+          0.3940076387869693,
+          0.022638209515282174,
+          0.12346548321541845
+        ],
+        "rotation": [
+          -0.8309138784597007,
+          -0.3911297552389238,
+          0.39572672534186637,
+          0.2710161514455889,
+          -0.9056602134348534,
+          -0.3260825408646667,
+          0.48593453493107386,
+          -0.16369817460153585,
+          0.8585281214925028
+        ]
+      },
+      {
+        "id": 25,
+        "position": [
+          0.35245633262607334,
+          0.056876876306072174,
+          0.03332003045870566
+        ],
+        "rotation": [
+          -0.8309138784597007,
+          -0.3911297552389238,
+          0.39572672534186637,
+          0.2710161514455889,
+          -0.9056602134348534,
+          -0.3260825408646667,
+          0.48593453493107386,
+          -0.16369817460153585,
+          0.8585281214925028
+        ]
+      },
+      {
+        "id": 26,
+        "position": [
+          -0.32149447466347564,
+          0.1249458102037088,
+          0.31155945149671516
+        ],
+        "rotation": [
+          -0.9183190983614931,
+          -0.39582111538167264,
+          0.003959571004909303,
+          0.39581743602453445,
+          -0.9183276346805689,
+          -0.0017066695506131372,
+          0.004311719320399755,
+          2.194425197110661e-16,
+          0.9999907044950478
+        ]
+      },
+      {
+        "id": 27,
+        "position": [
+          0.8374775233490906,
+          0.09027373806892107,
+          0.13992049380696558
+        ],
+        "rotation": [
+          -0.8957232325755745,
+          0.4446120675649347,
+          -4.1301066815453457e-17,
+          0.4446120675649347,
+          0.8957232325755745,
+          -8.208885794226619e-17,
+          4.966282230025742e-19,
+          -9.189184990393995e-17,
+          -1.0000000000000013
+        ]
+      },
+      {
+        "id": 28,
+        "position": [
+          -0.44399397373277705,
+          0.32984826595910416,
+          0.11987426961354078
+        ],
+        "rotation": [
+          -0.49435514807809733,
+          -0.5039130590348067,
+          -0.7082969832653969,
+          -0.5270237172856507,
+          -0.47423610797226845,
+          0.7052277045846438,
+          -0.691273454565625,
+          0.7219222553914615,
+          -0.031133072180696053
+        ]
+      },
+      {
+        "id": 29,
+        "position": [
+          2,
+          1,
+          0.025
+        ],
+        "rotation": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    ],
+    "energy": 1,
+    "held": false,
+    "gait": "trot",
+    "jump_active": false,
+    "jump_max_height": 0.46299071379134266,
+    "jump_flight_seconds": 0.27999999999999997,
+    "gripper": "contact-gated magnetic weld",
+    "foot_contacts": [
+      "fl",
+      "fr",
+      "rl",
+      "rr"
+    ],
+    "gait_air_seconds": {
+      "walk": 0,
+      "trot": 0.8600000000000004,
+      "run": 0
+    },
+    "type": "state",
+    "behavior": "stop",
+    "reason": "Mission complete: all physical or bounded-duration steps verified",
+    "target": [
+      2,
+      1
+    ],
+    "paused": false,
+    "policy": "baseline/curious-v2",
+    "needs_reset": false,
+    "mission": "Fetch the red ball, then hop, then stop.",
+    "mission_complete": true,
+    "brain": "vlm",
+    "planner": {
+      "instruction": "Fetch the red ball, then hop, then stop.",
+      "intent": "stop",
+      "phase": "complete",
+      "reason": "Mission complete: all physical or bounded-duration steps verified",
+      "complete": true,
+      "failed": false,
+      "model": "Qwen/Qwen3-VL-2B-Instruct",
+      "provider": "transformers-local",
+      "raw_response": "```json\n{\n  \"summary\": \"The mission is complete as the required tasks have been executed. No further actions are needed.\",\n  \"steps\": [\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+      "mission_steps": [
+        {
+          "action": "fetch",
+          "object": "ball",
+          "status": "complete"
+        },
+        {
+          "action": "jump",
+          "object": "none",
+          "status": "complete"
+        },
+        {
+          "action": "stop",
+          "object": "none",
+          "status": "complete"
+        }
+      ],
+      "current_step": 3,
+      "inference_ms": 104788.33624600156,
+      "elapsed_s": 355.1999999997475,
+      "execution_sim_s": 21.359999999980573,
+      "eye_grounding": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 10762,
+            "largest_component_pixels": 10762,
+            "maximum_posterior": 0.9948127269744873,
+            "mean_qualified_posterior": 0.986168622970581
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0739825963973999,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0002320080966455862,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.006906614638864994,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "ball"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent",
+        "eye_rgb_sha256": "00e53aaec45b708ef3d9453828246e8f98ed68601bf9bd7db0baa6c6c80e1212",
+        "checked_at_sim_s": 357.2799999997476
+      },
+      "replans": 2,
+      "vision": "actual perspective robot-eye RGB for VLM planning",
+      "limitation": "VLM plans from robot eyes; v4 low-level skills still use overhead RGB and analytic/PPO control.",
+      "rows": []
+    },
+    "motor_source": "analytic physical skill"
+  },
+  "capture": {
+    "source": "actual CDP frames",
+    "directory": "capture",
+    "cropped_or_sped_up": false,
+    "encoding": "VP9 cpu-used4 row-mt1; original frame timestamps retained"
+  },
+  "capture_finalization_wall_seconds": 147.207,
+  "wall_seconds": 558.902,
+  "wall_seconds_includes_video_encoding": true
+}

@@ -220,6 +220,15 @@ generated binding, and `/api/vlm` successfully called the internal planner's
 the internal service. These local processes were then stopped; this is not a
 hosted deployment or a test of a deployed private network.
 
+A subsequent [genuine-model service probe](../benchmarks/vlm-2026-10-16/vercel-real-model/)
+sent an actual 384×384 eye PNG and “Stop” through local `/api/plan`, the
+independently observed Vercel-injected `PLANNER_URL`, and the authenticated
+native `/v1/chat/completions` endpoint. The warm CPU Qwen model returned a valid
+stop plan in **42.41 request wall seconds**. All six checks passed; all seven
+owned helper ports were closed afterward. The returned plan did not execute
+physics. This verifies the local service-to-model chain, while production Vercel
+authentication, hosted routing and a public backend remain unverified.
+
 The initial container build required a
 proxy CA trust correction; its first non-root runtime check exposed restrictive
 checkout file permissions, addressed by making only bundled source/models/web

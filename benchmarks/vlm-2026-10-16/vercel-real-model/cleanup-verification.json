@@ -1,0 +1,15 @@
+{
+  "checked_at_utc": "2026-10-16T15:23:20.852497+00:00",
+  "owned_service_ports_accepting_connections": {
+    "3010": false,
+    "42779": false,
+    "44457": false,
+    "43419": false,
+    "4782": false,
+    "4783": false,
+    "4784": false
+  },
+  "all_owned_service_ports_closed": true,
+  "native_backend_port_8000_still_open": true,
+  "native_backend_not_stopped_by_probe": true
+}
