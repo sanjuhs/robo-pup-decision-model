@@ -38,8 +38,16 @@ timestamps; it is not sped up. The earlier policy-menu display was stale while
 telemetry already reported the correct CPU motor; the final UI now synchronizes
 the selector and has an explicit parity assertion.
 
-Hosted CI for the extension is recorded below once complete. The historical
-checks below retain their original counts/scope.
+Hosted CI **passed** for final UI/controller source
+`5a7f148a7b26118991f6542ea68e20ae1c08b2e9`:
+[full prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38870694044).
+This includes frozen setup/Python tests, lint, Chromium setup and the complete
+18-test browser/render suite. The controller-only revision `f80f4cb` also passed
+[its hosted checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38870218910).
+The public API conclusion/step record is retained in
+`benchmarks/multimodal-2026-10-16/hosted-ci.json`. Later documentation-only commits
+do not change the tested runtime source. The historical checks below retain
+their original counts/scope.
 
 ## Previous release evidence
 

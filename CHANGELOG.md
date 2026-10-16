@@ -13,6 +13,8 @@ research prototype; the linked evidence describes what was actually tested.
 - Preserve the failed byte-tokenizer run, final untouched scene/phrase test,
   modality interventions, failed retrieval pilot and all 24 successful final
   physics trials. Final-test intent accuracy 97.875%; first-action 89.542%.
+- Verify 26 Python tests, 18 browser/render checks and hosted CI on final UI
+  source `5a7f148`; publish the actual, unsped 40-second complete fetch recording.
 - Add offline PocketSphinx English voice capture/transcription with transcript
   review, virtual play-energy, finite skill commands and explicit neural/rules
   selection. No remote model service, Hugging Face hosting or new GPU spend.
