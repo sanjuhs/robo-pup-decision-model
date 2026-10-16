@@ -15,7 +15,7 @@ and [multimodal implementation](MULTIMODAL.md) for evidence and boundaries.
 | Voice | Offline English PocketSphinx command grammar; synthetic fixture tested. Transcript requires Send; human accent/noise accuracy unmeasured |
 | Browser | Articulated original golden puppy, camera and plan inspection, orbit/follow camera, manual controls, pause/reset, experiments and policy switching |
 | Appearance | Stylized procedural skin attached to physics; not photoreal or anatomical canine rig |
-| Participants | Separate browser worlds and fresh-policy experiments; five-browser isolation tested; short active-neural probes: v4 five at ≥0.814×, ten at ≥0.570× real time. No shared world |
+| Participants | Separate browser worlds and fresh-policy experiments; five-browser isolation tested; short active-neural probes: v4 minimum ratios about 0.814× for five and 0.570× for ten real time. No shared world |
 | RTX 5090 | Motor experiment: 1,048,576 steps in 121.7 s. Planner v3/v4: 8,000 CUDA updates in 95.49/101.13 s; v3 rejected by application test, v4 selected after CPU decoder stage |
 | Spending | Follow-up GPU estimate $0.4298; aggregate session $0.7068, within $30. Five own pods deleted/absence verified. Final invoice/storage reconciliation pending |
 | Weights | GitHub `demo/`; checksum sidecars. No Hugging Face model repository or Space |

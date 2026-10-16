@@ -14,6 +14,8 @@
   "checkpoint_selection": "GPU validation followed by decoder grammar-grid validation; fresh final test unused for selection/retraining",
   "previous_default": "demo/arena-planner-v2",
   "rejected_candidate": "demo/arena-planner-v3",
-  "application_checks": "30 Python +18 browser/render tests passed; browser asserted actual v4 version and completed physical fetch; hosted CI pending",
-  "license": "MIT"
+  "application_checks": "30 Python + 18 browser/render tests passed locally and in hosted CI; browser asserted actual v4 version and completed physical fetch",
+  "license": "MIT",
+  "validated_source_ref": "0a9beda987b98be6d4802888598bae966c6cd945",
+  "hosted_ci": "https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38878935098"
 }

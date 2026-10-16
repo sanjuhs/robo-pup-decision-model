@@ -1,0 +1,158 @@
+{
+  "id": 38878935098,
+  "name": "Prototype checks",
+  "head_sha": "0a9beda987b98be6d4802888598bae966c6cd945",
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38878935098",
+  "created_at": "2026-10-16T09:13:07Z",
+  "updated_at": "2026-10-16T09:16:14Z",
+  "jobs": [
+    {
+      "name": "native-arena",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-16T09:13:09Z",
+      "completed_at": "2026-10-16T09:16:13Z",
+      "html_url": "https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38878935098/job/116900666130",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-16T09:13:10Z",
+          "completed_at": "2026-10-16T09:13:11Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-16T09:13:11Z",
+          "completed_at": "2026-10-16T09:13:12Z"
+        },
+        {
+          "name": "Run python3 scripts/check_public_secrets.py",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-16T09:13:12Z",
+          "completed_at": "2026-10-16T09:13:12Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-16T09:13:12Z",
+          "completed_at": "2026-10-16T09:13:13Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-16T09:13:13Z",
+          "completed_at": "2026-10-16T09:13:13Z"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-16T09:13:13Z",
+          "completed_at": "2026-10-16T09:13:15Z"
+        },
+        {
+          "name": "Run sudo apt-get update && sudo apt-get install -y libegl1 libgl1-mesa-dri",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-16T09:13:15Z",
+          "completed_at": "2026-10-16T09:13:25Z"
+        },
+        {
+          "name": "Run ROBOPUP_MJX=1 bash scripts/setup.sh",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-16T09:13:25Z",
+          "completed_at": "2026-10-16T09:13:59Z"
+        },
+        {
+          "name": "Run uv run --frozen --extra dev --extra mjx ruff check src scripts tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-16T09:13:59Z",
+          "completed_at": "2026-10-16T09:13:59Z"
+        },
+        {
+          "name": "Run npx playwright install --with-deps chromium",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-16T09:13:59Z",
+          "completed_at": "2026-10-16T09:14:16Z"
+        },
+        {
+          "name": "Run npm test",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-16T09:14:16Z",
+          "completed_at": "2026-10-16T09:16:11Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-10-16T09:16:11Z",
+          "completed_at": "2026-10-16T09:16:11Z"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-10-16T09:16:11Z",
+          "completed_at": "2026-10-16T09:16:11Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-10-16T09:16:11Z",
+          "completed_at": "2026-10-16T09:16:11Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-10-16T09:16:11Z",
+          "completed_at": "2026-10-16T09:16:11Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24,
+          "started_at": "2026-10-16T09:16:11Z",
+          "completed_at": "2026-10-16T09:16:11Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-10-16T09:16:11Z",
+          "completed_at": "2026-10-16T09:16:12Z"
+        }
+      ]
+    }
+  ]
+}

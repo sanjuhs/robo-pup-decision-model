@@ -35,7 +35,12 @@ Raw measurements, hashes, source/initialization lineage, CUDA utilization, failu
 checks and cost ledger are in `benchmarks/gpu-planner-v4/` and the rejected run in
 `benchmarks/gpu-planner-v3/`. The actual v4 video is
 `docs/assets/gpu-planner-fetch.webm` (24.39 s, no speed change or synthetic motion).
-Hosted CI for this new default is recorded after completion below.
+Hosted CI **passed** for release source
+`0a9beda987b98be6d4802888598bae966c6cd945`: [full prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38878935098).
+This includes fresh frozen setup, all 30 Python tests, lint and all 18 browser/
+render tests. The public API step record is retained in
+`benchmarks/gpu-planner-v4/hosted-ci.json`. Later evidence-only commits preserve
+that tested runtime source.
 
 The following sections retain their historical version-specific evidence.
 

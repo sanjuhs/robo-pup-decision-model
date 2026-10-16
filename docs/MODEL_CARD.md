@@ -75,7 +75,7 @@ Stop uses analytic stance and reset restores the world.
 ## Where are the weights?
 
 Current and historical checkpoints are committed to this GitHub repository with SHA-256 sidecars.
-Setup verifies and copies them into `artifacts/baseline/curious-v2/` and
+Setup verifies and copies the two motor checkpoints into `artifacts/baseline/curious-v2/` and
 `artifacts/runpod/5090-once/`. New participant runs save their own `policy.zip`
 and intermediate checkpoints under `artifacts/<participant>/<run>/`.
 

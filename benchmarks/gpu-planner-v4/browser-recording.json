@@ -13,5 +13,5 @@
   "simulated_end_time_s": 23.279999999999653,
   "cropped_or_sped_up": false,
   "video": "docs/assets/gpu-planner-fetch.webm",
-  "note": "Browser executor runs at25 Hz with two50 Hz motor steps/command; headless evaluator commands at50 Hz. Timing differs between these protocols."
+  "note": "Browser executor runs at 25 Hz with two 50 Hz motor steps/command; headless evaluator commands at 50 Hz. Timing differs between these protocols."
 }

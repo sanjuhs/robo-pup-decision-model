@@ -7,6 +7,9 @@ research prototype; the linked evidence describes what was actually tested.
 
 ### GPU-trained v4 default
 
+Hosted [full prototype checks passed](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38878935098)
+for release source `0a9beda`: 30 Python and 18 browser/render tests.
+
 - Publish the 246,712-parameter, 1,011,137-byte v4 checkpoint after 30 Python and 18
   browser/render checks, including the unchanged held-state regression and live
   v4 identity assertion. Preserve v2 and rejected v3 checkpoints.

@@ -43,7 +43,7 @@
       "monetary_amount_present": false
     },
     {
-      "lifecycle": "artifacts/gpu-planner-v4-attempt2/lifecycle.json",
+      "lifecycle": "benchmarks/gpu-planner-v4/attempt2/lifecycle.json",
       "cli_exit": 0,
       "records_received": 0,
       "sanitized_billing": [],
