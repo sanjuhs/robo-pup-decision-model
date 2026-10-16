@@ -1,0 +1,75 @@
+{
+  "cases": [
+    {
+      "id": "multi-step",
+      "image": "eye-start.png",
+      "instruction": "Fetch the red ball, then hop, then stop.",
+      "energy": 0.9,
+      "held": false,
+      "expected_actions": [
+        "fetch",
+        "jump",
+        "stop"
+      ]
+    },
+    {
+      "id": "after-fetch-replan",
+      "image": "eye-after-fetch.png",
+      "instruction": "Fetch the red ball, then hop, then stop. Verified completed steps: [{\"action\":\"fetch\",\"object\":\"ball\"}]. Do not repeat completed steps. Plan only what remains of the original request.",
+      "energy": 0.9,
+      "held": false,
+      "expected_actions": [
+        "jump",
+        "stop"
+      ]
+    },
+    {
+      "id": "visual-choice",
+      "image": "eye-start.png",
+      "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+      "energy": 0.9,
+      "held": false,
+      "expected_first_action": "fetch"
+    },
+    {
+      "id": "visual-choice-blank",
+      "image": "eye-blank.png",
+      "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+      "energy": 0.9,
+      "held": false,
+      "expected_first_action": "look"
+    },
+    {
+      "id": "visual-choice-turned",
+      "image": "eye-turned.png",
+      "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+      "energy": 0.9,
+      "held": false,
+      "expected_first_action": "look"
+    },
+    {
+      "id": "low-energy",
+      "image": "eye-start.png",
+      "instruction": "I have very little energy. Rest first, then fetch the red ball, then stop.",
+      "energy": 0.05,
+      "held": false,
+      "expected_actions": [
+        "rest",
+        "fetch",
+        "stop"
+      ]
+    },
+    {
+      "id": "crate-and-hop",
+      "image": "eye-start.png",
+      "instruction": "Push the orange crate to its ring, then hop, then stop.",
+      "energy": 0.9,
+      "held": false,
+      "expected_actions": [
+        "push",
+        "jump",
+        "stop"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,934 @@
+{
+  "schema": "robopup-real-vlm-physical-mission-v1",
+  "seed": 7,
+  "instruction": "Fetch the red ball, then hop, then stop.",
+  "complete": true,
+  "success": true,
+  "physics": "native MuJoCo CPU",
+  "physics_hz": 50,
+  "motor": "bundled curious-v2 CPU PPO residuals plus analytic skill controllers",
+  "high_level_vision": "actual perspective robot-head RGB attached to every real VLM call",
+  "low_level_vision": "v4 skills retain their evaluated overhead RGB camera",
+  "simulation_paused_during_vlm_inference": true,
+  "real_time_responsiveness_tested": false,
+  "maximum_sim_seconds": 360.0,
+  "maximum_wall_seconds": 600.0,
+  "steps_verified": [
+    {
+      "action": "fetch",
+      "object": "ball",
+      "sim_seconds": 18.38000000000053,
+      "executor": {
+        "instruction": "fetch the ball",
+        "intent": "fetch",
+        "phase": "release",
+        "complete": true,
+        "failed": false,
+        "reason": "Fetch complete: contact, lift, return and release verified",
+        "plan": {
+          "intent": "fetch",
+          "confidence": 1.0,
+          "rows": [
+            {
+              "skill": "retrieve",
+              "object": "ball",
+              "delta": [
+                -0.6718645691871643,
+                0.38832536339759827
+              ],
+              "object_delta": [
+                -0.6663991808891296,
+                0.3987303674221039
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9993693232536316,
+              "visible": true
+            },
+            {
+              "skill": "return",
+              "object": "home",
+              "delta": [
+                -0.20013917982578278,
+                0.18550382554531097
+              ],
+              "object_delta": [
+                -0.2041788250207901,
+                0.1846502125263214
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9995390176773071,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.002707776613533497,
+                -0.0027202412020415068
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.999176561832428,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.014015806838870049,
+                -0.002544909715652466
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9993247985839844,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.010669169016182423,
+                -0.00558518199250102
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9992940425872803,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.004336333833634853,
+                -0.004173502326011658
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9988430738449097,
+              "visible": true
+            }
+          ],
+          "perception": [
+            [
+              -0.6663991808891296,
+              0.3987303674221039,
+              1.0
+            ],
+            [
+              1.1310319900512695,
+              0.1931181252002716,
+              1.0
+            ],
+            [
+              -0.2041788250207901,
+              0.1846502125263214,
+              1.0
+            ],
+            [
+              1.784182071685791,
+              1.176858901977539,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "elapsed_s": 18.38000000000053,
+        "ever_held": true,
+        "maximum_ball_height": 0.35584758134686423
+      },
+      "ball": [
+        -0.4540588376608165,
+        0.21686337894808277,
+        0.11987459118589236
+      ],
+      "held": false,
+      "grasp_count": 1,
+      "upright": 0.9999893257077308,
+      "jump_active": false,
+      "jump_flight_seconds": 0.0,
+      "foot_contacts": 4
+    },
+    {
+      "action": "jump",
+      "object": "none",
+      "sim_seconds": 19.98000000000021,
+      "executor": {
+        "instruction": "jump",
+        "intent": "jump",
+        "phase": "jumping",
+        "complete": true,
+        "failed": false,
+        "reason": "Hop and landing verified from contacts",
+        "plan": {
+          "intent": "jump",
+          "confidence": 1.0,
+          "rows": [
+            {
+              "skill": "jump",
+              "object": "none",
+              "delta": [
+                0.014589667320251465,
+                -0.004825148731470108
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9994851350784302,
+              "visible": true
+            },
+            {
+              "skill": "jump",
+              "object": "none",
+              "delta": [
+                -0.012357836589217186,
+                -0.0010911333374679089
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9998565912246704,
+              "visible": true
+            },
+            {
+              "skill": "jump",
+              "object": "none",
+              "delta": [
+                0.00030206143856048584,
+                -0.0028861775062978268
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9999263286590576,
+              "visible": true
+            },
+            {
+              "skill": "jump",
+              "object": "none",
+              "delta": [
+                0.0005697942688129842,
+                -0.002597162267193198
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9999276399612427,
+              "visible": true
+            },
+            {
+              "skill": "jump",
+              "object": "none",
+              "delta": [
+                0.0038182921707630157,
+                -0.0037412114907056093
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9999240636825562,
+              "visible": true
+            },
+            {
+              "skill": "jump",
+              "object": "none",
+              "delta": [
+                0.0006507745711132884,
+                -0.003419669112190604
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.999936580657959,
+              "visible": true
+            }
+          ],
+          "perception": [
+            [
+              -0.6586486101150513,
+              0.3357008099555969,
+              1.0
+            ],
+            [
+              1.2664856910705566,
+              0.06341558694839478,
+              1.0
+            ],
+            [
+              -0.039738044142723083,
+              0.04079185053706169,
+              1.0
+            ],
+            [
+              1.9458435773849487,
+              1.05527663230896,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "elapsed_s": 1.5999999999996817,
+        "ever_held": false,
+        "maximum_ball_height": 0.0
+      },
+      "ball": [
+        -0.6086133770317683,
+        0.28482003682188606,
+        0.11987426961354083
+      ],
+      "held": false,
+      "grasp_count": 1,
+      "upright": 0.9999856927579048,
+      "jump_active": false,
+      "jump_flight_seconds": 0.27999999999999997,
+      "foot_contacts": 4
+    },
+    {
+      "action": "stop",
+      "object": "none",
+      "sim_seconds": 19.98000000000021,
+      "executor": {
+        "instruction": "stop",
+        "intent": "stop",
+        "phase": "planning",
+        "complete": true,
+        "failed": false,
+        "reason": "Holding a standing pose",
+        "plan": {
+          "intent": "stop",
+          "confidence": 0.9999994039535522,
+          "rows": [
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.0012951672542840242,
+                0.010049357078969479
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 1.0,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                -0.003998656757175922,
+                -0.0001988336443901062
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 1.0,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.009029578417539597,
+                -0.0017420669319108129
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 1.0,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.007018886506557465,
+                -0.00301703461445868
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 1.0,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.012185800820589066,
+                -0.003664883319288492
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 1.0,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.010928039439022541,
+                -0.002730105770751834
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 1.0,
+              "visible": true
+            }
+          ],
+          "perception": [
+            [
+              -0.6613284349441528,
+              0.3358679711818695,
+              1.0
+            ],
+            [
+              1.2664856910705566,
+              0.06341558694839478,
+              1.0
+            ],
+            [
+              -0.03973706066608429,
+              0.040792711079120636,
+              1.0
+            ],
+            [
+              1.9458435773849487,
+              1.05527663230896,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "elapsed_s": 0.0,
+        "ever_held": false,
+        "maximum_ball_height": 0.0
+      },
+      "ball": [
+        -0.6086133770317683,
+        0.28482003682188606,
+        0.11987426961354083
+      ],
+      "held": false,
+      "grasp_count": 1,
+      "upright": 0.9999856927579048,
+      "jump_active": false,
+      "jump_flight_seconds": 0.27999999999999997,
+      "foot_contacts": 4
+    }
+  ],
+  "thinking_intervals": [
+    {
+      "wall_start": 1.2082730829715729,
+      "sim_start": 0.5000000000000003,
+      "wall_seconds": 10.009908884763718,
+      "sim_end": 0.5000000000000003
+    },
+    {
+      "wall_start": 12.274425722658634,
+      "sim_start": 18.88000000000053,
+      "wall_seconds": 5.595013929530978,
+      "sim_end": 18.88000000000053
+    },
+    {
+      "wall_start": 18.021319748833776,
+      "sim_start": 20.48000000000021,
+      "wall_seconds": 5.4293017610907555,
+      "sim_end": 20.48000000000021
+    }
+  ],
+  "trace": [
+    {
+      "wall_seconds": 1.2197174113243818,
+      "sim_seconds": 0.0,
+      "phase": "thinking",
+      "current_step": 0
+    },
+    {
+      "wall_seconds": 11.220401130616665,
+      "sim_seconds": 0.020000000000000018,
+      "phase": "executing",
+      "current_step": 0
+    },
+    {
+      "wall_seconds": 12.286295671015978,
+      "sim_seconds": 18.38000000000053,
+      "phase": "thinking",
+      "current_step": 1
+    },
+    {
+      "wall_seconds": 17.87208230793476,
+      "sim_seconds": 18.400000000000524,
+      "phase": "executing",
+      "current_step": 1
+    },
+    {
+      "wall_seconds": 18.031895903870463,
+      "sim_seconds": 19.98000000000021,
+      "phase": "thinking",
+      "current_step": 2
+    },
+    {
+      "wall_seconds": 23.450824201107025,
+      "sim_seconds": 19.98000000000021,
+      "phase": "complete",
+      "current_step": 3
+    }
+  ],
+  "metrics": {
+    "ever_ball_touched": true,
+    "ever_held": true,
+    "maximum_ball_height": 0.35584758134686423,
+    "maximum_held_ball_height": 0.35584758134686423,
+    "release_events": 1,
+    "ppo_residual_steps": 291,
+    "external_force_ever_applied": false,
+    "grasp_count": 1,
+    "held_final": false,
+    "ball_final": [
+      -0.6086133770317683,
+      0.28482003682188606,
+      0.11987426961354083
+    ],
+    "jump_max_height": 0.46260905697413296,
+    "jump_flight_seconds": 0.27999999999999997,
+    "jump_active": false,
+    "foot_contacts_final": 4,
+    "upright_final": 0.9999856927579048
+  },
+  "settle_steps": 25,
+  "sim_start": 0.5000000000000003,
+  "initial_runtime_status": {
+    "ready": true,
+    "phase": "available",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "available",
+    "reason": "Local checkpoint available; it has not been loaded or tested by this process",
+    "provider": "transformers-local",
+    "model_loaded": false,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local checkpoint available; it has not been loaded or tested by this process",
+    "last_error": null,
+    "dtype_config": "default",
+    "cpu_threads_config": 2,
+    "max_generation_seconds": 90
+  },
+  "mission": {
+    "instruction": "Fetch the red ball, then hop, then stop.",
+    "intent": "stop",
+    "phase": "complete",
+    "reason": "Mission complete: all physical or bounded-duration steps verified",
+    "complete": true,
+    "failed": false,
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "raw_response": "```json\n{\n  \"summary\": \"The mission is complete as the ball has been fetched and the robot is at rest. No further actions are required.\",\n  \"steps\": [\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "mission_steps": [
+      {
+        "action": "fetch",
+        "object": "ball",
+        "status": "complete"
+      },
+      {
+        "action": "jump",
+        "object": "none",
+        "status": "complete"
+      },
+      {
+        "action": "stop",
+        "object": "none",
+        "status": "complete"
+      }
+    ],
+    "current_step": 3,
+    "inference_ms": 5405.381290242076,
+    "elapsed_s": 19.98000000000021,
+    "replans": 2,
+    "vision": "actual perspective robot-eye RGB for VLM planning",
+    "limitation": "VLM plans from robot eyes; v4 low-level skills still use overhead RGB and analytic/PPO control.",
+    "rows": []
+  },
+  "wall_seconds": 23.451824568212032,
+  "sim_seconds": 19.98000000000021,
+  "failed": false,
+  "reason": "Mission complete: all physical or bounded-duration steps verified",
+  "history": [
+    {
+      "eye_rgb_sha256": "d57bcb93b1682d94fd5be39e510a0a40bf1307f7d05f3d2be4ea58a8ca07cd44",
+      "raw_response": "```json\n{\n  \"summary\": \"Fetch the red ball, then hop, then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+      "plan": {
+        "summary": "Fetch the red ball, then hop, then stop.",
+        "steps": [
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "jump",
+            "object": "none"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      },
+      "timing_ms": 9882.379667833447,
+      "metadata": {
+        "input_tokens": 1081,
+        "output_tokens": 84,
+        "device": "cuda:0",
+        "deterministic_decoding": true,
+        "parameter_count": 2127532032,
+        "dtype": "torch.bfloat16",
+        "dtype_config": "default",
+        "cpu_threads_config": 2,
+        "cpu_threads": null,
+        "max_generation_seconds": 90,
+        "timeout_is_cooperative": true,
+        "token_limit_reached": false,
+        "time_limit_reached": false,
+        "truncated": false,
+        "peak_cuda_allocated_bytes": 4454975488,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "image_width": 384,
+        "image_height": 384,
+        "max_new_tokens": 256
+      }
+    },
+    {
+      "eye_rgb_sha256": "091fa5519ab15c208e8d1b693167890634040387b09f93078969c2ff4019565e",
+      "raw_response": "```json\n{\n  \"summary\": \"Jump and then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+      "plan": {
+        "summary": "Jump and then stop.",
+        "steps": [
+          {
+            "action": "jump",
+            "object": "none"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      },
+      "timing_ms": 5567.325988784432,
+      "metadata": {
+        "input_tokens": 1151,
+        "output_tokens": 60,
+        "device": "cuda:0",
+        "deterministic_decoding": true,
+        "parameter_count": 2127532032,
+        "dtype": "torch.bfloat16",
+        "dtype_config": "default",
+        "cpu_threads_config": 2,
+        "cpu_threads": null,
+        "max_generation_seconds": 90,
+        "timeout_is_cooperative": true,
+        "token_limit_reached": false,
+        "time_limit_reached": false,
+        "truncated": false,
+        "peak_cuda_allocated_bytes": 4471732736,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "image_width": 384,
+        "image_height": 384,
+        "max_new_tokens": 256
+      }
+    },
+    {
+      "eye_rgb_sha256": "44d448de311186df1417291f2fdc3ce32b89b6004c8ebc660659722654c9063f",
+      "raw_response": "```json\n{\n  \"summary\": \"The mission is complete as the ball has been fetched and the robot is at rest. No further actions are required.\",\n  \"steps\": [\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+      "plan": {
+        "summary": "The mission is complete as the ball has been fetched and the robot is at rest. No further actions are required.",
+        "steps": [
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      },
+      "timing_ms": 5405.381290242076,
+      "metadata": {
+        "input_tokens": 1162,
+        "output_tokens": 60,
+        "device": "cuda:0",
+        "deterministic_decoding": true,
+        "parameter_count": 2127532032,
+        "dtype": "torch.bfloat16",
+        "dtype_config": "default",
+        "cpu_threads_config": 2,
+        "cpu_threads": null,
+        "max_generation_seconds": 90,
+        "timeout_is_cooperative": true,
+        "token_limit_reached": false,
+        "time_limit_reached": false,
+        "truncated": false,
+        "peak_cuda_allocated_bytes": 4471898112,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "image_width": 384,
+        "image_height": 384,
+        "max_new_tokens": 256
+      }
+    }
+  ],
+  "physics_steps": 999,
+  "model_calls": [
+    {
+      "index": 0,
+      "phase": "response",
+      "instruction": "Fetch the red ball, then hop, then stop.",
+      "energy": 0.9,
+      "held": false,
+      "image": "eye-000.png",
+      "image_sha256": "70e99596613c5959df826d5f7789c73c31feda89a64610ea84fa399cfe14ad4c",
+      "eye_rgb_sha256": "d57bcb93b1682d94fd5be39e510a0a40bf1307f7d05f3d2be4ea58a8ca07cd44",
+      "image_saved_before_model_call": true,
+      "actual_generated_response_received": true,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Fetch the red ball, then hop, then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 3196.5313497930765,
+          "generation": 6683.429766446352,
+          "queue": 0.0023301690816879272,
+          "total": 9882.379667833447
+        },
+        "metadata": {
+          "input_tokens": 1081,
+          "output_tokens": 84,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4454975488,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Fetch the red ball, then hop, then stop.",
+        "steps": [
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "jump",
+            "object": "none"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    },
+    {
+      "index": 1,
+      "phase": "response",
+      "instruction": "Your remaining mission is: jump, then stop. Verified completed steps: [{\"action\": \"fetch\", \"object\": \"ball\"}]. Those completed tasks are finished; do not include them again. Inspect the fresh image and return only the remaining tasks in order. You may first rest, look or turn if necessary.",
+      "energy": 0.8899958982076444,
+      "held": false,
+      "image": "eye-001.png",
+      "image_sha256": "8379f110e352c78651c46306c9ae3515f1111dd581026b6ccb0ec90699dd7688",
+      "eye_rgb_sha256": "091fa5519ab15c208e8d1b693167890634040387b09f93078969c2ff4019565e",
+      "image_saved_before_model_call": true,
+      "actual_generated_response_received": true,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Jump and then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 0.0,
+          "generation": 5565.431777387857,
+          "queue": 0.0012405216693878174,
+          "total": 5567.325988784432
+        },
+        "metadata": {
+          "input_tokens": 1151,
+          "output_tokens": 60,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4471732736,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Jump and then stop.",
+        "steps": [
+          {
+            "action": "jump",
+            "object": "none"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    },
+    {
+      "index": 2,
+      "phase": "response",
+      "instruction": "Your remaining mission is: stop. Verified completed steps: [{\"action\": \"fetch\", \"object\": \"ball\"}, {\"action\": \"jump\", \"object\": \"none\"}]. Those completed tasks are finished; do not include them again. Inspect the fresh image and return only the remaining tasks in order. You may first rest, look or turn if necessary.",
+      "energy": 0.8852121347515836,
+      "held": false,
+      "image": "eye-002.png",
+      "image_sha256": "6ea17199df8504c41985179d10394f6c905c0dc0d9489298dbe03e30f3c12593",
+      "eye_rgb_sha256": "44d448de311186df1417291f2fdc3ce32b89b6004c8ebc660659722654c9063f",
+      "image_saved_before_model_call": true,
+      "actual_generated_response_received": true,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"The mission is complete as the ball has been fetched and the robot is at rest. No further actions are required.\",\n  \"steps\": [\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 0.0,
+          "generation": 5403.553109616041,
+          "queue": 0.0009927898645401,
+          "total": 5405.381290242076
+        },
+        "metadata": {
+          "input_tokens": 1162,
+          "output_tokens": 60,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4471898112,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "The mission is complete as the ball has been fetched and the robot is at rest. No further actions are required.",
+        "steps": [
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    }
+  ],
+  "final_runtime_status": {
+    "ready": true,
+    "phase": "ready",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "ready",
+    "reason": "Local VLM loaded; mission JSON is validated separately before execution",
+    "provider": "transformers-local",
+    "model_loaded": true,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local VLM loaded; mission JSON is validated separately before execution",
+    "last_error": null,
+    "dtype_config": "default",
+    "cpu_threads_config": 2,
+    "max_generation_seconds": 90
+  },
+  "checks": {
+    "mission_complete": true,
+    "requested_actions_verified_in_order": true,
+    "every_response_from_actual_model": true,
+    "recorded_eyes_match_mission_observations": true,
+    "replanning_after_each_step": true,
+    "contact_and_grasp": true,
+    "lift": true,
+    "return_and_release": true,
+    "hop_flight_and_landing": true,
+    "ppo_residuals_used": true,
+    "no_external_forces": true,
+    "physics_frozen_while_thinking": true
+  }
+}

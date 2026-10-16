@@ -1,0 +1,61 @@
+{
+  "id": "low-energy",
+  "instruction": "I have very little energy. Rest first, then fetch the red ball, then stop.",
+  "energy": 0.05,
+  "held": false,
+  "image": "eye-start.png",
+  "image_sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396",
+  "generative_inference_requested": true,
+  "actual_generated_response_received": true,
+  "physical_task_tested": false,
+  "valid_mission": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Rest due to low energy, then fetch the red ball, and stop.\",\n  \"steps\": [\n    {\n      \"action\": \"rest\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 6041.950693354011,
+      "queue": 0.0010505318641662598,
+      "total": 6043.8516940921545
+    },
+    "metadata": {
+      "input_tokens": 1089,
+      "output_tokens": 88,
+      "device": "cuda:0",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "default",
+      "cpu_threads_config": 2,
+      "cpu_threads": null,
+      "max_generation_seconds": 90,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": 4455229952,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "mission": {
+    "summary": "Rest due to low energy, then fetch the red ball, and stop.",
+    "steps": [
+      {
+        "action": "rest",
+        "object": "none"
+      },
+      {
+        "action": "fetch",
+        "object": "ball"
+      },
+      {
+        "action": "stop",
+        "object": "none"
+      }
+    ]
+  }
+}

@@ -1,0 +1,455 @@
+{
+  "schema": "robopup-real-vlm-batch-v1",
+  "cases": 7,
+  "valid_missions": 7,
+  "elapsed_seconds": 49.177357194945216,
+  "physical_task_tested": false,
+  "final_runtime_status": {
+    "ready": true,
+    "phase": "ready",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "ready",
+    "reason": "Local VLM loaded; mission JSON is validated separately before execution",
+    "provider": "transformers-local",
+    "model_loaded": true,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local VLM loaded; mission JSON is validated separately before execution",
+    "last_error": null,
+    "dtype_config": "default",
+    "cpu_threads_config": 2,
+    "max_generation_seconds": 90
+  },
+  "results": [
+    {
+      "id": "multi-step",
+      "instruction": "Fetch the red ball, then hop, then stop.",
+      "energy": 0.9,
+      "held": false,
+      "image": "eye-start.png",
+      "image_sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396",
+      "generative_inference_requested": true,
+      "actual_generated_response_received": true,
+      "physical_task_tested": false,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Fetch the red ball, then hop, then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 5752.4780705571175,
+          "generation": 7279.472779482603,
+          "queue": 0.001959502696990967,
+          "total": 13034.780276939273
+        },
+        "metadata": {
+          "input_tokens": 1081,
+          "output_tokens": 84,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4454975488,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Fetch the red ball, then hop, then stop.",
+        "steps": [
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "jump",
+            "object": "none"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    },
+    {
+      "id": "after-fetch-replan",
+      "instruction": "Fetch the red ball, then hop, then stop. Verified completed steps: [{\"action\":\"fetch\",\"object\":\"ball\"}]. Do not repeat completed steps. Plan only what remains of the original request.",
+      "energy": 0.9,
+      "held": false,
+      "image": "eye-after-fetch.png",
+      "image_sha256": "eded94ba6ad49329bebd04535db987616e9c1da6c07cde0c6f16a2523cf450dc",
+      "generative_inference_requested": true,
+      "actual_generated_response_received": true,
+      "physical_task_tested": false,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Fetch the ball home, then hop, then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 0.0,
+          "generation": 5939.280167222023,
+          "queue": 0.0014603137969970703,
+          "total": 5941.303858533502
+        },
+        "metadata": {
+          "input_tokens": 1112,
+          "output_tokens": 84,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4471152640,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Fetch the ball home, then hop, then stop.",
+        "steps": [
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "jump",
+            "object": "none"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    },
+    {
+      "id": "visual-choice",
+      "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+      "energy": 0.9,
+      "held": false,
+      "image": "eye-start.png",
+      "image_sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396",
+      "generative_inference_requested": true,
+      "actual_generated_response_received": true,
+      "physical_task_tested": false,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Look at the red ball, then fetch it and stop.\",\n  \"steps\": [\n    {\n      \"action\": \"look\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 0.0,
+          "generation": 6083.249267190695,
+          "queue": 0.001039355993270874,
+          "total": 6085.706910118461
+        },
+        "metadata": {
+          "input_tokens": 1098,
+          "output_tokens": 85,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4456690176,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Look at the red ball, then fetch it and stop.",
+        "steps": [
+          {
+            "action": "look",
+            "object": "none"
+          },
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    },
+    {
+      "id": "visual-choice-blank",
+      "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+      "energy": 0.9,
+      "held": false,
+      "image": "eye-blank.png",
+      "image_sha256": "cf1814bcb8d13495b710015079ab41f90cf8c32111e68a78e9006183c3fac819",
+      "generative_inference_requested": true,
+      "actual_generated_response_received": true,
+      "physical_task_tested": false,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Look at the red ball, then fetch it and stop.\",\n  \"steps\": [\n    {\n      \"action\": \"look\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 0.0,
+          "generation": 5908.972835168242,
+          "queue": 0.000910833477973938,
+          "total": 5911.371361464262
+        },
+        "metadata": {
+          "input_tokens": 1098,
+          "output_tokens": 85,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4456690176,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Look at the red ball, then fetch it and stop.",
+        "steps": [
+          {
+            "action": "look",
+            "object": "none"
+          },
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    },
+    {
+      "id": "visual-choice-turned",
+      "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+      "energy": 0.9,
+      "held": false,
+      "image": "eye-turned.png",
+      "image_sha256": "2ea5ec316f091649a3854275ee2e2c9f32f1debfd8d028a1b270a5435823f8f5",
+      "generative_inference_requested": true,
+      "actual_generated_response_received": true,
+      "physical_task_tested": false,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Look at the red ball, then fetch it and stop.\",\n  \"steps\": [\n    {\n      \"action\": \"look\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 0.0,
+          "generation": 5995.615286752582,
+          "queue": 0.0008698552846908569,
+          "total": 5997.391736134887
+        },
+        "metadata": {
+          "input_tokens": 1098,
+          "output_tokens": 85,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4456690176,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Look at the red ball, then fetch it and stop.",
+        "steps": [
+          {
+            "action": "look",
+            "object": "none"
+          },
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    },
+    {
+      "id": "low-energy",
+      "instruction": "I have very little energy. Rest first, then fetch the red ball, then stop.",
+      "energy": 0.05,
+      "held": false,
+      "image": "eye-start.png",
+      "image_sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396",
+      "generative_inference_requested": true,
+      "actual_generated_response_received": true,
+      "physical_task_tested": false,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Rest due to low energy, then fetch the red ball, and stop.\",\n  \"steps\": [\n    {\n      \"action\": \"rest\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 0.0,
+          "generation": 6041.950693354011,
+          "queue": 0.0010505318641662598,
+          "total": 6043.8516940921545
+        },
+        "metadata": {
+          "input_tokens": 1089,
+          "output_tokens": 88,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4455229952,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Rest due to low energy, then fetch the red ball, and stop.",
+        "steps": [
+          {
+            "action": "rest",
+            "object": "none"
+          },
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    },
+    {
+      "id": "crate-and-hop",
+      "instruction": "Push the orange crate to its ring, then hop, then stop.",
+      "energy": 0.9,
+      "held": false,
+      "image": "eye-start.png",
+      "image_sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396",
+      "generative_inference_requested": true,
+      "actual_generated_response_received": true,
+      "physical_task_tested": false,
+      "valid_mission": true,
+      "generation": {
+        "raw_text": "```json\n{\n  \"summary\": \"Push the crate to its ring, then hop and stop.\",\n  \"steps\": [\n    {\n      \"action\": \"push\",\n      \"object\": \"crate\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "provider": "transformers-local",
+        "timing_ms": {
+          "load": 0.0,
+          "generation": 6130.72987832129,
+          "queue": 0.0008605420589447021,
+          "total": 6132.540008053184
+        },
+        "metadata": {
+          "input_tokens": 1084,
+          "output_tokens": 85,
+          "device": "cuda:0",
+          "deterministic_decoding": true,
+          "parameter_count": 2127532032,
+          "dtype": "torch.bfloat16",
+          "dtype_config": "default",
+          "cpu_threads_config": 2,
+          "cpu_threads": null,
+          "max_generation_seconds": 90,
+          "timeout_is_cooperative": true,
+          "token_limit_reached": false,
+          "time_limit_reached": false,
+          "truncated": false,
+          "peak_cuda_allocated_bytes": 4454415360,
+          "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+          "image_width": 384,
+          "image_height": 384,
+          "max_new_tokens": 256
+        }
+      },
+      "mission": {
+        "summary": "Push the crate to its ring, then hop and stop.",
+        "steps": [
+          {
+            "action": "push",
+            "object": "crate"
+          },
+          {
+            "action": "jump",
+            "object": "none"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      }
+    }
+  ],
+  "note": "Actual camera image inference; generated plans are not evidence of completed physical tasks."
+}

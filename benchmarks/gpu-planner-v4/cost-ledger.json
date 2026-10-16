@@ -29,12 +29,35 @@
       "gpu_estimate_usd": 0.12900794398387272,
       "monitor_seconds": 390.2761330604553,
       "pod_absent": true
+    },
+    {
+      "lifecycle": "benchmarks/vlm-2026-10-16/gpu-4090/lifecycle.json",
+      "gpu": "RTX 4090",
+      "experiment": "generative VLM inference and closed-loop CPU physics",
+      "gpu_estimate_usd": 0.0832595797419548,
+      "monitor_seconds": 336.7803225517273,
+      "pod_absent": true
     }
   ],
   "followup_gpu_estimate_usd": 0.42984619726339973,
-  "session_gpu_estimate_usd": 0.7067823361522886,
+  "session_gpu_estimate_usd": 0.7900419158942434,
   "total_budget_ceiling_usd": 30,
   "all_own_pods_absent": true,
   "final_invoice_verified": false,
-  "note": "Creation-to-deletion GPU estimates, not invoices. Storage charges have not been reconciled. No network volumes created."
+  "note": "Creation-to-deletion GPU estimates for six observed pods, not invoices. The original followup_gpu_estimate_usd field is historical v3/v4 planner work only; VLM inference is separately itemized. Failed VLM allocation requests with no observed pod are retained separately and excluded from allocated GPU spending. Storage charges have not been reconciled. No network volumes created.",
+  "historical_planner_followup_gpu_estimate_usd": 0.42984619726339973,
+  "vlm_gpu_estimate_usd": 0.0832595797419548,
+  "allocation_requests_without_observed_pods": [
+    {
+      "record": "benchmarks/vlm-2026-10-16/gpu-allocation-attempt1/raw-lifecycle.json",
+      "reconciliation": "benchmarks/vlm-2026-10-16/gpu-allocation-attempt1/reconciliation.json",
+      "observed_allocated_gpu_estimate_usd": 0,
+      "note": "HTTP500, no pod observed; original monitor-time arithmetic retained but excluded from GPU spending."
+    },
+    {
+      "record": "benchmarks/vlm-2026-10-16/gpu-allocation-attempt2/lifecycle.json",
+      "observed_allocated_gpu_estimate_usd": 0,
+      "note": "HTTP400, no matching pod on reconciliation; successful subsequent attempt records zero pre-existing pods. Raw uncertainty flags preserved."
+    }
+  ]
 }

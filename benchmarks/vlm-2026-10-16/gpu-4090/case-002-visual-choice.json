@@ -1,0 +1,61 @@
+{
+  "id": "visual-choice",
+  "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+  "energy": 0.9,
+  "held": false,
+  "image": "eye-start.png",
+  "image_sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396",
+  "generative_inference_requested": true,
+  "actual_generated_response_received": true,
+  "physical_task_tested": false,
+  "valid_mission": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Look at the red ball, then fetch it and stop.\",\n  \"steps\": [\n    {\n      \"action\": \"look\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 6083.249267190695,
+      "queue": 0.001039355993270874,
+      "total": 6085.706910118461
+    },
+    "metadata": {
+      "input_tokens": 1098,
+      "output_tokens": 85,
+      "device": "cuda:0",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "default",
+      "cpu_threads_config": 2,
+      "cpu_threads": null,
+      "max_generation_seconds": 90,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": 4456690176,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "mission": {
+    "summary": "Look at the red ball, then fetch it and stop.",
+    "steps": [
+      {
+        "action": "look",
+        "object": "none"
+      },
+      {
+        "action": "fetch",
+        "object": "ball"
+      },
+      {
+        "action": "stop",
+        "object": "none"
+      }
+    ]
+  }
+}

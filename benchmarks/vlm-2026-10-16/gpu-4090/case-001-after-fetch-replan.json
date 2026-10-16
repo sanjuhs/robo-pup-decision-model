@@ -1,0 +1,61 @@
+{
+  "id": "after-fetch-replan",
+  "instruction": "Fetch the red ball, then hop, then stop. Verified completed steps: [{\"action\":\"fetch\",\"object\":\"ball\"}]. Do not repeat completed steps. Plan only what remains of the original request.",
+  "energy": 0.9,
+  "held": false,
+  "image": "eye-after-fetch.png",
+  "image_sha256": "eded94ba6ad49329bebd04535db987616e9c1da6c07cde0c6f16a2523cf450dc",
+  "generative_inference_requested": true,
+  "actual_generated_response_received": true,
+  "physical_task_tested": false,
+  "valid_mission": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Fetch the ball home, then hop, then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 5939.280167222023,
+      "queue": 0.0014603137969970703,
+      "total": 5941.303858533502
+    },
+    "metadata": {
+      "input_tokens": 1112,
+      "output_tokens": 84,
+      "device": "cuda:0",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "default",
+      "cpu_threads_config": 2,
+      "cpu_threads": null,
+      "max_generation_seconds": 90,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": 4471152640,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "mission": {
+    "summary": "Fetch the ball home, then hop, then stop.",
+    "steps": [
+      {
+        "action": "fetch",
+        "object": "ball"
+      },
+      {
+        "action": "jump",
+        "object": "none"
+      },
+      {
+        "action": "stop",
+        "object": "none"
+      }
+    ]
+  }
+}

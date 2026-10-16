@@ -1,0 +1,58 @@
+{
+  "index": 1,
+  "phase": "response",
+  "instruction": "Your remaining mission is: jump, then stop. Verified completed steps: [{\"action\": \"fetch\", \"object\": \"ball\"}]. Those completed tasks are finished; do not include them again. Inspect the fresh image and return only the remaining tasks in order. You may first rest, look or turn if necessary.",
+  "energy": 0.8899958982076444,
+  "held": false,
+  "image": "eye-001.png",
+  "image_sha256": "8379f110e352c78651c46306c9ae3515f1111dd581026b6ccb0ec90699dd7688",
+  "eye_rgb_sha256": "091fa5519ab15c208e8d1b693167890634040387b09f93078969c2ff4019565e",
+  "image_saved_before_model_call": true,
+  "actual_generated_response_received": true,
+  "valid_mission": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Jump and then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 5565.431777387857,
+      "queue": 0.0012405216693878174,
+      "total": 5567.325988784432
+    },
+    "metadata": {
+      "input_tokens": 1151,
+      "output_tokens": 60,
+      "device": "cuda:0",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "default",
+      "cpu_threads_config": 2,
+      "cpu_threads": null,
+      "max_generation_seconds": 90,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": 4471732736,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "mission": {
+    "summary": "Jump and then stop.",
+    "steps": [
+      {
+        "action": "jump",
+        "object": "none"
+      },
+      {
+        "action": "stop",
+        "object": "none"
+      }
+    ]
+  }
+}

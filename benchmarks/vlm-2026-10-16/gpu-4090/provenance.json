@@ -1,0 +1,160 @@
+{
+  "source_artifact_directory": "artifacts/vlm-gpu-attempt3-4090",
+  "source_ref": "8ca421bd95e6241ea2f676f78a9af24449796354",
+  "source_url": "https://github.com/sanjuhs/robo-pup-decision-model/commit/8ca421bd95e6241ea2f676f78a9af24449796354",
+  "artifact_bundle_sha256": "6027793aa814f7112913efd79de78767d92ec1d72b8aae618f81b4e2e005da56",
+  "raw_files_copied_unchanged": true,
+  "weights_included": false,
+  "files": [
+    {
+      "path": "case-000-multi-step.json",
+      "bytes": 1959,
+      "sha256": "b3125872b36111d9c31b1176a66f8ef62de8b7648f12a646359d004586477fd7"
+    },
+    {
+      "path": "case-001-after-fetch-replan.json",
+      "bytes": 2111,
+      "sha256": "f0940c065ca27ce8efedf76d1d2331404006ba59015c260d6800f0961f0c73fa"
+    },
+    {
+      "path": "case-002-visual-choice.json",
+      "bytes": 2023,
+      "sha256": "f5b50d68c601d33ed0a1d0a3515074746446d541ee74076e7992d07121cfd36e"
+    },
+    {
+      "path": "case-003-visual-choice-blank.json",
+      "bytes": 2029,
+      "sha256": "2eb3df93e349aafcf7625ab3246d949978580ddf837bb4c28f272f6f9b48970e"
+    },
+    {
+      "path": "case-004-visual-choice-turned.json",
+      "bytes": 2032,
+      "sha256": "7124d6bccdf3f0a5ff21084dc3c474ecb670ae8d3a7ed3c9deb283ccd9e1b6af"
+    },
+    {
+      "path": "case-005-low-energy.json",
+      "bytes": 2016,
+      "sha256": "7b32230a4a162ff562bf48c204d8bafe66a21325c02ab05dea006bce8a12cda2"
+    },
+    {
+      "path": "case-006-crate-and-hop.json",
+      "bytes": 1973,
+      "sha256": "ed33af172a8472c609dfdef7eb68004046d9850c2298f3f19b20b3d6bea0c480"
+    },
+    {
+      "path": "combined-status.json",
+      "bytes": 112,
+      "sha256": "808ec1c155a38df3253dc79c27d08bdbab80cd19b6cb22274926493716ca54ce"
+    },
+    {
+      "path": "gpu-utilization.csv",
+      "bytes": 2233,
+      "sha256": "b072519349bcac9cbb2db0426c18f9a282ec57c166f516aa0cc9a5c19c80e654"
+    },
+    {
+      "path": "hardware.csv",
+      "bytes": 88,
+      "sha256": "f0e3b94d20d57d4a5c449aa436b3c1eb8d4b5901c2cb8922698db20a4addafd6"
+    },
+    {
+      "path": "inputs/eye-after-fetch.png",
+      "bytes": 19562,
+      "sha256": "eded94ba6ad49329bebd04535db987616e9c1da6c07cde0c6f16a2523cf450dc"
+    },
+    {
+      "path": "inputs/eye-blank.png",
+      "bytes": 509,
+      "sha256": "cf1814bcb8d13495b710015079ab41f90cf8c32111e68a78e9006183c3fac819"
+    },
+    {
+      "path": "inputs/eye-start.png",
+      "bytes": 12901,
+      "sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396"
+    },
+    {
+      "path": "inputs/eye-turned.png",
+      "bytes": 13364,
+      "sha256": "2ea5ec316f091649a3854275ee2e2c9f32f1debfd8d028a1b270a5435823f8f5"
+    },
+    {
+      "path": "inputs/prompts.json",
+      "bytes": 2141,
+      "sha256": "0b69f044cddbf9dca13a50ed865a8c161bb7593df7d94cc38cc33594eee43b89"
+    },
+    {
+      "path": "job-status.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "job.log",
+      "bytes": 37442,
+      "sha256": "a4ceef85353d34c14511e69b46db572498e39c7be1be5815a063ccaacd43b96a"
+    },
+    {
+      "path": "mission/eye-000.png",
+      "bytes": 14680,
+      "sha256": "70e99596613c5959df826d5f7789c73c31feda89a64610ea84fa399cfe14ad4c"
+    },
+    {
+      "path": "mission/eye-001.png",
+      "bytes": 23684,
+      "sha256": "8379f110e352c78651c46306c9ae3515f1111dd581026b6ccb0ec90699dd7688"
+    },
+    {
+      "path": "mission/eye-002.png",
+      "bytes": 23508,
+      "sha256": "6ea17199df8504c41985179d10394f6c905c0dc0d9489298dbe03e30f3c12593"
+    },
+    {
+      "path": "mission/inference-000.json",
+      "bytes": 2026,
+      "sha256": "05fa2ac3a2a443928f41402c09a714f762d17cf2cafede5ca40b087d6284c60c"
+    },
+    {
+      "path": "mission/inference-001.json",
+      "bytes": 2100,
+      "sha256": "1f1d8d28384e0c1ac2b8daa2291720192265a6ef8dca2fa7e6b7f7f8f8dd1fa5"
+    },
+    {
+      "path": "mission/inference-002.json",
+      "bytes": 2176,
+      "sha256": "658460402f63f62378613c54682ed068acbc3d7920aea02b82fa8218ca9a3c6e"
+    },
+    {
+      "path": "mission/result.json",
+      "bytes": 29015,
+      "sha256": "8b49712105bc394f98fb236e4aa8b259b31c0cd0b708f7cdbc5271cc097ea5ec"
+    },
+    {
+      "path": "model-manifest.json",
+      "bytes": 2014,
+      "sha256": "77393a71a81e95fbf80cd66199223992f00646384503413cb3830f40bec8516e"
+    },
+    {
+      "path": "packages.json",
+      "bytes": 8140,
+      "sha256": "ea599ac78b81a240c1d7b84f90f1a3ca1a9f79f19776d01f17a47be73ba8326c"
+    },
+    {
+      "path": "probe-summary.json",
+      "bytes": 16789,
+      "sha256": "f48029fd25f48d38c215c0bb41a1bb82379993d14eada5938db6c42004cb64ab"
+    },
+    {
+      "path": "runtime-requirements.sha256",
+      "bytes": 107,
+      "sha256": "1c1d2033f9115e96a6d0e65704d86bbcd6b6f42d95b3d95618c5011a1468358a"
+    },
+    {
+      "path": "runtime.json",
+      "bytes": 277,
+      "sha256": "7bec7164a7f0cf07c3ecb473da3e52f70803dcf51e7bceb2e8aadb4cce6f2c98"
+    },
+    {
+      "path": "lifecycle.json",
+      "bytes": 1753,
+      "sha256": "db12c6f4b52d57c5fa9f2aaae2513adecf9cc4fc05d94342d2d25e0fb98473cc"
+    }
+  ]
+}

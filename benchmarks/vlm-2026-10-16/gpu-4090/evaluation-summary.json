@@ -1,0 +1,218 @@
+{
+  "schema": "robopup-vlm-development-evaluation-v1",
+  "source_ref": "8ca421bd95e6241ea2f676f78a9af24449796354",
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "parameters": 2127532032,
+  "model_training_or_finetuning": false,
+  "hardware": "NVIDIA GeForce RTX 4090",
+  "model_dtype": "torch.bfloat16",
+  "scope": "Seven frozen development prompts plus one genuine closed-loop seed-7 mission. Prompts/runtime were revised using earlier CPU failures. This is not a held-out general VLM benchmark.",
+  "static_probes": {
+    "count": 7,
+    "valid_json_and_schema": 7,
+    "literal_declared_expectation_hits": 5,
+    "literal_declared_expectation_denominator": 7,
+    "literal_expectation_note": "Five of seven counts the deliberately weak first-action-only checks for the visual cases. It must not be presented as full instruction success.",
+    "full_instruction_descriptive_review_hits": 3,
+    "full_instruction_review_note": "Three of seven complete plans match the whole development request on descriptive review; this stricter review is not a preregistered benchmark metric.",
+    "cases": [
+      {
+        "id": "multi-step",
+        "raw_file": "case-000-multi-step.json",
+        "valid_json_and_schema": true,
+        "declared_expectation_kind": "exact_action_sequence",
+        "declared_expectation": [
+          "fetch",
+          "jump",
+          "stop"
+        ],
+        "actual_actions": [
+          "fetch",
+          "jump",
+          "stop"
+        ],
+        "declared_expectation_hit": true,
+        "full_instruction_review_matches": true,
+        "review": "The complete action sequence matches this development request."
+      },
+      {
+        "id": "after-fetch-replan",
+        "raw_file": "case-001-after-fetch-replan.json",
+        "valid_json_and_schema": true,
+        "declared_expectation_kind": "exact_action_sequence",
+        "declared_expectation": [
+          "jump",
+          "stop"
+        ],
+        "actual_actions": [
+          "fetch",
+          "jump",
+          "stop"
+        ],
+        "declared_expectation_hit": false,
+        "full_instruction_review_matches": false,
+        "review": "Failure: the old history-only prompt repeats fetch, although it is marked completed. The corrected closed-loop runtime sends an explicit remaining task list; that is a different prompt."
+      },
+      {
+        "id": "visual-choice",
+        "raw_file": "case-002-visual-choice.json",
+        "valid_json_and_schema": true,
+        "declared_expectation_kind": "first_action_only",
+        "declared_expectation": "fetch",
+        "actual_actions": [
+          "look",
+          "fetch",
+          "stop"
+        ],
+        "declared_expectation_hit": false,
+        "full_instruction_review_matches": false,
+        "review": "Failure: declared first action should be fetch, but model starts look and then fetch. Its plan is identical for the visible, blank and turned images."
+      },
+      {
+        "id": "visual-choice-blank",
+        "raw_file": "case-003-visual-choice-blank.json",
+        "valid_json_and_schema": true,
+        "declared_expectation_kind": "first_action_only",
+        "declared_expectation": "look",
+        "actual_actions": [
+          "look",
+          "fetch",
+          "stop"
+        ],
+        "declared_expectation_hit": true,
+        "full_instruction_review_matches": false,
+        "review": "The weak first-action-only expectation passes because the plan starts look; full instruction fails because the same plan subsequently fetches an unseen ball instead of stopping after look."
+      },
+      {
+        "id": "visual-choice-turned",
+        "raw_file": "case-004-visual-choice-turned.json",
+        "valid_json_and_schema": true,
+        "declared_expectation_kind": "first_action_only",
+        "declared_expectation": "look",
+        "actual_actions": [
+          "look",
+          "fetch",
+          "stop"
+        ],
+        "declared_expectation_hit": true,
+        "full_instruction_review_matches": false,
+        "review": "The weak first-action-only expectation passes because the plan starts look; full instruction fails because the same plan subsequently fetches an unseen ball instead of stopping after look."
+      },
+      {
+        "id": "low-energy",
+        "raw_file": "case-005-low-energy.json",
+        "valid_json_and_schema": true,
+        "declared_expectation_kind": "exact_action_sequence",
+        "declared_expectation": [
+          "rest",
+          "fetch",
+          "stop"
+        ],
+        "actual_actions": [
+          "rest",
+          "fetch",
+          "stop"
+        ],
+        "declared_expectation_hit": true,
+        "full_instruction_review_matches": true,
+        "review": "The complete action sequence matches this development request."
+      },
+      {
+        "id": "crate-and-hop",
+        "raw_file": "case-006-crate-and-hop.json",
+        "valid_json_and_schema": true,
+        "declared_expectation_kind": "exact_action_sequence",
+        "declared_expectation": [
+          "push",
+          "jump",
+          "stop"
+        ],
+        "actual_actions": [
+          "push",
+          "jump",
+          "stop"
+        ],
+        "declared_expectation_hit": true,
+        "full_instruction_review_matches": true,
+        "review": "The complete action sequence matches this development request."
+      }
+    ]
+  },
+  "visual_counterfactual": {
+    "case_ids": [
+      "visual-choice",
+      "visual-choice-blank",
+      "visual-choice-turned"
+    ],
+    "same_instruction_across_images": true,
+    "distinct_image_sha256": 3,
+    "distinct_raw_responses": 1,
+    "distinct_plan_sequences": 1,
+    "actual_actions": [
+      "look",
+      "fetch",
+      "stop"
+    ],
+    "blank_and_turned_plans_still_include_fetch": true,
+    "reliable_visual_conditioning_demonstrated": false,
+    "conclusion": "Actual images were attached to a real VLM, but all three images produced the identical look, fetch, stop response. These cases fail to demonstrate reliable image-dependent branching and hallucinate fetching on the blank/turned views."
+  },
+  "timings": {
+    "first_static_load_ms": 5752.4780705571175,
+    "first_static_generation_ms": 7279.472779482603,
+    "first_static_total_ms": 13034.780276939273,
+    "warm_static_generation_min_ms": 5908.972835168242,
+    "warm_static_generation_median_ms": 6018.782990053296,
+    "warm_static_generation_max_ms": 6130.72987832129,
+    "peak_cuda_allocated_bytes": 4471898112
+  },
+  "closed_loop": {
+    "result": "mission/result.json",
+    "seed": 7,
+    "success": true,
+    "checks": {
+      "mission_complete": true,
+      "requested_actions_verified_in_order": true,
+      "every_response_from_actual_model": true,
+      "recorded_eyes_match_mission_observations": true,
+      "replanning_after_each_step": true,
+      "contact_and_grasp": true,
+      "lift": true,
+      "return_and_release": true,
+      "hop_flight_and_landing": true,
+      "ppo_residuals_used": true,
+      "no_external_forces": true,
+      "physics_frozen_while_thinking": true
+    },
+    "actual_model_calls": 3,
+    "completed_actions": [
+      "fetch",
+      "jump",
+      "stop"
+    ],
+    "wall_seconds": 23.451824568212032,
+    "execution_sim_seconds": 19.98000000000021,
+    "physics": "native MuJoCo CPU",
+    "motor": "CPU PPO residuals plus analytic skills; v4 uses overhead RGB",
+    "simulation_paused_while_vlm_thinking": true,
+    "real_time_browser_latency_tested": false,
+    "fetch_completion_ball_distance_home_m": 0.5031889835704588,
+    "fetch_completion_ball_height_m": 0.11987459118589236,
+    "final_ball_distance_home_after_hop_m": 0.6719618263541717,
+    "retention_note": "Fetch return/release is verified at fetch completion (<0.6m from home). The ball later rolls beyond that radius during the hop. Persistent retention at home was not a criterion and is not demonstrated.",
+    "maximum_held_ball_height_m": 0.35584758134686423,
+    "jump_max_height_m": 0.46260905697413296,
+    "jump_flight_seconds": 0.27999999999999997,
+    "ppo_residual_steps": 291
+  },
+  "cost_and_cleanup": {
+    "lifecycle": "lifecycle.json",
+    "estimated_gpu_usd": 0.0832595797419548,
+    "estimated_session_gpu_usd": 0.7900419158942434,
+    "not_a_final_invoice": true,
+    "storage_reconciliation_complete": false,
+    "pod_deleted": true,
+    "pod_absent_verified": true
+  }
+}
