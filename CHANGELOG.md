@@ -5,6 +5,17 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Capped generative GPU validation
+
+- Prepare a single RTX 5090 VLM inference experiment with a 25-minute external
+  deletion watchdog, $2 allocation and $1.50/hour maximum inside the $30 total.
+- Freeze seven actual-image/command probes before GPU inference. Add a genuine
+  closed-loop fetch → hop → stop trial with fresh robot-eye inputs and model
+  responses at every replan. Native MuJoCo physics remains on CPU.
+- Verify all 65 locked non-Torch runtime wheels locally before allocation.
+  The job will retain every response/failure plus hardware, cost and deletion
+  evidence. This preparation does not claim a completed GPU run.
+
 ### Robot appearance and Vercel service boundaries
 
 - Make the original mechanical robot with visible physical pickup the default;

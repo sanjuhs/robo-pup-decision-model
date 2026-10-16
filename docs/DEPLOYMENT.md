@@ -210,12 +210,28 @@ and eight local service tests, including real HTTP calls through the gateway,
 internal planner and a clearly labeled fake provider fixture. That fixture
 verifies transport, exact camera image forwarding and mission validation; it
 does not prove actual VLM inference. A subprocess confirms the planner bundle
-imports no Torch/MuJoCo/Transformers. The initial container build required a
+imports no Torch/MuJoCo/Transformers, including in a separate minimal-dependency
+virtual environment with hash-verified installation.
+
+The real Vercel CLI (`64.3.1`) also ran `vercel dev -L` locally without a cloud
+login. `/` returned Vite HTML, `/api/health` returned the gateway with a configured
+generated binding, and `/api/vlm` successfully called the internal planner's
+`/status` route. Public `/status` returned frontend HTML rather than exposing
+the internal service. These local processes were then stopped; this is not a
+hosted deployment or a test of a deployed private network.
+
+The initial container build required a
 proxy CA trust correction; its first non-root runtime check exposed restrictive
 checkout file permissions, addressed by making only bundled source/models/web
-assets readable. The corrected container still requires its separate runtime
-smoke result before being described as validated.
+assets readable. Another build exhausted workspace disk while retaining old
+installer layers; those disposable images/caches were removed and uv's image
+cache disabled. The corrected 1.41 GB CPU image
+`sha256:253f183d89bf41fc50fd73918c4745d2819db46ff71cc2f6d80b198b6eb3329d`
+passed non-root imports, actual 384×384 EGL eye rendering, health and frontend
+HTTP responses, and an authenticated WebSocket with physics time advancing from
+0.04 to 0.08 seconds using `PORT=8056`. Its disposable runtime container was
+then stopped and removed. The optional VLM-extra image was not built or tested.
 
 Vercel publication, real provider inference, container behavior and deployed
-physical behavior are separate validation steps. No hosted deployment or live
-service binding has been verified by the local fixture tests.
+physical behavior are separate validation steps. No hosted deployment or deployed
+service binding has been verified by these local checks.
