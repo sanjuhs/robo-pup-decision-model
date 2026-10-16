@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import './style.css';
 import './commands.css';
-import { PoseBuffer, smoothingAlpha } from './motion.js';
+import { PoseBuffer, smoothingAlpha, updateOrbit } from './motion.js';
 import { PuppySkin } from './puppy.js';
 
 const $ = (id) => document.getElementById(id);
@@ -21,6 +21,8 @@ const renderedRoot = new THREE.Vector3();
 const followShift = new THREE.Vector3();
 let lastFrame, focusDistance;
 const cameraOffset = new THREE.Vector3();
+const previousCameraTarget = new THREE.Vector3();
+let cameraInteracting = false;
 const targetPos = new THREE.Vector3(2, 1, .02);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#142823');
@@ -293,7 +295,7 @@ function animate(time) {
     if (Math.abs(distance-focusDistance)<.001) focusDistance = undefined;
   }
   controls.dampingFactor = smoothingAlpha(dt, .23);
-  controls.update();
+  updateOrbit(controls,!followCamera&&!cameraInteracting,previousCameraTarget);
   if (state && pose) {
     projected.copy(renderedRoot).add(new THREE.Vector3(0,0,.34)).project(camera);
     const rect = $('viewport').getBoundingClientRect();
@@ -337,7 +339,8 @@ function setFollowCamera(value) {
 }
 $('camera').onclick = () => setFollowCamera(!followCamera);
 $('frame-pup').onclick = () => { setFollowCamera(true); focusDistance=2.6; };
-controls?.addEventListener('start', () => { focusDistance=undefined; });
+controls?.addEventListener('start', () => { focusDistance=undefined;cameraInteracting=true; });
+controls?.addEventListener('end', () => { cameraInteracting=false; });
 $('appearance').onchange = () => {
   appearance = $('appearance').value;
   for(const root of meshes.values())if(root.userData.skin) {
@@ -345,7 +348,7 @@ $('appearance').onchange = () => {
     root.userData.robot.visible=appearance==='robot';
   }
 };
-$('policy').onchange = () => {send({policy:$('policy').value});$('policy-detail').textContent=$('policy').value==='gait'?'Rule-based decisions + an analytic gait. Select a trained policy to compare.':'Fresh residual PPO weights. Flat forward training only; other commands are experimental.';};
+$('policy').onchange = () => {send({policy:$('policy').value});$('policy-detail').textContent=$('policy').value==='gait'?'Rule-based decisions + an analytic gait. No learned motor weights.':'Trained PPO · 15.7k parameters · numeric state input. Turning and object tasks are experimental.';};
 $('command-form').onsubmit = (event) => {
   event.preventDefault();
   const text=$('pet-command').value.trim();

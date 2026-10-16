@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { PoseBuffer, smoothingAlpha } from '../src/motion.js';
+import { PoseBuffer, smoothingAlpha, updateOrbit } from '../src/motion.js';
+import { Vector3 } from 'three';
 
 test('pose playback is independent of render frequency and bounded by actual snapshots', () => {
   for (const hz of [30, 60, 144]) {
@@ -40,4 +41,19 @@ test('paused render time stays bit-for-bit constant across fractional intervals'
   buffer.push({time}, 0);
   buffer.push({time}, 40);
   for (let now = 60; now <= 100; now += .37) expect(buffer.sample(now).time).toBe(time);
+});
+
+test('idle orbit target is exact while real user/camera updates still move it', () => {
+  const target=new Vector3(.668574373954221,-.052514854924089194,.1999982502624865);
+  const previous=new Vector3();
+  const initial=target.clone();
+  const controls={target,update:()=>{target.x+=1e-16;return false;}};
+  for(let i=0;i<100;i++)updateOrbit(controls,true,previous);
+  expect(target.toArray()).toEqual(initial.toArray());
+  controls.update=()=>{target.x+=.1;return true;};
+  updateOrbit(controls,true,previous);
+  expect(target.x).toBe(initial.x+.1);
+  controls.update=()=>{target.y+=.1;return false;};
+  updateOrbit(controls,false,previous);
+  expect(target.y).toBe(initial.y+.1);
 });

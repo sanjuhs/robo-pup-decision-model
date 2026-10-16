@@ -30,3 +30,11 @@ export class PoseBuffer {
 export function smoothingAlpha(dtSeconds, timeConstant) {
   return 1 - Math.exp(-Math.max(0, dtSeconds) / timeConstant);
 }
+
+export function updateOrbit(controls, preserveIdleTarget, previousTarget) {
+  previousTarget.copy(controls.target);
+  const changed = controls.update();
+  // OrbitControls clamps target radius via normalize/multiply even with no
+  // radius limits. Avoid accumulating round-off while the camera is idle.
+  if (preserveIdleTarget && !changed) controls.target.copy(previousTarget);
+}
