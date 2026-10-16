@@ -1,7 +1,9 @@
 # Third-party notices
 
 Original RoboPup application code and primitive robot geometry use the root MIT
-license. No robo-jev source, model weights, Unitree assets, or MuJoCo Menagerie
+license. The procedural golden-puppy skin and generated fur texture are original
+artwork covered by that license; no external character files are downloaded.
+No robo-jev source, model weights, Unitree assets, or MuJoCo Menagerie
 meshes are redistributed.
 
 Dependencies retain their own licenses:

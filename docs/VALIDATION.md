@@ -26,10 +26,10 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | Multimodal planner prototype | Three tensor-contract tests: image/text/state gradient paths, finite bounded horizon outputs, instruction padding/UTF-8 tokens and invalid input/config rejection. No trained weights, live inference, perception or planning success. |
 | Actual browser recording | GPU checkpoint moved 2.012 m along world X over 5.760 simulated seconds without reset; headless software-WebGL capture median frame interval 143.9 ms. Raw telemetry is in `benchmarks/presentation-2026-10-15/` |
 
-GitHub Actions passed on the pause-fix and CI-reporting revision
-`a15a6872e88df6816fef661b3e1404b2e4c51694`:
-[prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38823973896).
-The earlier presentation revisions `7e86dd3` and `f4280eb` also passed. These hosted runs are
+GitHub Actions passed on the golden-puppy, camera-fix and multimodal-scaffold revision
+`af88b87f5fac2cb837128b96142e3df531401751`:
+[prototype checks](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38862659843).
+The earlier pause-fix revision `a15a687` and presentation revisions `7e86dd3` and `f4280eb` also passed. These hosted runs are
 separate evidence from local testing. Later source revisions trigger their own
 checks; inspect their recorded conclusions before claiming them passed.
 
