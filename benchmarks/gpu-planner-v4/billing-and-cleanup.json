@@ -1,0 +1,57 @@
+{
+  "attempts": [
+    {
+      "lifecycle": "benchmarks/runpod-attempt-1/lifecycle.json",
+      "cli_exit": 0,
+      "records_received": 1,
+      "sanitized_billing": [
+        {
+          "endTime": "2026-10-15T23:00:00Z",
+          "startTime": "2026-10-15T22:00:00Z"
+        }
+      ],
+      "final_invoice_verified": false,
+      "monetary_amount_present": false
+    },
+    {
+      "lifecycle": "benchmarks/runpod-attempt-2/lifecycle.json",
+      "cli_exit": 0,
+      "records_received": 1,
+      "sanitized_billing": [
+        {
+          "endTime": "2026-10-15T23:00:00Z",
+          "startTime": "2026-10-15T22:00:00Z"
+        }
+      ],
+      "final_invoice_verified": false,
+      "monetary_amount_present": false
+    },
+    {
+      "lifecycle": "benchmarks/gpu-planner-v3/lifecycle.json",
+      "cli_exit": 0,
+      "records_received": 0,
+      "sanitized_billing": [],
+      "final_invoice_verified": false,
+      "monetary_amount_present": false
+    },
+    {
+      "lifecycle": "benchmarks/gpu-planner-v4/attempt1-network-failure/lifecycle.json",
+      "cli_exit": 0,
+      "records_received": 0,
+      "sanitized_billing": [],
+      "final_invoice_verified": false,
+      "monetary_amount_present": false
+    },
+    {
+      "lifecycle": "artifacts/gpu-planner-v4-attempt2/lifecycle.json",
+      "cli_exit": 0,
+      "records_received": 0,
+      "sanitized_billing": [],
+      "final_invoice_verified": false,
+      "monetary_amount_present": false
+    }
+  ],
+  "own_pods_remaining": 0,
+  "cli_exit": 0,
+  "note": "Provider usage rows are not invoices. Only timestamps were present in sanitized older rows; new attempts had no posted billing rows. All five own pods absent. GPU estimates remain separate."
+}

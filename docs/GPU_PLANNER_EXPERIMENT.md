@@ -79,12 +79,12 @@ action logits when predicted intent/needs stay fixed. This is a learned neural
 module trained from labels, not a handcoded action table. The transformer still
 predicts intent and the RGB classifier grounds object targets.
 
-Use 6,000 new scenes, seed6119, 50% static / 50% 20-step motion frames. Train
-8,000 steps, batch128, seed521; initialize from demo/arena-planner-v3. Broaden
+Use 6,000 new scenes, seed 6119, 50% static / 50% 20-step motion frames. Train
+8,000 steps, batch 128, seed 521; initialize from demo/arena-planner-v3. Broaden
 question/prefix compositions. Keep v3 test results as development evidence.
 Freeze FINAL_TEST4 before this run, exclude those exact strings from training,
-and evaluate all 500 new mixed scenes (seed94871) ×12 templates, evaluator seed384.
-Compare v2 and v4 on the same data; physical seeds707/808/909 and unchanged
+and evaluate all 500 new mixed scenes (seed 94871) × 12 templates, evaluator seed 384.
+Compare v2 and v4 on the same data; physical seeds 707/808/909 and unchanged
 120-second criteria. Also require the original held-state application regression,
 all Python checks and browser integration. Retain failed models and trials.
 
@@ -95,8 +95,31 @@ retries. Its GPU estimate is $0.1033; deletion and absence were verified. No
 checkpoint is claimed. The manually corrected retry retains the same frozen
 training/evaluation protocol. It removes the index/bootstrap dependency and uses
 52 explicit CDN wheel URLs with hashes exported from uv.lock for the tested
-Linux x86_64/CPython3.12 image. Every wheel was downloaded and hash-verified
+Linux x86_64/CPython 3.12 image. Every wheel was downloaded and hash-verified
 locally before launch. A verified HTTPS CDN preflight fails early on an unusable
 host. The provider Torch/CUDA stack is retained and recorded. Raw startup logs
 are now bundled even if checkout or installation fails. TLS/hash verification
 remains enabled; the default demo remains v2 pending application checks.
+
+## Final decoder stage and measured v4 outcome
+
+Before opening the new final scene/language test, training validation still showed
+rare-object weaknesses. A CPU-only second stage therefore refined the 6,739-parameter
+decoder, with all vision/transformer tensors frozen. The initial 2,500-step stage
+(18.90 s) remains recorded. The final 10,000-step stage took 87.26 s, seed 811,
+batch 512, balanced grammar labels and 264 task/state validation cases. Energy
+features were linearly normalized around the existing 15% virtual-rest threshold
+with scale 20; first-layer reparameterization preserved the starting function.
+The final checkpoint was selected solely by that validation grid before final
+evaluation. These are synthetic task/needs labels, not fetched-goal trajectories.
+
+v4 final test: **100% intent, 99.967% first action, 99.975% horizon, 99.95% object**.
+Both v2 and v4 passed 24/24 new physical trials; v4 fetched in 18.34–19.52 s versus
+v2's74.44–77.36 s on matching starts, while push was slower. The original settled
+held-state regression passes. Local application checks passed 30 Python and 18
+browser/render tests, with an explicit live-v4 identity assertion and recorded
+physical fetch. The current default is v4; v2 and rejected v3 are preserved.
+
+All five own session pods are deleted/absence verified. Aggregate GPU estimate
+$0.7068, including failed attempts; follow-up work alone $0.4298. New billing rows
+were not yet posted, so these are estimates rather than final invoices.

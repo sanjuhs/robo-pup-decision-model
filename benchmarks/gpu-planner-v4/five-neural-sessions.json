@@ -1,0 +1,42 @@
+{
+  "protocol": "independent-fetch-worlds-v2",
+  "participants": 5,
+  "sessions": [
+    {
+      "participant": 0,
+      "frames": 125,
+      "wall_seconds": 6.145068537000043,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.8136605751253118
+    },
+    {
+      "participant": 1,
+      "frames": 125,
+      "wall_seconds": 5.947094593997463,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.8407466740223918
+    },
+    {
+      "participant": 2,
+      "frames": 125,
+      "wall_seconds": 5.756129202003649,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.868639292922658
+    },
+    {
+      "participant": 3,
+      "frames": 125,
+      "wall_seconds": 5.62908666000294,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.8882435645425472
+    },
+    {
+      "participant": 4,
+      "frames": 125,
+      "wall_seconds": 5.427988351999375,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.9211515714027253
+    }
+  ],
+  "note": "Short local WebSocket capacity probe, not a two-hour browser soak test"
+}

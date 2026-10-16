@@ -5,26 +5,27 @@ and [multimodal implementation](MULTIMODAL.md) for evidence and boundaries.
 
 | Capability | Current evidence |
 | --- | --- |
-| CPU MuJoCo and residual PPO | Working headless simulation and fresh-weight participant training; three bundled trained checkpoints across motor/planner layers |
-| Trained multimodal planner | 232,414 parameters; RGB + English tokens + numeric state; six action/target proposals, live execution and feedback |
-| Perception | Learned arena pixel classes; dedicated 96×96 overhead RGB. Final-test centroid error 7.21 cm vs segmentation centroids; not general vision |
-| Language | Finite task vocabulary and learned phrase compositions; final test 97.875% intent / 89.542% first action, weak unseen fetch wording |
-| Approach / behind / fetch / push / follow | Three varied-start RGB physics trials each passed. Fetch uses an explicitly magnetic lifting tool with contact, return and release checks. General navigation remains unproven |
+| CPU MuJoCo and residual PPO | Working headless simulation and fresh-weight participant training; current v4 planner and two motor demos, with archived v2/rejected v3 weights |
+| Trained multimodal planner | v4: 246,712 parameters; GPU-trained transformer plus CPU-refined neural task/needs decoder; RGB + English + numeric state; six proposals and physical execution |
+| Perception | Learned arena pixel classes; dedicated 96×96 overhead RGB. Final-test centroid error 7.10 cm vs segmentation centroids; not general vision |
+| Language | Bounded vocabulary/compositions; fresh 6,000-sample test: 100% intent / 99.967% first action. Frozen test, not general-language competence |
+| Approach / behind / fetch / push / follow | Current v4 passed three fresh starts each; fetch 18.34–19.52 simulated seconds with physical contact/lift/return/release. Older occlusion failures remain retained; general navigation unproven |
 | Walk / run / hop | Three trials each passed movement/flight criteria. Analytic physical skills, not learned canine gaits; walking has brief measured flight and is not biomechanically validated |
 | Energy | Virtual play-energy, visible UI, learned rest choice and executor recharge hysteresis; no battery or biological claim |
 | Voice | Offline English PocketSphinx command grammar; synthetic fixture tested. Transcript requires Send; human accent/noise accuracy unmeasured |
 | Browser | Articulated original golden puppy, camera and plan inspection, orbit/follow camera, manual controls, pause/reset, experiments and policy switching |
 | Appearance | Stylized procedural skin attached to physics; not photoreal or anatomical canine rig |
-| Participants | Separate browser worlds and fresh-policy experiments; five-browser isolation tested; short active-neural probes: five at ≥0.819×, ten at ≥0.571× real time. No shared world |
-| RTX 5090 | Prior completed experiment: 1,048,576 steps in 121.7 s; native replay 0.337 m/s, 0/5 falls. Failed interface attempt retained, both pods deleted |
-| Spending | Prior estimated GPU charge $0.2769, not final invoice. Multimodal training/evaluation ran on this CPU host with $0 additional Runpod usage |
+| Participants | Separate browser worlds and fresh-policy experiments; five-browser isolation tested; short active-neural probes: v4 five at ≥0.814×, ten at ≥0.570× real time. No shared world |
+| RTX 5090 | Motor experiment: 1,048,576 steps in 121.7 s. Planner v3/v4: 8,000 CUDA updates in 95.49/101.13 s; v3 rejected by application test, v4 selected after CPU decoder stage |
+| Spending | Follow-up GPU estimate $0.4298; aggregate session $0.7068, within $30. Five own pods deleted/absence verified. Final invoice/storage reconciliation pending |
 | Weights | GitHub `demo/`; checksum sidecars. No Hugging Face model repository or Space |
 | Jev | Inspiration/license audited. No Jev weights, adapter or reproduced Jev benchmark |
 | Recovery | Standing/stop and explicit world reset; no learned self-righting |
 | Browser-only/offline phone | Not built; Three.js runs on device, physics/inference need the local Python server |
 
 The earlier `MultimodalPlanner` class is still an untrained research scaffold.
-The trained arena uses the distinct `ScenePlanner` class and bundled checkpoint.
+The trained arena uses `ArenaPlannerV4`, extending the original `ScenePlanner`,
+and a bundled checksum-verified checkpoint.
 Historical failed follow/push/retrieval and language runs remain in `benchmarks/`.
 
 Not validated: real hardware, sim-to-real, arbitrary objects/language/terrain,

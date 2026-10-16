@@ -1,0 +1,40 @@
+{
+  "attempts": [
+    {
+      "lifecycle": "benchmarks/runpod-attempt-1/lifecycle.json",
+      "gpu_estimate_usd": 0.11029977777777777,
+      "monitor_seconds": 333.68,
+      "pod_absent": true
+    },
+    {
+      "lifecycle": "benchmarks/runpod-attempt-2/lifecycle.json",
+      "gpu_estimate_usd": 0.1666363611111111,
+      "monitor_seconds": 504.11,
+      "pod_absent": true
+    },
+    {
+      "lifecycle": "benchmarks/gpu-planner-v3/lifecycle.json",
+      "gpu_estimate_usd": 0.19755548609097798,
+      "monitor_seconds": 597.6468486785889,
+      "pod_absent": true
+    },
+    {
+      "lifecycle": "benchmarks/gpu-planner-v4/attempt1-network-failure/lifecycle.json",
+      "gpu_estimate_usd": 0.10328276718854904,
+      "monitor_seconds": 312.4520688056946,
+      "pod_absent": true
+    },
+    {
+      "lifecycle": "benchmarks/gpu-planner-v4/attempt2/lifecycle.json",
+      "gpu_estimate_usd": 0.12900794398387272,
+      "monitor_seconds": 390.2761330604553,
+      "pod_absent": true
+    }
+  ],
+  "followup_gpu_estimate_usd": 0.42984619726339973,
+  "session_gpu_estimate_usd": 0.7067823361522886,
+  "total_budget_ceiling_usd": 30,
+  "all_own_pods_absent": true,
+  "final_invoice_verified": false,
+  "note": "Creation-to-deletion GPU estimates, not invoices. Storage charges have not been reconciled. No network volumes created."
+}

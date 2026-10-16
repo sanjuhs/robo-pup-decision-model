@@ -1,0 +1,17 @@
+{
+  "model": "arena-rgb-transformer-v4",
+  "model_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+  "policy": "baseline/curious-v2",
+  "source": "Actual Chromium CDP frames from passing browser fetch test",
+  "renderer": "SwiftShader software WebGL",
+  "viewport": [
+    1440,
+    1440
+  ],
+  "frames": 103,
+  "wall_seconds": 24.387367963790894,
+  "simulated_end_time_s": 23.279999999999653,
+  "cropped_or_sped_up": false,
+  "video": "docs/assets/gpu-planner-fetch.webm",
+  "note": "Browser executor runs at25 Hz with two50 Hz motor steps/command; headless evaluator commands at50 Hz. Timing differs between these protocols."
+}

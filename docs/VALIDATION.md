@@ -4,6 +4,41 @@ Validated on the development Linux machine with Python 3.12.14, Node 24.19.0,
 MuJoCo 3.3.7, PyTorch 2.9.0 CPU and optional JAX 0.7.2. Runpod hardware and source
 hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 
+## Current GPU-trained v4 release
+
+- Local Python suite: **30 passed**. The original settled-pose held-state
+  intervention is retained and now passes against v4, alongside physical fetch,
+  RGB grounding/blank visibility, energy, speech and physics regressions.
+- Full browser/render suite: **18 passed**. The camera/plan check explicitly asserts
+  `arena-rgb-transformer-v4`; the recorded fetch captures actual v4 inference and
+  measured contact/lift/return/release. Exact pause/idle-camera assertions remain.
+- Frozen npm installation, browser build and Ruff passed. A separate HTTP/WebSocket
+  smoke probe verifies the built page and advancing MuJoCo controls.
+- Fresh final test: 500 mixed static/motion scenes × 12 new phrase compositions,
+  6,000 task/state samples. Intent 100%, first action 99.967%, horizon 99.975%,
+  objects 99.95%. Identical v2 baseline: intent 91.667%, first action 59.817%.
+- Fresh physical protocol: both v2 and v4 **24/24**, seeds 707/808/909, unchanged
+  outcome criteria. Fetch 18.34–19.52 s for v4 vs 74.44–77.36 s for v2; push slower.
+- GPU v3 was rejected after its application regression despite good fresh-test
+  scores. A v4 network/bootstrap failure is retained. The first CPU decoder-stage
+  metrics are retained; final CPU decoder refinement used only grammar-grid
+  validation before opening the new scene/language final test.
+- One application test encountered an already queued streaming state while waiting
+  for invalid-control rejection. It now requires the exact `Invalid controls`
+  error within five messages; validation bounds are unchanged. Three independent
+  diagnostic sockets also confirmed the actual rejection.
+- All five session-created Runpod pods are absent, confirmed by CLI listing after
+  deletion. GPU estimates total $0.7068; fresh attempts' final billing rows were
+  not yet posted. This is not a reconciled invoice.
+
+Raw measurements, hashes, source/initialization lineage, CUDA utilization, failures,
+checks and cost ledger are in `benchmarks/gpu-planner-v4/` and the rejected run in
+`benchmarks/gpu-planner-v3/`. The actual v4 video is
+`docs/assets/gpu-planner-fetch.webm` (24.39 s, no speed change or synthetic motion).
+Hosted CI for this new default is recorded after completion below.
+
+The following sections retain their historical version-specific evidence.
+
 ## Multimodal extension
 
 - Current Python regression run: 26 passed, including actual RGB counterfactuals,

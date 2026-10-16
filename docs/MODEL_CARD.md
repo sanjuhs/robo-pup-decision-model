@@ -2,27 +2,40 @@
 
 Measured 2026-10-16. Reproduce with
 `uv run python scripts/inspect_models.py --out artifacts/model-inventory.json`.
-The committed [current inventory](../benchmarks/multimodal-2026-10-16/model-inventory.json) includes checkpoint
+The committed [current inventory](../benchmarks/gpu-planner-v4/model-inventory.json) includes checkpoint
 hashes and exact counts; the command does not download or train anything.
 
 ## Trained arena transformer
 
-The default live planner is `ScenePlanner`: **232,414 parameters**, **946,381 bytes**
+The default live planner is `ArenaPlannerV4`: **246,712 parameters**, **1,011,137 bytes**
 in `demo/arena-planner/planner.pt`, with digest, vocabulary and release metadata.
 It has a learned arena pixel classifier, visual/text/state encoders, two width-96
-four-head transformer layers and six plan queries. Inputs are actual overhead
+four-head transformer layers, six plan queries and a 6,739-parameter neural task/needs
+decoder. The transformer predicts intent; the decoder receives that predicted
+intent, held state, normalized virtual energy and slot index. Its skill/object
+logits are invariant to motor/yaw changes when the predicted intent/needs stay fixed.
+RGB perception grounds the selected object targets. Inputs are actual overhead
 96×96 RGB, up to 96 word tokens, and 50 motor observations plus virtual play-energy,
 held state and yaw/pi. Outputs are skill/object logits and relative offsets; each
 row is displayed as a fixed one-second proposal. Replanning occurs every half
 simulated second, with persistent goal execution and physical completion checks.
 
 It was trained by supervised imitation on generated arena labels. It is not a
-general VLM, language generator or RL-trained task planner. Final independent
-400-scene/12-template testing measured 97.875% intent and 89.542% first-action
-accuracy. All 24 canonical-command physical trials passed. See [training, failures,
-voice and limitations](MULTIMODAL.md). Voice is a separate offline PocketSphinx
-English command recognizer; its installed speech model is approximately 28 MiB.
-No voice/image foundation model is hidden behind an API.
+general VLM, language generator or RL-trained task planner. On a new independent
+500-scene / 12-template test (6,000 scene/command/state combinations), v4 measured
+100% intent, 99.967% first action, 99.975% horizon skill and 99.95% object accuracy.
+The v2 baseline on those same samples scored 91.667% intent and 59.817% first action.
+Both passed 24/24 fresh canonical-command physical trials. Known older occlusion
+failures remain visible; broader vision/language and navigation remain unproven.
+
+v4 inherits v2/v3 weights, uses 101.13 s of RTX 5090 optimization and 87.26 s of
+CPU-only decoder refinement. The pixel classifier stayed frozen. v3 was rejected
+after a held-state application failure; a v4 bootstrap failed on network access.
+Neither failed record is hidden. v2/v3 checkpoints are retained alongside the new
+default, with lineage and SHA-256. See [experiment protocol/results](GPU_PLANNER_EXPERIMENT.md)
+and [training/limitations](MULTIMODAL.md). Voice remains separate offline
+PocketSphinx English recognition, with an approximately 28 MiB installed speech
+model. No external model API or Hugging Face upload is involved.
 
 ## Trained motor controller
 
@@ -61,7 +74,7 @@ Stop uses analytic stance and reset restores the world.
 
 ## Where are the weights?
 
-All three checkpoints are committed to this GitHub repository with SHA-256 sidecars.
+Current and historical checkpoints are committed to this GitHub repository with SHA-256 sidecars.
 Setup verifies and copies them into `artifacts/baseline/curious-v2/` and
 `artifacts/runpod/5090-once/`. New participant runs save their own `policy.zip`
 and intermediate checkpoints under `artifacts/<participant>/<run>/`.
@@ -72,6 +85,13 @@ No external model service is called by the live arena. SB3/PyTorch checkpoints
 must only be loaded from trusted authors; their deserialization is not a sandbox.
 
 ## Was the RTX 5090 actually used?
+
+Yes for the new transformer: `benchmarks/gpu-planner-v4/attempt2/` contains actual
+hardware, PyTorch 2.9.0+cu129/CUDA 12.9, capability 12.0, GPU utilization and
+101.13-second training evidence. Rendering and native physics need no GPU in the
+local demo. The small final decoder was subsequently refined on CPU.
+
+The following paragraph describes the earlier motor experiment:
 
 Yes. The recorded [hardware probe](../benchmarks/runpod-attempt-2/hardware.csv)
 reports NVIDIA GeForce RTX 5090 with 32,607 MiB. The recorded JAX device is

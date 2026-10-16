@@ -5,12 +5,28 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### GPU-trained v4 default
+
+- Publish the 246,712-parameter, 1,011,137-byte v4 checkpoint after 30 Python and 18
+  browser/render checks, including the unchanged held-state regression and live
+  v4 identity assertion. Preserve v2 and rejected v3 checkpoints.
+- On the same new 6,000-sample test, improve first action 59.817% → 99.967% and
+  intent 91.667% → 100%. Both models pass 24/24 fresh physical tasks. Fetch improves
+  to 18–20 simulated seconds; push trials take longer. Retain all raw outcomes.
+- Train the v4 transformer on RTX 5090 for 101.13 s; refine only its 6,739-parameter
+  decoder on CPU for 87.26 s using grammar validation before final testing.
+- Verify all five session pods absent. Follow-up GPU estimate $0.4298; aggregate
+  session estimate $0.7068 inside $30. New final invoices/storage reconciliation pending.
+- Publish the actual 24-second v4 browser fetch recording and checkpoint/source/
+  data lineage; keep failed GPU/bootstrap and preliminary CPU-stage evidence.
+
+
 ### GPU bootstrap reliability
 
 - Preserve the failed v4 bootstrap: PyPI timeouts, no training/checkpoint, pod
   deleted, estimated GPU charge $0.1033. No test or TLS verification was bypassed.
 - Verify all 52 locked project runtime wheels locally and export direct CDN URLs
-  for the tested Python3.12 pod ABI. Add fast connectivity preflight and export
+  for the tested Python 3.12 pod ABI. Add fast connectivity preflight and export
   early failure logs before checkout. Prepare a manual retry of the same protocol.
 
 ### GPU candidate evidence and manual correction

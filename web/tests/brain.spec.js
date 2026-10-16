@@ -27,6 +27,7 @@ test('RGB plan matrix responds to text and energy; hop has actual flight and lan
   await page.getByLabel('Talk to Miso').fill('fetch the ball');
   await page.getByRole('button',{name:/Send/}).click();
   await page.waitForFunction(()=>window.arenaTelemetry.planner?.plan?.rows[0].skill==='retrieve');
+  expect(await page.evaluate(()=>window.arenaTelemetry.planner.model)).toBe('arena-rgb-transformer-v4');
   await expect(page.locator('#plan-rows tbody tr')).toHaveCount(6);
   await page.waitForFunction(()=>document.querySelector('#sensor-camera').naturalWidth===96);
   await page.locator('#play-energy').evaluate(el=>{el.value='5';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});

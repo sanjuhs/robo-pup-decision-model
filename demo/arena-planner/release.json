@@ -1,11 +1,19 @@
 {
-  "release": "arena-rgb-transformer-v2",
-  "weights_sha256": "e17d046cb211990fc2f9ba4cb466ae683084c98a03d4298729a3d93163395392",
-  "training_data_sha256": "7f8d7dcb945142b7726572bd7bf59aaa6e957975babb1296c6f8d98a9546f6d2",
-  "perception_initialization": "pixel.* copied from failed v1; only perception reused; fresh transformer seed 83",
-  "failed_v1_checkpoint_sha256": "a64de15fd8c8a48fb0d2c9b58fc80c135f0051b52ec6a04edb40e4f450d0e28e",
-  "provenance_limit": "Training ran from uncommitted development code; no source snapshot captured at start. Reports/configuration retained; exact bitwise reproduction is not asserted. Release source is committed alongside unchanged weights.",
-  "test": "benchmarks/multimodal-2026-10-16/planner-final-test.json",
-  "physical_goals": "benchmarks/multimodal-2026-10-16/rgb-final-goals.json",
-  "license": "MIT (project-authored scratch-trained weights)"
+  "release": "arena-rgb-transformer-v4",
+  "weights_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+  "parameters": 246712,
+  "checkpoint_bytes": 1011137,
+  "training_source_ref": "a6e55621120c342f6e2ba6abe58704c81b9b9a50",
+  "initialization": "v2 -> GPU-trained v3 -> v4 GPU transformer training -> CPU-only decision decoder refinement",
+  "parent_gpu_sha256": "904f503f45465b981155cfb34a02931f871fefd99d4a06f8e248e5ceee98b223",
+  "gpu_training_seconds": 101.13109323701065,
+  "cpu_decoder_seconds": 87.2568223950002,
+  "cpu_decoder_source_sha256": "d89c369ef62a74a117822670e0ea7f231a7d23ec403b0796971d11dcd5cf13e3",
+  "final_test": "benchmarks/gpu-planner-v4/candidate-final-test.json",
+  "physical_trials": "benchmarks/gpu-planner-v4/candidate-physical.json",
+  "checkpoint_selection": "GPU validation followed by decoder grammar-grid validation; fresh final test unused for selection/retraining",
+  "previous_default": "demo/arena-planner-v2",
+  "rejected_candidate": "demo/arena-planner-v3",
+  "application_checks": "30 Python +18 browser/render tests passed; browser asserted actual v4 version and completed physical fetch; hosted CI pending",
+  "license": "MIT"
 }

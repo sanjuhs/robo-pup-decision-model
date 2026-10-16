@@ -1,0 +1,16 @@
+[
+  {
+    "held_input": 0,
+    "intent": "fetch",
+    "first_skill": "retrieve",
+    "object": "ball",
+    "confidence": 0.9994627833366394
+  },
+  {
+    "held_input": 1,
+    "intent": "fetch",
+    "first_skill": "retrieve",
+    "object": "ball",
+    "confidence": 0.9988452196121216
+  }
+]

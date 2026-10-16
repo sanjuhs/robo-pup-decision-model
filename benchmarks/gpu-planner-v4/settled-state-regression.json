@@ -1,0 +1,26 @@
+[
+  {
+    "energy": 1,
+    "held_input": 0,
+    "intent": "fetch",
+    "first_skill": "retrieve",
+    "object": "ball",
+    "confidence": 0.9992282390594482
+  },
+  {
+    "energy": 1,
+    "held_input": 1,
+    "intent": "fetch",
+    "first_skill": "return",
+    "object": "home",
+    "confidence": 0.9993997812271118
+  },
+  {
+    "energy": 0.05,
+    "held_input": 0,
+    "intent": "fetch",
+    "first_skill": "rest",
+    "object": "none",
+    "confidence": 1.0
+  }
+]

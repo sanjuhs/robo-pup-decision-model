@@ -5,7 +5,65 @@ MuJoCo 3.3.7, PyTorch 2.9.0 CPU, four vectorized native environments, one PyTorc
 thread. This machine has no GPU. Other training/browser work overlapped some runs;
 these are development measurements, not isolated hardware benchmarks.
 
-## New trained multimodal controller (2026-10-16)
+## Current v4 GPU planner and independent comparison
+
+Raw records: [`gpu-planner-v4/`](../benchmarks/gpu-planner-v4), rejected candidate:
+[`gpu-planner-v3/`](../benchmarks/gpu-planner-v3). Both checkpoints see the same
+new seed-94871 test: all 500 mixed static/motion poses × 12 frozen new templates,
+6,000 task/state combinations, evaluator seed 384. Checkpoint selection used
+training validation; these final results did not trigger further training.
+
+| Metric | Prior v2 | Current v4 |
+| --- | ---: | ---: |
+| Intent accuracy | 91.667% | 100% |
+| First-action accuracy | 59.817% | 99.967% (2 errors / 6,000) |
+| Horizon skill accuracy | 61.867% | 99.975% |
+| Object accuracy | 85.947% | 99.95% |
+| Mean relative-offset error | 6.14 cm | 1.15 cm |
+| Visible-object centroid MAE vs segmentation | 7.10 cm | 7.10 cm |
+| Fresh physical goals | 24/24 | 24/24 |
+| Fetch, three matching starts | 74.44–77.36 s | 18.34–19.52 s |
+| Push, three matching starts | 11.78–14.78 s | 13.28–31.90 s |
+| Behind-ball, three matching starts | 30.14–96.16 s | 30.36–89.68 s |
+
+Physics seeds 707/808/909, 120-second limits and unchanged contact/pose/flight/
+return criteria; same CPU curious-v2 motor and analytic skill executor. This is
+one trained model per version and three varied starts per activity, not independent
+training seeds. Push took longer with v4. The earlier occluded-ball failures and
+all rejected-model trials remain visible. Current image classes are fixed coloured
+arena objects; the vision encoder was frozen from v2, so no new visual-domain
+recognition improvement is claimed.
+
+| Training/lifecycle stage | Actual measurement |
+| --- | --- |
+| v3 RTX 5090 optimization | 8,000 updates, batch 128, 95.49 s; fresh first action 96.867%, then rejected by settled held-state application test |
+| v4 failed bootstrap | PyPI request timeouts before training; no checkpoint, deleted; estimated GPU $0.1033 |
+| Corrected v4 RTX 5090 optimization | 8,000 updates, batch 128, 101.13 s; actual Torch 2.9.0+cu129, CUDA 12.9, device capability 12.0 |
+| v4 scene generation | 6,000 poses, seed 6119, half static / half after 20 physical steps; 46.93 s |
+| CPU decoder stage 1 | 2,500 updates, 18.90 s; validation/object/offset weaknesses retained |
+| Final CPU decoder stage | 10,000 updates, 87.26 s; only 6,739 parameters optimized, vision/transformer frozen; selected from grammar-grid validation |
+| Follow-up GPU estimates | v3 $0.1976 + failed v4 $0.1033 + successful v4 $0.1290 = **$0.4298** |
+| Aggregate session GPU estimate | Prior two attempts $0.2769 + follow-up $0.4298 = **$0.7068** of $30 ceiling |
+| Resource cleanup | All five own pods deleted and absent; no network volume or public port created |
+
+GPU estimates use create-to-delete elapsed time at confirmed $1.19/hour. They are
+not final receipts; storage reconciliation and new billing posting are pending.
+The provider Torch/CUDA stack comes from its image; all 52 project non-Torch
+runtime wheels were locally hash-verified and installed from explicit locked URLs.
+Hardware, driver, actual packages, utilization and source/data/init hashes are
+retained. Native physics and later deployment inference run on CPU. Timing of
+these different training recipes is not a controlled hardware-speedup comparison.
+
+Full local application validation passed 30 Python / 18 browser-render tests. The
+actual browser v4 fetch recording has 103 captured frames over 24.39 seconds using
+software WebGL; device/hardware mobile FPS remains unmeasured.
+
+Current v4 active-neural WebSocket probes advanced all independent worlds for five
+simulated seconds: minimum 0.814× real time across five sessions and 0.570× across
+ten. These short probes are not a two-hour workshop soak or browser FPS test;
+raw session timings are in the same v4 records directory.
+
+## Historical v2 trained multimodal controller (2026-10-16)
 
 Raw reports: [`multimodal-2026-10-16/`](../benchmarks/multimodal-2026-10-16).
 This entire extension used native CPU simulation/training and **$0 additional

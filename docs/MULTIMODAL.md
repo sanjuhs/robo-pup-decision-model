@@ -23,12 +23,52 @@ flowchart LR
   WORLD --> WEB[Three.js articulated puppy]
 ```
 
-## What was trained
+## Current v4 release
 
-`ScenePlanner` in `src/robopup/scene_planner.py` has **232,414 parameters**:
+The default `ArenaPlannerV4` has 246,712 parameters and a 1,011,137-byte checkpoint.
+It uses the same frozen arena pixel classifier and a GPU-trained fusion transformer
+for intent. A separate learned 6,739-parameter decoder maps predicted intent, energy,
+held state and slot index to skills, objects and offsets. This prevents nuisance
+motor values from changing action logits for a fixed predicted task and needs.
+Energy is linearly encoded as `(energy - 0.15) * 20`, centred on the existing virtual
+rest threshold. The decoder learns the task table from supervised grammar labels.
+This is a structured imitation model, with an analytic goal executor underneath.
+
+The v4 GPU run took 101.13 seconds for 8,000 steps, after initializing from v3.
+It used 6,000 seed-6119 poses: half static, half after 20 actual analytic-motion
+steps. Each sample supplies one RGB frame, not a learned video history. Energy
+and held state are crossed synthetically with poses for decision labels; these
+are not demonstrations of completed physical fetch trajectories. The decoder
+then received balanced synthetic task/state supervision on CPU for 87.26 seconds;
+vision and transformer weights were frozen. The first CPU-stage records and final
+normalized-stage selection are retained. All checkpoint selection used training
+validation before the fresh final test was opened.
+
+New final test: 500 seed-94871 mixed poses × 12 frozen new command templates,
+6,000 state/command samples. Intent 100%, first action 99.967%, horizon skills
+99.975%, object 99.95%, offset error 1.15 cm. Visible-object centroid error remains
+7.10 cm against segmentation centroids; perception was frozen. All 24 fresh
+physical trials passed, including three contact/lift/return/release fetches in
+18.34–19.52 simulated seconds. The same v2 baseline took 74.44–77.36 seconds.
+Push was slower (13.28–31.90 s vs 11.78–14.78 s). Small local tests do not prove
+arbitrary-language/visual/general navigation competence or calibrated confidence.
+
+v3's good language benchmark did not justify promotion: the unchanged settled-pose
+held=1 regression still returned retrieve. That checkpoint is retained as rejected.
+A v4 bootstrap failed on PyPI connectivity; its pod was deleted. The corrected
+retry used all 52 locally hash-verified direct wheel URLs. The full
+[protocol, failures, cost and results](GPU_PLANNER_EXPERIMENT.md) and
+[raw records](../benchmarks/gpu-planner-v4) distinguish each stage.
+
+The next section retains the earlier v2 training history; its test counts and
+metrics belong to that historical release.
+
+## Historical v2 training
+
+The historical `ScenePlanner` in `src/robopup/scene_planner.py` has **232,414 parameters**:
 small learned pixel classifier, object-centroid encoder, fixed word tokenizer,
 state encoder, two width-96 four-head transformer layers and six plan queries.
-The checkpoint is **946,381 bytes**, bundled at `demo/arena-planner/planner.pt`
+The checkpoint is **946,381 bytes**, archived at `demo/arena-planner-v2/planner.pt`
 with a SHA-256 sidecar, vocabulary, training report and release metadata.
 No pretrained third-party model weights are downloaded.
 
@@ -48,7 +88,7 @@ long-horizon task reward. The model is a fusion transformer, not an autoregressi
 LLM or the return-conditioned offline-RL Decision Transformer architecture.
 
 The first byte-tokenizer run failed held-out wording (68.3% intent accuracy).
-The deployed retry uses a word tokenizer and reuses only that run's pixel encoder.
+The historical deployed retry uses a word tokenizer and reuses only that run's pixel encoder.
 It achieved 100% validation intent accuracy and 99.2% first-action accuracy.
 An untouched final test used 400 new seed-927 scenes and 12 new phrase compositions:
 **97.875% intent, 89.542% first action, 89.25% horizon skills, 88.604% object choice**.
@@ -102,7 +142,7 @@ and specified task constants such as the crate goal `(3,0)`.
   can propose rest, and the executor uses recharge hysteresis before resuming.
 - Falls request a reset. Recovery and self-righting are not learned.
 
-The canonical eight activities passed **24/24 headless RGB trials** across seeds
+The historical v2 canonical eight activities passed **24/24 headless RGB trials** across seeds
 101, 202 and 303 with small initial yaw/object changes. Fetch took 71.86–78.16
 simulated seconds. This is a small local benchmark, not arbitrary-layout success.
 The original failed retrieval pilot is retained alongside the corrected trials.
@@ -140,7 +180,7 @@ and progress. New runs capture source/data/initialization hashes before training
 The actual v1/v2 experiments preceded that provenance capture: raw reports,
 seeds, data hashes and checkpoint lineage are retained, but their initial
 uncommitted source snapshot was not saved. Exact bitwise reproduction is not
-asserted. See `demo/arena-planner/release.json`.
+asserted. See `demo/arena-planner-v2/release.json`.
 
 The old `planner.py::MultimodalPlanner` remains an **untrained 769,149-parameter
 research scaffold** for image histories/byte tokens and different output heads.
@@ -153,3 +193,22 @@ A larger pretrained VLM needs a separate license/resource/evaluation decision;
 none is silently downloaded. The robo-jev inspiration is architectural: its
 audited README describes text sensory descriptions and Qwen3.5-2B LoRA judgments.
 Its weights/code and benchmark claims are not reproduced here.
+
+## Reproduce v4 training stages
+
+The archived v3 checkpoint is an explicitly rejected application model used as
+initialization, not a recommended demo controller. Only launch a paid pod with
+session authorization and the external lifecycle monitor.
+
+```bash
+python3 scripts/runpod_planner_experiment.py --candidate v4 --out artifacts/my-gpu-attempt
+# After retrieval/deletion; this trains only the small decoder on CPU.
+uv run python -m robopup.refine_decoder --source artifacts/my-gpu-attempt/runpod/planner-v4/weights --out artifacts/my-refined-brain
+uv run python -m robopup.planner_data --out artifacts/my-final-scenes --scenes 500 --seed 94871 --rollout-steps 20 --static-fraction .5
+uv run python -m robopup.evaluate_planner --model artifacts/my-refined-brain --data artifacts/my-final-scenes --curriculum v4 --out artifacts/my-final-test.json
+```
+
+The checked-in final set is now a regression benchmark for future changes; a new
+claim of untouched generalization requires another frozen test. Exact bitwise
+reproduction across different GPU drivers is not asserted. GPU packages/hashes,
+actual runtime, source/data hashes and decoder lineage are recorded.

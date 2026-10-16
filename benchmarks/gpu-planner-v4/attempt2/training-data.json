@@ -1,0 +1,11 @@
+{
+  "seed": 6119,
+  "scenes": 6000,
+  "rollout_steps_per_scene": 20,
+  "static_fraction": 0.5,
+  "seconds": 46.928768470999785,
+  "source": "actual orthographic MuJoCo RGB and segmentation; random scene poses",
+  "split": "first 80% train; remaining scenes validation; separate held-out instruction templates",
+  "sha256": "f1c7ca9b0cbde5a3fda03fd21960a7382c9651f8e5e0a1aea77978b304d376d7",
+  "privileged_labels": "Segmentation IDs are training labels only; no object coordinates enter live inference"
+}

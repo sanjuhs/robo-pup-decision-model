@@ -48,8 +48,12 @@ Heading and lateral drift are not penalized in this first reward.
 ## Decisions and physical skills
 
 The default `BrainSession` captures actual 96×96 RGB every 0.5 simulated seconds.
-The trained `ScenePlanner` fuses learned pixel/centroid tokens, word tokens and
-53 numeric inputs. Six query rows predict skills, object choice and metric offsets.
+The trained `ArenaPlannerV4` fuses learned pixel/centroid tokens, word tokens and
+53 numeric inputs. The fusion transformer predicts intent. A 6,739-parameter learned decoder receives
+that predicted intent, virtual energy, held state and slot index, and predicts six
+rows of skills/object choice/offsets. For fixed predicted task and needs, motor/yaw
+measurements cannot change its action logits. Energy uses a documented linear
+feature normalization `(energy - .15) * 20`. RGB grounds selected object targets.
 Chunk durations are fixed at one second; softmax scores are not calibrated.
 `GoalExecutor` persists the instruction, grounds targets in the robot's own pose,
 steers, checks contact/landing/return outcomes, and holds or stops on uncertainty,
@@ -114,9 +118,10 @@ worlds, TLS termination, or collaborative shared-world synchronization.
 
 ## Distinct model boundaries
 
-The trained 15,705-parameter PPO motor MLP, trained 232,414-parameter `ScenePlanner`
+The trained 15,705-parameter PPO motor MLP, trained 246,712-parameter `ArenaPlannerV4`
 and untrained 769,149-parameter historical `MultimodalPlanner` are distinct models.
-Only the first two have bundled trusted weights. The historical scaffold is not
+The motor/current v4 planner have bundled trusted weights. Historical v2 and
+rejected v3 planner checkpoints remain available for comparison. The historical scaffold is not
 imported by the arena server. See [model card](MODEL_CARD.md) and
 [training and evaluation](MULTIMODAL.md) for data, sizes and measured limitations.
 

@@ -1,0 +1,11 @@
+{
+  "release": "arena-rgb-transformer-v2",
+  "weights_sha256": "e17d046cb211990fc2f9ba4cb466ae683084c98a03d4298729a3d93163395392",
+  "training_data_sha256": "7f8d7dcb945142b7726572bd7bf59aaa6e957975babb1296c6f8d98a9546f6d2",
+  "perception_initialization": "pixel.* copied from failed v1; only perception reused; fresh transformer seed 83",
+  "failed_v1_checkpoint_sha256": "a64de15fd8c8a48fb0d2c9b58fc80c135f0051b52ec6a04edb40e4f450d0e28e",
+  "provenance_limit": "Training ran from uncommitted development code; no source snapshot captured at start. Reports/configuration retained; exact bitwise reproduction is not asserted. Release source is committed alongside unchanged weights.",
+  "test": "benchmarks/multimodal-2026-10-16/planner-final-test.json",
+  "physical_goals": "benchmarks/multimodal-2026-10-16/rgb-final-goals.json",
+  "license": "MIT (project-authored scratch-trained weights)"
+}

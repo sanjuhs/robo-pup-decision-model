@@ -26,7 +26,16 @@ def test_websocket_real_physics_and_invalid_controls():
             assert second["behavior"] == "approach"
             assert second["position"] != first["position"]
             ws.send_json({"forward": 100})
-            assert ws.receive_json()["type"] == "error"
+            # States stream independently of requests; an already queued frame
+            # may precede the rejection. Still require the actual validation
+            # error within five messages, rather than assuming response ordering.
+            for _ in range(5):
+                rejection = ws.receive_json()
+                if rejection["type"] == "error":
+                    break
+                assert rejection["type"] == "state"
+            assert rejection["type"] == "error"
+            assert rejection["message"] == "Invalid controls"
 
 
 def test_worlds_are_isolated():

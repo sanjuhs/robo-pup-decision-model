@@ -1,0 +1,288 @@
+[
+  {
+    "step": 0,
+    "seconds": 0.024204154004110023,
+    "validation": {
+      "first_skill": 0.9015151262283325,
+      "first_object": 0.8712121248245239,
+      "horizon_skill": 0.9053030014038086,
+      "object": 0.9204545617103577,
+      "offset_error_m": 0.18467475473880768
+    }
+  },
+  {
+    "step": 100,
+    "seconds": 0.9848000170022715,
+    "validation": {
+      "first_skill": 0.9469696879386902,
+      "first_object": 0.9015151262283325,
+      "horizon_skill": 0.939393937587738,
+      "object": 0.9217171669006348,
+      "offset_error_m": 0.039907630532979965
+    }
+  },
+  {
+    "step": 200,
+    "seconds": 1.822843128000386,
+    "validation": {
+      "first_skill": 0.9734848737716675,
+      "first_object": 0.9242424368858337,
+      "horizon_skill": 0.9564393758773804,
+      "object": 0.9343434572219849,
+      "offset_error_m": 0.03664803132414818
+    }
+  },
+  {
+    "step": 300,
+    "seconds": 2.587337288998242,
+    "validation": {
+      "first_skill": 0.9696969985961914,
+      "first_object": 0.9318181872367859,
+      "horizon_skill": 0.9526515007019043,
+      "object": 0.934974730014801,
+      "offset_error_m": 0.037395965307950974
+    }
+  },
+  {
+    "step": 400,
+    "seconds": 3.3363256380034727,
+    "validation": {
+      "first_skill": 0.9507575631141663,
+      "first_object": 0.9280303120613098,
+      "horizon_skill": 0.9558081030845642,
+      "object": 0.9381313323974609,
+      "offset_error_m": 0.039872873574495316
+    }
+  },
+  {
+    "step": 500,
+    "seconds": 4.098240698003792,
+    "validation": {
+      "first_skill": 0.9659090638160706,
+      "first_object": 0.9659090638160706,
+      "horizon_skill": 0.9741161465644836,
+      "object": 0.9577020406723022,
+      "offset_error_m": 0.03279433026909828
+    }
+  },
+  {
+    "step": 600,
+    "seconds": 4.8496629880028195,
+    "validation": {
+      "first_skill": 0.9621211886405945,
+      "first_object": 0.9810606241226196,
+      "horizon_skill": 0.9621211886405945,
+      "object": 0.9715909361839294,
+      "offset_error_m": 0.03202082961797714
+    }
+  },
+  {
+    "step": 700,
+    "seconds": 5.636098281000159,
+    "validation": {
+      "first_skill": 0.9507575631141663,
+      "first_object": 0.9242424368858337,
+      "horizon_skill": 0.9602272510528564,
+      "object": 0.9450757503509521,
+      "offset_error_m": 0.03908007591962814
+    }
+  },
+  {
+    "step": 800,
+    "seconds": 6.386293866002234,
+    "validation": {
+      "first_skill": 0.9886363744735718,
+      "first_object": 0.9734848737716675,
+      "horizon_skill": 0.9898989796638489,
+      "object": 0.9715909361839294,
+      "offset_error_m": 0.04009680449962616
+    }
+  },
+  {
+    "step": 900,
+    "seconds": 7.226401063002413,
+    "validation": {
+      "first_skill": 0.9810606241226196,
+      "first_object": 0.9772727489471436,
+      "horizon_skill": 0.9753788113594055,
+      "object": 0.9797979593276978,
+      "offset_error_m": 0.03535131365060806
+    }
+  },
+  {
+    "step": 1000,
+    "seconds": 7.921598544999142,
+    "validation": {
+      "first_skill": 0.9734848737716675,
+      "first_object": 0.9318181872367859,
+      "horizon_skill": 0.9678030014038086,
+      "object": 0.9457070827484131,
+      "offset_error_m": 0.044642623513936996
+    }
+  },
+  {
+    "step": 1100,
+    "seconds": 8.667858032997174,
+    "validation": {
+      "first_skill": 0.9848484992980957,
+      "first_object": 0.9810606241226196,
+      "horizon_skill": 0.9804292917251587,
+      "object": 0.9835858345031738,
+      "offset_error_m": 0.029496269300580025
+    }
+  },
+  {
+    "step": 1200,
+    "seconds": 9.389992426004028,
+    "validation": {
+      "first_skill": 0.9810606241226196,
+      "first_object": 0.9848484992980957,
+      "horizon_skill": 0.9842171669006348,
+      "object": 0.9785353541374207,
+      "offset_error_m": 0.03131435811519623
+    }
+  },
+  {
+    "step": 1300,
+    "seconds": 10.128895777001162,
+    "validation": {
+      "first_skill": 0.9848484992980957,
+      "first_object": 0.9659090638160706,
+      "horizon_skill": 0.9595959782600403,
+      "object": 0.9640151262283325,
+      "offset_error_m": 0.03471984341740608
+    }
+  },
+  {
+    "step": 1400,
+    "seconds": 10.844492203003028,
+    "validation": {
+      "first_skill": 0.9621211886405945,
+      "first_object": 0.9924242496490479,
+      "horizon_skill": 0.9652777910232544,
+      "object": 0.9930555820465088,
+      "offset_error_m": 0.04411466047167778
+    }
+  },
+  {
+    "step": 1500,
+    "seconds": 11.593798750000133,
+    "validation": {
+      "first_skill": 0.9545454382896423,
+      "first_object": 0.9545454382896423,
+      "horizon_skill": 0.9431818127632141,
+      "object": 0.9545454382896423,
+      "offset_error_m": 0.036762021481990814
+    }
+  },
+  {
+    "step": 1600,
+    "seconds": 12.30531578099908,
+    "validation": {
+      "first_skill": 0.9734848737716675,
+      "first_object": 0.9848484992980957,
+      "horizon_skill": 0.9709596037864685,
+      "object": 0.9898989796638489,
+      "offset_error_m": 0.028023870661854744
+    }
+  },
+  {
+    "step": 1700,
+    "seconds": 13.037215319003735,
+    "validation": {
+      "first_skill": 0.9962121248245239,
+      "first_object": 0.9659090638160706,
+      "horizon_skill": 0.9880050420761108,
+      "object": 0.9854797720909119,
+      "offset_error_m": 0.03248771280050278
+    }
+  },
+  {
+    "step": 1800,
+    "seconds": 13.800945492999745,
+    "validation": {
+      "first_skill": 0.9734848737716675,
+      "first_object": 0.9583333134651184,
+      "horizon_skill": 0.9722222089767456,
+      "object": 0.9678030014038086,
+      "offset_error_m": 0.035267505794763565
+    }
+  },
+  {
+    "step": 1900,
+    "seconds": 14.515192250997643,
+    "validation": {
+      "first_skill": 0.9962121248245239,
+      "first_object": 0.9924242496490479,
+      "horizon_skill": 0.9930555820465088,
+      "object": 0.9943181872367859,
+      "offset_error_m": 0.027483971789479256
+    }
+  },
+  {
+    "step": 2000,
+    "seconds": 15.251798006000172,
+    "validation": {
+      "first_skill": 0.9848484992980957,
+      "first_object": 0.9810606241226196,
+      "horizon_skill": 0.9842171669006348,
+      "object": 0.9898989796638489,
+      "offset_error_m": 0.038071487098932266
+    }
+  },
+  {
+    "step": 2100,
+    "seconds": 15.956657062000886,
+    "validation": {
+      "first_skill": 0.9848484992980957,
+      "first_object": 0.9810606241226196,
+      "horizon_skill": 0.9867424368858337,
+      "object": 0.9854797720909119,
+      "offset_error_m": 0.03668977692723274
+    }
+  },
+  {
+    "step": 2200,
+    "seconds": 16.712573181001062,
+    "validation": {
+      "first_skill": 1.0,
+      "first_object": 0.9848484992980957,
+      "horizon_skill": 0.9993686676025391,
+      "object": 0.9842171669006348,
+      "offset_error_m": 0.03686188906431198
+    }
+  },
+  {
+    "step": 2300,
+    "seconds": 17.440731290000258,
+    "validation": {
+      "first_skill": 0.9962121248245239,
+      "first_object": 0.9772727489471436,
+      "horizon_skill": 0.9962121248245239,
+      "object": 0.9848484992980957,
+      "offset_error_m": 0.03535693883895874
+    }
+  },
+  {
+    "step": 2400,
+    "seconds": 18.16526225000416,
+    "validation": {
+      "first_skill": 1.0,
+      "first_object": 0.9810606241226196,
+      "horizon_skill": 0.9886363744735718,
+      "object": 0.9722222089767456,
+      "offset_error_m": 0.027216745540499687
+    }
+  },
+  {
+    "step": 2499,
+    "seconds": 18.89624058300251,
+    "validation": {
+      "first_skill": 0.9318181872367859,
+      "first_object": 0.9848484992980957,
+      "horizon_skill": 0.9457070827484131,
+      "object": 0.9898989796638489,
+      "offset_error_m": 0.038492508232593536
+    }
+  }
+]

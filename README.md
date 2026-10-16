@@ -8,11 +8,11 @@ fresh PPO policies, and inspectable experiment results. Inspired by
 and motor control. Miso now has a trained camera/text/state transformer,
 physical skills, and a visible six-row plan.
 
-![Actual browser arena with camera-grounded plans and measured hop completion](docs/assets/arena-brain.png)
+![Actual browser arena with camera-grounded plans and measured hop completion](docs/assets/gpu-planner-arena.png)
 
-[Watch a complete, unsped browser fetch](docs/assets/multimodal-fetch.webm):
+[Watch a complete, unsped browser fetch](docs/assets/gpu-planner-fetch.webm):
 actual contact, lift, return and release, with the camera and plan panel visible.
-[Recording evidence](benchmarks/multimodal-2026-10-16/browser-recording.json).
+[Recording evidence](benchmarks/gpu-planner-v4/browser-recording.json).
 
 **Prototype, not a hardware controller.** The local arena runs on CPU; optional
 MJX physics runs on GPU. PPO learns joint-target residuals around an analytic trot,
@@ -21,9 +21,9 @@ starting with fresh network weights. No pretrained weights are required for trai
 An RTX 5090 experiment completed **1,048,576 steps in 121.7 seconds**, then averaged
 **0.337 m/s with no falls in five 12-second native-CPU trials**. Both CPU and
 GPU-trained demo checkpoints are included. See the [raw benchmark evidence](docs/BENCHMARKS.md)
-for compilation/setup time, a failed attempt, costs, and limits. The newer
-multimodal controller passed **24/24 varied-start trials** across approach, behind,
-fetch, push, follow, walk, run and hop. These are small arena tests; general
+for compilation/setup time, a failed attempt, costs, and limits. The current
+v4 multimodal controller passed **24/24 fresh varied-start trials** across
+approach, behind, fetch, push, follow, walk, run and hop. These are small arena tests; general
 vision/language, learned recovery and Jev integration remain incomplete.
 
 ![Actual GPU-trained policy wearing the golden-puppy skin](docs/assets/puppy-walk.gif)
@@ -99,31 +99,41 @@ the critic and training state. Bundled files are **219 KiB** (CPU curious-v2) an
 **254 KiB** (RTX 5090). Weights are in this repository's `demo/` directories,
 copied into local `artifacts/` by setup. Nothing is hosted on Hugging Face.
 
-The **trained arena planner is a separate 232,414-parameter transformer** with a
-946,381-byte checkpoint at `demo/arena-planner/`. It consumes 96×96 MuJoCo RGB,
+The **trained arena planner is a separate 246,712-parameter transformer** with a
+1,011,137-byte checkpoint at `demo/arena-planner/`. It consumes 96×96 MuJoCo RGB,
 word tokens and 53 state values. It replans six skill/target slots every half
 simulated second; the executor keeps working toward the goal and checks outcomes.
 The planner uses supervised imitation; PPO trains the motor layer. No general VLM,
 remote model service or Hugging Face hosting is involved.
 
-Fresh-scene/wording testing measured **97.875% intent and 89.542% first-action
-accuracy**; fetch wording is a known weakness. Final physical trials used canonical
-commands, three starts per activity. Fetch took 72–78 simulated seconds with
-contact, lift, return and release verified; hop had 0.28–0.30 seconds of flight.
-Multimodal training took about 17 minutes across two CPU runs and used **$0 new
-Runpod spend**. See the [model card](docs/MODEL_CARD.md),
-[implementation and reproduction commands](docs/MULTIMODAL.md), and
-[raw records](benchmarks/multimodal-2026-10-16).
+The current **v4** checkpoint uses a GPU-trained transformer and a small learned
+task/needs decoder. On the same new 6,000 scene/command/state samples, first-action
+accuracy improved from **59.817% (v2) to 99.967% (v4)**; intent accuracy improved
+from **91.667% to 100%**. The 12 final phrase compositions and 500 mixed static /
+motion scenes were frozen separately from training and validation.
 
-The previous **769,149-parameter `MultimodalPlanner`** remains an untrained research
-scaffold. It is distinct from the trained `ScenePlanner` running in the arena.
-The Python backend is still required: a fully offline browser/phone bundle and
-photoreal canine rig have not been built.
+Both models passed **24/24 fresh physical trials**. Fetch improved from
+74–77 to **18–20 simulated seconds** on those same three starts. Push took
+13–32 seconds with v4 versus 12–15 seconds with v2. These small tests do not
+establish general vision/language or arbitrary-layout manipulation.
 
-A further **user-authorized RTX 5090 planner experiment** is being prepared inside
-the same $30 total ceiling. The current demo remains the tested v2 checkpoint;
-candidate architecture/smoke checks are not evidence of improved task success.
-See [the capped experiment protocol](docs/RUNPOD.md#newly-authorized-planner-experiment-2026-10-16).
+Actual RTX 5090 training: v3 **95.49 s**, v4 **101.13 s**, 8,000 updates each.
+The v3 model was rejected after a held-state application regression. A v4 bootstrap
+attempt failed on PyPI networking and was deleted; the successful retry uses
+hash-verified direct wheels. The final 6,739-parameter decoder was refined on CPU
+for 87.26 s with vision/transformer frozen, before opening the fresh final test.
+All five session pods are deleted and their absence verified. Follow-up GPU
+estimate **$0.43**, aggregate session GPU estimate **$0.71** within the $30 ceiling;
+final invoices/storage reconciliation remain pending. See the
+[complete experiment and failed runs](docs/GPU_PLANNER_EXPERIMENT.md),
+[model card](docs/MODEL_CARD.md), and [raw records](benchmarks/gpu-planner-v4).
+
+The previous default v2 is archived at `demo/arena-planner-v2/`; rejected v3 is at
+`demo/arena-planner-v3/`. The **769,149-parameter `MultimodalPlanner`** remains an
+untrained historical scaffold, separate from the live v4 architecture.
+The Python backend is required; a browser-only phone bundle and photoreal canine
+rig remain future work. Walk/run/hop and steering still use analytic physical
+controllers alongside PPO straight-trot residuals.
 
 ## Train your first policy
 

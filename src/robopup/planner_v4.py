@@ -18,8 +18,9 @@ VERSION = "arena-rgb-transformer-v4"
 class ArenaPlannerV4(ArenaPlannerV3):
     version = VERSION
 
-    def __init__(self, width=96, layers=2):
+    def __init__(self, width=96, layers=2, energy_center=0.0, energy_scale=1.0):
         super().__init__(width=width, layers=layers)
+        self.energy_center, self.energy_scale = energy_center, energy_scale
         del self.skill, self.object, self.offset
         self.decision = nn.Sequential(
             nn.Linear(len(INTENTS) + 2 + 6, 64),
@@ -29,10 +30,22 @@ class ArenaPlannerV4(ArenaPlannerV3):
             nn.Linear(64, len(PLAN_SKILLS) + 5 + 2),
         )
 
+    def decision_context(self, task, energy, held):
+        return torch.cat(
+            (
+                task,
+                ((energy - self.energy_center) * self.energy_scale)[:, None],
+                held[:, None].float(),
+            ),
+            dim=-1,
+        )
+
     def decode_plan(self, plan, hidden, objects, pixels, states):
         intent = self.intent(hidden[:, -1])
         task = F.one_hot(intent.argmax(-1), num_classes=len(INTENTS)).float()
-        inputs = torch.cat((task, states[:, 50:52]), dim=-1)[:, None].expand(-1, 6, -1)
+        inputs = self.decision_context(task, states[:, 50], states[:, 51])[:, None].expand(
+            -1, 6, -1
+        )
         slots = torch.eye(6, device=states.device, dtype=states.dtype)[None].expand(
             len(states), -1, -1
         )
