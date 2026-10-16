@@ -1,0 +1,2827 @@
+{
+  "oracle": true,
+  "motor": "PPO hybrid",
+  "wall_seconds": 2.9423576299959677,
+  "trials": [
+    {
+      "intent": "approach",
+      "seed": 123,
+      "success": true,
+      "seconds": 5.479999999999895,
+      "position": [
+        1.341955869977019,
+        -0.8212406948703802,
+        0.38092678508172517
+      ],
+      "upright": 0.9993987807695913,
+      "ball": [
+        1.667605490659488,
+        -1.083943457111292,
+        0.11979078458483922
+      ],
+      "ball_touched": true,
+      "held": false,
+      "ever_held": false,
+      "maximum_ball_height": 0.0,
+      "grasp_count": 0,
+      "jump_max_height": 0.0,
+      "jump_flight_seconds": 0.0,
+      "follow_error_m": 1.9364761154503423,
+      "reason": "Ball contact verified in MuJoCo",
+      "trace": [
+        {
+          "time": 0.0,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              1.6957809631483498,
+              -1.078778707610976
+            ],
+            "object_delta": [
+              1.6957809631483498,
+              -1.078778707610976
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            -0.029634657507682818,
+            -0.005113330557240507,
+            0.39136672946521467
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 0.5,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              1.6356025629891178,
+              -1.0559085117182334
+            ],
+            "object_delta": [
+              1.6356025629891178,
+              -1.0559085117182334
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.030543742651549143,
+            -0.027983526449983247,
+            0.38780264726141817
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 1.02,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              1.5730236341301433,
+              -1.0208518075773558
+            ],
+            "object_delta": [
+              1.5730236341301433,
+              -1.0208518075773558
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.09312267151052353,
+            -0.06304023059086082,
+            0.38824044331074237
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 1.54,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              1.4703955640360376,
+              -0.9525326552491238
+            ],
+            "object_delta": [
+              1.4703955640360376,
+              -0.9525326552491238
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.19575074160462932,
+            -0.13135938291909294,
+            0.3833384423509215
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 2.06,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              1.3017832033052321,
+              -0.8605672591150025
+            ],
+            "object_delta": [
+              1.3017832033052321,
+              -0.8605672591150025
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.36436310233543473,
+            -0.22332477905321416,
+            0.3867712203295445
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 2.58,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              1.0973126903596473,
+              -0.7634350800940333
+            ],
+            "object_delta": [
+              1.0973126903596473,
+              -0.7634350800940333
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.5688336152810195,
+            -0.32045695807418334,
+            0.3902952268506563
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 3.1,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              1.0526009089641843,
+              -0.7207824352307872
+            ],
+            "object_delta": [
+              1.0526009089641843,
+              -0.7207824352307872
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.6135453966764824,
+            -0.36310960293742944,
+            0.38057700600614364
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 3.62,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              0.9095474224992599,
+              -0.621167972471895
+            ],
+            "object_delta": [
+              0.9095474224992599,
+              -0.621167972471895
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.756598883141407,
+            -0.4627240656963216,
+            0.39401110839836967
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 4.14,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              0.7098047303600885,
+              -0.522092528490237
+            ],
+            "object_delta": [
+              0.7098047303600885,
+              -0.522092528490237
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.9563415752805784,
+            -0.5617995096779796,
+            0.394325440027902
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 4.66,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              0.5867509178014683,
+              -0.42238969068967347
+            ],
+            "object_delta": [
+              0.5867509178014683,
+              -0.42238969068967347
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.0793953878391986,
+            -0.6615023474785432,
+            0.3943444515100771
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 5.18,
+          "intent": "approach",
+          "row": {
+            "skill": "approach",
+            "object": "ball",
+            "delta": [
+              0.42460353794638417,
+              -0.30337136437157364
+            ],
+            "object_delta": [
+              0.42460353794638417,
+              -0.30337136437157364
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.2415427676942827,
+            -0.780520673796643,
+            0.38697718143655624
+          ],
+          "phase": "planning",
+          "held": false
+        }
+      ]
+    },
+    {
+      "intent": "fetch",
+      "seed": 123,
+      "success": true,
+      "seconds": 16.42000000000092,
+      "position": [
+        0.20293432478433618,
+        -0.18413160294010034,
+        0.39122981929893463
+      ],
+      "upright": 0.9999969269764392,
+      "ball": [
+        -0.12348658958458607,
+        0.4612907969240541,
+        0.1198776616914911
+      ],
+      "ball_touched": true,
+      "held": false,
+      "ever_held": true,
+      "maximum_ball_height": 0.3397731962501058,
+      "grasp_count": 1,
+      "jump_max_height": 0.0,
+      "jump_flight_seconds": 0.0,
+      "follow_error_m": 2.1521181877675355,
+      "reason": "Fetch complete: contact, lift, return and release verified",
+      "trace": [
+        {
+          "time": 0.0,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              1.6957809631483498,
+              -1.078778707610976
+            ],
+            "object_delta": [
+              1.6957809631483498,
+              -1.078778707610976
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            -0.029634657507682818,
+            -0.005113330557240507,
+            0.39136672946521467
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 0.5,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              1.636067837955061,
+              -1.0570550425946266
+            ],
+            "object_delta": [
+              1.636067837955061,
+              -1.0570550425946266
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.030078467685605924,
+            -0.02683699557359013,
+            0.38764667795693175
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 1.02,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              1.5772091071147671,
+              -1.0208138104811428
+            ],
+            "object_delta": [
+              1.5772091071147671,
+              -1.0208138104811428
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.08893719852589965,
+            -0.06307822768707382,
+            0.3881581327773509
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 1.54,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              1.4854478108770766,
+              -0.9751223488017756
+            ],
+            "object_delta": [
+              1.4854478108770766,
+              -0.9751223488017756
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.1806984947635904,
+            -0.10876968936644103,
+            0.38329877902386333
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 2.06,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              1.350027553713107,
+              -0.9002595393436954
+            ],
+            "object_delta": [
+              1.350027553713107,
+              -0.9002595393436954
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.31611875192755984,
+            -0.18363249882452132,
+            0.3881789981599609
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 2.58,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              1.1493838316611327,
+              -0.7995029498123194
+            ],
+            "object_delta": [
+              1.1493838316611327,
+              -0.7995029498123194
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.5167624739795341,
+            -0.2843890883558973,
+            0.39058727042487784
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 3.1,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              1.0376575854366852,
+              -0.7060361125772889
+            ],
+            "object_delta": [
+              1.0376575854366852,
+              -0.7060361125772889
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.6284887202039817,
+            -0.37785592559092773,
+            0.3861475020006188
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 3.62,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              0.8685139411687306,
+              -0.5888296482040811
+            ],
+            "object_delta": [
+              0.8685139411687306,
+              -0.5888296482040811
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.7976323644719363,
+            -0.4950623899641356,
+            0.3937646650764148
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 4.14,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              0.673976608158468,
+              -0.48676531564067793
+            ],
+            "object_delta": [
+              0.673976608158468,
+              -0.48676531564067793
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.9921696974821989,
+            -0.5971267225275387,
+            0.39610779442812044
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 4.66,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              0.6350213772774365,
+              -0.44476298741169595
+            ],
+            "object_delta": [
+              0.6350213772774365,
+              -0.44476298741169595
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.0311249283632304,
+            -0.6391290507565207,
+            0.3926141088438448
+          ],
+          "phase": "retrieving",
+          "held": false
+        },
+        {
+          "time": 5.18,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.1809433595553744,
+              0.7334489602037024
+            ],
+            "object_delta": [
+              -1.1809433595553744,
+              0.7334489602037024
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.1809433595553744,
+            -0.7334489602037024,
+            0.3897201987494672
+          ],
+          "phase": "retrieving",
+          "held": true
+        },
+        {
+          "time": 5.7,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.3055463795502014,
+              0.7751815919377913
+            ],
+            "object_delta": [
+              -1.3055463795502014,
+              0.7751815919377913
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3055463795502014,
+            -0.7751815919377913,
+            0.4066754470574122
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 6.22,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.2944398400902701,
+              0.7702141172298067
+            ],
+            "object_delta": [
+              -1.2944398400902701,
+              0.7702141172298067
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.2944398400902701,
+            -0.7702141172298067,
+            0.3889987305774988
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 6.74,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.3167473748871639,
+              0.7995890672914909
+            ],
+            "object_delta": [
+              -1.3167473748871639,
+              0.7995890672914909
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3167473748871639,
+            -0.7995890672914909,
+            0.3872770296613743
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 7.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.3081429421468131,
+              0.8108806871038629
+            ],
+            "object_delta": [
+              -1.3081429421468131,
+              0.8108806871038629
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3081429421468131,
+            -0.8108806871038629,
+            0.3838642741355616
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 7.76,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.309112092091688,
+              0.847500116031503
+            ],
+            "object_delta": [
+              -1.309112092091688,
+              0.847500116031503
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.309112092091688,
+            -0.847500116031503,
+            0.3857408148057189
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 8.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.3086441681158019,
+              0.8673148765611248
+            ],
+            "object_delta": [
+              -1.3086441681158019,
+              0.8673148765611248
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3086441681158019,
+            -0.8673148765611248,
+            0.3874728996637684
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 8.76,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.2933266784806492,
+              0.8835090531093407
+            ],
+            "object_delta": [
+              -1.2933266784806492,
+              0.8835090531093407
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.2933266784806492,
+            -0.8835090531093407,
+            0.3849080699675296
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 9.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.2590372015380367,
+              0.9107879946637223
+            ],
+            "object_delta": [
+              -1.2590372015380367,
+              0.9107879946637223
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.2590372015380367,
+            -0.9107879946637223,
+            0.38488790091570513
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 9.76,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.2264110139987152,
+              0.9215967702111637
+            ],
+            "object_delta": [
+              -1.2264110139987152,
+              0.9215967702111637
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.2264110139987152,
+            -0.9215967702111637,
+            0.3837718783800446
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 10.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.1908276790070431,
+              0.9331663055612612
+            ],
+            "object_delta": [
+              -1.1908276790070431,
+              0.9331663055612612
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.1908276790070431,
+            -0.9331663055612612,
+            0.3849071459253083
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 10.76,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.17399463338789,
+              0.9117845363494845
+            ],
+            "object_delta": [
+              -1.17399463338789,
+              0.9117845363494845
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.17399463338789,
+            -0.9117845363494845,
+            0.3869835534542432
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 11.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -1.096148055228744,
+              0.887940628822701
+            ],
+            "object_delta": [
+              -1.096148055228744,
+              0.887940628822701
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.096148055228744,
+            -0.887940628822701,
+            0.38551408840596624
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 11.76,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -0.9954357171241501,
+              0.806960906074721
+            ],
+            "object_delta": [
+              -0.9954357171241501,
+              0.806960906074721
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.9954357171241501,
+            -0.806960906074721,
+            0.38896564341603845
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 12.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -0.8979144353764006,
+              0.7310640301154144
+            ],
+            "object_delta": [
+              -0.8979144353764006,
+              0.7310640301154144
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.8979144353764006,
+            -0.7310640301154144,
+            0.38226590797438414
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 12.76,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -0.7244883426476518,
+              0.6009361959256622
+            ],
+            "object_delta": [
+              -0.7244883426476518,
+              0.6009361959256622
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.7244883426476518,
+            -0.6009361959256622,
+            0.381006389081161
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 13.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -0.5677762567079099,
+              0.46949235570982195
+            ],
+            "object_delta": [
+              -0.5677762567079099,
+              0.46949235570982195
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.5677762567079099,
+            -0.46949235570982195,
+            0.3899842210078426
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 13.76,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -0.47485236581224705,
+              0.40280426437846173
+            ],
+            "object_delta": [
+              -0.47485236581224705,
+              0.40280426437846173
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.47485236581224705,
+            -0.40280426437846173,
+            0.38271912540282477
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 14.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -0.3164527119332149,
+              0.28851017973383336
+            ],
+            "object_delta": [
+              -0.3164527119332149,
+              0.28851017973383336
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.3164527119332149,
+            -0.28851017973383336,
+            0.3824584052820883
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 14.76,
+          "intent": "fetch",
+          "row": {
+            "skill": "return",
+            "object": "home",
+            "delta": [
+              -0.23204192009305205,
+              0.22065925535372286
+            ],
+            "object_delta": [
+              -0.23204192009305205,
+              0.22065925535372286
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.23204192009305205,
+            -0.22065925535372286,
+            0.3870371166675179
+          ],
+          "phase": "returning",
+          "held": true
+        },
+        {
+          "time": 15.26,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              -0.40192869564970096,
+              0.4416114522264123
+            ],
+            "object_delta": [
+              -0.40192869564970096,
+              0.4416114522264123
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.19629780086678308,
+            -0.1857404005556393,
+            0.3864912791739747
+          ],
+          "phase": "release",
+          "held": false
+        },
+        {
+          "time": 15.78,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              -0.3651891866649132,
+              0.5418216046233953
+            ],
+            "object_delta": [
+              -0.3651891866649132,
+              0.5418216046233953
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.20177994464839416,
+            -0.18355419714583823,
+            0.3910912111932656
+          ],
+          "phase": "release",
+          "held": false
+        },
+        {
+          "time": 16.3,
+          "intent": "fetch",
+          "row": {
+            "skill": "retrieve",
+            "object": "ball",
+            "delta": [
+              -0.3331425709056234,
+              0.6272525358246619
+            ],
+            "object_delta": [
+              -0.3331425709056234,
+              0.6272525358246619
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.20272888400252645,
+            -0.18402855348323185,
+            0.39121826137449095
+          ],
+          "phase": "release",
+          "held": false
+        }
+      ]
+    },
+    {
+      "intent": "push",
+      "seed": 123,
+      "success": true,
+      "seconds": 22.0399999999998,
+      "position": [
+        2.459426106309004,
+        -0.15935259638409438,
+        0.3861523257480739
+      ],
+      "upright": 0.9998558496689984,
+      "ball": [
+        1.666146305640667,
+        -1.0838920381682167,
+        0.11987426961354078
+      ],
+      "ball_touched": false,
+      "held": false,
+      "ever_held": false,
+      "maximum_ball_height": 0.0,
+      "grasp_count": 0,
+      "jump_max_height": 0.0,
+      "jump_flight_seconds": 0.0,
+      "follow_error_m": 1.2470648699649882,
+      "reason": "Crate-to-ring position verified",
+      "trace": [
+        {
+          "time": 0.0,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              1.4349462007172757,
+              -0.09211489911458241
+            ],
+            "object_delta": [
+              1.4349462007172757,
+              -0.09211489911458241
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            -0.029634657507682818,
+            -0.005113330557240507,
+            0.39136672946521467
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 0.5,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              1.2938679432050113,
+              -0.08262418901268002
+            ],
+            "object_delta": [
+              1.2938679432050113,
+              -0.08262418901268002
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.11144360000458144,
+            -0.014604040659142895,
+            0.3848325067020042
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 1.02,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              1.072115755683533,
+              -0.09071900404638474
+            ],
+            "object_delta": [
+              1.072115755683533,
+              -0.09071900404638474
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.3331957875260599,
+            -0.006509225625438184,
+            0.3835104560954875
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 1.54,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.8613665809798722,
+              -0.08027206394836567
+            ],
+            "object_delta": [
+              0.8613665809798722,
+              -0.08027206394836567
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.5439449622297207,
+            -0.016956165723457248,
+            0.3862187551650339
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 2.06,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.6362805312127998,
+              -0.07689772498862113
+            ],
+            "object_delta": [
+              0.6362805312127998,
+              -0.07689772498862113
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.769031011996793,
+            -0.020330504683201793,
+            0.3887349582688623
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 2.58,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.5826194388117903,
+              -0.08568457766020218
+            ],
+            "object_delta": [
+              0.5826194388117903,
+              -0.08568457766020218
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.9003962446366603,
+            -0.010795795722348907,
+            0.3854056354605807
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 3.1,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.5567176428408069,
+              -0.10436601737906386
+            ],
+            "object_delta": [
+              0.5567176428408069,
+              -0.10436601737906386
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.0073592629738422,
+            -0.022698250300739395,
+            0.38992451442884635
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 3.62,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.5159568661676326,
+              -0.1336801105115361
+            ],
+            "object_delta": [
+              0.5159568661676326,
+              -0.1336801105115361
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.1303415914782053,
+            -0.025818053132467097,
+            0.39145299068200723
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 4.14,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.5009501298851757,
+              -0.16790772906800908
+            ],
+            "object_delta": [
+              0.5009501298851757,
+              -0.16790772906800908
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.2616835664088635,
+            -0.05308924762113291,
+            0.39689949256484175
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 4.66,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.478998060550887,
+              -0.21787948837335558
+            ],
+            "object_delta": [
+              0.478998060550887,
+              -0.21787948837335558
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.2900449306367885,
+            -0.008138180835522415,
+            0.3971372824517636
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 5.18,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.46598282810329383,
+              -0.21733399975351841
+            ],
+            "object_delta": [
+              0.46598282810329383,
+              -0.21733399975351841
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3129464949491887,
+            -0.036560000900750914,
+            0.39768881925488325
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 5.7,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4953386145926839,
+              -0.2409494223570704
+            ],
+            "object_delta": [
+              0.4953386145926839,
+              -0.2409494223570704
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.320230566551839,
+            -0.06814521394308469,
+            0.39719527640945534
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 6.22,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4943127127345115,
+              -0.22427598787065248
+            ],
+            "object_delta": [
+              0.4943127127345115,
+              -0.22427598787065248
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3458674326086477,
+            -0.10638638756458121,
+            0.3906466380613547
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 6.74,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.49227789469117167,
+              -0.18405344267771165
+            ],
+            "object_delta": [
+              0.49227789469117167,
+              -0.18405344267771165
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3523870923982653,
+            -0.15295087205902005,
+            0.389832631525831
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 7.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.45794614778773846,
+              -0.14362010323545632
+            ],
+            "object_delta": [
+              0.45794614778773846,
+              -0.14362010323545632
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3868227004108162,
+            -0.19330974389077465,
+            0.38462664848379674
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 7.76,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4979841068078883,
+              -0.11175505282263992
+            ],
+            "object_delta": [
+              0.4979841068078883,
+              -0.11175505282263992
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3467847414004013,
+            -0.22517479429645737,
+            0.38468230519812374
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 8.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.5156951259882006,
+              -0.052342569713224596
+            ],
+            "object_delta": [
+              0.5156951259882006,
+              -0.052342569713224596
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.329073722220089,
+            -0.2845872774058727,
+            0.38637901234095823
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 8.76,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.5075688073908367,
+              -0.016845127100008905
+            ],
+            "object_delta": [
+              0.5075688073908367,
+              -0.016845127100008905
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.337200040817453,
+            -0.3200847200190884,
+            0.3863307856976218
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 9.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4966160021861392,
+              0.041596079718647816
+            ],
+            "object_delta": [
+              0.4966160021861392,
+              0.041596079718647816
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3481528460221504,
+            -0.3785259268377451,
+            0.38643522090884563
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 9.76,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.481950510092654,
+              0.06576608797963651
+            ],
+            "object_delta": [
+              0.481950510092654,
+              0.06576608797963651
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.3628183381156356,
+            -0.4026959350987338,
+            0.3869140131848027
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 10.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4331816490289475,
+              0.12754603755911137
+            ],
+            "object_delta": [
+              0.4331816490289475,
+              0.12754603755911137
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.411587199179342,
+            -0.46447588467820866,
+            0.3876369252145618
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 10.76,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4399029316143894,
+              0.14819727712285957
+            ],
+            "object_delta": [
+              0.4399029316143894,
+              0.14819727712285957
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.4122488088391802,
+            -0.47698180952653113,
+            0.3852414574334628
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 11.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4117520077258685,
+              0.2339861543041984
+            ],
+            "object_delta": [
+              0.4117520077258685,
+              0.2339861543041984
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.4849313909804849,
+            -0.5101712139775909,
+            0.3847378289152787
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 11.76,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4190513652208152,
+              0.26545347802713776
+            ],
+            "object_delta": [
+              0.4190513652208152,
+              0.26545347802713776
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.4868452925835733,
+            -0.5174167099340626,
+            0.38451811446617334
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 12.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4376841178253763,
+              0.2651284551817301
+            ],
+            "object_delta": [
+              0.4376841178253763,
+              0.2651284551817301
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.5134910073258023,
+            -0.4929391377111634,
+            0.3838455533678922
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 12.76,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.4348279718580146,
+              0.2515355163387535
+            ],
+            "object_delta": [
+              0.4348279718580146,
+              0.2515355163387535
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.586538320585188,
+            -0.4454181527960818,
+            0.38028092251993056
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 13.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.3536779495696316,
+              0.21454694495221513
+            ],
+            "object_delta": [
+              0.3536779495696316,
+              0.21454694495221513
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.6741692489624533,
+            -0.41112077771694394,
+            0.38644367354032366
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 13.76,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.293479630125957,
+              0.16798007218042324
+            ],
+            "object_delta": [
+              0.293479630125957,
+              0.16798007218042324
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.7644575439035488,
+            -0.3804953978259762,
+            0.38511140827737994
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 14.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.2642885591391104,
+              0.1385475474366909
+            ],
+            "object_delta": [
+              0.2642885591391104,
+              0.1385475474366909
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.8270390248442252,
+            -0.3527314563471227,
+            0.38398907758387185
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 14.76,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.2764108239941758,
+              0.12943039075304663
+            ],
+            "object_delta": [
+              0.2764108239941758,
+              0.12943039075304663
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.860838204619808,
+            -0.33918261879169226,
+            0.3850391042176148
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 15.26,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.2706115729540157,
+              0.12889165511537565
+            ],
+            "object_delta": [
+              0.2706115729540157,
+              0.12889165511537565
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.9059004253556984,
+            -0.3310977935597055,
+            0.3863069324598338
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 15.78,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.27551413561243554,
+              0.12088781846491248
+            ],
+            "object_delta": [
+              0.27551413561243554,
+              0.12088781846491248
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.9388509695705058,
+            -0.32114123058420047,
+            0.3848515603114296
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 16.3,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.2777120260051762,
+              0.11779559080225913
+            ],
+            "object_delta": [
+              0.2777120260051762,
+              0.11779559080225913
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.9735307570118448,
+            -0.30792341567868087,
+            0.38727484439652954
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 16.82,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.27836861481530484,
+              0.10859268244706347
+            ],
+            "object_delta": [
+              0.27836861481530484,
+              0.10859268244706347
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.009234841403872,
+            -0.2983122526507804,
+            0.38812453271085634
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 17.34,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.27794670940998056,
+              0.09814102811492117
+            ],
+            "object_delta": [
+              0.27794670940998056,
+              0.09814102811492117
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.0497961468433488,
+            -0.27928825265016005,
+            0.3884159886059965
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 17.86,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.2754172216159203,
+              0.10356031043167108
+            ],
+            "object_delta": [
+              0.2754172216159203,
+              0.10356031043167108
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.0951777209494398,
+            -0.2718613391632307,
+            0.39145505551413995
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 18.38,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.27915420083910547,
+              0.0917732381424066
+            ],
+            "object_delta": [
+              0.27915420083910547,
+              0.0917732381424066
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.129321281670709,
+            -0.2517754347641357,
+            0.3933926701921004
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 18.9,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.27185998587282256,
+              0.10677450078853754
+            ],
+            "object_delta": [
+              0.27185998587282256,
+              0.10677450078853754
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.1787303158389375,
+            -0.24298715152844083,
+            0.3952328091414735
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 19.42,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.28174433657914966,
+              0.10487984386042937
+            ],
+            "object_delta": [
+              0.28174433657914966,
+              0.10487984386042937
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.2110434044900065,
+            -0.23165176924739697,
+            0.39973652846871094
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 19.94,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.27805048620790007,
+              0.10995676275312133
+            ],
+            "object_delta": [
+              0.27805048620790007,
+              0.10995676275312133
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.2573405022554334,
+            -0.2115652457487198,
+            0.3966420080102893
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 20.46,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.27661765177797193,
+              0.11266374499762337
+            ],
+            "object_delta": [
+              0.27661765177797193,
+              0.11266374499762337
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.3055320628068805,
+            -0.1975274340306889,
+            0.39574796511277016
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 20.98,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.28377539403221963,
+              0.11881117945587283
+            ],
+            "object_delta": [
+              0.28377539403221963,
+              0.11881117945587283
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.3585279282040936,
+            -0.17477584923964762,
+            0.39031134736338474
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 21.5,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.27666381691655717,
+              0.10840162286630817
+            ],
+            "object_delta": [
+              0.27666381691655717,
+              0.10840162286630817
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.4116130436492997,
+            -0.1622359410735358,
+            0.3931116340129918
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 22.02,
+          "intent": "push",
+          "row": {
+            "skill": "push",
+            "object": "crate",
+            "delta": [
+              0.2729721587422951,
+              0.11444621611373242
+            ],
+            "object_delta": [
+              0.2729721587422951,
+              0.11444621611373242
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            2.4575007467887193,
+            -0.15700986590025062,
+            0.3859982991008762
+          ],
+          "phase": "planning",
+          "held": false
+        }
+      ]
+    },
+    {
+      "intent": "walk",
+      "seed": 123,
+      "success": true,
+      "seconds": 2.119999999999966,
+      "position": [
+        0.48186093668472624,
+        0.0545042101207059,
+        0.389288201427131
+      ],
+      "upright": 0.9914120394547066,
+      "ball": [
+        1.666146305640667,
+        -1.0838920381682167,
+        0.11987426961354077
+      ],
+      "ball_touched": false,
+      "held": false,
+      "ever_held": false,
+      "maximum_ball_height": 0.0,
+      "grasp_count": 0,
+      "jump_max_height": 0.0,
+      "jump_flight_seconds": 0.0,
+      "follow_error_m": 1.7884933615317802,
+      "reason": "Walk distance reached",
+      "trace": [
+        {
+          "time": 0.0,
+          "intent": "walk",
+          "row": {
+            "skill": "walk",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            -0.029634657507682818,
+            -0.005113330557240507,
+            0.39136672946521467
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 0.5,
+          "intent": "walk",
+          "row": {
+            "skill": "walk",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.0386354322854195,
+            -0.06744627114653633,
+            0.4119232440217244
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 1.02,
+          "intent": "walk",
+          "row": {
+            "skill": "walk",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.14625449411374378,
+            0.02837979934635083,
+            0.42258374331193527
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 1.54,
+          "intent": "walk",
+          "row": {
+            "skill": "walk",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.2976699787288772,
+            0.045701745366192384,
+            0.3990191123581447
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 2.06,
+          "intent": "walk",
+          "row": {
+            "skill": "walk",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.4537986564503285,
+            0.031665354426384684,
+            0.3872655076162567
+          ],
+          "phase": "planning",
+          "held": false
+        }
+      ]
+    },
+    {
+      "intent": "run",
+      "seed": 123,
+      "success": true,
+      "seconds": 2.3199999999999616,
+      "position": [
+        1.1825834554760566,
+        0.07781639149689201,
+        0.3862013157600914
+      ],
+      "upright": 0.999503854884468,
+      "ball": [
+        1.666146305640667,
+        -1.0838920381682167,
+        0.11987426961354078
+      ],
+      "ball_touched": false,
+      "held": false,
+      "ever_held": false,
+      "maximum_ball_height": 0.0,
+      "grasp_count": 0,
+      "jump_max_height": 0.0,
+      "jump_flight_seconds": 0.0,
+      "follow_error_m": 1.232311817298397,
+      "reason": "Run distance reached",
+      "trace": [
+        {
+          "time": 0.0,
+          "intent": "run",
+          "row": {
+            "skill": "run",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            -0.029634657507682818,
+            -0.005113330557240507,
+            0.39136672946521467
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 0.5,
+          "intent": "run",
+          "row": {
+            "skill": "run",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.1252706330033965,
+            0.001387684530281404,
+            0.3841567692912594
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 1.02,
+          "intent": "run",
+          "row": {
+            "skill": "run",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.42013714538300545,
+            0.023409940817024126,
+            0.39541014463945073
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 1.54,
+          "intent": "run",
+          "row": {
+            "skill": "run",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.7423559798661049,
+            0.04858325939705351,
+            0.3906259462361641
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 2.06,
+          "intent": "run",
+          "row": {
+            "skill": "run",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            1.0547975381916708,
+            0.06994325483138009,
+            0.38379466363031284
+          ],
+          "phase": "planning",
+          "held": false
+        }
+      ]
+    },
+    {
+      "intent": "jump",
+      "seed": 123,
+      "success": true,
+      "seconds": 1.6199999999999766,
+      "position": [
+        0.14825651774258478,
+        0.014499151544031157,
+        0.3933529548336383
+      ],
+      "upright": 0.9999895897744562,
+      "ball": [
+        1.666146305640667,
+        -1.0838920381682167,
+        0.11987426961354078
+      ],
+      "ball_touched": false,
+      "held": false,
+      "ever_held": false,
+      "maximum_ball_height": 0.0,
+      "grasp_count": 0,
+      "jump_max_height": 0.46354886090351677,
+      "jump_flight_seconds": 0.27999999999999997,
+      "follow_error_m": 2.0976572280499624,
+      "reason": "Hop and landing verified from contacts",
+      "trace": [
+        {
+          "time": 0.0,
+          "intent": "jump",
+          "row": {
+            "skill": "jump",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            -0.029634657507682818,
+            -0.005113330557240507,
+            0.39136672946521467
+          ],
+          "phase": "planning",
+          "held": false
+        },
+        {
+          "time": 0.5,
+          "intent": "jump",
+          "row": {
+            "skill": "jump",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            -0.02070649599856315,
+            -0.006032710115379536,
+            0.38576029705674714
+          ],
+          "phase": "jumping",
+          "held": false
+        },
+        {
+          "time": 1.02,
+          "intent": "jump",
+          "row": {
+            "skill": "jump",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.16598879681044548,
+            0.016706128300012328,
+            0.3943571085329874
+          ],
+          "phase": "jumping",
+          "held": false
+        },
+        {
+          "time": 1.54,
+          "intent": "jump",
+          "row": {
+            "skill": "jump",
+            "object": "none",
+            "delta": [
+              0.0,
+              0.0
+            ],
+            "object_delta": [
+              0.0,
+              0.0
+            ],
+            "confidence": 1.0,
+            "visible": true,
+            "duration_s": 1.0
+          },
+          "position": [
+            0.14848425243853272,
+            0.01452081250960189,
+            0.3935355293182023
+          ],
+          "phase": "jumping",
+          "held": false
+        }
+      ]
+    }
+  ]
+}

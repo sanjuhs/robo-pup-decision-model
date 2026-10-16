@@ -1,0 +1,163 @@
+{
+  "time": 39.28000000000164,
+  "behavior": "fetch",
+  "needsReset": false,
+  "geometryCount": 29,
+  "policy": "baseline/curious-v2",
+  "missionComplete": true,
+  "ballTouched": true,
+  "position": [
+    0.2686459211980664,
+    -0.12432732253265248,
+    0.39132180733503785
+  ],
+  "brain": "neural",
+  "planner": {
+    "instruction": "fetch the ball",
+    "intent": "fetch",
+    "phase": "release",
+    "complete": true,
+    "failed": false,
+    "reason": "Fetch complete: contact, lift, return and release verified",
+    "plan": {
+      "intent": "fetch",
+      "confidence": 0.9998989105224609,
+      "rows": [
+        {
+          "skill": "retrieve",
+          "object": "ball",
+          "delta": [
+            -0.48331576585769653,
+            0.36375653743743896
+          ],
+          "object_delta": [
+            -0.5255080461502075,
+            0.3235948085784912
+          ],
+          "duration_s": 1,
+          "confidence": 0.8231663703918457,
+          "visible": true
+        },
+        {
+          "skill": "return",
+          "object": "home",
+          "delta": [
+            -0.1898840367794037,
+            0.09342584758996964
+          ],
+          "object_delta": [
+            -0.23226317763328552,
+            0.08318182080984116
+          ],
+          "duration_s": 1,
+          "confidence": 0.997969925403595,
+          "visible": true
+        },
+        {
+          "skill": "stop",
+          "object": "none",
+          "delta": [
+            0.016876721754670143,
+            0.009245201013982296
+          ],
+          "object_delta": [
+            0,
+            0
+          ],
+          "duration_s": 1,
+          "confidence": 0.9997101426124573,
+          "visible": true
+        },
+        {
+          "skill": "stop",
+          "object": "none",
+          "delta": [
+            0.017119599506258965,
+            0.011027658358216286
+          ],
+          "object_delta": [
+            0,
+            0
+          ],
+          "duration_s": 1,
+          "confidence": 0.9996970891952515,
+          "visible": true
+        },
+        {
+          "skill": "stop",
+          "object": "none",
+          "delta": [
+            0.017438240349292755,
+            0.008418355137109756
+          ],
+          "object_delta": [
+            0,
+            0
+          ],
+          "duration_s": 1,
+          "confidence": 0.9997120499610901,
+          "visible": true
+        },
+        {
+          "skill": "stop",
+          "object": "none",
+          "delta": [
+            0.02018335647881031,
+            0.012616659514605999
+          ],
+          "object_delta": [
+            0,
+            0
+          ],
+          "duration_s": 1,
+          "confidence": 0.9990512728691101,
+          "visible": true
+        }
+      ],
+      "perception": [
+        [
+          -0.5255080461502075,
+          0.3235948085784912,
+          1
+        ],
+        [
+          1.0589611530303955,
+          0.22265774011611938,
+          1
+        ],
+        [
+          -0.23226317763328552,
+          0.08318182080984116,
+          1
+        ],
+        [
+          1.7300007343292236,
+          1.1251933574676514,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    "elapsed_s": 38.08000000000165,
+    "ever_held": true,
+    "maximum_ball_height": 0.3461248499568061,
+    "inference_ms": 45.37581500335364,
+    "model": "arena-rgb-transformer-v2",
+    "vision": "learned arena pixel segmentation; orthographic 96x96 RGB",
+    "energy": "virtual play-energy, not a battery measurement"
+  },
+  "held": false,
+  "energy": 1,
+  "gait": "trot",
+  "jumpMaxHeight": 0,
+  "jumpFlightSeconds": 0,
+  "gaitAirSeconds": {
+    "walk": 0,
+    "trot": 1.0400000000000005,
+    "run": 0
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "seed": 61,
+  "scenes": 1800,
+  "seconds": 27.971559689998685,
+  "source": "actual orthographic MuJoCo RGB and segmentation; random scene poses",
+  "split": "first 80% train; remaining scenes validation; separate held-out instruction templates",
+  "sha256": "7f8d7dcb945142b7726572bd7bf59aaa6e957975babb1296c6f8d98a9546f6d2",
+  "privileged_labels": "Segmentation IDs are training labels only; no object coordinates enter live inference"
+}

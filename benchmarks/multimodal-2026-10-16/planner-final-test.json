@@ -1,0 +1,132 @@
+{
+  "model_sha256": "e17d046cb211990fc2f9ba4cb466ae683084c98a03d4298729a3d93163395392",
+  "dataset_sha256": "5608b1b96266b43912503d89141d7566aeae77345a1a0e1a1aa0dd8d70f9e95b",
+  "scenes": 400,
+  "samples": 4800,
+  "templates": {
+    "stop": "miso please wait here",
+    "approach": "please go sniff the ball now",
+    "behind": "miso go behind the red ball please",
+    "fetch": "miso bring me the red ball please",
+    "follow": "hey miso chase the purple beacon for me",
+    "push": "go nudge that orange crate",
+    "walk": "please take a slow walk now",
+    "run": "hey miso go run forward",
+    "jump": "miso please hop for me",
+    "rest": "miso recharge and relax",
+    "drop": "miso let go of the red ball",
+    "unsupported": "what time is it"
+  },
+  "metrics": {
+    "intent": 0.97875,
+    "first_skill": 0.8954166666666666,
+    "horizon_skill": 0.8925,
+    "object": 0.8860416666666666
+  },
+  "offset_error_m": 0.02778403143915865,
+  "per_intent_accuracy": {
+    "stop": 1.0,
+    "approach": 1.0,
+    "behind": 1.0,
+    "fetch": 0.745,
+    "follow": 1.0,
+    "push": 1.0,
+    "walk": 1.0,
+    "run": 1.0,
+    "jump": 1.0,
+    "rest": 1.0,
+    "drop": 1.0,
+    "unsupported": 1.0
+  },
+  "pixel_iou": [
+    0.9907176494598389,
+    0.8393731713294983,
+    0.7091236114501953,
+    0.6074413061141968,
+    0.8122338056564331
+  ],
+  "visible_object_centroid_mae_m": 0.07209848487274538,
+  "visible_object_recall": 1.0,
+  "interventions": {
+    "fetch": {
+      "intent": "fetch",
+      "row": {
+        "skill": "retrieve",
+        "object": "ball",
+        "delta": [
+          -1.5052931308746338,
+          -1.5606696605682373
+        ],
+        "object_delta": [
+          -1.523123025894165,
+          -1.6079683303833008
+        ],
+        "duration_s": 1.0,
+        "confidence": 0.9012625813484192,
+        "visible": true
+      }
+    },
+    "push": {
+      "intent": "push",
+      "row": {
+        "skill": "push",
+        "object": "crate",
+        "delta": [
+          -1.1404728889465332,
+          1.2995953559875488
+        ],
+        "object_delta": [
+          -1.140027403831482,
+          1.286301612854004
+        ],
+        "duration_s": 1.0,
+        "confidence": 0.9994282126426697,
+        "visible": true
+      }
+    },
+    "low_energy": {
+      "intent": "fetch",
+      "row": {
+        "skill": "rest",
+        "object": "none",
+        "delta": [
+          0.0009254083852283657,
+          0.020155390724539757
+        ],
+        "object_delta": [
+          0.0,
+          0.0
+        ],
+        "duration_s": 1.0,
+        "confidence": 0.9980815649032593,
+        "visible": true
+      }
+    },
+    "held": {
+      "intent": "fetch",
+      "row": {
+        "skill": "return",
+        "object": "home",
+        "delta": [
+          -0.8100177645683289,
+          1.1511152982711792
+        ],
+        "object_delta": [
+          -0.8479365706443787,
+          1.1147903203964233
+        ],
+        "duration_s": 1.0,
+        "confidence": 0.9982707500457764,
+        "visible": true
+      }
+    },
+    "blank_rgb": {
+      "visible": false
+    },
+    "shifted_rgb": {
+      "expected_x_shift_m": 0.5,
+      "measured_x_shift_m": 0.49999988079071045
+    }
+  },
+  "scope": "All independent seed-927 scenes; unseen phrase compositions in the fixed arena vocabulary. No retraining on this test. Not general vision/language validation."
+}

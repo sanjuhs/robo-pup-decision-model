@@ -1,0 +1,14 @@
+{
+  "device": "CPU",
+  "torch_threads": 1,
+  "python": "3.12.14",
+  "torch": "2.9.0+cpu",
+  "samples": 100,
+  "warmups": 10,
+  "includes": "MuJoCo RGB render + tensor preprocessing + transformer infer/decoding; excludes PNG/network/browser",
+  "checkpoint_load_ms": 16.368641001463402,
+  "median_ms": 12.53289750093245,
+  "p95_ms": 17.723452700010967,
+  "maximum_ms": 23.41602500382578,
+  "overlap": "A software-rendered browser fetch trial was running concurrently"
+}
