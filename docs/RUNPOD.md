@@ -3,7 +3,9 @@
 The total GPU experimentation budget is **$30**. The user subsequently authorized paid work within this budget and requested
 one training experiment. One initial MJX/SB3 interface attempt failed; its pod
 was deleted and the same experiment was retried after a regression-tested fix.
-No additional policy experiments or persistent services are authorized by this runbook.
+The user later expanded the goal to complete multimodal planning within the same
+$30 total ceiling. That extension was trained/tested on this CPU host with no new
+Runpod resources. This historical GPU runbook does not start further services.
 The checked-in scripts do not provision pods; `gpu_job.sh` runs only inside an
 already authorized, externally monitored disposable pod.
 

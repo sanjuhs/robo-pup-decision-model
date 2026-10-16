@@ -5,9 +5,14 @@
 An interactive robot-pet lab: real MuJoCo contact physics, a playful Three.js yard,
 fresh PPO policies, and inspectable experiment results. Inspired by
 [robo-jev](https://github.com/STEERIX-home/robo-jev)'s separation of physical judgment
-and motor control. This repository's decision layer currently uses rules.
+and motor control. Miso now has a trained camera/text/state transformer,
+physical skills, and a visible six-row plan.
 
-![Miso's articulated golden-puppy appearance in the actual browser](docs/assets/puppy.png)
+![Actual browser arena with camera-grounded plans and measured hop completion](docs/assets/arena-brain.png)
+
+[Watch a complete, unsped browser fetch](docs/assets/multimodal-fetch.webm):
+actual contact, lift, return and release, with the camera and plan panel visible.
+[Recording evidence](benchmarks/multimodal-2026-10-16/browser-recording.json).
 
 **Prototype, not a hardware controller.** The local arena runs on CPU; optional
 MJX physics runs on GPU. PPO learns joint-target residuals around an analytic trot,
@@ -16,8 +21,10 @@ starting with fresh network weights. No pretrained weights are required for trai
 An RTX 5090 experiment completed **1,048,576 steps in 121.7 seconds**, then averaged
 **0.337 m/s with no falls in five 12-second native-CPU trials**. Both CPU and
 GPU-trained demo checkpoints are included. See the [raw benchmark evidence](docs/BENCHMARKS.md)
-for compilation/setup time, a failed attempt, costs, and limits. Following,
-pushing-to-goal, learned recovery, and Jev integration remain incomplete.
+for compilation/setup time, a failed attempt, costs, and limits. The newer
+multimodal controller passed **24/24 varied-start trials** across approach, behind,
+fetch, push, follow, walk, run and hop. These are small arena tests; general
+vision/language, learned recovery and Jev integration remain incomplete.
 
 ![Actual GPU-trained policy wearing the golden-puppy skin](docs/assets/puppy-walk.gif)
 
@@ -29,6 +36,7 @@ The puppy is original, stylized procedural artwork, not a photoreal canine asset
 ## Start the yard
 
 Requires Linux, Python 3.11–3.13, Node 20.19+ or 22.12+, and `uv`.
+Headless RGB rendering also needs EGL/Mesa (`libegl1 libgl1-mesa-dri` on Ubuntu).
 
 ```bash
 bash scripts/setup.sh
@@ -56,11 +64,17 @@ validated. PyTorch 2.9 does not support every older CPU/OS combination.
 - Select a locally trained policy to compare it with the analytic gait.
 - Switch **Appearance** between the golden puppy and the original research robot.
   Both display the same physics and policy; this does not retrain or replace the gait.
-- Talk to Miso: **go to the ball**, **go behind the ball**, **follow me**, **push the crate**, **stop**.
-  This is a local command grammar. Ball missions report completion from physics
-  contacts or measured position; free-form language understanding is not implemented.
-- Select **baseline / curious-v2** for the validated ball-boop demo. The GPU-trained
-  policy is validated for flat-ground locomotion and can fail the contact task.
+- Try **fetch the ball**, **go behind the ball**, **push the crate**, **follow me**,
+  **walk forward**, **run forward**, **jump**, **rest**, **drop the ball**, or **stop**.
+  The default trained brain reads actual overhead RGB, English tokens and state.
+  The camera/plan panel shows what it sees and proposes. Wording outside the
+  bounded vocabulary can fail; the displayed confidence is uncalibrated.
+- **Speak** records a short offline English command. Check the transcript, then
+  press **Send**. Microphone access needs HTTPS or localhost.
+- **Play-energy** is a virtual game variable: lower it to see rest/recharge.
+- The default **baseline / curious-v2** motor supplies straight-trot residuals.
+  Walk, run, hop, steering and magnetic retrieval use analytic physical skills.
+  The GPU-trained policy remains selectable; its manipulation results differ.
 - **Experiments** reads actual run results; the UI does not start training or cloud resources.
 
 The physical robot and crate transforms come from MuJoCo. Decorative eyes, ears,
@@ -68,7 +82,9 @@ tail, treat beacon, grid and painted boundary line are visual only. Tail wagging
 and blinking freeze with Pause. The renderer buffers snapshots by 60 ms and
 interpolates physical poses; it never invents extra locomotion. Obstacles and the crate
 collide physically. The ball has rolling friction and the yard has low physical
-boundary walls. The crate and ball are moved only by contact, never scripted forces.
+boundary walls. The crate moves by contact. The ball moves by contact and a contact-gated magnetic
+lifting gripper during fetch; it is never teleported. The gripper is a simulated
+tool, not a canine mouth. Hop uses joint motors and has measured flight/landing.
 The puppy's rounded coat, muzzle, floppy ears, paws and collar are a visual skin
 attached to 18 physical geometries. Its silhouette is an approximation of the
 collision robot. All leg poses still come from MuJoCo. The skin uses 18,248
@@ -83,17 +99,26 @@ the critic and training state. Bundled files are **219 KiB** (CPU curious-v2) an
 **254 KiB** (RTX 5090). Weights are in this repository's `demo/` directories,
 copied into local `artifacts/` by setup. Nothing is hosted on Hugging Face.
 
-The live controller takes numerical proprioception, uses rule-based task
-decisions, and parses a small text-command grammar. It does not consume images
-or voice. The RTX 5090 accelerated MJX physics; the small PPO optimizer ran on CPU.
-See the [model card and exact weight inventory](docs/MODEL_CARD.md).
+The **trained arena planner is a separate 232,414-parameter transformer** with a
+946,381-byte checkpoint at `demo/arena-planner/`. It consumes 96×96 MuJoCo RGB,
+word tokens and 53 state values. It replans six skill/target slots every half
+simulated second; the executor keeps working toward the goal and checks outcomes.
+The planner uses supervised imitation; PPO trains the motor layer. No general VLM,
+remote model service or Hugging Face hosting is involved.
 
-A separate **769,149-parameter multimodal transformer scaffold** now accepts
-image history, text tokens and numeric state and emits six proposed skill slots.
-It is **untrained and disconnected from the live arena**. Its tensor/gradient
-tests do not establish perception, instruction understanding, or planning ability.
-The [vision, voice, energy and skill roadmap](docs/MULTIMODAL.md) explains how to
-build that next layer, including what walk/run/jump and physical fetch require.
+Fresh-scene/wording testing measured **97.875% intent and 89.542% first-action
+accuracy**; fetch wording is a known weakness. Final physical trials used canonical
+commands, three starts per activity. Fetch took 72–78 simulated seconds with
+contact, lift, return and release verified; hop had 0.28–0.30 seconds of flight.
+Multimodal training took about 17 minutes across two CPU runs and used **$0 new
+Runpod spend**. See the [model card](docs/MODEL_CARD.md),
+[implementation and reproduction commands](docs/MULTIMODAL.md), and
+[raw records](benchmarks/multimodal-2026-10-16).
+
+The previous **769,149-parameter `MultimodalPlanner`** remains an untrained research
+scaffold. It is distinct from the trained `ScenePlanner` running in the arena.
+The Python backend is still required: a fully offline browser/phone bundle and
+photoreal canine rig have not been built.
 
 ## Train your first policy
 
@@ -123,7 +148,7 @@ creates paid infrastructure.
 - [Runpod setup, key handling, and approval plan](docs/RUNPOD.md).
 - [Architecture and research path](docs/ARCHITECTURE.md).
 - [Model sizes, weight locations, and current inputs](docs/MODEL_CARD.md).
-- [Multimodal transformer and skill roadmap](docs/MULTIMODAL.md).
+- [Trained multimodal controller and reproduction](docs/MULTIMODAL.md).
 - [Upstream license audit](docs/UPSTREAM_AUDIT.md).
 
 ```bash

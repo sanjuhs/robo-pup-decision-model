@@ -2,8 +2,27 @@
 
 Measured 2026-10-16. Reproduce with
 `uv run python scripts/inspect_models.py --out artifacts/model-inventory.json`.
-The committed [inventory](../benchmarks/model-inventory.json) includes checkpoint
+The committed [current inventory](../benchmarks/multimodal-2026-10-16/model-inventory.json) includes checkpoint
 hashes and exact counts; the command does not download or train anything.
+
+## Trained arena transformer
+
+The default live planner is `ScenePlanner`: **232,414 parameters**, **946,381 bytes**
+in `demo/arena-planner/planner.pt`, with digest, vocabulary and release metadata.
+It has a learned arena pixel classifier, visual/text/state encoders, two width-96
+four-head transformer layers and six plan queries. Inputs are actual overhead
+96×96 RGB, up to 96 word tokens, and 50 motor observations plus virtual play-energy,
+held state and yaw/pi. Outputs are skill/object logits and relative offsets; each
+row is displayed as a fixed one-second proposal. Replanning occurs every half
+simulated second, with persistent goal execution and physical completion checks.
+
+It was trained by supervised imitation on generated arena labels. It is not a
+general VLM, language generator or RL-trained task planner. Final independent
+400-scene/12-template testing measured 97.875% intent and 89.542% first-action
+accuracy. All 24 canonical-command physical trials passed. See [training, failures,
+voice and limitations](MULTIMODAL.md). Voice is a separate offline PocketSphinx
+English command recognizer; its installed speech model is approximately 28 MiB.
+No voice/image foundation model is hidden behind an API.
 
 ## Trained motor controller
 
@@ -33,15 +52,16 @@ residuals scaled by 0.3 radians and added to an analytic diagonal trot.
 The policy acts at 50 Hz; physics steps at 200 Hz. It has no RGB, microphone,
 language encoder, transformer, object detector, memory, or learned fetch skill.
 
-The live hierarchy separately reads privileged simulator positions to choose
-speed/yaw commands. Text commands are parsed by a local grammar. Drawing a
-camera image in Three.js does not mean the policy receives or understands it.
-The metric called energy is a squared-torque penalty, not a measured battery
-level or joules. Stop uses an analytic stance; reset restores the world.
+The default neural hierarchy uses image-derived object targets. Its executor reads
+own pose/proprioception and contact/true-state outcome checks. The selectable
+historical rules controller uses privileged object positions and a local command
+grammar; compare it explicitly as an oracle-style baseline. The motor reward's
+energy term is squared torque, distinct from the new virtual play-energy variable.
+Stop uses analytic stance and reset restores the world.
 
 ## Where are the weights?
 
-The checkpoints are committed to this GitHub repository with SHA-256 sidecars.
+All three checkpoints are committed to this GitHub repository with SHA-256 sidecars.
 Setup verifies and copies them into `artifacts/baseline/curious-v2/` and
 `artifacts/runpod/5090-once/`. New participant runs save their own `policy.zip`
 and intermediate checkpoints under `artifacts/<participant>/<run>/`.
@@ -69,7 +89,7 @@ See [the complete evidence and limitations](BENCHMARKS.md).
 The golden puppy is original procedural Three.js artwork: 18,248 triangles,
 382,736 bytes of unique geometry buffers, 18 physical attachments, and a generated
 256×256 fur-bump texture. There is no downloaded GLB or texture asset. The whole
-browser JS build, including Three.js, is about 547 kB / 141 kB gzip. Those values
+browser JS build, including Three.js, is about 552 kB / 143 kB gzip. Those values
 are separate from the neural checkpoint and do not include Python dependencies.
 
 The look is stylized, not photoreal. Its simple articulated segments inherit the
@@ -90,15 +110,10 @@ That path would require browser physics/WASM plus a deterministic actor export
 (for example ONNX), the exact gait/observation interface, numerical parity tests,
 and real device benchmarks. Merely exporting the 32 KiB actor is insufficient.
 
-## New transformer foundation
+## Historical transformer scaffold
 
-`src/robopup/planner.py` now implements a **769,149-parameter** multimodal
-transformer scaffold (3,076,596 raw float32 parameter bytes, about 2.93 MiB).
-It accepts image history, byte-tokenized text, and numerical state and produces
-six proposed action slots. Tensor shapes, finite values, bounds, and gradients
-are tested. **It has random initialization, no trained checkpoint, and no
-demonstrated visual/language/planning competence. It is not connected to the
-arena.** No random planner weights are distributed or advertised as a policy.
-
-The [multimodal roadmap](MULTIMODAL.md) describes what training, perception,
-skill control, and evaluation still need to be built.
+`src/robopup/planner.py::MultimodalPlanner` has 769,149 parameters and remains
+untrained and disconnected. It has different image-history/byte-token/output
+interfaces from the deployed `scene_planner.py::ScenePlanner`. Its tensor tests
+are research infrastructure, not evidence for learned planning. No random
+scaffold weights are shipped. See [the live implementation](MULTIMODAL.md).

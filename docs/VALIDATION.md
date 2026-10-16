@@ -4,6 +4,45 @@ Validated on the development Linux machine with Python 3.12.14, Node 24.19.0,
 MuJoCo 3.3.7, PyTorch 2.9.0 CPU and optional JAX 0.7.2. Runpod hardware and source
 hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 
+## Multimodal extension
+
+- Current Python regression run: 26 passed, including actual RGB counterfactuals,
+  offline speech fixture/API boundaries, contact-driven lift/release, powered
+  flight/landing with no external force and a complete trained RGB fetch trial.
+- Ruff and browser build pass. The new build is approximately 552 kB JS / 143 kB
+  gzip; Vite emits its bundle-size advisory.
+- Independent 400-scene/12-template final test and all 24 physical trials are
+  preserved in `benchmarks/multimodal-2026-10-16/`. See `BENCHMARKS.md` for exact
+  metrics, failed first model, failed retrieval pilot and provenance limitations.
+- Real offline PocketSphinx decoding passed on a locally generated Flite fixture.
+  Fake-microphone browser capture/transcription passed; real-human speech accuracy
+  remains unmeasured.
+- Integration exposed a NumPy outcome boolean JSON error; conversion now preserves
+  live socket output. A subsequent grasp-frame test exposed outcome telemetry one
+  physics frame behind the held flag; post-step status now synchronizes contact
+  outcomes. Assertions remain intact. An initial matrix test counted the header
+  as an action; it now counts six body rows.
+- Playwright's optional video binary download was blocked by its CDN policy.
+  Actual-frame recording uses the existing system FFmpeg and CDP screencast instead;
+  the functional browser tests do not require that optional recording binary.
+
+The full local browser run passed **18/18**: the original 14 checks plus RGB
+plan/camera/energy and real hop/landing, synthetic-microphone offline transcription,
+a complete physical RGB fetch through the browser, and PCM capture/resampling.
+Frozen setup was rerun successfully with all 26 Python tests. Active-neural
+capacity probes passed advancement/isolation checks for five and ten sessions,
+with minimum ratios 0.819× and 0.571× real time respectively; this is a short
+capacity probe, not a completion or soak benchmark. Ruff and the final
+browser build passed. The fetch recording preserves actual browser frames and
+timestamps; it is not sped up. The earlier policy-menu display was stale while
+telemetry already reported the correct CPU motor; the final UI now synchronizes
+the selector and has an explicit parity assertion.
+
+Hosted CI for the extension is recorded below once complete. The historical
+checks below retain their original counts/scope.
+
+## Previous release evidence
+
 | Check | Observed result |
 | --- | --- |
 | `ROBOPUP_MJX=1 bash scripts/setup.sh` | Passed frozen Python/npm installation, two checkpoint digest checks, browser build, operator CLI verification and Python tests; repeat runs preserve local outputs |
@@ -55,10 +94,11 @@ is retained and an idle/active update regression was added.
 
 ## Scope of the evidence
 
-The ball-contact and behind-ball successes are short deterministic trials, not
-general manipulation benchmarks. The GPU-trained walker failed its ball-contact
-trial; curious-v2 is the validated ball-demo policy. Follow and push-to-goal
-trials failed and remain visible. No learned self-righting or Jev model is present.
+The historical ball-contact and behind-ball successes are short deterministic
+trials. The GPU walker failed its ball-contact trial; curious-v2 remains the
+default motor in the new RGB hierarchy. Historical follow/push failures remain
+visible alongside the later varied-start successes. No learned self-righting or
+Jev model is present.
 
 Not run: physical hardware, sim-to-real, rough terrain, adversarial/mutually
 untrusted participants, Windows/Apple Silicon installation, a two-hour multi-user

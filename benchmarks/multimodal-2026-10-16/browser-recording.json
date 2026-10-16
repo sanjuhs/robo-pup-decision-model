@@ -1,9 +1,13 @@
 {
-  "source": "Actual Chromium CDP screencast during successful browser RGB fetch test",
+  "source": "Actual Chromium CDP screencast during successful final-UI browser RGB fetch test",
   "renderer": "SwiftShader software WebGL",
-  "frames": 206,
-  "wall_seconds": 41.45390200614929,
-  "simulated_end_time_s": 39.28000000000164,
+  "frames": 188,
+  "wall_seconds": 40.137409925460815,
+  "simulated_end_time_s": 36.960000000000456,
+  "viewport": [
+    1440,
+    1440
+  ],
   "cropped_or_sped_up": false,
   "full_video": "docs/assets/multimodal-fetch.webm",
   "note": "Browser executor runs at 25 Hz with two 50 Hz motor steps per command, unlike the 50 Hz headless evaluator. Timings differ; no direct speed comparison."

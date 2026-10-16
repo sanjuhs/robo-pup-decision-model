@@ -5,6 +5,81 @@ MuJoCo 3.3.7, PyTorch 2.9.0 CPU, four vectorized native environments, one PyTorc
 thread. This machine has no GPU. Other training/browser work overlapped some runs;
 these are development measurements, not isolated hardware benchmarks.
 
+## New trained multimodal controller (2026-10-16)
+
+Raw reports: [`multimodal-2026-10-16/`](../benchmarks/multimodal-2026-10-16).
+This entire extension used native CPU simulation/training and **$0 additional
+Runpod usage**. The prior GPU estimate remains $0.2769; no final invoice is claimed.
+
+| Measurement | Actual result |
+| --- | --- |
+| Training scenes | 1,800 independent rendered poses, 27.97 s generation; 1,440 train / 360 validation |
+| Failed byte-tokenizer model | 616.24 s, 2,400 transformer steps plus 450 pixel steps; held-out intent 68.33% |
+| Deployed word-tokenizer retry | 411.14 s, 1,600 transformer steps; reused only trained pixel encoder from the failed run |
+| Retry validation | 1,920 scene/phrase/state samples; intent 100%, first action 99.219%, horizon skills 98.490%, objects 99.427% |
+| Untouched final test | 400 new seed-927 scenes × 12 new phrase compositions = 4,800 samples; intent 97.875%, first action 89.542%, horizon skills 89.25%, object 88.604% |
+| Final-test fetch wording | 74.5% intent accuracy; other 11 tested templates 100%. No retraining after this test |
+| Visible-object perception | Mean centroid error 7.21 cm against segmentation centroids, visible recall 100%; not exact physical-centre error |
+| RGB render + inference | 100 warmed CPU samples, one thread: median 12.53 ms, p95 17.72 ms; excludes PNG/network/browser; overlapped software-browser trial |
+| Checkpoint | 232,414 parameters; 946,381 bytes, SHA-256 recorded with release |
+
+The final test includes energy/held-state interventions and random numerical
+states. Its composed wording/state failures remain visible; confidence is not
+calibrated. The data are static scene poses, not independent physical rollouts.
+Two development runs total 1,027.38 CPU training seconds. Architecture was revised
+after validation failure, then tested once on the fresh final set. Initial
+uncommitted source snapshots were not captured; provenance limits are explicit
+in `demo/arena-planner/release.json`.
+
+The **final physical protocol** uses actual RGB/model inference every 0.5 simulated
+seconds, the CPU curious-v2 PPO during near-straight trot and analytic steering /
+other skills. Seeds 101, 202, 303 randomize initial yaw ±0.12 rad and ball/crate
+positions ±0.15 m. They are three varied starts for one trained planner, not three
+independently trained policies. Oracle mechanics trials are separate records.
+
+| Activity | Passes | Simulated duration / criterion |
+| --- | ---: | --- |
+| Ball approach | 3/3 | 5.24–5.50 s; actual robot/ball contact |
+| Behind ball | 3/3 | 26.24–34.00 s; +X >0.35 m, Y within 0.45 m |
+| Fetch | 3/3 | 71.86–78.16 s; contact, weld capture, lift >0.2 m, return, lower and release on floor within 0.6 m of home |
+| Push | 3/3 | 11.78–13.78 s; crate within 0.35 m of (3,0) |
+| Follow | 3/3 | 35.02 s each; final beacon error 0.367–0.381 m, upright |
+| Walk | 3/3 | 2.42–2.48 s for 0.5 m forward; four-phase analytic schedule |
+| Run | 3/3 | 2.74–2.92 s for 1.2 m; 0.28–0.34 s measured all-feet flight |
+| Hop | 3/3 | 1.62 s sequence; 0.28–0.30 s flight, max base height 0.463 m, landed upright with ≥2 foot contacts |
+
+All 24 passed with no falls, over 42.49 wall seconds of accelerated headless
+simulation. Fetch is slow: turning/alignment dominate. Walking still had
+0.02–0.10 s of all-feet flight; call it an analytic four-phase movement, not a
+biomechanically validated walking gait. Run/hop are analytic actuator targets,
+not newly RL-trained skills. Grasping is a magnetic tool, not an anatomical mouth.
+
+The original RGB pilot fetch failed after release because the ball rolled outside
+the unchanged 0.6 m criterion. Its trace is retained. The correction adds settling,
+lowering and a gentle release; the criterion was not loosened. A behind-route
+latch fixed looping waypoints. Oracle-only successes are not counted as RGB-agent
+success. These 24 short tests do not establish arbitrary navigation/manipulation,
+real-world transfer, general language/vision or calibrated task success.
+
+## Concurrent neural sessions
+
+A new short probe exercised actual camera/model inference and independent physics,
+not just idle worlds. All participants issued fetch and received 125 advancing
+state frames each with neural plans/RGB and no fall. Five active neural sessions
+measured a minimum **0.819× real time**; ten measured **0.571×** on this CPU host.
+This exposes the additional camera/inference load; the old idle-world near-real-time
+figure does not describe this path. The test covers only about five simulated
+seconds/session, not completion of ten simultaneous fetches or a two-hour soak.
+For a smoother workshop, use local backends per participant or fewer concurrently
+active neural goals. No extra GPU/server was provisioned to improve this result.
+
+## Historical motor and infrastructure measurements
+
+The following earlier results describe the previous rig/controller revisions.
+Their failed follow/push trials are retained and do not contradict the later
+RGB-controller results above. Throughput figures below do not benchmark ten
+simultaneously active neural planners.
+
 | Run | Steps | Training seconds | Mean forward speed | Mean return | Falls |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Analytic gait | no training | — | 0.129 m/s | 757.1 | 0/5 |
@@ -37,7 +112,7 @@ it is an intermediate checkpoint from the longer run, not an independent trainin
 The optional MJX backend completed a CPU compiled probe (one world, 50 batched
 control steps): **84.63 s compilation**, **9.12 steps/s** after compilation. CPU MJX
 is much slower than native MuJoCo for this small batch; that is why it is optional.
-GPU throughput and transfer quality will be reported only after the approved run.
+The later GPU throughput and transfer recheck are reported below.
 
 Behavior protocol: one deterministic 30-second trial each. These tests have low
 coverage and were used to expose controller defects. Initial and revised trials

@@ -1,35 +1,34 @@
 # Prototype status
 
-This file separates implemented paths from measured task success. See
-`BENCHMARKS.md` and the raw JSON in `benchmarks/` for evidence.
+Updated 2026-10-16. See [benchmarks](BENCHMARKS.md), [model card](MODEL_CARD.md)
+and [multimodal implementation](MULTIMODAL.md) for evidence and boundaries.
 
 | Capability | Current evidence |
 | --- | --- |
-| Native headless MuJoCo physics | Tested; physical quadruped, contacts, crate, obstacles and ball |
-| PPO from fresh weights | Completed CPU runs; residual gait policies, not end-to-end torque learning |
-| First locomotion policy | Curious-v2: 0.340 m/s body-frame forward speed on five 12-second held-out trials; no falls |
-| Interactive browser | Tested desktop/mobile; buffered physical geometry, orbit/follow camera, keyboard, pause/reset, policy loading. Cosmetic expressions are separate from learned locomotion. |
-| Puppy appearance | Original stylized golden skin attached to 18 physical geometries; real policy walking and robot/puppy switching tested. Not photoreal or an anatomical canine rig. |
-| Multiple participants | Five simultaneous independent browser worlds tested; no shared-world collaboration |
-| Experiment comparison | Completed local runs discovered from real config/result files; compare equal protocols |
-| Plain-language commands | Local grammar; ball boop and behind-ball missions passed single deterministic physics trials; browser contact also verified |
-| Approach | Nearby static-target trial passed; arbitrary navigation not solved |
-| Follow and push | Experimental controller; failed recorded trials; no general success claim |
-| Stop/recover | Analytic standing pose and explicit simulation reset; no learned self-righting |
-| Jev decision model | License/inspiration audited; no model weights, training, or inference integrated |
-| Multimodal transformer scaffold | 769,149 random-initialized parameters; image/text/state tensor and gradient tests pass. No trained checkpoint, semantic perception, task success or live integration. |
-| Vision / voice | No camera frames or audio enter the live controller; rendering is not perception |
-| MJX backend | CPU and RTX 5090 probes passed, including forced timeout/reset; writable-array regression tested |
-| Runpod | CLI checksum and read-only authentication verified; live catalog inspected |
-| RTX 5090 GPU training | One completed experiment: 1,048,576 steps in 121.7 s; native CPU recheck 0.337 m/s, no falls in five trials. One failed interface attempt retained. Both pods deleted. |
+| CPU MuJoCo and residual PPO | Working headless simulation and fresh-weight participant training; three bundled trained checkpoints across motor/planner layers |
+| Trained multimodal planner | 232,414 parameters; RGB + English tokens + numeric state; six action/target proposals, live execution and feedback |
+| Perception | Learned arena pixel classes; dedicated 96×96 overhead RGB. Final-test centroid error 7.21 cm vs segmentation centroids; not general vision |
+| Language | Finite task vocabulary and learned phrase compositions; final test 97.875% intent / 89.542% first action, weak unseen fetch wording |
+| Approach / behind / fetch / push / follow | Three varied-start RGB physics trials each passed. Fetch uses an explicitly magnetic lifting tool with contact, return and release checks. General navigation remains unproven |
+| Walk / run / hop | Three trials each passed movement/flight criteria. Analytic physical skills, not learned canine gaits; walking has brief measured flight and is not biomechanically validated |
+| Energy | Virtual play-energy, visible UI, learned rest choice and executor recharge hysteresis; no battery or biological claim |
+| Voice | Offline English PocketSphinx command grammar; synthetic fixture tested. Transcript requires Send; human accent/noise accuracy unmeasured |
+| Browser | Articulated original golden puppy, camera and plan inspection, orbit/follow camera, manual controls, pause/reset, experiments and policy switching |
+| Appearance | Stylized procedural skin attached to physics; not photoreal or anatomical canine rig |
+| Participants | Separate browser worlds and fresh-policy experiments; five-browser isolation tested; short active-neural probes: five at ≥0.819×, ten at ≥0.571× real time. No shared world |
+| RTX 5090 | Prior completed experiment: 1,048,576 steps in 121.7 s; native replay 0.337 m/s, 0/5 falls. Failed interface attempt retained, both pods deleted |
+| Spending | Prior estimated GPU charge $0.2769, not final invoice. Multimodal training/evaluation ran on this CPU host with $0 additional Runpod usage |
+| Weights | GitHub `demo/`; checksum sidecars. No Hugging Face model repository or Space |
+| Jev | Inspiration/license audited. No Jev weights, adapter or reproduced Jev benchmark |
+| Recovery | Standing/stop and explicit world reset; no learned self-righting |
+| Browser-only/offline phone | Not built; Three.js runs on device, physics/inference need the local Python server |
 
-The research server has no user accounts and binds to loopback by default. Host
-it behind private port-forwarding. It is not a public production service. The
-hardware model is original primitive geometry, not a validated real robot.
+The earlier `MultimodalPlanner` class is still an untrained research scaffold.
+The trained arena uses the distinct `ScenePlanner` class and bundled checkpoint.
+Historical failed follow/push/retrieval and language runs remain in `benchmarks/`.
 
-Bundled, checksum-verified CPU and GPU-trained checkpoints are seeded by setup.
-The GPU-trained policy runs in the local CPU arena; participants do not need a
-GPU just to play. Following, pushing-to-goal and learned recovery are still unsolved.
-Windows/Apple Silicon installation and a full two-hour multi-user soak test were
-not run here. Hosted CI evidence is recorded in `VALIDATION.md`;
-for the source SHA and run link, separate from the local evidence.
+Not validated: real hardware, sim-to-real, arbitrary objects/language/terrain,
+long-horizon obstacle avoidance, photoreal assets, real mobile FPS, human voice
+accuracy, Windows/Apple Silicon installation, long-duration concurrent neural planning or a
+full two-hour workshop soak. The server is an unauthenticated private workshop
+tool with a 12-session limit and same-origin checks, not a public hosted service.

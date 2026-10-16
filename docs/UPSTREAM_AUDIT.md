@@ -40,5 +40,19 @@ This is not end-to-end torque locomotion or sim-to-real training.
 
 robo-jev's README explicitly limits out-of-simulator risk calibration. A 2B model,
 adapter training, paid model API, and its reported benchmark scores are not needed
-for this proof of concept. The local decision layer remains inspectable rules;
+for this proof of concept. The local arena now uses its own small supervised RGB/text/state transformer;
 there is no claim that a Jev model has been trained or integrated.
+
+## Added local perception and speech dependencies (2026-10-16)
+
+Installed distribution licenses were inspected: Pillow 12.3.0 (MIT-CMU),
+PocketSphinx 5.0.4 (BSD-2-Clause, Carnegie Mellon), sounddevice 0.5.6 (MIT),
+cffi 2.1.1 (MIT-0), pycparser 3.11 (BSD-style). Exact wheels and hashes are pinned
+in `uv.lock`; PocketSphinx 5.0.4 has a Python 3.12 Linux binary wheel and bundled
+English acoustic/dictionary data. The server does not use sounddevice for capture;
+the browser supplies WAV audio. PocketSphinx's source/model notices are retained
+in the installed distribution, with the principal license copied to
+`licenses/POCKETSPHINX.txt`. No downloaded VLM or third-party character asset was
+added. The synthetic voice test fixture was generated locally with FFmpeg's
+Flite `slt` voice; it is not a recording of a real person. See the CMU notice
+in `licenses/FLITE-VOICE.txt`. Original trained planner weights use project MIT.

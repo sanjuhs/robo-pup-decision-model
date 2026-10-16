@@ -1,0 +1,77 @@
+{
+  "protocol": "independent-fetch-worlds-v2",
+  "participants": 10,
+  "sessions": [
+    {
+      "participant": 0,
+      "frames": 125,
+      "wall_seconds": 8.758317298998008,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.5708859167013663
+    },
+    {
+      "participant": 1,
+      "frames": 125,
+      "wall_seconds": 8.599025381998217,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.5814612444879221
+    },
+    {
+      "participant": 2,
+      "frames": 125,
+      "wall_seconds": 8.43458463800198,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.5927974185560292
+    },
+    {
+      "participant": 3,
+      "frames": 125,
+      "wall_seconds": 8.336522666002566,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.5997704558989049
+    },
+    {
+      "participant": 4,
+      "frames": 125,
+      "wall_seconds": 8.095885315997293,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.6175976813950195
+    },
+    {
+      "participant": 5,
+      "frames": 125,
+      "wall_seconds": 7.936754924005072,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.6299803947425904
+    },
+    {
+      "participant": 6,
+      "frames": 125,
+      "wall_seconds": 7.824068998001167,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.6390536690406583
+    },
+    {
+      "participant": 7,
+      "frames": 125,
+      "wall_seconds": 7.720531541002856,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.6476238032893833
+    },
+    {
+      "participant": 8,
+      "frames": 125,
+      "wall_seconds": 7.663330249997671,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.6524578527724852
+    },
+    {
+      "participant": 9,
+      "frames": 125,
+      "wall_seconds": 7.4183912520020385,
+      "simulated_seconds": 4.999999999999913,
+      "real_time_ratio": 0.6740005791215903
+    }
+  ],
+  "note": "Short local WebSocket capacity probe, not a two-hour browser soak test"
+}

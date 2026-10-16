@@ -9,8 +9,8 @@ Browser / Three.js                   Local experiment process
           v                                   v
 FastAPI / one process                CSV + Monitor episode logs
   one MuJoCo world per connection     checkpoints + result.json
-  rules -> speed/yaw command                  |
-  analytic trot + optional PPO         Experiments API + policy menu
+  RGB/text/state transformer + executor                  |
+  PPO trot + analytic physical skills         Experiments API + policy menu
   position actuators -> physics
 ```
 
@@ -28,7 +28,10 @@ attach to the correct torso/limb without relying on numeric geometry IDs. Its
 18 attachments add soft ellipsoids, paws, muzzle and coat materials; eyes, ears
 and tail have cosmetic expression. Static details are batched by material. No
 additional limb cycle, torso bobbing, root motion, or physical contact is scripted.
-The collision model and policy interface remain the original primitive robot.
+The leg collision model and 50-input/12-action motor interface remain the original
+primitive robot. The interactive PetEnv adds a thirteenth gripper slide actuator,
+a contact-gated weld, visual home/beacon markers and an overhead RGB camera.
+The default training environment excludes those additions for replay compatibility.
 
 Observations: base velocity, orientation/gravity row, joint positions/velocities,
 command, gait phase, height, and previous action (50 values). Actions: 12 residual
@@ -42,23 +45,47 @@ energy is a squared-torque proxy, **not** joules or electrical power. The report
 speed is body-frame forward velocity; world-X displacement is separately recorded.
 Heading and lateral drift are not penalized in this first reward.
 
-## Decisions
+## Decisions and physical skills
 
-The deterministic hierarchy selects approach, follow, push, stop, manual, or
-recover. A fallen robot enters recover and requests a posture reset. There is no
-trained self-righting controller. Stop uses an analytic standing pose, even when
-a learned policy is selected. The current PPO policies were trained only for
-forward flat-ground commands, so turning and other commands are distribution shifts.
+The default `BrainSession` captures actual 96×96 RGB every 0.5 simulated seconds.
+The trained `ScenePlanner` fuses learned pixel/centroid tokens, word tokens and
+53 numeric inputs. Six query rows predict skills, object choice and metric offsets.
+Chunk durations are fixed at one second; softmax scores are not calibrated.
+`GoalExecutor` persists the instruction, grounds targets in the robot's own pose,
+steers, checks contact/landing/return outcomes, and holds or stops on uncertainty,
+invisible targets, unsupported instructions, falls or timeout. Later proposal rows
+are informational; each immediate step is reconsidered from fresh observations.
 
-The local command grammar accepts ball approach, behind-ball waypoints, follow,
-push, stop, and recovery requests. It is not an LLM. Ball-boop completion requires
-actual robot/ball contact; behind-ball completion requires the robot to be on the
-ball's +X side by more than 0.35 m, within 0.45 m on Y, after consuming waypoints.
-The ball has rolling friction and low physical perimeter walls contain it.
+True object coordinates are not navigation inputs in this mode. They verify task
+outcomes separately. Proprioception includes own pose/yaw, and home `(0,0)` and
+crate goal `(3,0)` are task constants. The camera is north-up overhead, not the
+Three.js viewer or an egocentric eye. Training segmentation/oracle labels are
+isolated in `planner_data.py`; the explicitly labelled oracle mechanics evaluator
+is never imported by the live arena.
 
-The moving follow beacon travels at 0.072 m/s. Push aligns behind a crate and
-commands contact toward a goal at (3,0); it is a heuristic, not a learned manipulation
-skill. Behavior trials record both successes and failures.
+Fetch uses physical tool/ball contact to activate a magnetic weld at the existing
+relative pose. A slide servo lifts the tool. The executor returns using a visual
+home target, settles, lowers, releases and checks the ball on the floor within
+0.6 m of home, with prior contact/hold/lift. No object qpos edits occur during a
+grasp. Explicit reset and offline scene construction do set initial poses.
+
+The default curious-v2 PPO residual is used only in near-straight trot; steering,
+four-phase walk, faster diagonal run, crouch/extend hop and gripper control are
+analytic physical controllers. Hop temporarily raises actuator gain/torque bounds
+and restores them afterward; no external force or visual root animation creates
+flight. Run has measured flight; the four-phase walk still has brief aerial
+intervals and is not a validated canine walk. Virtual play-energy drains with
+activity, recharges at rest, and can cause the planner to rest before resuming.
+
+The selectable historical rules baseline uses simulator object positions and a
+local text grammar. It retains its earlier failures; it is not evidence for vision.
+The moving beacon travels at 0.072 m/s. No learned self-righting is implemented.
+
+Voice uses browser AudioWorklet capture, local WAV transfer, offline PocketSphinx
+English command grammar, then explicit transcript Send. Same-origin audio checks,
+300 kB upload bounds, 0.1–8 second WAV bounds and two concurrent decodes constrain
+this private endpoint. Audio is not persisted. Speech recognition is separate
+from the trained RGB/text/state fusion model.
 
 ## Isolation and trust
 
@@ -85,16 +112,13 @@ worlds, TLS termination, or collaborative shared-world synchronization.
    counterfactual outcomes. Keep network/model calls out of the motor-control loop;
    measure calibration, latency, and budget independently. No Jev weights are downloaded now.
 
-## Multimodal planner research boundary
+## Distinct model boundaries
 
-The trained 15,705-parameter motor MLP is separate from the new
-`MultimodalPlanner` scaffold. The latter has 769,149 random-initialized parameters,
-RGB-patch/history, byte-text and state encoders, a transformer, and horizon heads.
-Only tensor contracts/gradients are tested. It is not imported by the arena
-server, has no trained checkpoint and must not be used for live control.
-See [the model card](MODEL_CARD.md) for exact sizes and
-[the multimodal design](MULTIMODAL.md) for closed-loop execution, data collection,
-calibration, unavailable-skill masking and perception evaluation requirements.
+The trained 15,705-parameter PPO motor MLP, trained 232,414-parameter `ScenePlanner`
+and untrained 769,149-parameter historical `MultimodalPlanner` are distinct models.
+Only the first two have bundled trusted weights. The historical scaffold is not
+imported by the arena server. See [model card](MODEL_CARD.md) and
+[training and evaluation](MULTIMODAL.md) for data, sizes and measured limitations.
 
 ## Optional GPU physics
 

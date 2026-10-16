@@ -3,6 +3,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import './style.css';
 import './commands.css';
+import './brain.css';
+import { setupVoice } from './audio.js';
 import { PoseBuffer, smoothingAlpha, updateOrbit } from './motion.js';
 import { PuppySkin } from './puppy.js';
 
@@ -188,6 +190,10 @@ function buildScene(geoms) {
 const rotationMatrix = new THREE.Matrix4();
 function updateState(next) {
   state = next;
+  const motorChoice=next.policy==='Analytic gait'?'gait':next.policy;
+  if(document.activeElement!==$('policy') && [...$('policy').options].some(option=>option.value===motorChoice))$('policy').value=motorChoice;
+  const motorDetail=`${next.brain==='neural'?'RGB/text transformer':'Rules baseline'} · ${motorChoice==='gait'?'analytic motor gait':'PPO near-straight trot; analytic steering and other physical skills'}.`;
+  if($('policy-detail').textContent!==motorDetail)$('policy-detail').textContent=motorDetail;
   $('sim-time').textContent = `${next.time.toFixed(1)} s`;
   $('speed').innerHTML = `${next.speed.toFixed(2)} <small>m/s</small>`;
   const balance = Math.round(Math.max(0,next.upright)*100);
@@ -195,7 +201,7 @@ function updateState(next) {
   $('speed-meter').style.width = `${Math.min(100,next.speed/.6*100)}%`;
   $('balance-meter').style.width = `${balance}%`;
   $('thought').textContent = next.mission_complete ? 'Mission complete. Measured in the physics world.' : next.reason;
-  $('pet-state').textContent = next.needs_reset ? 'A little tumble. Reset posture?' : next.paused ? 'Taking a breather' : ({stop:'Standing by. Ready for a treat.',approach:'On a little adventure',follow:'Following my curiosity',push:'Testing a little nudge',manual:'You lead. I’ll try.',recover:'Finding my feet'}[next.behavior]);
+  $('pet-state').textContent = next.needs_reset ? 'A little tumble. Reset posture?' : next.paused ? 'Taking a breather' : ({stop:'Standing by. Ready for a treat.',approach:'On a little adventure',follow:'Following my curiosity',push:'Testing a little nudge',manual:'You lead. I’ll try.',recover:'Finding my feet',fetch:'Bringing a little treasure home',walk:'Taking a stroll',run:'A little burst of zoomies',jump:'Up, then safely down',rest:'Recharging my play energy',drop:'Letting go',unsupported:'I need a different command'}[next.behavior]??'Thinking about the next step');
   $('pet-status')?.classList.toggle('fallen',next.needs_reset);
   targetPos.set(next.target[0],next.target[1],.015);
   const transforms = new Map();
@@ -208,8 +214,46 @@ function updateState(next) {
     });
   }
   poses.push({time: next.time, root: new THREE.Vector3().fromArray(next.position), transforms}, performance.now());
+  updateBrain(next);
   // Expose only non-sensitive simulation telemetry for end-to-end verification.
-  window.arenaTelemetry = { time: next.time, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy, missionComplete:next.mission_complete, ballTouched:next.ball_touched, position:next.position };
+  window.arenaTelemetry = { time: next.time, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy, missionComplete:next.mission_complete, ballTouched:next.ball_touched, position:next.position, brain:next.brain, planner:next.planner, held:next.held, energy:next.energy, gait:next.gait, jumpMaxHeight:next.jump_max_height, jumpFlightSeconds:next.jump_flight_seconds, gaitAirSeconds:next.gait_air_seconds };
+}
+
+let lastPlanTime, lastCamera;
+function updateBrain(next) {
+  if(next.brain && document.activeElement!==$('brain-mode'))$('brain-mode').value=next.brain;
+  const energy=Math.round((next.energy??1)*100);
+  $('energy-value').textContent=`${energy}%`;
+  if(document.activeElement!==$('play-energy'))$('play-energy').value=energy;
+  if(next.gait && document.activeElement!==$('gait'))$('gait').value=next.gait;
+  for(const foot of document.querySelectorAll('[data-foot]'))foot.classList.toggle('planted',next.foot_contacts?.includes(foot.dataset.foot));
+  $('gripper-state').textContent=`Contact-gated magnetic gripper · ${next.held?'carrying the ball':'empty'}`;
+  const brain=next.planner;
+  if(!brain){
+    if(lastPlanTime!==undefined){
+      lastPlanTime=undefined;lastCamera=undefined;
+      $('sensor-camera').removeAttribute('src');
+      $('goal-progress').textContent=next.brain==='rules'?'Rules baseline: no camera inference.':'Give Miso a command to see the camera and next moves.';
+      $('plan-rows').className='plan-empty';$('plan-rows').textContent='Ready for your next goal.';
+      $('brain-clock').textContent='';
+    }
+    return;
+  }
+  $('goal-progress').textContent=brain.reason;
+  $('goal-progress').classList.toggle('goal-error',brain.failed);
+  if(brain.camera_png && brain.camera_png!==lastCamera){lastCamera=brain.camera_png;$('sensor-camera').src=`data:image/png;base64,${brain.camera_png}`;}
+  $('brain-clock').textContent=`${brain.elapsed_s.toFixed(1)} s on goal · camera + plan ${brain.inference_ms.toFixed(0)} ms`;
+  const plan=brain.plan;
+  if(!plan)return;
+  const key=JSON.stringify(plan.rows);
+  if(key===lastPlanTime)return;
+  lastPlanTime=key;
+  const table=document.createElement('table');table.className='plan-table';
+  const header=table.createTHead().insertRow();
+  for(const name of ['Next move','Focus','Chunk']){const cell=document.createElement('th');cell.textContent=name;header.append(cell);}
+  const body=table.createTBody();
+  for(const row of plan.rows){const tr=body.insertRow();for(const value of [row.skill,row.object,row.duration_s+' s'])tr.insertCell().textContent=value;}
+  $('plan-rows').className='';$('plan-rows').replaceChildren(table);
 }
 
 function send(data) {
@@ -348,13 +392,22 @@ $('appearance').onchange = () => {
     root.userData.robot.visible=appearance==='robot';
   }
 };
-$('policy').onchange = () => {send({policy:$('policy').value});$('policy-detail').textContent=$('policy').value==='gait'?'Rule-based decisions + an analytic gait. No learned motor weights.':'Trained PPO · 15.7k parameters · numeric state input. Turning and object tasks are experimental.';};
+$('policy').onchange = () => {send({policy:$('policy').value});$('policy-detail').textContent=$('policy').value==='gait'?'Analytic physical gait. The selected decision brain still chooses goals.':'Trained PPO · 15.7k parameters · numeric state input. Turning and object tasks are experimental.';};
+function submitInstruction(text) {
+  if(!text.trim())return;
+  manual=false;keys.clear();selectedMode='approach';
+  send({text});
+}
+for(const button of document.querySelectorAll('[data-command]'))button.onclick=()=>submitInstruction(button.dataset.command);
+$('brain-mode').onchange=()=>{chooseMode('stop');send({brain:$('brain-mode').value});};
+$('gait').onchange=()=>send({gait:$('gait').value});
+$('play-energy').onchange=()=>send({energy:Number($('play-energy').value)/100});
+setupVoice($('speak'),$('pet-command'),toast);
 $('command-form').onsubmit = (event) => {
   event.preventDefault();
   const text=$('pet-command').value.trim();
   if(!text)return;
-  manual=false;keys.clear();selectedMode='approach';
-  send({text});$('pet-command').value='';
+  submitInstruction(text);$('pet-command').value='';
 };
 
 window.addEventListener('keydown',(event)=>{
@@ -376,6 +429,7 @@ setInterval(()=>{if(manual)sendManual();},100);
 function showPage(page) {
   $('playground').hidden=page!=='arena';
   document.querySelector('.under-grid').hidden=page!=='arena';
+  document.querySelector('.brain-card').hidden=page!=='arena';
   $('experiments').hidden=page!=='experiments';
   $('arena-tab').classList.toggle('nav-active',page==='arena');
   $('experiments-tab').classList.toggle('nav-active',page==='experiments');
@@ -397,7 +451,8 @@ async function refreshRuns() {
     const previous=$('policy').value;
     $('policy').replaceChildren(new Option('Analytic trot · no learned weights','gait'));
     for(const run of runs)if(run.has_policy)$('policy').add(new Option(`${run.participant} / ${run.run}`,run.id));
-    if([...$('policy').options].some(o=>o.value===previous))$('policy').value=previous;
+    const current=state?.policy==='Analytic gait'?'gait':state?.policy;
+    if([...$('policy').options].some(o=>o.value===(current??previous)))$('policy').value=current??previous;
     const table=document.createElement('table');
     const header=table.createTHead().insertRow();
     for(const title of ['Participant / run','Steps','Train time','Speed / target','Return','Falls']){const th=document.createElement('th');th.textContent=title;header.append(th);}

@@ -1,0 +1,45 @@
+{
+  "checkpoints": [
+    {
+      "path": "demo/5090-once/policy.zip",
+      "checkpoint_bytes": 259942,
+      "sha256": "d32ecd461ab6b53afdb2c1b51dd5edbba7f4f0e4a10f46e905414e278c96cbac",
+      "policy_parameters": 15705,
+      "policy_parameter_bytes": 62820,
+      "deterministic_actor_parameters": 8204,
+      "deterministic_actor_parameter_bytes": 32816,
+      "observations": 50,
+      "joint_residual_outputs": 12,
+      "architecture": "separate actor/critic 50->64->64 MLP; actor->12, critic->1"
+    },
+    {
+      "path": "demo/curious-v2/policy.zip",
+      "checkpoint_bytes": 224113,
+      "sha256": "f0f6719679974652dc5bcc1406b9157aeb02391fa40f78d6afe1cb3e7e854c5b",
+      "policy_parameters": 15705,
+      "policy_parameter_bytes": 62820,
+      "deterministic_actor_parameters": 8204,
+      "deterministic_actor_parameter_bytes": 32816,
+      "observations": 50,
+      "joint_residual_outputs": 12,
+      "architecture": "separate actor/critic 50->64->64 MLP; actor->12, critic->1"
+    }
+  ],
+  "hosting": "GitHub repository; no Hugging Face upload",
+  "trained_arena_planner": {
+    "path": "demo/arena-planner/planner.pt",
+    "checkpoint_bytes": 946381,
+    "sha256": "e17d046cb211990fc2f9ba4cb466ae683084c98a03d4298729a3d93163395392",
+    "parameters": 232414,
+    "parameter_bytes": 929656,
+    "inputs": "96x96 overhead RGB + up to 96 word tokens + 53 numerical values",
+    "outputs": "six skill/object/offset proposals; fixed one-second chunks",
+    "training": "supervised arena imitation, not task RL",
+    "status": "bundled trained weights, default live decision brain; bounded arena language/vision"
+  },
+  "planner_prototype": {
+    "parameters": 769149,
+    "parameter_bytes": 3076596,
+    "status": "Random initialization; no trained checkpoint; not connected to arena"
+  }
+}

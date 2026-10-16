@@ -5,6 +5,18 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Trained arena brain and voice — 2026-10-16
+
+- Train and bundle a 232,414-parameter RGB/text/state transformer with six plan
+  rows, visible camera input and closed-loop physical goal checks. Keep the
+  earlier untrained research architecture separately labelled.
+- Preserve the failed byte-tokenizer run, final untouched scene/phrase test,
+  modality interventions, failed retrieval pilot and all 24 successful final
+  physics trials. Final-test intent accuracy 97.875%; first-action 89.542%.
+- Add offline PocketSphinx English voice capture/transcription with transcript
+  review, virtual play-energy, finite skill commands and explicit neural/rules
+  selection. No remote model service, Hugging Face hosting or new GPU spend.
+
 ### Physical pet skills and sensor camera
 
 - Add an optional interactive physics rig with a motor-driven lifting gripper,

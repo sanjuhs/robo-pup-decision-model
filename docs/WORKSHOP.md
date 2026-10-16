@@ -13,6 +13,9 @@ prior is disclosed; this is residual PPO, not learning all locomotion from zero.
    Each tab is independent; changing one target does not move another participant's dog.
    The final short ten-session WebSocket probe measured a minimum real-time ratio of 0.986;
    this is not a two-hour soak test. Five simultaneous browser renderers were also tested.
+   The new active-neural probe measured minimum 0.819× real time for five sessions
+   and 0.571× for ten, because RGB/inference add CPU load. For smoother interaction
+   use local backends per participant or fewer simultaneously active neural goals.
 4. Give each participant a unique ID and terminal access. This prototype trusts
    participants with the host filesystem; do not use it for mutually untrusted tenants.
 5. Avoid running ten optimizers at once. Queue jobs; begin with one training job,
@@ -48,9 +51,14 @@ uv run robopup-evaluate --model artifacts/alice/curious-02/policy.zip --speed .3
 
 The shipped curious-v2 checkpoint is available after setup, so the arena can be
 demonstrated immediately. Select it and try `go to the ball` or `go behind the ball`.
-Both passed one deterministic headless trial; ball contact also passed a live
-browser trial. Following and pushing remain experimental. A command being
-recognized does not prove that its activity was completed.
+The neural RGB controller now passed three varied-start trials each for approach,
+behind, fetch, push, follow, walk, run and hop. Use the default curious-v2 hybrid
+motor for that demo; custom participant motors can behave differently. A command
+being recognized does not prove completion. Inspect the goal and camera/plan panel.
+Try `fetch the ball` (about 72–78 simulated seconds), `run forward` and `jump`.
+Voice is offline bounded English recognition: review the transcript before Send.
+A low virtual play-energy value demonstrates rest/recharge. Use the rules brain
+as a clearly labelled privileged-state comparison, not a vision baseline.
 
 Participants can copy `configs/curious.json` to a new file and change one variable.
 Profiles `gentle` and `zoomies` intentionally use different speeds/energy penalties;
