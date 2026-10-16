@@ -1,0 +1,24 @@
+.git
+.github
+.venv
+.cache
+.tools
+.env
+.env.*
+!.env.example
+artifacts
+benchmarks
+docs
+tests
+node_modules
+web/node_modules
+web/dist
+web/test-results
+web/playwright-report
+__pycache__
+**/__pycache__
+*.log
+*.egg-info
+.pytest_cache
+.ruff_cache
+# Bundled demo/*.pt and demo/*.zip are deliberately included; runtime needs them.

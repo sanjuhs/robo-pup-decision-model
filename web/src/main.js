@@ -7,6 +7,8 @@ import './brain.css';
 import { setupVoice } from './audio.js';
 import { PoseBuffer, smoothingAlpha, updateOrbit } from './motion.js';
 import { PuppySkin } from './puppy.js';
+import { RobotSkin } from './robot.js';
+import { backend, backendEndpoints, configuredBackend, readSessionToken, authenticatedFetch } from './backend.js';
 
 const $ = (id) => document.getElementById(id);
 let socket, state, paused = false, followCamera = false, manual = false, selectedMode = 'stop';
@@ -16,8 +18,9 @@ const meshes = new Map();
 const poses = new PoseBuffer();
 const eyes = [];
 const puppy = new PuppySkin();
-let appearance = 'puppy';
-let puppyStats;
+const robot = new RobotSkin();
+let appearance = 'robot';
+let puppyStats, robotStats;
 let tailPivot;
 const renderedRoot = new THREE.Vector3();
 const followShift = new THREE.Vector3();
@@ -133,9 +136,11 @@ function buildScene(geoms) {
     scene.add(root);
     meshes.set(geom.id, root);
     const skin = puppy.add(geom);
-    root.userData.robot = mesh;
+    const robotSkin = robot.add(geom);
+    root.userData.robot = robotSkin ?? mesh;
     root.userData.skin = skin;
-    if(skin) { root.add(skin); mesh.visible=false; }
+    if(robotSkin) { root.add(robotSkin); mesh.visible=false; }
+    if(skin) { root.add(skin); skin.visible=false; mesh.visible=false; }
     if (geom.name === 'head') {
       for (const side of [-1,1]) {
         const eye = new THREE.Mesh(new THREE.SphereGeometry(.013, 12, 8), new THREE.MeshStandardMaterial({ color: '#122b27', roughness: .3 }));
@@ -185,6 +190,7 @@ function buildScene(geoms) {
     }
   }
   puppyStats=puppy.stats();
+  robotStats=robot.stats();
 }
 
 const rotationMatrix = new THREE.Matrix4();
@@ -192,7 +198,7 @@ function updateState(next) {
   state = next;
   const motorChoice=next.policy==='Analytic gait'?'gait':next.policy;
   if(document.activeElement!==$('policy') && [...$('policy').options].some(option=>option.value===motorChoice))$('policy').value=motorChoice;
-  const motorDetail=`${next.brain==='neural'?'RGB/text transformer':'Rules baseline'} · ${motorChoice==='gait'?'analytic motor gait':'PPO near-straight trot; analytic steering and other physical skills'}.`;
+  const motorDetail=`${next.brain==='vlm'?'Generative robot-eye VLM':next.brain==='neural'?'Arena RGB/text transformer':'Rules baseline'} · ${motorChoice==='gait'?'analytic motor gait':'PPO near-straight trot; analytic steering and other physical skills'}.`;
   if($('policy-detail').textContent!==motorDetail)$('policy-detail').textContent=motorDetail;
   $('sim-time').textContent = `${next.time.toFixed(1)} s`;
   $('speed').innerHTML = `${next.speed.toFixed(2)} <small>m/s</small>`;
@@ -216,43 +222,64 @@ function updateState(next) {
   poses.push({time: next.time, root: new THREE.Vector3().fromArray(next.position), transforms}, performance.now());
   updateBrain(next);
   // Expose only non-sensitive simulation telemetry for end-to-end verification.
-  window.arenaTelemetry = { time: next.time, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy, missionComplete:next.mission_complete, ballTouched:next.ball_touched, position:next.position, brain:next.brain, planner:next.planner, held:next.held, energy:next.energy, gait:next.gait, jumpMaxHeight:next.jump_max_height, jumpFlightSeconds:next.jump_flight_seconds, gaitAirSeconds:next.gait_air_seconds };
+  window.arenaTelemetry = { time: next.time, paused:next.paused, behavior: next.behavior, needsReset:next.needs_reset, geometryCount: next.geoms.length, policy:next.policy, missionComplete:next.mission_complete, ballTouched:next.ball_touched, position:next.position, brain:next.brain, planner:next.planner, held:next.held, energy:next.energy, gait:next.gait, jumpMaxHeight:next.jump_max_height, jumpFlightSeconds:next.jump_flight_seconds, gaitAirSeconds:next.gait_air_seconds };
 }
 
 let lastPlanTime, lastCamera;
 function updateBrain(next) {
   if(next.brain && document.activeElement!==$('brain-mode'))$('brain-mode').value=next.brain;
+  const generative=next.brain==='vlm';
+  $('vlm-details').hidden=!generative;
+  $('sensor-caption').textContent=generative?'Robot-eye RGB · first person':'MuJoCo sensor · top-down RGB';
+  $('sensor-camera').alt=generative?'Current robot-eye RGB image used by the vision-language planner':'Current RGB image seen by the planner';
   const energy=Math.round((next.energy??1)*100);
   $('energy-value').textContent=`${energy}%`;
   if(document.activeElement!==$('play-energy'))$('play-energy').value=energy;
   if(next.gait && document.activeElement!==$('gait'))$('gait').value=next.gait;
   for(const foot of document.querySelectorAll('[data-foot]'))foot.classList.toggle('planted',next.foot_contacts?.includes(foot.dataset.foot));
-  $('gripper-state').textContent=`Contact-gated magnetic gripper · ${next.held?'carrying the ball':'empty'}`;
+  $('gripper-state').textContent=`Physical vertical magnetic pickup · ${next.held?'carrying the ball':'empty'}`;
   const brain=next.planner;
+  $('planner-model').textContent=brain?.model??(generative?'Generative model not loaded':next.brain==='rules'?'Rules baseline':'Arena RGB/text transformer');
+  const phase=brain?.phase??(brain?.failed?'error':next.mission_complete?'complete':brain?'executing':'standing by');
+  $('planner-phase').textContent=phase;
+  $('planner-phase').dataset.phase=phase;
+  if(generative) {
+    $('vlm-provider').textContent=brain?.provider??'Backend model configuration';
+    $('vlm-raw-response').textContent=brain?.raw_response||'No model response received yet.';
+    $('vlm-limitation').textContent=brain?.limitation??'The VLM proposes bounded skills. Physics verifies completion; generated text is not proof of a completed goal.';
+  }
   if(!brain){
     if(lastPlanTime!==undefined){
       lastPlanTime=undefined;lastCamera=undefined;
-      $('sensor-camera').removeAttribute('src');
-      $('goal-progress').textContent=next.brain==='rules'?'Rules baseline: no camera inference.':'Give Miso a command to see the camera and next moves.';
+      $('sensor-camera').removeAttribute('src');$('sensor-camera').hidden=true;$('sensor-placeholder').hidden=false;
+      $('goal-progress').textContent=next.brain==='rules'?'Rules baseline: no camera inference.':generative?'Send a goal to the configured vision-language model.':'Give Miso a command to see the camera and next moves.';
       $('plan-rows').className='plan-empty';$('plan-rows').textContent='Ready for your next goal.';
       $('brain-clock').textContent='';
     }
     return;
   }
-  $('goal-progress').textContent=brain.reason;
-  $('goal-progress').classList.toggle('goal-error',brain.failed);
-  if(brain.camera_png && brain.camera_png!==lastCamera){lastCamera=brain.camera_png;$('sensor-camera').src=`data:image/png;base64,${brain.camera_png}`;}
-  $('brain-clock').textContent=`${brain.elapsed_s.toFixed(1)} s on goal · camera + plan ${brain.inference_ms.toFixed(0)} ms`;
-  const plan=brain.plan;
-  if(!plan)return;
-  const key=JSON.stringify(plan.rows);
+  $('goal-progress').textContent=brain.reason??brain.phase??'Waiting for the next observation.';
+  $('goal-progress').classList.toggle('goal-error',brain.failed||brain.phase==='error');
+  if(brain.camera_png && brain.camera_png!==lastCamera){lastCamera=brain.camera_png;$('sensor-camera').src=`data:image/png;base64,${brain.camera_png}`;$('sensor-camera').hidden=false;$('sensor-placeholder').hidden=true;}
+  $('brain-clock').textContent=`${(brain.elapsed_s??0).toFixed(1)} s on goal · camera + plan ${(brain.inference_ms??0).toFixed(0)} ms`;
+  const rows=generative?brain.mission_steps:brain.plan?.rows;
+  if(!rows?.length){
+    if(generative){$('plan-rows').className='plan-empty';$('plan-rows').textContent=brain.phase==='thinking'?'The model is reading the robot-eye image…':'No executable steps received.';lastPlanTime=undefined;}
+    return;
+  }
+  const key=JSON.stringify([generative,rows,brain.current_step]);
   if(key===lastPlanTime)return;
   lastPlanTime=key;
   const table=document.createElement('table');table.className='plan-table';
   const header=table.createTHead().insertRow();
-  for(const name of ['Next move','Focus','Chunk']){const cell=document.createElement('th');cell.textContent=name;header.append(cell);}
+  for(const name of generative?['Step','Action','Focus','Status']:['Next move','Focus','Chunk']){const cell=document.createElement('th');cell.textContent=name;header.append(cell);}
   const body=table.createTBody();
-  for(const row of plan.rows){const tr=body.insertRow();for(const value of [row.skill,row.object,row.duration_s+' s'])tr.insertCell().textContent=value;}
+  for(const [index,row] of rows.entries()) {
+    const tr=body.insertRow();
+    if(generative)tr.dataset.status=row.status??(index===brain.current_step?'executing':'pending');
+    const values=generative?[String(index+1),row.action,row.object??'—',row.status??(index===brain.current_step?'executing':'pending')]:[row.skill,row.object,row.duration_s+' s'];
+    for(const value of values)tr.insertCell().textContent=value;
+  }
   $('plan-rows').className='';$('plan-rows').replaceChildren(table);
 }
 
@@ -269,8 +296,15 @@ function chooseMode(mode) {
 }
 
 function connect() {
-  socket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws`);
+  window.arenaConnection={backend:backend.base,status:'connecting'};
+  socket = new WebSocket(backend.ws);
+  const connectionTimer=setTimeout(()=>{if(socket.readyState!==WebSocket.OPEN)showBackendSetup('The physics server is still starting or unreachable. Connect an HTTPS backend to run MuJoCo and model inference.');},6000);
   socket.onopen = () => {
+    clearTimeout(connectionTimer);
+    const token=readSessionToken();
+    if(token)socket.send(JSON.stringify({type:'auth',token}));
+    window.arenaConnection.status='connected';
+    $('backend-setup').hidden=true;
     $('connection-dot').classList.add('connected');
     $('connection-text').textContent = 'Arena connected';
   };
@@ -281,10 +315,12 @@ function connect() {
     else if (message.type === 'error') toast(message.message);
     else if (message.type === 'reply') toast(message.message);
   };
-  socket.onclose = () => {
+  socket.onclose = ({reason}) => {
+    clearTimeout(connectionTimer);
+    window.arenaConnection.status='disconnected';
     $('connection-dot').classList.remove('connected');
     $('connection-text').textContent = 'Disconnected · reload to reconnect';
-    toast('Arena disconnected. Check the server and reload to reconnect.');
+    showBackendSetup(reason?`The physics server disconnected: ${reason}. Check the backend URL and workshop access key.`:'The physics server is disconnected. Start your backend, then reconnect.');
   };
 }
 
@@ -348,7 +384,7 @@ function animate(time) {
     $('world-label').style.opacity = projected.z>1 || Math.abs(projected.x)>1 || Math.abs(projected.y)>1 ? '0' : '1';
     window.arenaPresentation = {
       time: simTime, position: renderedRoot.toArray(), cameraTarget: controls.target.toArray(),
-      appearance, puppyStats, puppyParts: puppy.parts.size, puppyTailAngle: puppy.tail?.rotation.x,
+      appearance, robotStats, robotParts:robot.parts.size, pickupTool:[...robot.parts.values()].some(group=>group.name==='robot:gripper_geom'), puppyStats, puppyParts: puppy.parts.size, puppyTailAngle: puppy.tail?.rotation.x,
       puppyEarAngles: puppy.ears.map(({ear})=>ear.rotation.x),
       followCamera, cameraDistance: camera.position.distanceTo(controls.target), tailAngle: tailPivot?.rotation.z, blink, interpolationMs: poses.delayMs,
     };
@@ -399,10 +435,10 @@ function submitInstruction(text) {
   send({text});
 }
 for(const button of document.querySelectorAll('[data-command]'))button.onclick=()=>submitInstruction(button.dataset.command);
-$('brain-mode').onchange=()=>{chooseMode('stop');send({brain:$('brain-mode').value});};
+$('brain-mode').onchange=()=>{chooseMode('stop');send({brain:$('brain-mode').value});if($('brain-mode').value==='vlm')refreshVlmStatus();};
 $('gait').onchange=()=>send({gait:$('gait').value});
 $('play-energy').onchange=()=>send({energy:Number($('play-energy').value)/100});
-setupVoice($('speak'),$('pet-command'),toast);
+setupVoice($('speak'),$('pet-command'),toast,backend.api('transcribe'),authenticatedFetch);
 $('command-form').onsubmit = (event) => {
   event.preventDefault();
   const text=$('pet-command').value.trim();
@@ -444,7 +480,7 @@ $('refresh-runs').onclick=refreshRuns;
 
 async function refreshRuns() {
   try {
-    const response=await fetch('/api/runs');
+    const response=await authenticatedFetch(backend.api('runs'));
     if(!response.ok)throw new Error('Results unavailable');
     const {runs}=await response.json();
     $('run-count').textContent=runs.length;
@@ -464,5 +500,33 @@ async function refreshRuns() {
   }catch(error){toast('Could not load experiments. Check the arena server.');}
 }
 
+$('backend-url').value=configuredBackend;
+$('backend-token').value=readSessionToken();
+$('backend-settings').onclick=()=>{$('backend-setup').hidden=!$('backend-setup').hidden;};
+$('backend-form').onsubmit=event=>{
+  event.preventDefault();
+  try {
+    const value=$('backend-url').value.trim();
+    const selected=backendEndpoints(value,location.origin);
+    if(location.protocol==='https:' && !selected.base.startsWith('https://'))throw new Error('An HTTPS page needs an HTTPS backend.');
+    localStorage.setItem('robopup.backendUrl',value);
+    sessionStorage.setItem('robopup.accessKey',$('backend-token').value.trim());
+    location.reload();
+  }catch(error){$('backend-message').textContent=error.message;}
+};
+function showBackendSetup(message) {
+  $('backend-setup').hidden=false;
+  $('backend-message').textContent=message;
+}
+async function refreshVlmStatus() {
+  try {
+    const response=await fetch(backend.api('vlm'),{signal:AbortSignal.timeout(5000)});
+    if(!response.ok)throw new Error('No generative VLM is configured on this backend.');
+    const data=await response.json();
+    $('vlm-availability').textContent=data.available ? `${data.model??'Vision-language model'} · ${data.provider??'local model'} · ${data.status??'ready'}` : (data.reason??data.detail??'Generative VLM is not configured. Start a model server using the deployment guide.');
+  }catch(error){$('vlm-availability').textContent=error.message;}
+}
 connect();
 refreshRuns();
+refreshVlmStatus();
+fetch(backend.api('health'),{signal:AbortSignal.timeout(5000)}).then(response=>{if(!response.ok)throw new Error('Backend health check failed');return response.json();}).then(()=>{$('backend-health').textContent=`Physics backend: ${backend.base}`;}).catch(()=>{$('backend-health').textContent='Physics backend is not reachable.';});

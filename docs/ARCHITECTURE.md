@@ -14,6 +14,18 @@ FastAPI / one process                CSV + Monitor episode logs
   position actuators -> physics
 ```
 
+## Generative mission layer
+
+The optional Qwen3-VL-2B layer consumes a real 384px perspective head-camera
+image, language, energy and held-state data. It produces validated JSON subgoals.
+`VLMMission` executes one physical skill at a time, retains verified completion
+history and replans from fresh eyes between steps. The existing v4 planner below
+continues to use overhead RGB for low-level visual grounding; the entire policy
+is not egocentric end to end. Invalid/model failures stop execution visibly.
+
+[Full model/control flow](VLM_GUIDE.md), [source-audited inspiration](ROBOJEV_COMPARISON.md)
+and [Vercel services boundaries](DEPLOYMENT.md) describe the implementation.
+
 ## Robot and environment
 
 Original 12-actuator primitive dog: roll, pitch, and knee on each of four legs.

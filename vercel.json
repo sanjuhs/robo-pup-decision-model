@@ -1,0 +1,38 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "app": {
+      "root": "services/app",
+      "framework": "fastapi",
+      "bindings": [
+        { "type": "service", "service": "planner", "format": "url", "env": "PLANNER_URL" }
+      ]
+    },
+    "web": {
+      "root": "web",
+      "framework": "vite",
+      "installCommand": "npm ci --ignore-scripts",
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist"
+    },
+    "planner": {
+      "root": "services/planner",
+      "framework": "fastapi",
+      "installCommand": "python prepare.py && python -m pip install --requirement requirements.txt"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": { "service": "app" } },
+    { "source": "/:path*", "destination": { "service": "web" } }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "microphone=(self)" }
+      ]
+    }
+  ]
+}

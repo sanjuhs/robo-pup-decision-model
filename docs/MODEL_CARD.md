@@ -5,6 +5,27 @@ Measured 2026-10-16. Reproduce with
 The committed [current inventory](../benchmarks/gpu-planner-v4/model-inventory.json) includes checkpoint
 hashes and exact counts; the command does not download or train anything.
 
+## Generative robot-eye vision-language model
+
+The optional high-level model is **Qwen/Qwen3-VL-2B-Instruct**, an Apache-2.0
+pretrained foundation model with **2,127,532,032 parameters**. The pinned public
+revision is `89644892e4d85e24eaac8bacfd4f463576704203`; its downloaded files total
+4,266,647,442 bytes. The model manifest and first actual CPU image-inference
+record are in [`benchmarks/vlm-2026-10-16/`](../benchmarks/vlm-2026-10-16).
+
+This model receives actual perspective robot-eye RGB plus text/energy/held state
+and verified action history. It generates a bounded JSON mission; the executor
+checks physical outcomes and requests a fresh-eye remaining plan between steps.
+It was not trained or fine-tuned in this project. Its local weights live under
+ignored `artifacts/vlm/`; no token is needed for the public download. CPU latency
+in the first probe was 127.73 seconds including load, overlapping other checks.
+That first image-to-JSON probe is not proof of a physical VLM mission; separate
+closed-loop and GPU measurements are recorded as they complete.
+
+See [the VLM guide](VLM_GUIDE.md), [RoboJev comparison](ROBOJEV_COMPARISON.md) and
+[deployment services](DEPLOYMENT.md) for the difference between generative
+planning, the small learned controller below, analytic mechanics and hosting.
+
 ## Trained arena transformer
 
 The default live planner is `ArenaPlannerV4`: **246,712 parameters**, **1,011,137 bytes**

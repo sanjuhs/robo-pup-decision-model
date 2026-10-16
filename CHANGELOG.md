@@ -5,6 +5,19 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Robot appearance and Vercel service boundaries
+
+- Make the original mechanical robot with visible physical pickup the default;
+  retain the puppy skin and exact physical-pose rendering. Fresh cold browser
+  suite passes 21/21, including actual fetch and strict pause/camera checks.
+- Pin Vite 7.3.7; frozen install, build and npm audit pass with zero advisories.
+- Add independently packaged app/web/internal-planner Vercel services. The app
+  reads its injected PLANNER_URL binding at runtime; planner has no public route.
+  Actual `vercel dev -L` routing and internal binding checks passed locally;
+  production deployment still requires account authentication and routing review.
+- Add a non-root CPU backend container and pinned minimal serverless dependencies.
+  Preserve disk/TLS/import build failures rather than claiming they succeeded.
+
 ### Robot eyes and sequential generative missions
 
 - Integrate the public Apache-2.0 Qwen3-VL-2B checkpoint as a genuine generative

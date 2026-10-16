@@ -21,7 +21,7 @@ export function pcmWave(chunks,sourceRate,targetRate=16000) {
   return buffer;
 }
 
-export function setupVoice(button,input,notify) {
+export function setupVoice(button,input,notify,transcribeUrl='/api/transcribe',request=fetch) {
   let recording,timeout;
   const stop=async()=>{
     if(!recording)return;
@@ -34,7 +34,7 @@ export function setupVoice(button,input,notify) {
     await context.close();
     button.disabled=true;button.textContent='Transcribing…';button.setAttribute('aria-pressed','false');
     try {
-      const response=await fetch('/api/transcribe',{method:'POST',headers:{'Content-Type':'audio/wav'},body:pcmWave(chunks,sampleRate)});
+      const response=await request(transcribeUrl,{method:'POST',headers:{'Content-Type':'audio/wav'},body:pcmWave(chunks,sampleRate)});
       const result=await response.json();
       if(!response.ok)throw new Error(result.detail??'Could not transcribe');
       input.value=result.text;input.focus();notify(`Heard “${result.text}”. Press Send to give the command.`);

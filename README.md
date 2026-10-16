@@ -1,6 +1,6 @@
 # RoboPup Arena
 
-**A little dog. A big experiment.**
+**A robot with a plan. A world to explore.**
 
 An interactive robot-pet lab: real MuJoCo contact physics, a playful Three.js yard,
 fresh PPO policies, and inspectable experiment results. Inspired by
@@ -8,7 +8,7 @@ fresh PPO policies, and inspectable experiment results. Inspired by
 and motor control. Miso now has a trained camera/text/state transformer,
 physical skills, and a visible six-row plan.
 
-![Actual browser arena with camera-grounded plans and measured hop completion](docs/assets/gpu-planner-arena.png)
+![Actual browser arena with the research robot and physical pickup](docs/assets/robot-arena.png)
 
 [Watch a complete, unsped browser fetch](docs/assets/gpu-planner-fetch.webm):
 actual contact, lift, return and release, with the camera and plan panel visible.
@@ -32,6 +32,37 @@ Actual browser capture of the bundled GPU-trained checkpoint, cropped and looped
 [Full six-second recording](docs/assets/puppy-walk.webm). The new puppy capture
 averaged about 5 frames/s using software WebGL; hardware-browser FPS is unmeasured.
 The puppy is original, stylized procedural artwork, not a photoreal canine asset.
+
+## Understand the system
+
+The large vision-language model and the small arena controller are separate.
+**Qwen3-VL-2B-Instruct** is the pretrained, generative VLM: actual robot-eye RGB,
+English instructions, virtual energy, held state and verified action history go
+in; a validated sequence of skills comes out. The native mission runtime executes
+one step, checks the physical outcome, captures fresh eyes and asks for the
+remaining plan. The existing v4 controller still grounds low-level targets from
+its overhead RGB camera. This is a hierarchy, not an end-to-end learned robot policy.
+
+| Your question | Read this |
+| --- | --- |
+| What is closest to RoboJev, and what differs? | [Source-audited RoboJev comparison](docs/ROBOJEV_COMPARISON.md) |
+| How do robot eyes become sequential decisions? | [VLM architecture and decision flow](docs/VLM_GUIDE.md) |
+| Which weights, sizes and licenses are used? | [Model card](docs/MODEL_CARD.md) and [VLM model guide](docs/VLM_GUIDE.md#where-the-weights-live-and-how-large-they-are) |
+| What did we actually train? | [PPO training](docs/ARCHITECTURE.md), [v4 training history](docs/MULTIMODAL.md), [GPU experiment](docs/GPU_PLANNER_EXPERIMENT.md) |
+| How do I download the VLM or use the HF CLI? | [Hugging Face setup](docs/VLM_GUIDE.md#download-and-run-locally) |
+| How do app, web and planner deploy? | [Vercel services and backend deployment](docs/DEPLOYMENT.md), [vercel.json](vercel.json) |
+| What passed, failed or remains incomplete? | [Validation](docs/VALIDATION.md), [current status](docs/STATUS.md), [raw benchmarks](benchmarks/) |
+
+Qwen's public checkpoint is **2,127,532,032 parameters**, Apache-2.0, pinned to
+[`89644892e4d85e24eaac8bacfd4f463576704203`](https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/tree/89644892e4d85e24eaac8bacfd4f463576704203).
+We integrate its pretrained weights; we have not pretrained or fine-tuned this
+foundation model. The public download needs **no Hugging Face token**. Its weights
+live in ignored `artifacts/vlm/`, separate from the approximately 1 MB v4 weights
+committed in `demo/`. No Hugging Face Space has been published.
+
+The generative integration is being validated separately from the existing arena
+benchmark. Contract/transport fixtures are never reported as actual VLM inference.
+See the linked validation record for the completed evidence.
 
 ## Start the yard
 
@@ -62,7 +93,7 @@ validated. PyTorch 2.9 does not support every older CPU/OS combination.
 - **WASD** steers; **Space** requests a standing pose.
 - **Pause** freezes physics; **Reset posture** resets the world, including the crate.
 - Select a locally trained policy to compare it with the analytic gait.
-- Switch **Appearance** between the golden puppy and the original research robot.
+- Switch **Appearance** between the default research robot with physical pickup and the optional golden puppy.
   Both display the same physics and policy; this does not retrain or replace the gait.
 - Try **fetch the ball**, **go behind the ball**, **push the crate**, **follow me**,
   **walk forward**, **run forward**, **jump**, **rest**, **drop the ball**, or **stop**.
@@ -134,6 +165,26 @@ untrained historical scaffold, separate from the live v4 architecture.
 The Python backend is required; a browser-only phone bundle and photoreal canine
 rig remain future work. Walk/run/hop and steering still use analytic physical
 controllers alongside PPO straight-trot residuals.
+
+## Enable the generative VLM
+
+```bash
+uv sync --frozen --extra dev --extra vlm
+uv run --extra vlm python scripts/download_vlm.py
+ROBOPUP_DEFAULT_BRAIN=vlm bash scripts/start.sh
+```
+
+The explicit downloader writes the pinned model revision, license, file sizes
+and SHA-256 manifest. It does not need a token for this public model and never
+pushes weights or credentials to GitHub. Downloading a model is not training it.
+The browser's **Generative robot-eye VLM** mode shows the actual eye image, raw
+model response and step outcomes. Failure remains visible; it never silently
+substitutes the small arena planner as the language model.
+
+Local inference needs several GB of RAM and disk. CPU latency must be measured
+on your device. A remote OpenAI-compatible vision provider is optional; its key
+stays on the backend. The default compact arena remains available without this
+large download. See [the full guide](docs/VLM_GUIDE.md).
 
 ## Train your first policy
 

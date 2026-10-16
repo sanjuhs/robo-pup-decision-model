@@ -1,12 +1,19 @@
 import {test,expect} from '@playwright/test';
 
-test('articulated puppy walks with a trusted policy and appearance changes preserve the world',async({page})=>{
+test('research robot has a physical pickup and optional puppy skin preserves the physical world',async({page})=>{
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   await page.setViewportSize({width:1440,height:1050});
   await page.goto('/');
   await page.waitForFunction(()=>window.arenaPresentation?.puppyParts===18);
-  await expect(page.getByLabel('Appearance')).toHaveValue('puppy');
+  await expect(page.getByLabel('Appearance')).toHaveValue('robot');
+  const presentation=await page.evaluate(()=>window.arenaPresentation);
+  expect(presentation.robotParts).toBe(19);
+  expect(presentation.pickupTool).toBe(true);
+  expect(presentation.robotStats.externalAssets).toBe(0);
+  await page.screenshot({path:'../artifacts/screens/robot-default.png',fullPage:true});
+  await page.getByLabel('Appearance').selectOption('puppy');
+  await page.waitForFunction(()=>window.arenaPresentation.appearance==='puppy');
   await page.getByRole('button',{name:/Close-up/}).click();
   await page.waitForFunction(()=>window.arenaPresentation.cameraDistance<2.7);
   await page.getByLabel('Motor policy').selectOption('baseline/curious-v2');
@@ -16,7 +23,7 @@ test('articulated puppy walks with a trusted policy and appearance changes prese
   expect(await page.evaluate(()=>window.arenaTelemetry.needsReset)).toBe(false);
   await page.keyboard.up('w');
   await page.getByRole('button',{name:'Pause simulation'}).click();
-  await page.waitForTimeout(350);
+  await page.waitForFunction(()=>window.arenaTelemetry.paused && window.arenaPresentation.time===window.arenaTelemetry.time);
   const before=await page.evaluate(()=>({physical:window.arenaTelemetry,art:window.arenaPresentation}));
   await page.waitForTimeout(200);
   const held=await page.evaluate(()=>window.arenaPresentation);
