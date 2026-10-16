@@ -5,6 +5,18 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Physical pet skills and sensor camera
+
+- Add an optional interactive physics rig with a motor-driven lifting gripper,
+  contact-gated magnetic weld, and orthographic RGB sensor. The original training
+  rig remains the default for reproducibility.
+- Add analytic four-beat movement, bouncing run and powered hop controllers.
+  These use actual contacts/actuators; they are not newly learned motor policies.
+- Test contact-gated capture without pose teleportation, physical lift/release,
+  hop flight/landing with no applied external force, and actual RGB/segmentation.
+- Preserve the user-approved $30 total ceiling while completing the expanded
+  multimodal goal; no new paid resources were used for these changes.
+
 ### Golden puppy — 2026-10-16
 
 - Add an original articulated puppy appearance: rounded golden coat, muzzle,

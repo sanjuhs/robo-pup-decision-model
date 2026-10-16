@@ -8,7 +8,9 @@
   ceiling: $30. Do not provision or start billable resources just to make a test pass.
   The user authorized one paid GPU training run in this session. That authorization
   completed on a disposable RTX 5090 pod with a 25-minute monitor;
-  do not start additional policy experiments. A failed MJX/SB3 interface attempt
+  and the user subsequently requested completing the multimodal planner and
+  additional skills. Further training for that goal is authorized within the
+  remaining $30 total ceiling. A failed MJX/SB3 interface attempt
   was diagnosed, its pod deleted, and the same experiment retried after a regression
   test. Keep every attempt and cleanup record; do not hide failures or exceed the budget.
 - Keep changes small and commit related work together. Preserve raw failed runs.
@@ -23,8 +25,9 @@
 - Native simulation is CPU; current policies are residual PPO around an analytic
   gait. Stop uses an analytic stance. Reset is not learned self-righting.
 - The puppy skin changes rendering only; never fabricate physical root/leg motion.
-  `MultimodalPlanner` is an untrained tensor scaffold disconnected from the server;
-  never present it as trained perception, language understanding, or a live policy.
+  The original `MultimodalPlanner` is an untrained tensor scaffold. The separate
+  arena RGB transformer must pass held-out and real-goal checks before packaging;
+  never confuse tensor tests, oracle mechanics trials, and learned-agent success.
 - Update docs/STATUS.md and docs/BENCHMARKS.md when evidence or scope changes.
   Do not claim GPU timings, costs, task success, Jev integration, or overnight
   unattended execution without direct evidence.

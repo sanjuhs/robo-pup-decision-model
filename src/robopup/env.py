@@ -14,9 +14,9 @@ class RoboPupEnv(gym.Env):
     dt = .02
 
     def __init__(self, *, obstacles=False, target_speed=.35, episode_seconds=12,
-                 energy_weight=.002, randomize=True):
+                 energy_weight=.002, randomize=True, pet=False):
         super().__init__()
-        self.model = mujoco.MjModel.from_xml_string(arena_xml(obstacles))
+        self.model = mujoco.MjModel.from_xml_string(arena_xml(obstacles, pet=pet))
         self.data = mujoco.MjData(self.model)
         self.target_speed = float(target_speed)
         self.energy_weight = float(energy_weight)
@@ -28,6 +28,7 @@ class RoboPupEnv(gym.Env):
         self.previous_action = np.zeros(12)
         self.steps = 0
         self.phase = 0.
+        self.gait_frequency = 2.0
         self.torso = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "torso")
         self.crate = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "crate")
         self.ball = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "ball")
@@ -75,7 +76,7 @@ class RoboPupEnv(gym.Env):
         if self.randomize:
             self.data.qpos[7:19] += self.np_random.uniform(-.025, .025, 12)
             self.model.geom_friction[0, 0] = self.np_random.uniform(.7, 1.1)
-        self.data.ctrl[:] = self.data.qpos[7:19]
+        self.data.ctrl[:12] = self.data.qpos[7:19]
         mujoco.mj_forward(self.model, self.data)
         return self._obs(), {}
 
@@ -84,9 +85,9 @@ class RoboPupEnv(gym.Env):
         if action.shape != (12,) or not np.isfinite(action).all():
             raise ValueError("Expected 12 finite joint residuals")
         action = np.clip(action, -1, 1)
-        self.phase = (self.phase + self.dt * 2*np.pi*2.) % (2*np.pi)
+        self.phase = (self.phase + self.dt * 2*np.pi*self.gait_frequency) % (2*np.pi)
         targets = self.gait() + action * .3
-        self.data.ctrl[:] = np.clip(targets, self.model.jnt_range[1:13, 0],
+        self.data.ctrl[:12] = np.clip(targets, self.model.jnt_range[1:13, 0],
                                    self.model.jnt_range[1:13, 1])
         for _ in range(4):
             mujoco.mj_step(self.model, self.data)
