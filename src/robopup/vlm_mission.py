@@ -39,6 +39,7 @@ class VLMMission:
         self.inference_ms = 0.0
         self.closed = False
         self.replans = 0
+        self.expected_remaining = None
 
     @property
     def executor(self):
@@ -68,10 +69,17 @@ class VLMMission:
         self.phase, self.reason = "thinking", "VLM is inspecting the actual robot-eye image"
         prompt = self.instruction
         completed = [s.as_dict() for s in self.steps[:self.current_step]]
+        self.expected_remaining = None
         if completed:
-            prompt += (
-                " Verified completed steps: " + json.dumps(completed)
-                + ". Do not repeat completed steps. Plan only what remains of the original request."
+            remaining = tuple(self.steps[self.current_step:])
+            self.expected_remaining = remaining
+            prompt = (
+                "Your remaining mission is: "
+                + ", then ".join(step_execution(s).command for s in remaining)
+                + ". Verified completed steps: " + json.dumps(completed)
+                + ". Those completed tasks are finished; do not include them again. "
+                "Inspect the fresh image and return only the remaining tasks in order. "
+                "You may first rest, look or turn if necessary."
             )
         self.observation_sha256 = hashlib.sha256(image.tobytes()).hexdigest()
         energy, held = float(self.env.energy), bool(self.env.held)
@@ -119,6 +127,13 @@ class VLMMission:
                     "metadata": result.metadata,
                 })
                 self.plan = plan
+                if self.expected_remaining is not None:
+                    remaining = list(plan.steps)
+                    auxiliaries = {"rest", "look", "turn_left", "turn_right"}
+                    while remaining and remaining[0].action in auxiliaries and remaining[0] != self.expected_remaining[0]:
+                        remaining.pop(0)
+                    if tuple(remaining) != self.expected_remaining:
+                        raise ValueError("Replan changed the remembered remaining task sequence")
                 self.steps = self.steps[:self.current_step] + list(plan.steps)
                 if len(self.steps) > 16:
                     raise ValueError("Mission exceeded its total step limit")
@@ -127,7 +142,7 @@ class VLMMission:
                 # Runtime exceptions can contain signed URLs or credentials.
                 # Diagnostics retain raw model text, never exception bodies.
                 self.failed, self.phase = True, "error"
-                self.reason = "VLM request or structured plan validation failed; no action executed"
+                self.reason = "VLM request or structured plan validation failed; no new action executed"
                 return np.zeros(2), False
         if self.plan is None:
             return np.zeros(2), False

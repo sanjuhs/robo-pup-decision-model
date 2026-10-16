@@ -1,0 +1,23 @@
+{
+  "source_ref": "0ae8411238f441052a20dd44258ba4799e64fc92",
+  "gpu": "RTX 5090",
+  "experiment": "real-generative-vlm-inference",
+  "ttl_seconds": 1500,
+  "total_session_budget_usd": 30,
+  "prior_spend_reserve_usd": 1,
+  "experiment_allocation_usd": 2.0,
+  "maximum_gpu_rate_usd_hour": 1.5,
+  "storage_reserve_usd": 0.2,
+  "input_cases": 7,
+  "input_archive_bytes": 45624,
+  "input_archive_sha256": "2e7e05f3a1b9fe1aa887cdf127ff21d4d050e7168b2ad818dd8eb7b96f256063",
+  "paid_scope": "One inference pod; no training, retries, fallback GPU, or network volume",
+  "account_key_passed_to_pod": false,
+  "image": "runpod/pytorch:1.2.0-cu1290-torch290-ubuntu2404",
+  "job_script_sha256": "81f63a67e276757266598a59b8abb5e52a28e19ab33f1550eade92e5cc9594a2",
+  "pre_existing_pod_count": 0,
+  "create_requested_at": 1792160691.8198771,
+  "monitor_seconds": 1.721966028213501,
+  "gpu_cost_estimate_usd": 0.0007174858450889588,
+  "cost_is_estimate_not_invoice": true
+}

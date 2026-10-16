@@ -72,6 +72,17 @@ def test_invalid_request_does_not_make_provider_call():
     assert runtime.status()["phase"] == "configured"
 
 
+@pytest.mark.parametrize("prompt,tokens", [
+    ("", None), ("x" * 16_001, None), ("A prompt", 0),
+    ("A prompt", 257), ("A prompt", True), ("A prompt", 3.5),
+])
+def test_composed_prompt_limits_reject_before_provider_call(prompt, tokens):
+    runtime = VLMRuntime(base_url="http://127.0.0.1:7654/v1", max_new_tokens=256)
+    with pytest.raises(VLMRuntimeError):
+        runtime.generate_prompt(Image.new("RGB", (32, 24)), prompt, max_new_tokens=tokens)
+    assert runtime.status()["phase"] == "configured"
+
+
 def test_real_http_transport_attaches_actual_pixels_but_fixture_is_not_a_model():
     received = []
 

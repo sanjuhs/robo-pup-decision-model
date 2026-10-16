@@ -144,7 +144,7 @@ def test_runtime_and_schema_failures_stop_without_model_fallback_or_exception_le
             np.testing.assert_array_equal(command, np.zeros(2))
             assert not learned and mission.failed and not mission.complete
             assert mission.phase == "error" and mission.steps == []
-            assert mission.reason == "VLM request or structured plan validation failed; no action executed"
+            assert mission.reason == "VLM request or structured plan validation failed; no new action executed"
             assert "private-provider-diagnostic" not in mission.reason
             assert mission.executor.instruction == "stop"
             assert not env.magnet and not env.held
@@ -377,6 +377,34 @@ def test_contract_fixture_fetch_then_hop_runs_real_physics_and_completes_only_af
             assert '"action": "fetch"' in runtime.calls[1]["instruction"]
             assert not np.array_equal(runtime.calls[0]["image"], runtime.calls[1]["image"])
             assert all(row["status"] == "complete" for row in mission.status()["mission_steps"])
+        finally:
+            mission.close()
+            env.close()
+
+    asyncio.run(scenario())
+
+
+def test_replan_cannot_repeat_a_completed_task_or_replace_remaining_goals():
+    """Contract regression from a real Qwen failure; these outputs are fixtures."""
+    initial = '{"summary":"Stop, then walk.","steps":[{"action":"stop","object":"none"},{"action":"walk","object":"none"}]}'
+
+    async def scenario():
+        env = settled_env()
+        runtime = ControlledRuntime([initial, initial])
+        mission = VLMMission(env, runtime)
+        try:
+            mission.begin("stop then walk")
+            await wait_for_generation(mission)
+            mission.tick()
+            assert mission.current_step == 1 and mission.phase == "thinking"
+            await wait_for_generation(mission)
+            command, learned = mission.tick()
+            np.testing.assert_array_equal(command, np.zeros(2))
+            assert not learned and mission.failed and not mission.complete
+            assert mission.current_step == 1
+            assert mission.executor.instruction == "stop"
+            assert runtime.calls[1]["instruction"].startswith("Your remaining mission is: walk forward.")
+            assert "Verified completed steps" in runtime.calls[1]["instruction"]
         finally:
             mission.close()
             env.close()

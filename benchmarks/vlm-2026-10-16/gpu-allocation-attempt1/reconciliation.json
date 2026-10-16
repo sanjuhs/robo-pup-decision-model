@@ -1,0 +1,10 @@
+{
+  "runpod_pods_visible": 0,
+  "checked_at_unix": 1792160933.6215613,
+  "allocation_confirmed": false,
+  "gpu_runtime_confirmed_seconds": 0,
+  "confirmed_gpu_cost_estimate_usd": 0,
+  "final_invoice_verified": false,
+  "original_monitor_cost_is_not_measured_gpu_spend": true,
+  "note": "Allocation POST returned HTTP500; subsequent read-only account listing confirms no pods. Original monitor artifact is preserved unchanged; its elapsed-monitor-time arithmetic does not establish GPU billing."
+}

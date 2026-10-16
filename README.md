@@ -59,6 +59,8 @@ We integrate its pretrained weights; we have not pretrained or fine-tuned this
 foundation model. The public download needs **no Hugging Face token**. Its weights
 live in ignored `artifacts/vlm/`, separate from the approximately 1 MB v4 weights
 committed in `demo/`. No Hugging Face Space has been published.
+[.env.example](.env.example) lists variable names with blank credentials; never
+push real token values.
 
 The generative integration is being validated separately from the existing arena
 benchmark. Contract/transport fixtures are never reported as actual VLM inference.

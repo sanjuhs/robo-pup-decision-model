@@ -9,6 +9,14 @@ if [[ ${1:-} == --inner ]]; then
   timeout 60s git clone https://github.com/sanjuhs/robo-pup-decision-model.git robopup
   cd robopup
   git checkout --detach "$ROBOPUP_REF"
+  python3 - <<'PY'
+import os,pathlib,shutil
+relative=pathlib.PurePosixPath(os.environ['ROBOPUP_INPUT_DIR'])
+if relative.is_absolute() or '..' in relative.parts:raise ValueError('Invalid public input path')
+source=(pathlib.Path.cwd()/relative).resolve()
+if not source.is_relative_to(pathlib.Path.cwd()) or not source.is_dir():raise ValueError('Input path must be inside checked-out source')
+shutil.copytree(source,'/workspace/vlm-input')
+PY
   export PYTHONPATH=/workspace/robopup/src
   export PYTHONUNBUFFERED=1 XDG_CACHE_HOME=/workspace/cache HF_HOME=/workspace/hf-cache
   export HF_HUB_DISABLE_TELEMETRY=1 HF_HUB_DISABLE_XET=1

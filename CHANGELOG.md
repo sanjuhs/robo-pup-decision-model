@@ -5,6 +5,19 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Corrective mission memory and model hosting
+
+- Preserve the genuine CPU closed-loop failure: Qwen repeatedly reintroduced
+  fetch after physical completion. Do not promote that trial as a successful
+  fetch/hop mission. Replanning now receives the explicit remaining task list;
+  a guard rejects substitution/repetition outside that remembered sequence.
+- Add a private, bounded OpenAI-compatible vision endpoint to the native backend
+  so a Vercel planner can call the actual locally hosted Qwen model. It requires
+  a workshop key and never accepts external image URLs or provider recursion.
+- Preserve Runpod's failed allocation HTTP500 and independent zero-pod listing.
+  Correct the monitor's API-wait arithmetic: unconfirmed allocation is not
+  measured GPU spend. Prepare a smaller, tracked-input bootstrap for manual retry.
+
 ### Capped generative GPU validation
 
 - Prepare a single RTX 5090 VLM inference experiment with a 25-minute external

@@ -1,0 +1,9 @@
+{
+  "reason": "Genuine Qwen replan repeated fetch after physical completion, instead of advancing to jump. Trial manually interrupted after the repeated action was observed; no success claim.",
+  "first_plan_valid": true,
+  "fresh_eye_replan_repeated_completed_task": true,
+  "physical_fetches_observed_before_interruption": 4,
+  "model_was_genuine": true,
+  "original_records_preserved": true,
+  "followup": "Add explicit remaining-task memory to the prompt and reject responses that reintroduce completed tasks not present in remaining plan."
+}

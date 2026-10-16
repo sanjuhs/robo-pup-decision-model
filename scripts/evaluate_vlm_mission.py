@@ -242,6 +242,11 @@ async def evaluate(args):
             "every_response_from_actual_model": bool(record["model_calls"]) and all(
                 call.get("actual_generated_response_received") and call.get("valid_mission")
                 for call in record["model_calls"]),
+            "recorded_eyes_match_mission_observations": (
+                len(record["model_calls"]) == len(mission.history)
+                and all(call.get("eye_rgb_sha256") == entry.get("eye_rgb_sha256")
+                        for call, entry in zip(record["model_calls"], mission.history))
+            ),
             "replanning_after_each_step": len(record["model_calls"]) >= 3,
             "contact_and_grasp": bool(metrics["ever_ball_touched"] and metrics["ever_held"]
                                       and env.grasp_count >= 1),

@@ -26,6 +26,7 @@ from robopup.pet import PetEnv
 from robopup.brain import MODEL_DIR, trained_model
 from robopup.vlm_mission import BrainRouter
 from robopup.vlm_runtime import get_vlm_runtime
+from robopup.vlm_api import router as vlm_api_router
 
 ROOT = Path(__file__).resolve().parents[2]
 ARTIFACTS = Path(os.environ.get("ROBOPUP_ARTIFACTS", ROOT / "artifacts")).resolve()
@@ -40,6 +41,7 @@ async def lifespan(_app):
 
 
 app = FastAPI(title="RoboPup Arena", version="0.1.0", lifespan=lifespan)
+app.include_router(vlm_api_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[s.strip() for s in os.getenv("ROBOPUP_ALLOWED_ORIGINS", "").split(",") if s.strip()],

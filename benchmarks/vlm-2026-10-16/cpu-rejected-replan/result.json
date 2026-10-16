@@ -1,0 +1,781 @@
+{
+  "schema": "robopup-real-vlm-physical-mission-v1",
+  "seed": 7,
+  "instruction": "Fetch the red ball, then hop, then stop.",
+  "complete": false,
+  "success": false,
+  "physics": "native MuJoCo CPU",
+  "physics_hz": 50,
+  "motor": "bundled curious-v2 CPU PPO residuals plus analytic skill controllers",
+  "high_level_vision": "actual perspective robot-head RGB attached to every real VLM call",
+  "low_level_vision": "v4 skills retain their evaluated overhead RGB camera",
+  "simulation_paused_during_vlm_inference": true,
+  "real_time_responsiveness_tested": false,
+  "maximum_sim_seconds": 360,
+  "maximum_wall_seconds": 600.0,
+  "steps_verified": [
+    {
+      "action": "fetch",
+      "object": "ball",
+      "sim_seconds": 18.38000000000053,
+      "executor": {
+        "instruction": "fetch the ball",
+        "intent": "fetch",
+        "phase": "release",
+        "complete": true,
+        "failed": false,
+        "reason": "Fetch complete: contact, lift, return and release verified",
+        "plan": {
+          "intent": "fetch",
+          "confidence": 1.0,
+          "rows": [
+            {
+              "skill": "retrieve",
+              "object": "ball",
+              "delta": [
+                -0.47371119260787964,
+                0.3928658068180084
+              ],
+              "object_delta": [
+                -0.468778133392334,
+                0.40336090326309204
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9993727803230286,
+              "visible": true
+            },
+            {
+              "skill": "return",
+              "object": "home",
+              "delta": [
+                -0.16158133745193481,
+                0.15881915390491486
+              ],
+              "object_delta": [
+                -0.16589608788490295,
+                0.15813273191452026
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.999535322189331,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.0028117671608924866,
+                -0.002827141433954239
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9992020726203918,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.014097125269472599,
+                -0.0026580628473311663
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.999345600605011,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.01072391401976347,
+                -0.0056943222880363464
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9993166923522949,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.00443816976621747,
+                -0.004271864891052246
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9988808035850525,
+              "visible": true
+            }
+          ],
+          "perception": [
+            [
+              -0.468778133392334,
+              0.40336090326309204,
+              1.0
+            ],
+            [
+              1.1282603740692139,
+              0.1939765363931656,
+              1.0
+            ],
+            [
+              -0.16589608788490295,
+              0.15813273191452026,
+              1.0
+            ],
+            [
+              1.788204550743103,
+              1.171797513961792,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "elapsed_s": 18.38000000000053,
+        "ever_held": true,
+        "maximum_ball_height": 0.35124152115113544
+      },
+      "ball": [
+        -0.2589836817511563,
+        0.20993976628111,
+        0.11987426961354083
+      ],
+      "held": false,
+      "grasp_count": 1,
+      "upright": 0.9999952893442419,
+      "jump_active": false,
+      "jump_flight_seconds": 0.0,
+      "foot_contacts": 4
+    },
+    {
+      "action": "fetch",
+      "object": "ball",
+      "sim_seconds": 21.63999999999988,
+      "executor": {
+        "instruction": "fetch the ball",
+        "intent": "fetch",
+        "phase": "release",
+        "complete": true,
+        "failed": false,
+        "reason": "Fetch complete: contact, lift, return and release verified",
+        "plan": {
+          "intent": "fetch",
+          "confidence": 1.0,
+          "rows": [
+            {
+              "skill": "retrieve",
+              "object": "ball",
+              "delta": [
+                -0.47939905524253845,
+                0.4452557861804962
+              ],
+              "object_delta": [
+                -0.46944916248321533,
+                0.45482608675956726
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9993367791175842,
+              "visible": true
+            },
+            {
+              "skill": "return",
+              "object": "home",
+              "delta": [
+                -0.15857046842575073,
+                0.15787875652313232
+              ],
+              "object_delta": [
+                -0.16024433076381683,
+                0.15556499361991882
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9995629191398621,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.0018036531982943416,
+                -0.0017199666472151875
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9989186525344849,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.0132985170930624,
+                -0.0014870379818603396
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9991173148155212,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.010151734575629234,
+                -0.004562290385365486
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9990658164024353,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.0034394278191030025,
+                -0.003230750560760498
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.998461127281189,
+              "visible": true
+            }
+          ],
+          "perception": [
+            [
+              -0.46944916248321533,
+              0.45482608675956726,
+              1.0
+            ],
+            [
+              1.2128424644470215,
+              0.19176365435123444,
+              1.0
+            ],
+            [
+              -0.16024433076381683,
+              0.15556499361991882,
+              1.0
+            ],
+            [
+              1.8034814596176147,
+              1.17078697681427,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "elapsed_s": 3.2599999999993514,
+        "ever_held": true,
+        "maximum_ball_height": 0.23113613400576458
+      },
+      "ball": [
+        -0.2835008162921324,
+        0.27600729234012594,
+        0.11987426961354077
+      ],
+      "held": false,
+      "grasp_count": 2,
+      "upright": 0.9999884865912532,
+      "jump_active": false,
+      "jump_flight_seconds": 0.0,
+      "foot_contacts": 4
+    },
+    {
+      "action": "fetch",
+      "object": "ball",
+      "sim_seconds": 25.19999999999917,
+      "executor": {
+        "instruction": "fetch the ball",
+        "intent": "fetch",
+        "phase": "release",
+        "complete": true,
+        "failed": false,
+        "reason": "Fetch complete: contact, lift, return and release verified",
+        "plan": {
+          "intent": "fetch",
+          "confidence": 1.0,
+          "rows": [
+            {
+              "skill": "retrieve",
+              "object": "ball",
+              "delta": [
+                -0.48069998621940613,
+                0.3948671221733093
+              ],
+              "object_delta": [
+                -0.46645525097846985,
+                0.40349990129470825
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9993014335632324,
+              "visible": true
+            },
+            {
+              "skill": "return",
+              "object": "home",
+              "delta": [
+                -0.118980772793293,
+                0.06985344737768173
+              ],
+              "object_delta": [
+                -0.11831291764974594,
+                0.06603734195232391
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9995785355567932,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.000914048170670867,
+                -0.0005798022611998022
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9985729455947876,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.012553256005048752,
+                -0.0002898015081882477
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9988411068916321,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.009582334198057652,
+                -0.0033942684531211853
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9987583160400391,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.002539744833484292,
+                -0.002124082762748003
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9979445338249207,
+              "visible": true
+            }
+          ],
+          "perception": [
+            [
+              -0.46645525097846985,
+              0.40349990129470825,
+              1.0
+            ],
+            [
+              1.2844316959381104,
+              0.09794896841049194,
+              1.0
+            ],
+            [
+              -0.11831291764974594,
+              0.06603734195232391,
+              1.0
+            ],
+            [
+              1.8583847284317017,
+              1.0860397815704346,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "elapsed_s": 3.5599999999992917,
+        "ever_held": true,
+        "maximum_ball_height": 0.22224263012568832
+      },
+      "ball": [
+        -0.3244290285370761,
+        0.3047146812143723,
+        0.11987426961354077
+      ],
+      "held": false,
+      "grasp_count": 3,
+      "upright": 0.9999891886859591,
+      "jump_active": false,
+      "jump_flight_seconds": 0.0,
+      "foot_contacts": 4
+    },
+    {
+      "action": "fetch",
+      "object": "ball",
+      "sim_seconds": 28.17999999999858,
+      "executor": {
+        "instruction": "fetch the ball",
+        "intent": "fetch",
+        "phase": "release",
+        "complete": true,
+        "failed": false,
+        "reason": "Fetch complete: contact, lift, return and release verified",
+        "plan": {
+          "intent": "fetch",
+          "confidence": 1.0,
+          "rows": [
+            {
+              "skill": "retrieve",
+              "object": "ball",
+              "delta": [
+                -0.5026234984397888,
+                0.40981772541999817
+              ],
+              "object_delta": [
+                -0.48360440135002136,
+                0.41722023487091064
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9992552399635315,
+              "visible": true
+            },
+            {
+              "skill": "return",
+              "object": "home",
+              "delta": [
+                -0.12733913958072662,
+                0.07260230928659439
+              ],
+              "object_delta": [
+                -0.1239989697933197,
+                0.06696402281522751
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9995890259742737,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                -6.052851676940918e-05,
+                0.0009291653404943645
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9980023503303528,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.011698785237967968,
+                0.0012858894187957048
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9983874559402466,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.008903871290385723,
+                -0.0018441264983266592
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.9982481002807617,
+              "visible": true
+            },
+            {
+              "skill": "stop",
+              "object": "none",
+              "delta": [
+                0.0015460277209058404,
+                -0.0006247106357477605
+              ],
+              "object_delta": [
+                0.0,
+                0.0
+              ],
+              "duration_s": 1.0,
+              "confidence": 0.997083842754364,
+              "visible": true
+            }
+          ],
+          "perception": [
+            [
+              -0.48360440135002136,
+              0.41722023487091064,
+              1.0
+            ],
+            [
+              1.2929000854492188,
+              0.10255640745162964,
+              1.0
+            ],
+            [
+              -0.1239989697933197,
+              0.06696402281522751,
+              1.0
+            ],
+            [
+              1.8583852052688599,
+              1.0860379934310913,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "elapsed_s": 2.979999999999407,
+        "ever_held": true,
+        "maximum_ball_height": 0.2214628795415991
+      },
+      "ball": [
+        -0.3665696151707816,
+        0.33848368997033373,
+        0.11987426961354077
+      ],
+      "held": false,
+      "grasp_count": 4,
+      "upright": 0.9999893783784122,
+      "jump_active": false,
+      "jump_flight_seconds": 0.0,
+      "foot_contacts": 4
+    }
+  ],
+  "thinking_intervals": [
+    {
+      "wall_start": 1.3636988549988018,
+      "sim_start": 0.5000000000000003,
+      "wall_seconds": 69.69229828099924,
+      "sim_end": 0.5000000000000003
+    },
+    {
+      "wall_start": 72.94386919300086,
+      "sim_start": 18.88000000000053,
+      "wall_seconds": 64.31089910399896,
+      "sim_end": 18.88000000000053
+    },
+    {
+      "wall_start": 137.54253720799898,
+      "sim_start": 22.13999999999988,
+      "wall_seconds": 71.52951834800115,
+      "sim_end": 22.13999999999988
+    },
+    {
+      "wall_start": 209.35493009600032,
+      "sim_start": 25.69999999999917,
+      "wall_seconds": 57.8143209689988,
+      "sim_end": 25.69999999999917
+    }
+  ],
+  "trace": [
+    {
+      "wall_seconds": 1.3747865240002284,
+      "sim_seconds": 0.0,
+      "phase": "thinking",
+      "current_step": 0
+    },
+    {
+      "wall_seconds": 71.05993100399792,
+      "sim_seconds": 0.020000000000000018,
+      "phase": "executing",
+      "current_step": 0
+    },
+    {
+      "wall_seconds": 72.95456737199856,
+      "sim_seconds": 18.38000000000053,
+      "phase": "thinking",
+      "current_step": 1
+    },
+    {
+      "wall_seconds": 137.25810642799843,
+      "sim_seconds": 18.400000000000524,
+      "phase": "executing",
+      "current_step": 1
+    },
+    {
+      "wall_seconds": 137.55297014000098,
+      "sim_seconds": 21.63999999999988,
+      "phase": "thinking",
+      "current_step": 2
+    },
+    {
+      "wall_seconds": 209.07667562999995,
+      "sim_seconds": 21.659999999999876,
+      "phase": "executing",
+      "current_step": 2
+    },
+    {
+      "wall_seconds": 209.36529712099946,
+      "sim_seconds": 25.19999999999917,
+      "phase": "thinking",
+      "current_step": 3
+    },
+    {
+      "wall_seconds": 267.17256937300044,
+      "sim_seconds": 25.219999999999168,
+      "phase": "executing",
+      "current_step": 3
+    },
+    {
+      "wall_seconds": 267.39579744599905,
+      "sim_seconds": 28.17999999999858,
+      "phase": "thinking",
+      "current_step": 4
+    }
+  ],
+  "metrics": {
+    "ever_ball_touched": true,
+    "ever_held": true,
+    "maximum_ball_height": 0.35124152115113544,
+    "maximum_held_ball_height": 0.35124152115113544,
+    "release_events": 4,
+    "ppo_residual_steps": 358,
+    "external_force_ever_applied": false
+  },
+  "settle_steps": 25,
+  "sim_start": 0.5000000000000003,
+  "initial_runtime_status": {
+    "ready": true,
+    "phase": "available",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "available",
+    "reason": "Local checkpoint available; it has not been loaded or tested by this process",
+    "provider": "transformers-local",
+    "model_loaded": false,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local checkpoint available; it has not been loaded or tested by this process",
+    "last_error": null,
+    "dtype_config": "bfloat16",
+    "cpu_threads_config": 4,
+    "max_generation_seconds": 180
+  },
+  "mission": {
+    "instruction": "Fetch the red ball, then hop, then stop.",
+    "intent": "jump",
+    "phase": "thinking",
+    "reason": "VLM is inspecting the actual robot-eye image",
+    "complete": false,
+    "failed": false,
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "raw_response": "```json\n{\n  \"summary\": \"Fetch the red ball, then hop, then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "mission_steps": [
+      {
+        "action": "fetch",
+        "object": "ball",
+        "status": "complete"
+      },
+      {
+        "action": "fetch",
+        "object": "ball",
+        "status": "complete"
+      },
+      {
+        "action": "fetch",
+        "object": "ball",
+        "status": "complete"
+      },
+      {
+        "action": "fetch",
+        "object": "ball",
+        "status": "complete"
+      },
+      {
+        "action": "jump",
+        "object": "none",
+        "status": "pending"
+      },
+      {
+        "action": "stop",
+        "object": "none",
+        "status": "pending"
+      }
+    ],
+    "current_step": 4,
+    "inference_ms": 57765.61602700167,
+    "elapsed_s": 28.17999999999858,
+    "replans": 4,
+    "vision": "actual perspective robot-eye RGB for VLM planning",
+    "limitation": "VLM plans from robot eyes; v4 low-level skills still use overhead RGB and analytic/PPO control.",
+    "rows": []
+  },
+  "wall_seconds": 275.43155969500003,
+  "sim_seconds": 28.17999999999858
+}

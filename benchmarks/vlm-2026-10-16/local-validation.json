@@ -1,0 +1,26 @@
+{
+  "python_tests": 207,
+  "browser_tests": 21,
+  "ruff": "passed",
+  "npm_audit_vulnerabilities": 0,
+  "vite": "7.3.7",
+  "vercel_local_services": {
+    "command": "vercel dev -L",
+    "web_root_http": 200,
+    "app_api_health_http": 200,
+    "planner_binding": true,
+    "app_api_vlm_internal_status_http": 200,
+    "public_status_path": "frontend HTML; internal planner was not public"
+  },
+  "cloud_vercel_deployment": false,
+  "production_credentials_available": false,
+  "container_default_cpu": "non-root HTTP, EGL robot-eye RGB and authenticated advancing WebSocket passed",
+  "optional_vlm_container_tested": false,
+  "preserved_failures": [
+    "initial browser cold handshake timeout; readiness warmup corrected",
+    "Docker TLS proxy trust corrected with build secret",
+    "Docker non-root source permissions corrected",
+    "Docker cache exhausted workspace; own cache cleared; file-copy test rerun passed"
+  ],
+  "note": "207 count is recorded after the completed current full-suite output; prior138-test run and targeted95-test corrective run also passed."
+}

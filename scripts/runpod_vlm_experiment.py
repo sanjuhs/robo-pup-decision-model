@@ -8,6 +8,7 @@ The account credential stays in this monitor and the local CLI environment.
 import argparse
 import base64
 import getpass
+import gzip
 import hashlib
 import io
 import json
@@ -74,9 +75,78 @@ def pack_inputs(directory):
     return packed, len(cases)
 
 
+def tracked_input_directory(directory, ref, packed):
+    """Require public committed inputs; never publish or embed private files."""
+    directory = directory.resolve()
+    try:
+        relative = directory.relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        raise ValueError("Input directory must be inside the reviewed repository") from None
+    if not relative or relative == "." or not re.fullmatch(r"[A-Za-z0-9_./-]+", relative):
+        raise ValueError("Input directory must use a bounded relative repository path")
+    with tarfile.open(fileobj=io.BytesIO(packed), mode="r:gz") as archive:
+        for member in archive.getmembers():
+            filename = Path(member.name).name
+            git_path = relative + "/" + filename
+            try:
+                committed = subprocess.check_output(
+                    ["git", "-C", str(ROOT), "show", ref + ":" + git_path],
+                    stderr=subprocess.DEVNULL,
+                )
+            except subprocess.CalledProcessError:
+                raise ValueError("Every selected input must be committed at the source revision") from None
+            if (directory / filename).read_bytes() != committed:
+                raise ValueError("Working input differs from the reviewed committed source")
+    return relative
+
+
+def bootstrap_command(bootstrap):
+    """Keep the API command small; camera files arrive only through public git."""
+    encoded = base64.b64encode(gzip.compress(bootstrap, mtime=0)).decode()
+    command = ("mkdir -p /workspace && printf %s " + encoded
+               + " | base64 -d | gzip -d > /workspace/gpu_vlm_job.sh"
+               + " && bash /workspace/gpu_vlm_job.sh")
+    if len(command.encode()) > 8192:
+        raise ValueError("Compressed job bootstrap exceeds the 8 KiB command bound")
+    return command
+
+
+def allocation_costs(record, elapsed):
+    """Never count monitor/API time as allocated GPU time without an observed pod."""
+    confirmed = record.get("pod_creation_confirmed", False)
+    return {
+        "gpu_cost_estimate_usd": (elapsed / 3600 * record.get(
+            "confirmed_gpu_rate_usd_hour", MAX_RATE,
+        )) if confirmed else 0.0,
+        "cost_is_estimate_not_invoice": True,
+        "gpu_allocation_observed": confirmed,
+        "unconfirmed_gpu_cost_upper_estimate_usd": (
+            TTL / 3600 * MAX_RATE if not confirmed and record.get("create_requested_at") else 0.0
+        ),
+        "pod_creation_verification_uncertain": bool(
+            not confirmed and record.get("create_requested_at")
+        ),
+    }
+
+
+def provider_error_categories(text, status):
+    """Return fixed diagnostic flags only; never return any provider body text."""
+    text = text.lower()
+    return {
+        "http_status": int(status),
+        "capacity_or_stock": (("resource" in text and "available" in text)
+                              or "capacity" in text or "stock" in text),
+        "balance_or_credit": any(word in text for word in ("balance", "credit", "fund")),
+        "payload_size": any(word in text for word in ("payload", "size", "length")),
+        "container_image": any(word in text for word in ("image", "docker")),
+        "validation": any(word in text for word in ("invalid", "validation", "argument")),
+    }
+
+
 def run(out, input_dir):
     packed, count = pack_inputs(input_dir)
     ref = subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip()
+    public_input_dir = tracked_input_directory(input_dir, ref, packed)
     # Use exactly the reviewed committed script, not a changed working copy.
     bootstrap = subprocess.check_output(
         ["git", "-C", str(ROOT), "show", ref + ":scripts/gpu_vlm_job.sh"]
@@ -103,8 +173,10 @@ def run(out, input_dir):
         "maximum_gpu_rate_usd_hour": MAX_RATE, "storage_reserve_usd": .2,
         "input_cases": count, "input_archive_bytes": len(packed),
         "input_archive_sha256": hashlib.sha256(packed).hexdigest(),
+        "input_source": "public tracked git files", "input_directory": public_input_dir,
         "paid_scope": "One inference pod; no training, retries, fallback GPU, or network volume",
         "account_key_passed_to_pod": False,
+        "pod_creation_confirmed": False,
     }
     state_path = out / "lifecycle.json"
     pod_id = None
@@ -133,6 +205,18 @@ def run(out, input_dir):
                 data = response.read()
                 return json.loads(data) if data else {}
         except urllib.error.HTTPError as error:
+            try:
+                # Provider responses can contain credentials or signed URLs.
+                # Inspect a bounded in-memory copy and retain fixed flags only.
+                diagnostic = error.read(16 * 1024).decode("utf-8", errors="replace")
+                diagnostic = diagnostic.replace(key, "[REDACTED]")
+            except (OSError, ValueError):
+                diagnostic = ""
+            finally:
+                error.close()
+            categories = provider_error_categories(diagnostic, error.code)
+            record.setdefault("provider_error_categories", []).append(categories)
+            save()
             raise RuntimeError(f"Runpod HTTP {error.code}; response body withheld") from None
 
     def entries(response):
@@ -192,22 +276,18 @@ def run(out, input_dir):
                           "sha256": digest}), flush=True)
         return True
 
-    command = (
-        "mkdir -p /workspace && printf %s " + base64.b64encode(bootstrap).decode()
-        + " | base64 -d > /workspace/gpu_vlm_job.sh && printf %s "
-        + base64.b64encode(packed).decode()
-        + " | base64 -d > /workspace/vlm-input.tar.gz"
-        + " && tar -xzf /workspace/vlm-input.tar.gz -C /workspace"
-        + " && bash /workspace/gpu_vlm_job.sh"
-    )
+    command = bootstrap_command(bootstrap)
     body = {
         "name": "robopup-vlm-" + ref[:7] + "-" + secrets.token_hex(3),
         "image": "runpod/pytorch:1.2.0-cu1290-torch290-ubuntu2404", "cloud": "SECURE",
         "gpu": {"id": "NVIDIA GeForce RTX 5090", "count": 1, "minCudaVersion": "12.9"},
         "disk": 30, "entrypoint": ["/bin/bash", "-lc"], "cmd": [command],
-        "env": {"ROBOPUP_REF": ref, "PYTHONUNBUFFERED": "1"}, "startSsh": False,
+        "env": {"ROBOPUP_REF": ref, "ROBOPUP_INPUT_DIR": public_input_dir,
+                "PYTHONUNBUFFERED": "1"}, "startSsh": False,
     }
-    record.update(image=body["image"], job_script_sha256=hashlib.sha256(bootstrap).hexdigest())
+    record.update(image=body["image"], job_script_sha256=hashlib.sha256(bootstrap).hexdigest(),
+                  pod_name=body["name"], bootstrap_encoding="gzip+base64",
+                  command_bytes=len(command.encode()), request_body_bytes=len(json.dumps(body).encode()))
     env = {**os.environ, "RUNPOD_API_KEY": key, "RUNPOD_SKIP_UPDATE_CHECK": "1"}
     try:
         record["pre_existing_pod_count"] = len(entries(api("GET", "/pods")))
@@ -219,13 +299,27 @@ def run(out, input_dir):
             pod_id = response.get("id")
             if not pod_id:
                 raise RuntimeError("Create response missing ID; reconcile by unique name")
-        except Exception:
-            matches = [pod for pod in entries(api("GET", "/pods"))
-                       if pod.get("name") == body["name"]]
+        except Exception as error:
+            record["create_error_type"] = type(error).__name__
+            record["create_error"] = (str(error) if isinstance(error, RuntimeError)
+                                      else "Create request failed; exception body withheld")
+            save()
+            try:
+                matches = [pod for pod in entries(api("GET", "/pods"))
+                           if pod.get("name") == body["name"]]
+            except Exception:
+                record["post_error_reconciliation_succeeded"] = False
+                save()
+                raise
+            record["post_error_reconciliation_succeeded"] = True
+            record["post_error_reconcile_count"] = len(matches)
+            record["no_matching_pod_observed_after_create_error"] = len(matches) == 0
+            save()
             if len(matches) != 1:
                 raise
             pod_id = matches[0]["id"]
         record["pod_id"] = pod_id
+        record["pod_creation_confirmed"] = True
         save()
         timer = threading.Timer(max(1, TTL - (time.time() - started)), cleanup)
         timer.daemon = True
@@ -285,10 +379,14 @@ def run(out, input_dir):
         if timer:
             timer.cancel()
         record["monitor_seconds"] = time.time() - started if started else 0
-        record["gpu_cost_estimate_usd"] = (
-            record["monitor_seconds"] / 3600 * record.get("confirmed_gpu_rate_usd_hour", MAX_RATE)
-        )
-        record["cost_is_estimate_not_invoice"] = True
+        record.update(allocation_costs(record, record["monitor_seconds"]))
+        if record["pod_creation_verification_uncertain"]:
+            record["allocation_reconciliation_note"] = (
+                "Failed POST can be ambiguous. No allocated GPU time was observed; "
+                "zero observed cost is not an invoice or proof no delayed allocation occurred. "
+                "The separate unconfirmed upper estimate assumes the planned TTL/rate bounds; "
+                "independent account reconciliation is required."
+            )
         if pod_id and deleted:
             try:
                 record["pod_absent_after_delete"] = not any(
@@ -299,6 +397,8 @@ def run(out, input_dir):
         save()
         print(json.dumps({"stage": "finished", "pod_absent": record.get("pod_absent_after_delete"),
                           "estimated_gpu_cost_usd": record["gpu_cost_estimate_usd"],
+                          "pod_creation_confirmed": record["pod_creation_confirmed"],
+                          "allocation_verification_uncertain": record["pod_creation_verification_uncertain"],
                           "artifacts_retrieved": record.get("artifacts_retrieved", False)}), flush=True)
     if (not record.get("artifacts_retrieved") or record.get("job_exit_code") != 0
             or not record.get("pod_absent_after_delete")):

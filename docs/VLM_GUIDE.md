@@ -256,3 +256,30 @@ MuJoCo/PPO path; results do not transfer automatically between engines.
 
 See [the source-audited RoboJev comparison](ROBOJEV_COMPARISON.md) for how this
 planner/executor hierarchy differs from a text-based, calibrated decision model.
+
+## Remembering the remaining mission
+
+The initial Qwen response supplies the ordered task list. After a physically
+verified step, the controller records completion and asks Qwen about the remaining
+commands only, with a fresh robot-eye image. It rejects a response that substitutes
+a different sequence or reintroduces a completed task. Optional rest/look/turn
+prefixes can support the remaining work; they are still bounded and verified.
+
+This guard was added after a genuine CPU trial repeatedly fetched the ball rather
+than advancing to the hop. That rejected trial and all raw responses are retained
+in `benchmarks/vlm-2026-10-16/cpu-rejected-replan/`. The guard is controller memory,
+not a learned Qwen improvement or proof that the earlier trial succeeded.
+
+## Host the actual model for the Vercel planner
+
+The native backend also exposes authenticated `POST /v1/chat/completions` for
+OpenAI-compatible image/text requests. It accepts bounded inline PNGs and text,
+serves only the local checkpoint and requires `ROBOPUP_ARENA_TOKEN`. It does not
+fetch caller-provided image URLs or recursively call another provider. The two-call
+queue and serialized model lock limit local work; this remains a private workshop
+service rather than per-user authentication or a public inference business.
+
+Point the internal Vercel planner's `ROBOPUP_VLM_BASE_URL` at the backend's HTTPS
+`/v1` URL and set `ROBOPUP_VLM_API_KEY` to its private workshop key. Keep that key
+in server-side secret settings. This makes the hostable integration concrete;
+cloud publication and actual provider latency still require their own validation.

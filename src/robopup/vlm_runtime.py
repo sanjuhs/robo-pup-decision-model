@@ -181,6 +181,22 @@ class VLMRuntime:
     def generate(self, image, instruction, energy, held_object):
         """Run the actual model. Return raw text; this does not authorize execution."""
         prompt = build_planning_prompt(instruction, energy=energy, held=held_object)
+        return self.generate_prompt(image, prompt)
+
+    def generate_prompt(self, image, prompt, max_new_tokens=None):
+        """Infer from an already composed bounded prompt, without a second wrapper.
+
+        This supports the authenticated model-serving endpoint. It cannot extend
+        the operator's configured token budget and never executes model output.
+        """
+        if not isinstance(prompt, str) or not prompt.strip() or len(prompt) > 16_000:
+            raise VLMRuntimeError("VLM prompt must contain 1 to 16000 characters")
+        if max_new_tokens is not None and type(max_new_tokens) is not int:
+            raise VLMRuntimeError("max_new_tokens must be an integer")
+        max_tokens = _positive_int(
+            max_new_tokens, name="max_new_tokens", default=self.max_new_tokens,
+            maximum=min(self.max_new_tokens, 1024),
+        )
         rgb = _rgb_image(image)
         started = time.perf_counter()
         # One process-wide model can serve sessions without concurrent GPU spikes.
@@ -188,9 +204,9 @@ class VLMRuntime:
             queue_ms = (time.perf_counter() - started) * 1000
             try:
                 if self.base_url:
-                    result = self._generate_remote(rgb, prompt)
+                    result = self._generate_remote(rgb, prompt, max_tokens)
                 else:
-                    result = self._generate_local(rgb, prompt)
+                    result = self._generate_local(rgb, prompt, max_tokens)
             except VLMRuntimeError as exc:
                 self._set_phase("error", str(exc))
                 raise
@@ -207,10 +223,10 @@ class VLMRuntime:
                        "total": (time.perf_counter() - started) * 1000},
             metadata={**result[2], "revision": self._revision,
                       "image_width": rgb.width, "image_height": rgb.height,
-                      "max_new_tokens": self.max_new_tokens},
+                      "max_new_tokens": max_tokens},
         )
 
-    def _generate_local(self, rgb, prompt):
+    def _generate_local(self, rgb, prompt, max_tokens):
         if not self.status()["ready"]:
             raise VLMRuntimeError(self.status()["detail"])
         load_ms = 0.0
@@ -256,7 +272,7 @@ class VLMRuntime:
         decoding_started = time.perf_counter()
         with torch.inference_mode():
             output = self._model.generate(
-                **inputs, max_new_tokens=self.max_new_tokens, do_sample=False, use_cache=True,
+                **inputs, max_new_tokens=max_tokens, do_sample=False, use_cache=True,
                 max_time=self.timeout_s,
             )
         decoding_seconds = time.perf_counter() - decoding_started
@@ -270,7 +286,7 @@ class VLMRuntime:
         eos = self._model.generation_config.eos_token_id
         eos = eos if isinstance(eos, (tuple, list)) else [eos]
         ended_with_eos = output_tokens > 0 and int(continuation[0, -1]) in eos
-        token_limit = output_tokens >= self.max_new_tokens
+        token_limit = output_tokens >= max_tokens
         time_limit = decoding_seconds >= self.timeout_s
         return raw, {"load": load_ms, "generation": (time.perf_counter() - started) * 1000}, {
             "input_tokens": input_tokens, "output_tokens": output_tokens,
@@ -288,12 +304,12 @@ class VLMRuntime:
                                           if torch.cuda.is_available() else None),
         }
 
-    def _generate_remote(self, rgb, prompt):
+    def _generate_remote(self, rgb, prompt, max_tokens):
         self._set_phase("generating")
         image_bytes = io.BytesIO()
         rgb.save(image_bytes, format="PNG")
         uri = "data:image/png;base64," + base64.b64encode(image_bytes.getvalue()).decode("ascii")
-        payload = {"model": self.model, "temperature": 0, "max_tokens": self.max_new_tokens,
+        payload = {"model": self.model, "temperature": 0, "max_tokens": max_tokens,
                    "messages": [{"role": "user", "content": [
                        {"type": "image_url", "image_url": {"url": uri}},
                        {"type": "text", "text": prompt},

@@ -1,0 +1,11 @@
+{
+  "health": "ok",
+  "html_bytes": 13692,
+  "websocket_state_times": [
+    0.04,
+    0.08
+  ],
+  "port": 8056,
+  "authenticated": true,
+  "image_id": "sha256:253f183d89bf41fc50fd73918c4745d2819db46ff71cc2f6d80b198b6eb3329d"
+}
