@@ -5,6 +5,14 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Credential publication guard
+
+- Extend the selected-pattern public scanner to current Hugging Face and Vercel
+  token prefixes. Redact matching values from diagnostic paths; never verify
+  candidate credentials against provider APIs. Five synthetic temporary-Git
+  tests cover tracked content, deleted history and redaction. This remains a
+  limited publication check, not comprehensive secret detection.
+
 ### Inspectable browser missions
 
 - Show the limited activation-eye visibility check alongside the real Qwen plan;

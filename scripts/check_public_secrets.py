@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Check tracked content (and optionally history) without printing secret values."""
+"""Check selected credential patterns in tracked content and optional Git history.
+
+This is a small publication guard, not a complete secret-detection service. It
+does not recognize arbitrary credentials, legacy unprefixed tokens, or JWTs.
+Matched values are never printed or checked against a provider's API.
+"""
 import argparse
 from pathlib import Path
 import re
@@ -8,8 +13,15 @@ import subprocess
 PATTERN = re.compile(
     rb"rpa_[A-Za-z0-9]{30,}|gh[pousr]_[A-Za-z0-9]{30,}|"
     rb"github_pat_[A-Za-z0-9_]{30,}|"
+    rb"\bhf_[A-Za-z0-9]{34}\b|"
+    rb"\bvcp_[A-Za-z0-9_-]{24,}|"
     rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"
 )
+# HF's current user-token shape is also recognized by established public
+# detectors. Vercel documents its current PAT prefix at:
+# https://vercel.com/docs/accounts/create-an-access-token
+# Only long prefixed values are selected; short documentation placeholders and
+# generic unprefixed identifiers intentionally remain outside this check.
 
 
 def git(*args):
@@ -25,7 +37,9 @@ def main():
     findings = 0
     for file in files:
         if file.is_file() and PATTERN.search(file.read_bytes()):
-            print("Potential credential in tracked file: " + str(file.relative_to(root)))
+            path = str(file.relative_to(root)).encode("utf-8", errors="replace")
+            safe_path = PATTERN.sub(b"[REDACTED]", path).decode("utf-8", errors="replace")
+            print("Potential credential in tracked file: " + safe_path)
             findings += 1
     blobs = 0
     if args.history:
