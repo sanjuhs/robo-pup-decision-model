@@ -23,6 +23,16 @@ history and replans from fresh eyes between steps. The existing v4 planner below
 continues to use overhead RGB for low-level visual grounding; the entire policy
 is not egocentric end to end. Invalid/model failures stop execution visibly.
 
+After Qwen returns, an independent 821-parameter learned pixel classifier checks
+a fresh eye image before the immediate action starts. Object-directed actions
+require confident target visibility; look/turn and untargeted motions do not.
+An already held ball may be returned using held-state proprioception. This
+bounded-color guard blocks hallucinated targets without replacing Qwen's answer.
+The unguarded model failed paired visible/blank/turned decision probes; those raw
+responses remain published. Waiting for inference consumes wall time, while a
+separate 360-second simulated execution budget bounds movement. Missions also
+have a 30-minute wall deadline.
+
 [Full model/control flow](VLM_GUIDE.md), [source-audited inspiration](ROBOJEV_COMPARISON.md)
 and [Vercel services boundaries](DEPLOYMENT.md) describe the implementation.
 

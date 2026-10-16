@@ -1,0 +1,1492 @@
+{
+  "configuration": {
+    "posterior_threshold": 0.9,
+    "minimum_area_fraction": 0.00043402777777777775,
+    "minimum_pixels": 4,
+    "fresh_positions": [
+      [
+        -0.45,
+        0.2
+      ],
+      [
+        0.55,
+        -0.3
+      ],
+      [
+        -0.2,
+        -0.55
+      ]
+    ],
+    "fresh_yaw_degrees": [
+      -80,
+      -25,
+      25,
+      105,
+      180
+    ],
+    "seed_start": 1741,
+    "occlusion_seed": 1839,
+    "thresholds_frozen_before_fresh_rendering": true
+  },
+  "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+  "trained_pixel_parameters": 821,
+  "new_training_performed": false,
+  "model_input": "RGB image only; no coordinates, IDs, segmentation or target truth",
+  "evaluation_labels": "Renderer IDs used only offline to count true object pixels in fresh frames",
+  "fresh_cases": 17,
+  "recorded_gpu_cases": 7,
+  "fresh_summary_at_ground_truth_min64_pixels": {
+    "ball": {
+      "visible_truth_min64": 5,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 12
+    },
+    "crate": {
+      "visible_truth_min64": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 13
+    },
+    "home": {
+      "visible_truth_min64": 6,
+      "true_positive": 6,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 11
+    },
+    "beacon": {
+      "visible_truth_min64": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 14
+    }
+  },
+  "limitations": [
+    "Not general object recognition; same primitive arena colours and native MuJoCo renderer",
+    "Thresholds are engineering abstention rules; posteriors are not calibrated probabilities",
+    "No-grounding can mean occlusion, distant/small/shadowed object or out-of-domain colour",
+    "Visibility does not establish action completion or prevent repeat fetch of a still-visible ball"
+  ],
+  "records": [
+    {
+      "id": "gpu-inputs-eye-after-fetch",
+      "source": "artifacts/vlm-gpu-attempt3-4090/runpod/inputs/eye-after-fetch.png",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 8426,
+            "largest_component_pixels": 8426,
+            "maximum_posterior": 0.9946473240852356,
+            "mean_qualified_posterior": 0.9832044243812561
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.07137618213891983,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.006890818011015654,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.010760938748717308,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "ball"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "eded94ba6ad49329bebd04535db987616e9c1da6c07cde0c6f16a2523cf450dc",
+      "inference_ms_cpu_one_thread": 95.89571900141891
+    },
+    {
+      "id": "gpu-inputs-eye-blank",
+      "source": "artifacts/vlm-gpu-attempt3-4090/runpod/inputs/eye-blank.png",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04176799952983856,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.005463720764964819,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 2.732185930653941e-05,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.000787103723268956,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "cf1814bcb8d13495b710015079ab41f90cf8c32111e68a78e9006183c3fac819",
+      "inference_ms_cpu_one_thread": 47.12245799964876
+    },
+    {
+      "id": "gpu-inputs-eye-start",
+      "source": "artifacts/vlm-gpu-attempt3-4090/runpod/inputs/eye-start.png",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 1004,
+            "largest_component_pixels": 1004,
+            "maximum_posterior": 0.9860198497772217,
+            "mean_qualified_posterior": 0.9663280248641968
+          },
+          "crate": {
+            "visible": true,
+            "confident_pixels": 3285,
+            "largest_component_pixels": 3285,
+            "maximum_posterior": 0.9799776673316956,
+            "mean_qualified_posterior": 0.970480740070343
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0006470928783528507,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": true,
+            "confident_pixels": 258,
+            "largest_component_pixels": 258,
+            "maximum_posterior": 0.9972301125526428,
+            "mean_qualified_posterior": 0.9551172852516174
+          }
+        },
+        "visible_objects": [
+          "ball",
+          "crate",
+          "beacon"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396",
+      "inference_ms_cpu_one_thread": 69.80756299890345
+    },
+    {
+      "id": "gpu-inputs-eye-turned",
+      "source": "artifacts/vlm-gpu-attempt3-4090/runpod/inputs/eye-turned.png",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04176799952983856,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.010958476923406124,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.01297332625836134,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.01548725739121437,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "2ea5ec316f091649a3854275ee2e2c9f32f1debfd8d028a1b270a5435823f8f5",
+      "inference_ms_cpu_one_thread": 25.020146000315435
+    },
+    {
+      "id": "gpu-mission-eye-000",
+      "source": "artifacts/vlm-gpu-attempt3-4090/runpod/mission/eye-000.png",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 866,
+            "largest_component_pixels": 866,
+            "maximum_posterior": 0.9851629137992859,
+            "mean_qualified_posterior": 0.9665655493736267
+          },
+          "crate": {
+            "visible": true,
+            "confident_pixels": 2910,
+            "largest_component_pixels": 2910,
+            "maximum_posterior": 0.9812361001968384,
+            "mean_qualified_posterior": 0.9707307815551758
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0006024537142366171,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": true,
+            "confident_pixels": 178,
+            "largest_component_pixels": 178,
+            "maximum_posterior": 0.9974110722541809,
+            "mean_qualified_posterior": 0.9688776135444641
+          }
+        },
+        "visible_objects": [
+          "ball",
+          "crate",
+          "beacon"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "70e99596613c5959df826d5f7789c73c31feda89a64610ea84fa399cfe14ad4c",
+      "inference_ms_cpu_one_thread": 64.56928099942161
+    },
+    {
+      "id": "gpu-mission-eye-001",
+      "source": "artifacts/vlm-gpu-attempt3-4090/runpod/mission/eye-001.png",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 10572,
+            "largest_component_pixels": 10572,
+            "maximum_posterior": 0.9950703382492065,
+            "mean_qualified_posterior": 0.9840424656867981
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.07307977974414825,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0016461412888020277,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0076352632604539394,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "ball"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "8379f110e352c78651c46306c9ae3515f1111dd581026b6ccb0ec90699dd7688",
+      "inference_ms_cpu_one_thread": 57.151331999193644
+    },
+    {
+      "id": "gpu-mission-eye-002",
+      "source": "artifacts/vlm-gpu-attempt3-4090/runpod/mission/eye-002.png",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 12637,
+            "largest_component_pixels": 12637,
+            "maximum_posterior": 0.9945840239524841,
+            "mean_qualified_posterior": 0.9853232502937317
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0712888091802597,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0002114590461133048,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.00705350935459137,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "ball"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "6ea17199df8504c41985179d10394f6c905c0dc0d9489298dbe03e30f3c12593",
+      "inference_ms_cpu_one_thread": 87.69546999974409
+    },
+    {
+      "id": "fresh-00",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04236465319991112,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.008206384256482124,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.00024276599287986755,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0010490412823855877,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "34f521dd06707652790f9669d2b8ab15fc24024785f479a1107bf930bc86ea8a",
+      "inference_ms_cpu_one_thread": 59.25268799910555,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-01",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 332,
+            "largest_component_pixels": 332,
+            "maximum_posterior": 0.9854503870010376,
+            "mean_qualified_posterior": 0.9683367013931274
+          },
+          "crate": {
+            "visible": true,
+            "confident_pixels": 1806,
+            "largest_component_pixels": 1806,
+            "maximum_posterior": 0.9708314538002014,
+            "mean_qualified_posterior": 0.9623446464538574
+          },
+          "home": {
+            "visible": true,
+            "confident_pixels": 15612,
+            "largest_component_pixels": 15612,
+            "maximum_posterior": 0.9978627562522888,
+            "mean_qualified_posterior": 0.9967657923698425
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.015330571681261063,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "ball",
+          "crate",
+          "home"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "5df32eab608304d82d8e1c852d13dc40c3f34f298ae7ff0427897f84e46de455",
+      "inference_ms_cpu_one_thread": 141.3075390009908,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 358,
+        "crate": 1867,
+        "home": 15667,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-02",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.5885194540023804,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": true,
+            "confident_pixels": 2665,
+            "largest_component_pixels": 2665,
+            "maximum_posterior": 0.9746606349945068,
+            "mean_qualified_posterior": 0.9652693867683411
+          },
+          "home": {
+            "visible": true,
+            "confident_pixels": 329,
+            "largest_component_pixels": 329,
+            "maximum_posterior": 0.9964409470558167,
+            "mean_qualified_posterior": 0.9944357872009277
+          },
+          "beacon": {
+            "visible": true,
+            "confident_pixels": 97,
+            "largest_component_pixels": 97,
+            "maximum_posterior": 0.9979386925697327,
+            "mean_qualified_posterior": 0.9736617803573608
+          }
+        },
+        "visible_objects": [
+          "crate",
+          "home",
+          "beacon"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "a4db82a6226a58be244375fe9a23999ac1370e8701e30b20aa1b43ae0b398c09",
+      "inference_ms_cpu_one_thread": 45.15095099850441,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 3007,
+        "home": 337,
+        "beacon": 207
+      }
+    },
+    {
+      "id": "fresh-03",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04236465319991112,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.009761209599673748,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.006890818011015654,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.011091377586126328,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "af7ffef1ccd84a5a2ed5d4add7f6c75b4895c899a65253b12c4ea376df8cd0c4",
+      "inference_ms_cpu_one_thread": 41.832797000097344,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-04",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04176799952983856,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.010958476923406124,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.00017184171883855015,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0009627938270568848,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "ec1bd0c79542cf367885cfab34a730d2396d85639616c06c436543d70a612e5b",
+      "inference_ms_cpu_one_thread": 33.076882999012014,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-05",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04236465319991112,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.010958476923406124,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.00017184171883855015,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0009627938270568848,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "11708c667c92e54d35f6f446d6dd8f8b518d782e4f64978c33ea9d6177e4eaea",
+      "inference_ms_cpu_one_thread": 38.76188399954117,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-06",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 1414,
+            "largest_component_pixels": 1414,
+            "maximum_posterior": 0.9857373237609863,
+            "mean_qualified_posterior": 0.9700554013252258
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.1032586470246315,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.00011476270447019488,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0037154725287109613,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "ball"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "b2c53bfca3d5f753ab6e83bc95e14517971f2f40a70c80b1223f5b0c4de60703",
+      "inference_ms_cpu_one_thread": 46.48802500014426,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 1453,
+        "crate": 25,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-07",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.5215221047401428,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": true,
+            "confident_pixels": 11845,
+            "largest_component_pixels": 11845,
+            "maximum_posterior": 0.9661021828651428,
+            "mean_qualified_posterior": 0.9572500586509705
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0006462477031163871,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": true,
+            "confident_pixels": 240,
+            "largest_component_pixels": 240,
+            "maximum_posterior": 0.9975115060806274,
+            "mean_qualified_posterior": 0.9651536345481873
+          }
+        },
+        "visible_objects": [
+          "crate",
+          "beacon"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "0b05d00dbc2c2f56277c5a0803f9330ad6492ff7ef98e53dd5584ce1eb176c20",
+      "inference_ms_cpu_one_thread": 89.75886900225305,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 12046,
+        "home": 0,
+        "beacon": 537
+      }
+    },
+    {
+      "id": "fresh-08",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04236465319991112,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.008949752897024155,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": true,
+            "confident_pixels": 4727,
+            "largest_component_pixels": 4727,
+            "maximum_posterior": 0.9971969127655029,
+            "mean_qualified_posterior": 0.9964278340339661
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.01890598051249981,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "home"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "bdb9d7e0f6dfd420a24369570f9e7604a865716838dc0325c529dd48adb812bd",
+      "inference_ms_cpu_one_thread": 54.10342100003618,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 4749,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-09",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04236465319991112,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.010958476923406124,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": true,
+            "confident_pixels": 15910,
+            "largest_component_pixels": 15910,
+            "maximum_posterior": 0.9978118538856506,
+            "mean_qualified_posterior": 0.9969216585159302
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.021196505054831505,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "home"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "ac96e5cd6c1ed91cf9ac1c57c26d92316b57a3efead9abb2397d600b4115f7a0",
+      "inference_ms_cpu_one_thread": 88.69699999922886,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 15947,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-10",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04236465319991112,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.008694660849869251,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.00012516551942098886,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0009412469808012247,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "287d514566994e6f52b40e84af5e6a521825f276b7ec307f8fe5f6ac3604cbe0",
+      "inference_ms_cpu_one_thread": 32.764584000688046,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-11",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 596,
+            "largest_component_pixels": 596,
+            "maximum_posterior": 0.9854708909988403,
+            "mean_qualified_posterior": 0.9682741165161133
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.1032586470246315,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0001774153352016583,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.0036369292065501213,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "ball"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "feb4fd49b50eb05b085350ceda9552f14dd9904bc8c19131795db41e8ea17616",
+      "inference_ms_cpu_one_thread": 43.211233998590615,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 650,
+        "crate": 26,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-12",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 514,
+            "largest_component_pixels": 514,
+            "maximum_posterior": 0.9783565402030945,
+            "mean_qualified_posterior": 0.9546296000480652
+          },
+          "crate": {
+            "visible": true,
+            "confident_pixels": 1827,
+            "largest_component_pixels": 1827,
+            "maximum_posterior": 0.9661021828651428,
+            "mean_qualified_posterior": 0.9602646827697754
+          },
+          "home": {
+            "visible": true,
+            "confident_pixels": 4570,
+            "largest_component_pixels": 4570,
+            "maximum_posterior": 0.9971969127655029,
+            "mean_qualified_posterior": 0.9963482618331909
+          },
+          "beacon": {
+            "visible": true,
+            "confident_pixels": 97,
+            "largest_component_pixels": 97,
+            "maximum_posterior": 0.9981325268745422,
+            "mean_qualified_posterior": 0.9709984064102173
+          }
+        },
+        "visible_objects": [
+          "ball",
+          "crate",
+          "home",
+          "beacon"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "4d1d380a19efb039409e7012501d4441ecf3685afda7e16c44a36c068e8641a4",
+      "inference_ms_cpu_one_thread": 60.402025999792386,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 731,
+        "crate": 2154,
+        "home": 4583,
+        "beacon": 184
+      }
+    },
+    {
+      "id": "fresh-13",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04236465319991112,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.008694660849869251,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": true,
+            "confident_pixels": 10546,
+            "largest_component_pixels": 10546,
+            "maximum_posterior": 0.9975430965423584,
+            "mean_qualified_posterior": 0.9967247247695923
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.025068003684282303,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "home"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "d9b719a11e2343d3c2a0d7b05f68f84342aea3ef4eedcac10457542ed6b8053d",
+      "inference_ms_cpu_one_thread": 78.85151499795029,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 10574,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-14",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04176799952983856,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.010047757998108864,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.01360444724559784,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.016346635296940804,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "8c45c62c598f771e2f3265810ca98aeda55453ee8607c2d386802560320e6fae",
+      "inference_ms_cpu_one_thread": 38.27513099895441,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-ball-before-occluder",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": true,
+            "confident_pixels": 6382,
+            "largest_component_pixels": 6382,
+            "maximum_posterior": 0.9938026666641235,
+            "mean_qualified_posterior": 0.9794827103614807
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.07175630331039429,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.021542081609368324,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.05300302803516388,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [
+          "ball"
+        ],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": null,
+      "rgb_sha256": "c138f2beef9aa9351618f9dfe83f8497c62f8c7d77ee98b98838a26dbb41d0e1",
+      "inference_ms_cpu_one_thread": 62.730502999329474,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 6557,
+        "crate": 0,
+        "home": 0,
+        "beacon": 0
+      }
+    },
+    {
+      "id": "fresh-ball-behind-occluder",
+      "source": "fresh MuJoCo head camera; fixed scene/pose recipe",
+      "report": {
+        "source": "learned arena pixel classifier applied to eye RGB",
+        "checkpoint_version": "arena-rgb-transformer-v4",
+        "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+        "trained_parameters": 821,
+        "width": 384,
+        "height": 384,
+        "thresholds": {
+          "posterior": 0.9,
+          "minimum_area_fraction": 0.00043402777777777775,
+          "minimum_connected_pixels": 64
+        },
+        "objects": {
+          "ball": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.04176799952983856,
+            "mean_qualified_posterior": null
+          },
+          "crate": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.011279805563390255,
+            "mean_qualified_posterior": null
+          },
+          "home": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.021542081609368324,
+            "mean_qualified_posterior": null
+          },
+          "beacon": {
+            "visible": false,
+            "confident_pixels": 0,
+            "largest_component_pixels": 0,
+            "maximum_posterior": 0.021765217185020447,
+            "mean_qualified_posterior": null
+          }
+        },
+        "visible_objects": [],
+        "coordinates_used": false,
+        "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+      },
+      "fetch_guard_rejection": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first",
+      "rgb_sha256": "a39576ec5300ac2ac2c8eae64d0c13c3b6099ca3247baa7bbdccd7996b1fd680",
+      "inference_ms_cpu_one_thread": 44.857780001620995,
+      "offline_evaluation_only_simulator_pixel_counts": {
+        "ball": 0,
+        "crate": 0,
+        "home": 0,
+        "beacon": 0
+      }
+    }
+  ]
+}

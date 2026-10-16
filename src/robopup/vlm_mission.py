@@ -16,6 +16,7 @@ import numpy as np
 from PIL import Image
 
 from robopup.brain import BrainSession
+from robopup.eye_grounding import EyeGrounding, require_visible_target
 from robopup.vision import EyeCamera
 from robopup.vlm_protocol import parse_mission, step_execution, step_status
 
@@ -40,6 +41,11 @@ class VLMMission:
         self.closed = False
         self.replans = 0
         self.expected_remaining = None
+        self.execution_s = 0.0
+        self.last_tick_time = 0.0
+        self.wall_started = 0.0
+        self.grounding = None
+        self.eye_grounding = None
 
     @property
     def executor(self):
@@ -55,7 +61,11 @@ class VLMMission:
         self.complete = self.failed = False
         self.steps, self.current_step, self.history = [], 0, []
         self.plan = None
+        self.eye_grounding = None
         self.started = self.env.data.time
+        self.execution_s = 0.0
+        self.last_tick_time = self.started
+        self.wall_started = time.monotonic()
         self.replans = 0
         self._request_plan()
 
@@ -92,8 +102,24 @@ class VLMMission:
         self.requested_at = time.monotonic()
 
     def _activate(self):
-        self.step_started = self.env.data.time
         step = self.steps[self.current_step]
+        # A generative plan is not evidence that its target is in view. Recheck
+        # actual RGB after inference, without object positions or simulator IDs.
+        if self.grounding is None:
+            self.grounding = EyeGrounding()
+        activation_image = self.eye.capture()
+        self.eye_grounding = {
+            **self.grounding.observe(activation_image),
+            "eye_rgb_sha256": hashlib.sha256(activation_image.tobytes()).hexdigest(),
+            "checked_at_sim_s": float(self.env.data.time),
+        }
+        try:
+            require_visible_target(step, self.eye_grounding, held=bool(self.env.held))
+        except ValueError as exc:
+            self.failed, self.phase, self.reason = True, "error", str(exc)
+            self.env.grip(False)
+            return
+        self.step_started = self.env.data.time
         execution = step_execution(step)
         if execution.kind == "v4":
             self.skills.begin(execution.command)
@@ -101,10 +127,15 @@ class VLMMission:
         self.reason = f"Step {self.current_step + 1}: {step.action} {step.object}"
 
     def tick(self):
-        if self.closed or self.failed or self.complete:
+        if self.closed or self.failed or self.complete or self.phase == "idle":
             return np.zeros(2), False
-        if self.env.data.time - self.started > 360:
-            self.failed, self.phase, self.reason = True, "error", "Mission timed out"
+        elapsed = max(0.0, self.env.data.time - self.last_tick_time)
+        self.last_tick_time = self.env.data.time
+        if self.phase == "executing":
+            self.execution_s += elapsed
+        if self.execution_s > 360 or time.monotonic() - self.wall_started > 1800:
+            self.failed, self.phase = True, "error"
+            self.reason = "Mission execution timed out" if self.execution_s > 360 else "Mission wall time exceeded 30 minutes"
             self.env.grip(False)
             return np.zeros(2), False
         if self.env.upright < 0.45 or self.env.data.qpos[2] < 0.19:
@@ -138,6 +169,8 @@ class VLMMission:
                 if len(self.steps) > 16:
                     raise ValueError("Mission exceeded its total step limit")
                 self._activate()
+                if self.failed:
+                    return np.zeros(2), False
             except Exception:
                 # Runtime exceptions can contain signed URLs or credentials.
                 # Diagnostics retain raw model text, never exception bodies.
@@ -198,6 +231,8 @@ class VLMMission:
             "mission_steps": rows, "current_step": self.current_step,
             "inference_ms": self.inference_ms,
             "elapsed_s": float(self.env.data.time - self.started),
+            "execution_sim_s": float(self.execution_s),
+            "eye_grounding": self.eye_grounding,
             "replans": self.replans,
             "vision": "actual perspective robot-eye RGB for VLM planning",
             "limitation": "VLM plans from robot eyes; v4 low-level skills still use overhead RGB and analytic/PPO control.",

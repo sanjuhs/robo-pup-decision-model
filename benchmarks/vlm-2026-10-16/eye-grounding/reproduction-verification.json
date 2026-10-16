@@ -1,0 +1,17 @@
+{
+  "result": "passed",
+  "compared_frames": 24,
+  "original_and_reproduced_rgb_and_learned_masks_identical": true,
+  "reports_and_fresh_summary_identical_excluding_timing": true,
+  "existing_output_refused": true,
+  "evaluation_script_sha256": "926ad26809ab265208e6157ac0668e2d2a395485171c5ddd25c55f10272c3338",
+  "reproduction_runtime": {
+    "torch": "2.9.0+cpu",
+    "device": "cpu",
+    "threads": 1,
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "mujoco_gl": "egl"
+  },
+  "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+  "note": "Reproduction uses original recorded RGB inputs plus fresh rerendering from frozen scene recipes; no inference/training on new object domains"
+}

@@ -13,10 +13,45 @@ records establish each one, configuration and contract tests alone do not prove
 VLM task competence. See [VALIDATION.md](VALIDATION.md) for the recorded checks and
 [STATUS.md](STATUS.md) for the current release's scope.
 
-**Generative-model validation status:** actual Qwen inference and model-generated
-physical-goal evaluation are pending measurement for this guide. The already
-passing mission integration tests use explicitly controlled high-level plan
-fixtures. They are not reported as successful Qwen runs.
+**Measured genuine-model result:** the corrected native CPU trial of "Fetch the
+red ball, then hop, then stop" passed all twelve physical/trace checks with three
+actual Qwen calls. It took **183.27 wall seconds for 19.98 simulated seconds**;
+physics was paused while the model generated. The [saved eye images, unedited
+responses and physical result](../benchmarks/vlm-2026-10-16/cpu-verified-mission)
+are separate from the controlled fixtures used in protocol/runtime tests. This
+single corrected headless trial does not establish real-time browser behavior
+or general vision-language task success. An earlier genuine repeated-fetch
+[failure is retained](../benchmarks/vlm-2026-10-16/cpu-rejected-replan).
+
+A separate [actual RTX 4090 run](../benchmarks/vlm-2026-10-16/gpu-4090) completed
+the same corrected native mission in **23.45 wall seconds / 19.98 simulated
+seconds**, again pausing physics during model inference. Its three calls took
+9.882, 5.567 and 5.405 seconds. The pod was deleted and absence verified; GPU cost
+was approximately **$0.0833**, with cumulative confirmed-experiment GPU estimates
+about **$0.79**, not a final invoice.
+
+**Visual semantic grounding failed its probe:** conditional real, blank and
+turned-eye images all produced look → fetch → stop. The blank frame should have
+prevented fetching under that instruction. Seven schema-valid outputs therefore
+do not establish seven correct decisions or reliable vision-based planning.
+Successful fetch/hop execution used the separate overhead-v4 controller; it does
+not resolve this high-level visual failure. Raw failed responses are retained.
+
+The native controller now adds a separate [activation-image visibility
+guard](../benchmarks/vlm-2026-10-16/eye-grounding/probe.json). It reuses 821 trained
+v4 pixel weights unchanged and recaptures actual head RGB after Qwen returns.
+Its small same-color/same-renderer probe had 18 visible and 50 negative object/view
+pairs across seventeen fresh views, with no observed false positives/negatives.
+This is limited developmental evidence, with engineering thresholds rather than
+calibrated probabilities. The guard visibly rejects an ungrounded target action;
+it does not rewrite the model's plan or improve Qwen's raw visual judgment.
+The successful earlier CPU/GPU mission timing records predate this addition.
+
+The loaded model has **2,127,532,032 parameters**; its downloaded snapshot totals
+**4,266,647,442 bytes**, pinned to revision
+`89644892e4d85e24eaac8bacfd4f463576704203`. See the
+[provenance manifest](../benchmarks/vlm-2026-10-16/model-manifest.json) and
+[benchmark details](BENCHMARKS.md). No Qwen pretraining or fine-tuning occurred.
 
 ## How an instruction becomes motion
 
@@ -29,7 +64,10 @@ flowchart TD
   Q --> J[Raw generated JSON mission]
   J --> V[Strict schema and supported-skill validation]
   V --> M[Sequential mission executor]
-  M --> C[Canonical immediate skill instruction]
+  M --> G[Fresh activation-eye visibility gate]
+  RG[Actual head RGB after model returns] --> G
+  G --> C[Canonical immediate skill instruction]
+  G --> FAIL[Ungrounded target: visible failure and hold]
   C --> A[Trained compact v4 arena planner]
   O[Actual overhead RGB and proprioception] --> A
   A --> X[Analytic closed-loop skill executor]
@@ -39,6 +77,7 @@ flowchart TD
   K --> M
   M --> H
   F --> E
+  F --> RG
   F --> B[Three.js physical-pose visualization]
 ```
 
@@ -108,7 +147,8 @@ an unsupported skill by describing it in the summary.
 The native mission engine executes one step, verifies its outcome, then requests
 a fresh plan for the remainder when more steps were proposed. It includes
 completed history to discourage repetition. It limits the mission to seven
-replans, sixteen accumulated steps and 360 simulated seconds. Continuous steps
+replans, sixteen accumulated steps, **360 simulated execution seconds excluding
+model wait**, and **30 minutes wall time**. Continuous steps
 can finish at their duration bound; a fetch/push timeout is a failure. A stop or
 mode change can cancel application of a pending plan. An inference thread may
 still finish internally, but its canceled result cannot start the old mission.
@@ -118,6 +158,37 @@ it is thinking, the robot holds position; duplicate mission requests are rejecte
 as busy. Malformed output or provider failure is shown as a failure. The compact
 planner is not substituted while presented as an LLM response.
 
+## What the eye-visibility gate adds
+
+A model-generated target name is not evidence that the target is visible. Just
+before native step activation, a fresh eye image passes through the released v4
+pixel classifier alone. Its 821 parameters are copied unchanged from the
+checksum-verified checkpoint; the overhead metric projection is not reused.
+No simulator positions, segmentation masks, object IDs or visibility labels enter
+this inference. The model remains a learned arena-color classifier, not a new
+foundation-model detector.
+
+Approach, behind and fetch require ball evidence; push requires crate evidence;
+follow requires beacon evidence. Fetch may return an already physically held
+ball. Look/turn, untargeted motion/rest/stop and drop can proceed without a visual
+target. If the immediate target is ungrounded, the mission reports the reason and
+holds movement. It does not automatically pick a new action or hide the failed
+proposal. In particular, the failed raw Qwen blank-image fetch remains a failed
+visual decision even though the new controller would block its execution.
+
+At 384×384, a target needs a connected region of at least 64 pixels, each qualifying
+at classifier posterior ≥0.9. The area scales with frame size with a four-pixel
+floor. These are engineering abstention thresholds, not calibrated probabilities.
+An object can be present but ungrounded because it is too small, hidden, shadowed
+or outside the learned colors.
+
+The [saved probe](../benchmarks/vlm-2026-10-16/eye-grounding/probe.json) includes
+seven recorded views and seventeen fresh physical views. Offline renderer IDs
+were used only to score the fresh images (visible truth: at least 64 pixels).
+The 18 positive / 50 negative object-view results with zero observed mistakes
+are a small developmental check in the same renderer and color domain. They do
+not establish general visual recognition or successful guarded physical missions.
+
 ## Where the weights live and how large they are
 
 | Model | Storage | Size and training |
@@ -125,7 +196,7 @@ planner is not substituted while presented as an LLM response.
 | Compact v4 planner | [`demo/arena-planner/`](../demo/arena-planner) | 246,712 parameters; 1,011,137 bytes; supervised arena training here |
 | Default PPO motor | [`demo/curious-v2/policy.zip`](../demo/curious-v2/policy.zip) | 224,113-byte archive; 15,705 actor/critic parameters; separate locomotion training |
 | GPU PPO comparison | [`demo/5090-once/policy.zip`](../demo/5090-once/policy.zip) | 259,942-byte archive; same parameter count |
-| Large VLM | Hugging Face model repository, downloaded under `artifacts/vlm/Qwen3-VL-2B-Instruct/` | 2B-class pretrained model, multi-GB weights; inference only, not bundled in GitHub |
+| Large VLM | Hugging Face model repository, downloaded under `artifacts/vlm/Qwen3-VL-2B-Instruct/` | 2,127,532,032 parameters; 4,266,647,442-byte downloaded snapshot; inference only, not bundled in GitHub |
 
 `artifacts/` is ignored by Git. The model-download script resolves an immutable
 Hub revision and writes a local `robopup-model-manifest.json` with source,

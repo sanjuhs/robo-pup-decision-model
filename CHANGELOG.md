@@ -5,6 +5,25 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Measured generative GPU execution and retained vision failure
+
+- Execute the genuine Qwen fetch → hop → stop loop on Runpod in 23.45 wall
+  seconds with three fresh-eye model calls, native CPU physics and verified
+  contact/lift/return/release/hop/landing. Headless physics pauses during thinking.
+- Retrieve raw responses, camera images, hardware and cost records; delete the
+  provider-reported RTX 4090 and verify absence. New GPU estimate $0.0833;
+  cumulative recorded estimate $0.7900, with invoices/storage unreconciled.
+- Preserve the frozen counterfactual failure: real, blank and turned-away images
+  all produced look → fetch → stop. Seven valid JSON responses do not demonstrate
+  seven correct decisions or reliable image grounding.
+- Check fresh eye RGB before step activation using 821 unchanged trained arena
+  pixel-classifier parameters. Refuse ungrounded object-directed actions; keep
+  the raw Qwen answer visible. Actual view/occlusion probes are explicitly
+  restricted to the existing arena colors and renderer, with no new training.
+- Separate a mission's 360-second simulated movement budget from model waiting;
+  retain a 30-minute wall deadline. Slow CPU inference should not exhaust the
+  movement allowance while the robot is standing still.
+
 ### Genuine CPU mission verified
 
 - The corrected Qwen loop completed fetch → hop → stop using three actual

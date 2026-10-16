@@ -1,0 +1,12 @@
+{
+  "stage": "initial ad hoc eye-grounding evaluation",
+  "session_date_utc": "2026-10-16",
+  "outcome": "failed before the first fresh evaluation image was rendered",
+  "category": "headless OpenGL platform configuration",
+  "cause": "MuJoCo was imported before MUJOCO_GL=egl was selected; GLFW required a missing display",
+  "recorded_image_calculations_completed_before_failure": 7,
+  "fresh_image_evaluations_completed": 0,
+  "new_training_performed": false,
+  "correction": "Reran with MUJOCO_GL=egl; committed evaluator now selects EGL before importing MuJoCo",
+  "weights_or_visibility_thresholds_changed_to_pass": false
+}

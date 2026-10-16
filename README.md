@@ -6,7 +6,8 @@ An interactive robot-pet lab: real MuJoCo contact physics, a playful Three.js ya
 fresh PPO policies, and inspectable experiment results. Inspired by
 [robo-jev](https://github.com/STEERIX-home/robo-jev)'s separation of physical judgment
 and motor control. Miso now has a trained camera/text/state transformer,
-physical skills, and a visible six-row plan.
+physical skills, a visible six-row plan, and an optional genuine Qwen vision-language
+model for sequential missions from its onboard camera.
 
 ![Actual browser arena with the research robot and physical pickup](docs/assets/robot-arena.png)
 
@@ -62,9 +63,28 @@ committed in `demo/`. No Hugging Face Space has been published.
 [.env.example](.env.example) lists variable names with blank credentials; never
 push real token values.
 
-The generative integration is being validated separately from the existing arena
-benchmark. Contract/transport fixtures are never reported as actual VLM inference.
-See the linked validation record for the completed evidence.
+The actual Qwen loop completed **fetch → hop → stop** in **23.45 wall seconds on
+Runpod** and **183.27 seconds on CPU**, with three fresh-eye model calls in each
+trial. These headless trials paused physics while thinking. The RTX 4090 allocation
+cost an estimated **$0.083** and was deleted; cumulative recorded GPU estimate is
+**$0.79**, with invoices/storage unreconciled. [Raw GPU mission and cleanup](benchmarks/vlm-2026-10-16/gpu-4090/).
+
+**Known vision failure:** the unguarded VLM produced the same look/fetch/stop plan
+for real, blank and turned-away images. Valid JSON and a successful canonical
+mission do not establish reliable visual reasoning. The linked records retain
+these failures; contract/transport fixtures are labeled separately.
+
+An explicit **eye visibility guard** now checks fresh RGB before each action. It
+reuses 821 unchanged trained pixel-classifier parameters and refuses fetch/push/
+follow when their target lacks confident visual evidence. Blank and turned-away
+views are rejected. This is limited to the arena's colors; it does not make Qwen
+a reliable visual reasoner. [Guard, masks and fresh-view probes](benchmarks/vlm-2026-10-16/eye-grounding/).
+
+To move closer to RoboJev, keep three layers explicit: **Qwen plans the mission,
+a judgment layer decides whether the next action is justified, and physical
+controllers execute and verify it**. A learned, calibrated RoboJev-style judgment
+model and fully eye-based low-level control remain research work. See the
+[source-audited comparison and next experiments](docs/ROBOJEV_COMPARISON.md#how-to-move-closer-to-the-robojev-research-goal).
 
 ## Start the yard
 
@@ -130,14 +150,16 @@ The trained motor policy is a **15,705-parameter MLP**, not a transformer. Its
 deterministic actor has 8,204 parameters; the checkpoint archive also contains
 the critic and training state. Bundled files are **219 KiB** (CPU curious-v2) and
 **254 KiB** (RTX 5090). Weights are in this repository's `demo/` directories,
-copied into local `artifacts/` by setup. Nothing is hosted on Hugging Face.
+copied into local `artifacts/` by setup. These RoboPup-trained weights have not
+been uploaded to Hugging Face; the optional Qwen foundation weights come from its
+public Hugging Face repository.
 
 The **trained arena planner is a separate 246,712-parameter transformer** with a
 1,011,137-byte checkpoint at `demo/arena-planner/`. It consumes 96×96 MuJoCo RGB,
 word tokens and 53 state values. It replans six skill/target slots every half
 simulated second; the executor keeps working toward the goal and checks outcomes.
-The planner uses supervised imitation; PPO trains the motor layer. No general VLM,
-remote model service or Hugging Face hosting is involved.
+The planner uses supervised imitation; PPO trains the motor layer. This compact
+mode runs independently of the optional Qwen VLM described above.
 
 The current **v4** checkpoint uses a GPU-trained transformer and a small learned
 task/needs decoder. On the same new 6,000 scene/command/state samples, first-action
@@ -155,9 +177,10 @@ The v3 model was rejected after a held-state application regression. A v4 bootst
 attempt failed on PyPI networking and was deleted; the successful retry uses
 hash-verified direct wheels. The final 6,739-parameter decoder was refined on CPU
 for 87.26 s with vision/transformer frozen, before opening the fresh final test.
-All five session pods are deleted and their absence verified. Follow-up GPU
-estimate **$0.43**, aggregate session GPU estimate **$0.71** within the $30 ceiling;
-final invoices/storage reconciliation remain pending. See the
+All five pods for those earlier experiments are deleted and their absence verified.
+Their GPU estimate was **$0.71**; the subsequent Qwen inference allocation brings
+the cumulative recorded estimate to **$0.79** within the $30 ceiling. Final
+invoices/storage reconciliation remain pending. See the
 [complete experiment and failed runs](docs/GPU_PLANNER_EXPERIMENT.md),
 [model card](docs/MODEL_CARD.md), and [raw records](benchmarks/gpu-planner-v4).
 

@@ -4,7 +4,164 @@ Validated on the development Linux machine with Python 3.12.14, Node 24.19.0,
 MuJoCo 3.3.7, PyTorch 2.9.0 CPU and optional JAX 0.7.2. Runpod hardware and source
 hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 
-## Current GPU-trained v4 release
+## Current native activation-image guard
+
+The [eye-grounding probe](../benchmarks/vlm-2026-10-16/eye-grounding/probe.json)
+evaluates a new activation guard using **821 unchanged trained v4 pixel weights**.
+After genuine model generation returns, the native mission recaptures head RGB
+and checks the immediate target before enabling motion. The guard receives no
+object coordinates, simulator IDs, segmentation or target truth during inference.
+
+Seven recorded GPU images and seventeen fresh physical views are retained. For
+the fresh views, offline renderer labels define visibility as at least 64 object
+pixels: **18 positive and 50 negative object/view pairs**, with **zero observed
+false positives or false negatives**. Those are 68 correlated pairs from a small
+same-color, same-renderer developmental probe, not 68 independent scenes or a
+general recognition benchmark. Thresholds were fixed before fresh rendering.
+
+The engineering rules require posterior ≥0.9 and a sufficiently large connected
+predicted region (64 pixels for the tested 384×384 images). They are not calibrated
+success probabilities. The old overhead-trained arena color classifier has not
+become a general visual encoder through this transfer. Missing evidence can mean
+occlusion, distance, shadows or different colors.
+
+Approach/behind/fetch require grounded ball pixels, push requires crate pixels,
+and follow requires beacon pixels. Fetch may return a physically held ball;
+look, turns, other untargeted skills and drop do not need target pixels. The
+recorded blank/turned frames reject fetch. A missing target produces a visible
+failure and holds movement; no alternate plan is silently invented, and Qwen's
+failed original response remains unchanged.
+
+Native mission budgets now allow **360 simulated execution seconds**, excluding
+model-wait time, plus a **30-minute wall limit**. The earlier headless CPU/GPU
+mission records below preceded this activation guard and are not retroactively
+presented as a fresh guarded-model evaluation. The full new application suite
+and corrected browser run require their own results.
+
+The first genuine browser capture is retained as
+[`browser-attempt1`](../benchmarks/vlm-2026-10-16/browser-attempt1). Its mission
+reported completion, but the harness failed a final post-hop ball-position check
+and had not saved the independent fetch-completion snapshot. Its video, original
+harness and rejection remain available; it is not counted as a passing browser
+mission. A corrected harness records the release/fetch transition before the
+later hop, while retaining physical hop/landing checks.
+
+## Actual RTX 4090 inference: successful sequence and failed visual semantics
+
+The [GPU run records](../benchmarks/vlm-2026-10-16/gpu-4090) retain genuine
+Qwen3-VL inputs/responses, CUDA runtime, native mission outcomes and deleted-pod
+lifecycle. The model ran on an RTX 4090; the simulator remained native CPU.
+The recorded source is `8ca421bd95e6241ea2f676f78a9af24449796354`.
+
+- Seven static probes produced **seven schema-valid JSON missions**. This is a
+  structured-output result, not a semantic or physical success rate.
+- **The visual conditional test failed:** real, blank and turned-camera images
+  produced identical look → fetch → stop sequences. The blank-image response
+  violated the instruction to avoid fetching when no red ball is visible.
+  A real attached image is confirmed; reliable image-conditioned decision making
+  is not. The completed-history-only static prompt also repeated fetch.
+- A separate corrected **fetch → jump → stop** native mission passed all twelve
+  physical/trace checks with three genuine model calls. It took **23.4518 wall
+  seconds / 19.98 simulated seconds**. Calls took 9.882, 5.567 and 5.405 seconds;
+  the first includes 3.197 seconds loading. Physics was frozen during generation.
+- One contact-gated grasp and a **0.35585 m** held lift were verified, followed by
+  return/release, **0.28 s** hop flight and four-foot landing. The later hop moved
+  the ball outside the home radius after fetch had completed. PPO residuals ran
+  on 291 steps alongside analytic skills, without external forces.
+- Provider hardware reported RTX 4090 and **49,140 MiB**, an atypical capacity.
+  Torch peak CUDA allocation was 4,471,898,112 bytes. These are separate recorded
+  quantities; neither is a standard-card capacity or production-memory guarantee.
+- The pod was deleted and absence verified. GPU estimate **$0.08326**, cumulative
+  confirmed-experiment estimate **$0.79004**, within $30; final invoice and storage
+  reconciliation remain outstanding. Both preceding failed RTX 5090 allocations
+  are preserved and are not counted as observed GPU runtime.
+
+This is actual GPU model inference and a narrow model/controller success, while
+visual semantic grounding remains an incomplete part of the user's goal. It is
+not a real-time browser result, robust autonomous vision benchmark or new LLM
+training result. The CPU trial and fixture-based application checks below remain
+separate evidence.
+
+## Genuine VLM, sequential native mission and deployment extension
+
+The externally pretrained **Qwen/Qwen3-VL-2B-Instruct** checkpoint is pinned to
+`89644892e4d85e24eaac8bacfd4f463576704203`, with **2,127,532,032 parameters**
+and **4,266,647,442 downloaded bytes**. Its Apache-2.0 provenance and file hashes
+are retained in [`model-manifest.json`](../benchmarks/vlm-2026-10-16/model-manifest.json)
+and the [experiment protocol](../benchmarks/vlm-2026-10-16/protocol.json).
+This is actual pretrained-model inference, not a new LLM training run or a rename
+of the tiny v4 model.
+
+The corrected native CPU trial requested **"Fetch the red ball, then hop, then
+stop."** Three actual Qwen calls each received the corresponding saved 384×384
+robot-eye image and produced validated mission JSON. The native engine verified
+fetch → jump → stop in order; all twelve recorded checks passed. The full
+[result](../benchmarks/vlm-2026-10-16/cpu-verified-mission/result.json), three
+[inference records and PNGs](../benchmarks/vlm-2026-10-16/cpu-verified-mission)
+retain the unedited responses, image hashes, timing, physical trace and outcomes.
+
+- CPU BF16, four PyTorch threads; **183.2708 wall seconds**, **19.98 simulated
+  seconds**, 999 physical control steps. Model calls took 62.233, 61.276 and
+  56.315 seconds, including first-call load time.
+- Contact/grasp occurred once, held-ball lift reached **0.35124 m**, and the ball
+  was released on the floor within the home criterion. Hop flight was **0.26 s**,
+  landing ended with four foot contacts and upright ratio 0.99999. The execution
+  used 294 PPO-residual steps and no externally applied forces.
+- **Physics was frozen while the VLM was thinking.** This headless CPU result does
+  not establish real-time browser responsiveness. The physical controller still
+  uses overhead-v4 grounding plus analytic skills; high-level robot-eye input
+  alone is not an end-to-end egocentric control result.
+- The first genuine trial repeated fetch during replanning and was rejected. Its
+  [original records and rejection](../benchmarks/vlm-2026-10-16/cpu-rejected-replan)
+  remain unchanged. The controller now supplies explicit remaining-goal memory
+  and rejects plans that change the remembered remainder. That is an application
+  prompt/validation fix; the Qwen weights were not optimized.
+
+Before the new activation guard, the completed full local Python suite passed
+**207 tests**; a monitor regression subsequently passed its targeted test. The
+expanded guarded-application suite and current hosted CI require their own
+recorded conclusions, not inference from those earlier runs.
+Ruff, frozen dependency installation and browser build passed. All **21 browser/
+render checks** passed, including the VLM UI using controlled provider fixtures,
+original physics/real-v4 fetch, head-camera inspection, robot/puppy skin parity
+and existing pause/camera assertions. These fixtures are labeled explicitly;
+actual Qwen browser execution is not claimed by them.
+
+The private local-model HTTP endpoint validates workshop authentication,
+PNG/text/model/token bounds and local-only serving, with two pending/running
+slots. Its HTTP tests use a controlled adapter and do not stand in for model
+inference. Native mission contract tests separately perform real fetch/hop
+physics with controlled high-level plans. Genuine Qwen evidence is the recorded
+trial above, rather than either fixture suite.
+
+Deployment checks are retained in
+[`local-validation.json`](../benchmarks/vlm-2026-10-16/local-validation.json) and
+[`container-smoke.json`](../benchmarks/vlm-2026-10-16/container-smoke.json):
+
+- Actual Vercel CLI `vercel dev -L` served the Vite frontend and public gateway;
+  the generated internal planner binding answered status requests. This was a
+  local service run, not a Vercel cloud deployment or deployed private-network test.
+- The non-root **1.41 GB CPU image** passed imports, actual 384×384 EGL eye
+  rendering, HTTP frontend/health and an authenticated WebSocket advancing native
+  physics from 0.04 to 0.08 seconds. Its disposable container was removed.
+  The optional VLM-extra image was not built or tested.
+- Failed Docker TLS/non-root-permission/disk-cache checks were diagnosed and
+  corrected; retained summaries distinguish them from the passing smoke run.
+  The three Vercel services are prepared, but personal-account authentication and
+  the requested service/route review are still outstanding. Nothing was published.
+
+Two new RTX 5090 allocation attempts failed (HTTP 500 and HTTP 400) without an
+observed matching pod. The first attempt's
+[reconciliation](../benchmarks/vlm-2026-10-16/gpu-allocation-attempt1/reconciliation.json)
+and second [lifecycle](../benchmarks/vlm-2026-10-16/gpu-allocation-attempt2/lifecycle.json)
+are retained. An allocation error or elapsed monitor time does not establish GPU
+usage or billing. The later successful RTX 4090 run and its completed cleanup are recorded above;
+its valid JSON is reported separately from failed visual semantics.
+
+The following v4 and older sections retain their original version-specific counts,
+measurements, cleanup state and hosted CI conclusions.
+
+## Historical GPU-trained v4 release
 
 - Local Python suite: **30 passed**. The original settled-pose held-state
   intervention is retained and now passes against v4, alongside physical fetch,

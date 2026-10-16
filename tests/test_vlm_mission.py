@@ -12,6 +12,7 @@ import hashlib
 import io
 from pathlib import Path
 import threading
+import time
 
 import mujoco
 import numpy as np
@@ -212,8 +213,39 @@ def test_mission_budget_timeout_releases_gripper_and_never_claims_success():
             command, learned = mission.tick()
             np.testing.assert_array_equal(command, np.zeros(2))
             assert not learned and mission.failed and not mission.complete
-            assert mission.reason == "Mission timed out" and not env.magnet
+            assert mission.reason == "Mission execution timed out" and not env.magnet
         finally:
+            mission.close()
+            env.close()
+
+    asyncio.run(scenario())
+
+
+def test_slow_inference_does_not_consume_movement_budget_but_wall_deadline_still_applies():
+    async def scenario():
+        env = settled_env()
+        gate = threading.Event()
+        runtime = ControlledRuntime([STOP_FIXTURE], gate=gate)
+        mission = VLMMission(env, runtime)
+        try:
+            mission.begin("stop")
+            assert await asyncio.to_thread(runtime.entered.wait, 2)
+            # Exercise clocks without waiting six minutes or fabricating a task
+            # result. The model is genuinely still pending behind a test gate.
+            env.data.time += 361
+            command, learned = mission.tick()
+            np.testing.assert_array_equal(command, np.zeros(2))
+            assert not learned and not mission.failed and mission.phase == "thinking"
+            assert mission.execution_s == 0
+            mission.wall_started = time.monotonic() - 1801
+            command, learned = mission.tick()
+            np.testing.assert_array_equal(command, np.zeros(2))
+            assert not learned and mission.failed and not mission.complete
+            assert mission.reason == "Mission wall time exceeded 30 minutes"
+        finally:
+            gate.set()
+            if mission.pending is not None:
+                await wait_for_generation(mission)
             mission.close()
             env.close()
 
@@ -406,6 +438,43 @@ def test_replan_cannot_repeat_a_completed_task_or_replace_remaining_goals():
             assert runtime.calls[1]["instruction"].startswith("Your remaining mission is: walk forward.")
             assert "Verified completed steps" in runtime.calls[1]["instruction"]
         finally:
+            mission.close()
+            env.close()
+
+    asyncio.run(scenario())
+
+
+def test_activation_rechecks_actual_eyes_and_blocks_a_now_invisible_target():
+    """Delayed fixture output must not authorize fetch from stale camera pixels."""
+    async def scenario():
+        env = settled_env()
+        gate = threading.Event()
+        runtime = ControlledRuntime([FETCH_HOP_FIXTURE], gate=gate)
+        mission = VLMMission(env, runtime)
+        try:
+            mission.begin("fetch the ball then hop")
+            assert await asyncio.to_thread(runtime.entered.wait, 2)
+            requested_hash = mission.observation_sha256
+            # Rotate the real camera while inference is delayed. The guard must
+            # inspect new pixels rather than trust the old image or plan text.
+            env.data.qpos[3:7] = [0, 0, 0, 1]
+            mujoco.mj_forward(env.model, env.data)
+            gate.set()
+            await wait_for_generation(mission)
+            command, learned = mission.tick()
+            np.testing.assert_array_equal(command, np.zeros(2))
+            assert not learned and mission.failed and not mission.complete
+            assert mission.phase == "error"
+            assert mission.reason.startswith("Cannot start fetch: ball is not grounded")
+            assert mission.eye_grounding["visible_objects"] == []
+            assert mission.eye_grounding["eye_rgb_sha256"] != requested_hash
+            assert mission.executor.instruction == "stop"
+            assert not env.magnet and not env.held and env.grasp_count == 0
+            assert len(mission.history) == 1
+            assert mission.history[0]["plan"]["steps"][0]["action"] == "fetch"
+            assert mission.status()["mission_steps"][0]["status"] == "failed"
+        finally:
+            gate.set()
             mission.close()
             env.close()
 

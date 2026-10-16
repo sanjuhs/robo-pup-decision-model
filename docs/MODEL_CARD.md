@@ -19,8 +19,26 @@ checks physical outcomes and requests a fresh-eye remaining plan between steps.
 It was not trained or fine-tuned in this project. Its local weights live under
 ignored `artifacts/vlm/`; no token is needed for the public download. CPU latency
 in the first probe was 127.73 seconds including load, overlapping other checks.
-That first image-to-JSON probe is not proof of a physical VLM mission; separate
-closed-loop and GPU measurements are recorded as they complete.
+Subsequent actual closed-loop fetch → hop → stop trials passed on CPU in 183.27
+wall seconds and on a provider-reported RTX 4090 in 23.45 seconds. Each used three
+fresh-eye model calls and paused physics during inference. The GPU checkpoint
+used 4,471,898,112 bytes peak PyTorch CUDA allocation in that trial.
+
+The frozen static probes exposed a visual-reasoning failure: real, blank and
+turned-away images produced identical look/fetch/stop plans. All seven outputs
+were valid JSON, but this does not establish semantic correctness or visual
+grounding. An earlier CPU run also repeated already completed fetches; its raw
+failure motivated the explicit remaining-task memory guard. These limits and
+all raw trials are retained in the [VLM evidence](../benchmarks/vlm-2026-10-16/).
+
+The native executor separately reuses the unchanged **821-parameter** arena pixel
+classifier on fresh perspective RGB before activating a targeted action. It
+abstains when a sufficiently confident connected target region is absent. This
+engineering guard uses no simulator object coordinates or segmentation at
+inference, and its thresholds are not probability calibration. The small
+[view/occlusion probe](../benchmarks/vlm-2026-10-16/eye-grounding/) is limited to
+the same colored arena objects and renderer; it is not evidence of general VLM
+vision improvement. No new training was performed for this guard.
 
 See [the VLM guide](VLM_GUIDE.md), [RoboJev comparison](ROBOJEV_COMPARISON.md) and
 [deployment services](DEPLOYMENT.md) for the difference between generative

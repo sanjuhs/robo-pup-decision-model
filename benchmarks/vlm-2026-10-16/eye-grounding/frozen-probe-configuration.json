@@ -1,0 +1,29 @@
+{
+  "posterior_threshold": 0.9,
+  "minimum_area_fraction": 0.00043402777777777775,
+  "minimum_pixels": 4,
+  "fresh_positions": [
+    [
+      -0.45,
+      0.2
+    ],
+    [
+      0.55,
+      -0.3
+    ],
+    [
+      -0.2,
+      -0.55
+    ]
+  ],
+  "fresh_yaw_degrees": [
+    -80,
+    -25,
+    25,
+    105,
+    180
+  ],
+  "seed_start": 1741,
+  "occlusion_seed": 1839,
+  "thresholds_frozen_before_fresh_rendering": true
+}
