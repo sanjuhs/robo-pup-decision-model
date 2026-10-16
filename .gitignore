@@ -14,5 +14,6 @@ artifacts/
 *.zip
 playwright-report/
 test-results/
+.vercel/
 
 *.pt

@@ -1,0 +1,16 @@
+{
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "license": "apache-2.0",
+  "parameters": 2127532032,
+  "downloaded_files_bytes": 4266647442,
+  "training_or_finetuning": false,
+  "first_probe_host": "Intel Xeon Platinum 8573C, 5 CPU affinity slots",
+  "first_probe_dtype": "bfloat16",
+  "first_probe_threads": 4,
+  "first_probe_gpu_used": false,
+  "first_probe_other_work_overlapped": true,
+  "scope": "First actual camera\u2192model\u2192validated JSON probe; no physical execution in this first probe. Separate fresh closed-loop evaluation required.",
+  "new_paid_resources_created_so_far": false,
+  "hf_token_required": false
+}

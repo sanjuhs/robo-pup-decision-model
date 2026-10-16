@@ -1,0 +1,98 @@
+{
+  "schema": "robopup-real-vlm-probe-v1",
+  "timestamp_unix": 1792160122.0419672,
+  "instruction": "Fetch the red ball, then hop, then stop.",
+  "energy": 0.9,
+  "held": false,
+  "image": {
+    "file": "eye-start.png",
+    "sha256": "c4baeede714c86a08f1e3993f506675b8ce4be163a649ca38e10d1cf03e55396"
+  },
+  "initial_runtime_status": {
+    "ready": true,
+    "phase": "available",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "available",
+    "reason": "Local checkpoint available; it has not been loaded or tested by this process",
+    "provider": "transformers-local",
+    "model_loaded": false,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local checkpoint available; it has not been loaded or tested by this process",
+    "last_error": null,
+    "dtype_config": "bfloat16",
+    "cpu_threads_config": 4,
+    "max_generation_seconds": 180
+  },
+  "physical_task_tested": false,
+  "valid_mission": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Fetch the red ball, then hop, then stop.\",\n  \"steps\": [\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"jump\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 10601.478421000138,
+      "generation": 117124.06630800069,
+      "queue": 0.0023160009732237086,
+      "total": 127728.99232800046
+    },
+    "metadata": {
+      "input_tokens": 1081,
+      "output_tokens": 84,
+      "device": "cpu",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "bfloat16",
+      "cpu_threads_config": 4,
+      "cpu_threads": 4,
+      "max_generation_seconds": 180,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": null,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "mission": {
+    "summary": "Fetch the red ball, then hop, then stop.",
+    "steps": [
+      {
+        "action": "fetch",
+        "object": "ball"
+      },
+      {
+        "action": "jump",
+        "object": "none"
+      },
+      {
+        "action": "stop",
+        "object": "none"
+      }
+    ]
+  },
+  "final_runtime_status": {
+    "ready": true,
+    "phase": "ready",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "available": true,
+    "status": "ready",
+    "reason": "Local VLM loaded; mission JSON is validated separately before execution",
+    "provider": "transformers-local",
+    "model_loaded": true,
+    "checkpoint_available": true,
+    "dependencies_available": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "detail": "Local VLM loaded; mission JSON is validated separately before execution",
+    "last_error": null,
+    "dtype_config": "bfloat16",
+    "cpu_threads_config": 4,
+    "max_generation_seconds": 180
+  }
+}

@@ -7,6 +7,14 @@ research prototype; the linked evidence describes what was actually tested.
 
 ### Robot eyes and sequential generative missions
 
+- Integrate the public Apache-2.0 Qwen3-VL-2B checkpoint as a genuine generative
+  model, with explicit revision-pinned download, local or remote vision runtime,
+  raw responses and no silent substitute. First actual BF16 CPU image probe
+  generated a valid fetch → hop → stop plan in 127.73 s including load; physical
+  VLM mission evaluation is separate and remains pending at this checkpoint.
+- Add nonblocking per-step mission execution, fresh-eye replanning after verified
+  steps, cancellation and private backend access for externally hosted frontends.
+
 - Add a real 384px perspective camera mounted on the robot, preserving the
   original overhead-camera pixels and physical trajectories exactly.
 - Add a strict, bounded JSON mission contract for an external generative VLM.

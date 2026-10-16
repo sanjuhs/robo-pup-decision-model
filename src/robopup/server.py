@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import asyncio
+from contextlib import asynccontextmanager
+import hmac
 from functools import lru_cache
 import json
 import math
@@ -12,7 +14,8 @@ from typing import Literal
 from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Request, WebSocket, WebSocketDisconnect
-from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 import numpy as np
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
@@ -20,13 +23,48 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from robopup.decisions import decide, follow_target
 from robopup.commands import interpret
 from robopup.pet import PetEnv
-from robopup.brain import BrainSession, MODEL_DIR
+from robopup.brain import MODEL_DIR, trained_model
+from robopup.vlm_mission import BrainRouter
+from robopup.vlm_runtime import get_vlm_runtime
 
 ROOT = Path(__file__).resolve().parents[2]
 ARTIFACTS = Path(os.environ.get("ROBOPUP_ARTIFACTS", ROOT / "artifacts")).resolve()
 DIST = ROOT / "web" / "dist"
-app = FastAPI(title="RoboPup Arena", version="0.1.0")
+@asynccontextmanager
+async def lifespan(_app):
+    # Readiness means bundled inference is warm, not merely that the port opened.
+    if (MODEL_DIR / "planner.pt").is_file():
+        await asyncio.to_thread(default_motor)
+        await asyncio.to_thread(trained_model)
+    yield
+
+
+app = FastAPI(title="RoboPup Arena", version="0.1.0", lifespan=lifespan)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[s.strip() for s in os.getenv("ROBOPUP_ALLOWED_ORIGINS", "").split(",") if s.strip()],
+    allow_methods=["GET", "POST"],
+    allow_headers=["Authorization", "Content-Type"],
+)
 active_sessions = 0
+
+
+def origin_allowed(origin, host):
+    if not origin or urlsplit(origin).netloc == host:
+        return True
+    allowed = {s.strip().rstrip("/") for s in os.getenv("ROBOPUP_ALLOWED_ORIGINS", "").split(",")}
+    # An externally hosted UI must use a private workshop access key.
+    return bool(os.getenv("ROBOPUP_ARENA_TOKEN")) and origin.rstrip("/") in allowed
+
+
+@app.middleware("http")
+async def private_api(request: Request, call_next):
+    token = os.getenv("ROBOPUP_ARENA_TOKEN", "")
+    if token and request.url.path.startswith("/api/") and request.url.path not in ("/api/health", "/api/vlm") and request.method != "OPTIONS":
+        supplied = request.headers.get("authorization", "")
+        if not hmac.compare_digest(supplied.encode(), ("Bearer " + token).encode()):
+            return JSONResponse({"detail": "Workshop access key required"}, status_code=401)
+    return await call_next(request)
 
 
 class Control(BaseModel):
@@ -38,8 +76,8 @@ class Control(BaseModel):
     reset: bool = False
     paused: bool | None = None
     policy: str | None = None
-    text: str | None = Field(default=None, max_length=160)
-    brain: Literal["neural", "rules"] | None = None
+    text: str | None = Field(default=None, max_length=2000)
+    brain: Literal["neural", "rules", "vlm"] | None = None
     gait: Literal["walk", "trot", "run"] | None = None
     energy: float | None = Field(default=None, ge=0, le=1)
     release: bool = False
@@ -95,13 +133,18 @@ def list_runs():
     return {"runs": runs(), "protocol": "flat-forward-v1"}
 
 
+@app.get("/api/vlm")
+def vlm_status():
+    return get_vlm_runtime().status()
+
+
 voice_slots = asyncio.Semaphore(2)
 
 
 @app.post("/api/transcribe")
 async def transcribe(request: Request):
     origin = request.headers.get("origin")
-    if origin and urlsplit(origin).netloc != request.headers.get("host"):
+    if not origin_allowed(origin, request.headers.get("host")):
         raise HTTPException(403, "Cross-origin audio rejected")
     content = bytearray()
     async for chunk in request.stream():
@@ -130,13 +173,25 @@ def default_motor():
 async def arena(socket: WebSocket):
     global active_sessions
     origin = socket.headers.get("origin")
-    if origin and urlsplit(origin).netloc != socket.headers.get("host"):
+    if not origin_allowed(origin, socket.headers.get("host")):
         await socket.close(code=1008)
         return
     if active_sessions >= 12:
         await socket.close(code=1013)
         return
     await socket.accept()
+    # Flush the handshake before synchronous MuJoCo session construction.
+    await asyncio.sleep(0)
+    token = os.getenv("ROBOPUP_ARENA_TOKEN", "")
+    if token:
+        try:
+            auth = await asyncio.wait_for(socket.receive_json(), timeout=5)
+            if not isinstance(auth, dict) or auth.get("type") != "auth" or not isinstance(auth.get("token"), str) or not hmac.compare_digest(auth["token"].encode(), token.encode()):
+                await socket.close(code=1008)
+                return
+        except (asyncio.TimeoutError, ValueError, WebSocketDisconnect):
+            await socket.close(code=1008)
+            return
     active_sessions += 1
     env = PetEnv(episode_seconds=3600)
     obs, _ = env.reset(seed=7)
@@ -145,8 +200,10 @@ async def arena(socket: WebSocket):
     waypoints = []
     mission = None
     mission_complete = False
-    brain = BrainSession(env)
-    brain_mode = "neural" if brain.available else "rules"
+    brain = BrainRouter(env)
+    prefer_vlm = os.getenv("ROBOPUP_DEFAULT_BRAIN") == "vlm"
+    brain_mode = "vlm" if prefer_vlm and get_vlm_runtime().status()["available"] else "neural" if brain.available else "rules"
+    brain.set_mode(brain_mode)
     if brain.available:
         policy, policy_name = default_motor(), "baseline/curious-v2"
     mode_alias = None
@@ -162,6 +219,7 @@ async def arena(socket: WebSocket):
                 if control.brain is not None:
                     if control.brain == "neural" and not brain.available:
                         raise ValueError("Bundled planner is unavailable; run setup first")
+                    brain.set_mode(control.brain)
                     brain_mode = control.brain
                     mode = "stop"
                     env.grip(False)
@@ -172,13 +230,17 @@ async def arena(socket: WebSocket):
                 if control.release:
                     env.grip(False)
                     mode = "stop"
+                    if brain_mode == "vlm":
+                        brain.cancel_vlm()
                 if control.mode is not None:
+                    if control.mode in ("manual", "stop", "recover") and brain_mode == "vlm":
+                        brain.cancel_vlm()
                     mode = control.mode
                     waypoints = []
                     mission, mission_complete = None, False
                     follow_beacon = control.mode == "follow"
                     mode_alias = control.mode
-                    if brain_mode == "neural" and control.mode in ("approach", "follow", "push"):
+                    if brain_mode in ("neural", "vlm") and control.mode in ("approach", "follow", "push"):
                         brain.begin(
                             {
                                 "approach": "follow the beacon",
@@ -197,7 +259,7 @@ async def arena(socket: WebSocket):
                 if control.text is not None:
                     if not control.text.strip():
                         raise ValueError("Type a command first")
-                    if brain_mode == "neural":
+                    if brain_mode in ("neural", "vlm"):
                         brain.begin(control.text)
                         mode, mode_alias, follow_beacon = "planner", None, False
                         env.ball_touched = False
@@ -233,7 +295,8 @@ async def arena(socket: WebSocket):
                     waypoints = []
                     mission, mission_complete = None, False
                     brain.close()
-                    brain = BrainSession(env)
+                    brain = BrainRouter(env)
+                    brain.set_mode(brain_mode)
                     mode_alias, follow_beacon = None, False
                     target = np.array([2.0, 1.0])
                 if control.policy is not None:
@@ -300,12 +363,13 @@ async def arena(socket: WebSocket):
                 try:
                     command, learned_motor = brain.tick()
                     planner_state = brain.status()
-                    behavior = mode_alias or {"behind": "approach"}.get(
-                        brain.executor.intent, brain.executor.intent
-                    )
-                    decision = Decision(behavior, command, brain.executor.reason)
-                    mission_complete = bool(brain.executor.complete)
-                    if brain.executor.plan is not None:
+                    intent = planner_state["intent"]
+                    behavior = mode_alias or {"behind": "approach"}.get(intent, intent)
+                    decision = Decision(behavior, command, planner_state["reason"])
+                    mission_complete = bool(planner_state["complete"])
+                    if brain_mode == "vlm":
+                        mission = brain.vlm.instruction
+                    elif brain.executor.plan is not None:
                         mission = brain.executor.intent
                 except (OSError, RuntimeError, ValueError) as error:
                     decision = Decision(
