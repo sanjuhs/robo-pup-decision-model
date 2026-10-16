@@ -5,6 +5,13 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Illustrated model explanation
+
+- Add diagrams distinguishing PPO motor training, supervised arena planning,
+  pretrained Qwen inference, physical feedback and participant setup.
+- Correct older model-card wording about Hugging Face storage and optional
+  remote inference. The architecture and trained weights are unchanged.
+
 ### Genuine guarded browser mission
 
 - Complete actual Qwen fetch → hop → stop through the browser, with the fresh-eye

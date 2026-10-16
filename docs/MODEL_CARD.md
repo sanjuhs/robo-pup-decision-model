@@ -81,7 +81,8 @@ Neither failed record is hidden. v2/v3 checkpoints are retained alongside the ne
 default, with lineage and SHA-256. See [experiment protocol/results](GPU_PLANNER_EXPERIMENT.md)
 and [training/limitations](MULTIMODAL.md). Voice remains separate offline
 PocketSphinx English recognition, with an approximately 28 MiB installed speech
-model. No external model API or Hugging Face upload is involved.
+model. This compact planner runs locally without an external model API; its
+RoboPup-trained checkpoint has not been uploaded to Hugging Face.
 
 ## Trained motor controller
 
@@ -120,15 +121,23 @@ Stop uses analytic stance and reset restores the world.
 
 ## Where are the weights?
 
-Current and historical checkpoints are committed to this GitHub repository with SHA-256 sidecars.
+Current and historical RoboPup-trained checkpoints are committed to this GitHub
+repository with SHA-256 sidecars.
 Setup verifies and copies the two motor checkpoints into `artifacts/baseline/curious-v2/` and
 `artifacts/runpod/5090-once/`. New participant runs save their own `policy.zip`
 and intermediate checkpoints under `artifacts/<participant>/<run>/`.
 
-Nothing has been published to Hugging Face. A Hugging Face **model repository**
-would store weights; a **Space** would host an app. Neither is required here.
-No external model service is called by the live arena. SB3/PyTorch checkpoints
-must only be loaded from trusted authors; their deserialization is not a sandbox.
+No RoboPup-owned model or app has been published to Hugging Face. The optional
+Qwen checkpoint is downloaded from its existing public Hugging Face **model
+repository**; a **Space** would host an app. Qwen weights remain in ignored local
+`artifacts/vlm/`, separate from the bundled RoboPup-trained checkpoints.
+
+The compact planner and local Qwen mode do not call an external inference service.
+The optional remote VLM mode sends images and prompts from the Python backend to
+the configured vision provider, with credentials kept server-side. See
+[VLM provider setup](VLM_GUIDE.md#use-a-remote-model-or-vercel).
+SB3/PyTorch checkpoints must only be loaded from trusted authors; their
+deserialization is not a sandbox.
 
 ## Was the RTX 5090 actually used?
 
@@ -154,9 +163,9 @@ See [the complete evidence and limitations](BENCHMARKS.md).
 
 The golden puppy is original procedural Three.js artwork: 18,248 triangles,
 382,736 bytes of unique geometry buffers, 18 physical attachments, and a generated
-256×256 fur-bump texture. There is no downloaded GLB or texture asset. The whole
-browser JS build, including Three.js, is about 552 kB / 143 kB gzip. Those values
-are separate from the neural checkpoint and do not include Python dependencies.
+256×256 fur-bump texture. There is no downloaded GLB or texture asset. Browser
+bundle size is separate from neural checkpoint size and Python dependencies;
+`npm run build` reports the current JavaScript and gzip sizes.
 
 The look is stylized, not photoreal. Its simple articulated segments inherit the
 robot's leg poses, not a detailed anatomical canine skeleton. A production canine

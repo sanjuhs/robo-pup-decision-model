@@ -36,6 +36,9 @@ The puppy is original, stylized procedural artwork, not a photoreal canine asset
 
 ## Understand the system
 
+[Start with the illustrated explanation](docs/EXPLAINER.md): what we trained,
+where PPO fits, how commands become physical behavior, and participant setup.
+
 The large vision-language model and the small arena controller are separate.
 **Qwen3-VL-2B-Instruct** is the pretrained, generative VLM: actual robot-eye RGB,
 English instructions, virtual energy, held state and verified action history go
