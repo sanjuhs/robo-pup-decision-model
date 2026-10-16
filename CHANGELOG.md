@@ -5,6 +5,15 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Robot eyes and sequential generative missions
+
+- Add a real 384px perspective camera mounted on the robot, preserving the
+  original overhead-camera pixels and physical trajectories exactly.
+- Add a strict, bounded JSON mission contract for an external generative VLM.
+  Individual fetch/push/hop steps require physical outcome checks; timeouts are
+  failures. This contract alone is not evidence of language-model competence.
+
+
 ### GPU-trained v4 default
 
 Hosted [full prototype checks passed](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38878935098)

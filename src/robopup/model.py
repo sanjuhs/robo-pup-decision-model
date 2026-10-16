@@ -77,6 +77,7 @@ def arena_xml(obstacles: bool = False, pet: bool = False) -> str:
         <geom name="floor" type="plane" size="12 12 .1" rgba=".12 .16 .2 1"/>
         <body name="torso" pos="0 0 .415">
           <freejoint name="root"/>
+          <camera name="robot_eyes" pos=".412 0 .092" xyaxes="0 -1 0 .258819 0 .965926" fovy="90"/>
           <geom name="torso_geom" type="box" size=".26 .13 .075" mass="3"/>
           <geom name="head" type="box" pos=".31 0 .045" size=".09 .1 .075" mass=".25" rgba=".88 .95 .88 1"/>
           {"".join(legs)}
