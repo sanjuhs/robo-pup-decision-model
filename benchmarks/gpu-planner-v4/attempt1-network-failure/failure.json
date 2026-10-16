@@ -1,0 +1,8 @@
+{
+  "stage": "bootstrap, before clone/data/training",
+  "cause": "PyPI simple/uv request timed out through all pip retries; reported no matching versions is a network symptom, not a package-version conclusion",
+  "checkpoint_created": false,
+  "artifacts_retrieved": false,
+  "pod_deleted_and_absence_verified": true,
+  "next_step": "manually correct bootstrap to locked direct CDN wheel URLs; fast verified-HTTPS preflight; capture early errors even before checkout"
+}

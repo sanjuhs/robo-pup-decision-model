@@ -1,0 +1,8 @@
+{
+  "source": "Runpod system log Digest lines",
+  "pod_id": "yefpv7i7yx40px",
+  "image_digests": [
+    "sha256:cbf48bdd597b143bff333beeda3c95d82fa3f7faa98910eff9356f3eb4aa1fb8"
+  ],
+  "cli_exit": 0
+}

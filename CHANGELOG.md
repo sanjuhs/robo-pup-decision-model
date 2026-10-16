@@ -5,6 +5,14 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### GPU bootstrap reliability
+
+- Preserve the failed v4 bootstrap: PyPI timeouts, no training/checkpoint, pod
+  deleted, estimated GPU charge $0.1033. No test or TLS verification was bypassed.
+- Verify all 52 locked project runtime wheels locally and export direct CDN URLs
+  for the tested Python3.12 pod ABI. Add fast connectivity preflight and export
+  early failure logs before checkout. Prepare a manual retry of the same protocol.
+
 ### GPU candidate evidence and manual correction
 
 - v3 completed actual RTX 5090 training in 95.49 seconds; new-test first action

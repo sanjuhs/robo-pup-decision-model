@@ -87,3 +87,16 @@ and evaluate all 500 new mixed scenes (seed94871) ×12 templates, evaluator seed
 Compare v2 and v4 on the same data; physical seeds707/808/909 and unchanged
 120-second criteria. Also require the original held-state application regression,
 all Python checks and browser integration. Retain failed models and trials.
+
+### v4 bootstrap failure and corrected retry
+
+The first v4 pod never trained: its PyPI index requests timed out through all
+retries. Its GPU estimate is $0.1033; deletion and absence were verified. No
+checkpoint is claimed. The manually corrected retry retains the same frozen
+training/evaluation protocol. It removes the index/bootstrap dependency and uses
+52 explicit CDN wheel URLs with hashes exported from uv.lock for the tested
+Linux x86_64/CPython3.12 image. Every wheel was downloaded and hash-verified
+locally before launch. A verified HTTPS CDN preflight fails early on an unusable
+host. The provider Torch/CUDA stack is retained and recorded. Raw startup logs
+are now bundled even if checkout or installation fails. TLS/hash verification
+remains enabled; the default demo remains v2 pending application checks.
