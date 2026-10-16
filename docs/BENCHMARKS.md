@@ -134,6 +134,25 @@ The README GIF crops the viewport and loops the first 3.6 seconds at the origina
 playback speed; repeated GIF frames do not represent extra physics steps. The
 linked WebM retains the full recorded page and captured duration.
 
+## Golden-puppy presentation (2026-10-16)
+
+The original procedural skin has **18 physical attachments, 18,248 surface
+triangles, 44 mesh draws**, and **382,736 bytes of unique geometry buffers**
+(renderer-side buffers, not a model download). One generated 256×256 RGBA bump
+texture is shared across coat materials. The browser JS build is about 547 kB
+uncompressed / 141 kB gzip, including Three.js. There is no GLB/texture download.
+
+A fresh real-browser replay of the existing GPU checkpoint advanced **5.800
+simulation seconds in 6.016 wall seconds**, moved **2.019 m along world X**, and
+did not request a reset. Software-WebGL capture sampled **32 render frames**,
+with **179.1 ms median** and **536.3 ms p95** frame intervals, about 5 frames/s.
+This is a capture on SwiftShader with a larger 993×605 arena viewport, not a
+controlled comparison or a hardware/mobile performance claim. Later frames
+encounter the crate; no manipulation success is implied. See the
+[raw record](../benchmarks/puppy-presentation-2026-10-16/measurements.json).
+The screenshot and looped GIF in the README are taken from actual browser output.
+No new training or billable resources were used.
+
 ## Cost
 
 CPU development incurred **$0 in Runpod GPU spend**. The two disposable GPU

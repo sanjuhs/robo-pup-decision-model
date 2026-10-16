@@ -4,6 +4,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import './style.css';
 import './commands.css';
 import { PoseBuffer, smoothingAlpha } from './motion.js';
+import { PuppySkin } from './puppy.js';
 
 const $ = (id) => document.getElementById(id);
 let socket, state, paused = false, followCamera = false, manual = false, selectedMode = 'stop';
@@ -12,6 +13,9 @@ const keys = new Set();
 const meshes = new Map();
 const poses = new PoseBuffer();
 const eyes = [];
+const puppy = new PuppySkin();
+let appearance = 'puppy';
+let puppyStats;
 let tailPivot;
 const renderedRoot = new THREE.Vector3();
 const followShift = new THREE.Vector3();
@@ -120,8 +124,14 @@ function buildScene(geoms) {
     }
     const mesh = new THREE.Mesh(geometry, material(geom.color, geom.name));
     mesh.castShadow = mesh.receiveShadow = true;
-    scene.add(mesh);
-    meshes.set(geom.id, mesh);
+    const root = new THREE.Group();
+    root.add(mesh);
+    scene.add(root);
+    meshes.set(geom.id, root);
+    const skin = puppy.add(geom);
+    root.userData.robot = mesh;
+    root.userData.skin = skin;
+    if(skin) { root.add(skin); mesh.visible=false; }
     if (geom.name === 'head') {
       for (const side of [-1,1]) {
         const eye = new THREE.Mesh(new THREE.SphereGeometry(.013, 12, 8), new THREE.MeshStandardMaterial({ color: '#122b27', roughness: .3 }));
@@ -170,6 +180,7 @@ function buildScene(geoms) {
       }
     }
   }
+  puppyStats=puppy.stats();
 }
 
 const rotationMatrix = new THREE.Matrix4();
@@ -267,6 +278,7 @@ function animate(time) {
   if (tailPivot) tailPivot.rotation.z = Math.sin(simTime*(state?.behavior==='stop'?3:8))*.22;
   const blink = Math.max(.08, 1 - Math.exp(-Math.pow(((simTime+1.5)%4.7-2.35)/.065, 2)));
   for (const eye of eyes) eye.scale.z = blink;
+  puppy.animate(simTime,state?.speed??0,blink);
   if (state && pose) {
     if (followCamera) {
       followShift.set(renderedRoot.x, renderedRoot.y, .2).sub(controls.target).multiplyScalar(smoothingAlpha(dt, .32));
@@ -290,6 +302,8 @@ function animate(time) {
     $('world-label').style.opacity = projected.z>1 || Math.abs(projected.x)>1 || Math.abs(projected.y)>1 ? '0' : '1';
     window.arenaPresentation = {
       time: simTime, position: renderedRoot.toArray(), cameraTarget: controls.target.toArray(),
+      appearance, puppyStats, puppyParts: puppy.parts.size, puppyTailAngle: puppy.tail?.rotation.x,
+      puppyEarAngles: puppy.ears.map(({ear})=>ear.rotation.x),
       followCamera, cameraDistance: camera.position.distanceTo(controls.target), tailAngle: tailPivot?.rotation.z, blink, interpolationMs: poses.delayMs,
     };
   }
@@ -324,6 +338,13 @@ function setFollowCamera(value) {
 $('camera').onclick = () => setFollowCamera(!followCamera);
 $('frame-pup').onclick = () => { setFollowCamera(true); focusDistance=2.6; };
 controls?.addEventListener('start', () => { focusDistance=undefined; });
+$('appearance').onchange = () => {
+  appearance = $('appearance').value;
+  for(const root of meshes.values())if(root.userData.skin) {
+    root.userData.skin.visible=appearance==='puppy';
+    root.userData.robot.visible=appearance==='robot';
+  }
+};
 $('policy').onchange = () => {send({policy:$('policy').value});$('policy-detail').textContent=$('policy').value==='gait'?'Rule-based decisions + an analytic gait. Select a trained policy to compare.':'Fresh residual PPO weights. Flat forward training only; other commands are experimental.';};
 $('command-form').onsubmit = (event) => {
   event.preventDefault();

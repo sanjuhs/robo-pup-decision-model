@@ -22,6 +22,14 @@ friction, contacts, two static obstacles in the yard, and a free crate.
 Physics steps at 200 Hz; actions at 50 Hz; the browser receives transforms at a
 target 25 Hz. Browser frames interpolate actual simulated geometry.
 
+The browser has two visual skins on the same physical transforms. Each scene
+geometry includes its MuJoCo body name so the original golden-puppy artwork can
+attach to the correct torso/limb without relying on numeric geometry IDs. Its
+18 attachments add soft ellipsoids, paws, muzzle and coat materials; eyes, ears
+and tail have cosmetic expression. Static details are batched by material. No
+additional limb cycle, torso bobbing, root motion, or physical contact is scripted.
+The collision model and policy interface remain the original primitive robot.
+
 Observations: base velocity, orientation/gravity row, joint positions/velocities,
 command, gait phase, height, and previous action (50 values). Actions: 12 residual
 joint targets, clipped to [-1,1], scaled by 0.3 radians, then clipped to joint limits.

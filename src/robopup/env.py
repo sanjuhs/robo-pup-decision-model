@@ -145,6 +145,8 @@ class RoboPupEnv(gym.Env):
                  int(mujoco.mjtGeom.mjGEOM_BOX): "box",
                  int(mujoco.mjtGeom.mjGEOM_CYLINDER): "cylinder"}
         return [{"id": i, "name": mujoco.mj_id2name(self.model, mujoco.mjtObj.mjOBJ_GEOM, i),
+                 "body": mujoco.mj_id2name(self.model, mujoco.mjtObj.mjOBJ_BODY,
+                                           int(self.model.geom_bodyid[i])),
                  "type": names.get(int(self.model.geom_type[i]), "box"),
                  "size": self.model.geom_size[i].tolist(),
                  "color": self.model.geom_rgba[i].tolist()}

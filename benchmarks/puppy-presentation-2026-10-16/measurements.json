@@ -1,0 +1,1075 @@
+{
+  "policy": "runpod/5090-once",
+  "renderer": "Chromium headless / SwiftShader software WebGL",
+  "viewport": {
+    "x": 49.953125,
+    "y": 298.1875,
+    "width": 993.09375,
+    "height": 604.78125
+  },
+  "wallSeconds": 6.016,
+  "simulationSeconds": 5.800000000000096,
+  "worldXDisplacement": 2.018924548434754,
+  "needsReset": false,
+  "frameCount": 32,
+  "medianFrameMs": 179.09999999776483,
+  "p95FrameMs": 536.3000000007451,
+  "frames": [
+    {
+      "wall": 4146.300000000745,
+      "time": 3.4792537313428817,
+      "position": [
+        -0.0392362747375284,
+        -0.005800826903934069,
+        0.39136277226037625
+      ],
+      "cameraTarget": [
+        -0.012744855490710324,
+        -0.000020153279662830408,
+        0.1972948753152106
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.21014626191965696,
+      "puppyEarAngles": [
+        -0.10426245142387275,
+        0.10426245142387275
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.645475553514082,
+      "tailAngle": 0.09376719405681012,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 4379.39999999851,
+      "time": 3.7283377308709826,
+      "position": [
+        0.0016838943265553394,
+        -0.030335123014113594,
+        0.3848232073447268
+      ],
+      "cameraTarget": [
+        -0.008872404545917222,
+        -0.008156217365344989,
+        0.19802088850235872
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.2843254250999373,
+      "puppyEarAngles": [
+        -0.1376741661654257,
+        0.1376741661654257
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6288649899868544,
+      "tailAngle": -0.21996264455878267,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 4684.89999999851,
+      "time": 4.029762532981285,
+      "position": [
+        0.11158064227670064,
+        -0.0020774005924134625,
+        0.38808234441038947
+      ],
+      "cameraTarget": [
+        0.023455310667031787,
+        -0.006524757948993157,
+        0.19855205109689764
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.027698266786177053,
+      "puppyEarAngles": [
+        -0.08697492390114293,
+        0.08697492390114293
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.618321660377002,
+      "tailAngle": 0.16117795419034883,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 4876.5,
+      "time": 4.197705735662883,
+      "position": [
+        0.19022287612692956,
+        -0.02454832015797454,
+        0.3856068739111971
+      ],
+      "cameraTarget": [
+        0.06821311883508618,
+        -0.0113620003565917,
+        0.19894065795257415
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.37611988616631087,
+      "puppyEarAngles": [
+        -0.12373738370143816,
+        0.12373738370143816
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6116294250967376,
+      "tailAngle": 0.18220216143509738,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 4894,
+      "time": 4.245163204748861,
+      "position": [
+        0.20439846226584962,
+        -0.0357017509153216,
+        0.3882405113171753
+      ],
+      "cameraTarget": [
+        0.08791296511458953,
+        -0.014882859007083752,
+        0.19909389672971403
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.4165108939004157,
+      "puppyEarAngles": [
+        -0.14191171355537363,
+        0.14191171355537363
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.609265203327436,
+      "tailAngle": 0.12353293532136399,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 5101.599999997765,
+      "time": 4.431805929918591,
+      "position": [
+        0.28840143643227634,
+        -0.03466419364362304,
+        0.39600095399434915
+      ],
+      "cameraTarget": [
+        0.14172093739263616,
+        -0.02019186006210736,
+        0.19933708068601913
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.15606024440819768,
+      "puppyEarAngles": [
+        -0.12746571613560573,
+        0.12746571613560573
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.605880961980811,
+      "tailAngle": -0.17191103303613406,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 5149.800000000745,
+      "time": 4.4780269058307605,
+      "position": [
+        0.3034732575323048,
+        -0.025697359281393956,
+        0.3885529564523357
+      ],
+      "cameraTarget": [
+        0.1651191663197049,
+        -0.020988256249682504,
+        0.1994329750624046
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.02926406366147981,
+      "puppyEarAngles": [
+        -0.10868470567561585,
+        0.10868470567561585
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.604685382816423,
+      "tailAngle": -0.2099056848553277,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 5482.89999999851,
+      "time": 4.793925925928054,
+      "position": [
+        0.42283817759943715,
+        -0.056762244215772764,
+        0.39011302431805944
+      ],
+      "cameraTarget": [
+        0.2342869210705092,
+        -0.030589435510032043,
+        0.1995851556936527
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.35342637032821606,
+      "puppyEarAngles": [
+        -0.1490370245738483,
+        0.1490370245738483
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.60297398311026,
+      "tailAngle": 0.13354269965673066,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 5516.099999997765,
+      "time": 4.83999999999927,
+      "position": [
+        0.4435820287012002,
+        -0.05925796500000504,
+        0.3919695331712976
+      ],
+      "cameraTarget": [
+        0.2645624363609846,
+        -0.03473647225998159,
+        0.19964516486100575
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.2632820738095523,
+      "puppyEarAngles": [
+        -0.15497274878310913,
+        0.15497274878310913
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6023693826633476,
+      "tailAngle": 0.18756595371728108,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 5638.599999997765,
+      "time": 4.956915887849741,
+      "position": [
+        0.4961800872461003,
+        -0.04157418255885932,
+        0.3904897235761318
+      ],
+      "cameraTarget": [
+        0.3267249939186427,
+        -0.03657160683799096,
+        0.19974039706661237
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.05744055600347934,
+      "puppyEarAngles": [
+        -0.1269207821275581,
+        0.1269207821275581
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.601503933466833,
+      "tailAngle": 0.2038610237974515,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 5729.39999999851,
+      "time": 5.034051593322881,
+      "position": [
+        0.5220965478027082,
+        -0.033517136399925956,
+        0.3877059787843821
+      ],
+      "cameraTarget": [
+        0.37915966552953495,
+        -0.035751834710569814,
+        0.19981007043661325
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.26436794543213554,
+      "puppyEarAngles": [
+        -0.09696475535878823,
+        0.09696475535878823
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430613,
+      "tailAngle": 0.11840247865793703,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 6080.800000000745,
+      "time": 5.372977777777023,
+      "position": [
+        0.6631298752111858,
+        -0.07370334305093146,
+        0.39389257352654716
+      ],
+      "cameraTarget": [
+        0.45537283165283504,
+        -0.045937426407024064,
+        0.19986104456302728
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.037024186960528775,
+      "puppyEarAngles": [
+        -0.1549065695209614,
+        0.1549065695209614
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430604,
+      "tailAngle": -0.18494212146653646,
+      "blink": 0.9993990567049498,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 6105.800000000745,
+      "time": 5.403342939480388,
+      "position": [
+        0.6781257802295415,
+        -0.07001125983702396,
+        0.3960349778582257
+      ],
+      "cameraTarget": [
+        0.47738773441698695,
+        -0.04831666809836057,
+        0.19987477767162606
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.05135972237566789,
+      "puppyEarAngles": [
+        -0.15105800878647951,
+        0.15105800878647951
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.60095460134306,
+      "tailAngle": -0.15085218715635734,
+      "blink": 0.9938464143308012,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 6284.89999999851,
+      "time": 5.591400966184608,
+      "position": [
+        0.7483750616524432,
+        -0.05044416410564291,
+        0.3908018757464428
+      ],
+      "cameraTarget": [
+        0.5501164978005054,
+        -0.04888765477619357,
+        0.19990838538746855
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.41645047200181917,
+      "puppyEarAngles": [
+        -0.08844533732458491,
+        0.08844533732458491
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.600954601343059,
+      "tailAngle": 0.14978507249757902,
+      "blink": 0.3334832051255957,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 6481.89999999851,
+      "time": 5.769503916448946,
+      "position": [
+        0.8117087446934418,
+        -0.0849445961644944,
+        0.3890514412582297
+      ],
+      "cameraTarget": [
+        0.6203237684553009,
+        -0.058564774312800494,
+        0.1999329733176321
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.1842636471869553,
+      "puppyEarAngles": [
+        -0.12415547637467338,
+        0.12415547637467338
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430582,
+      "tailAngle": 0.18120810798493656,
+      "blink": 0.9999888493906463,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 6629,
+      "time": 5.910510708402739,
+      "position": [
+        0.8766438354753179,
+        -0.08549955647909438,
+        0.3941806010284387
+      ],
+      "cameraTarget": [
+        0.6891160684308228,
+        -0.06579364888396048,
+        0.1999509622316232
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.21336332226765667,
+      "puppyEarAngles": [
+        -0.15399438339759924,
+        0.15399438339759924
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430573,
+      "tailAngle": -0.035092544349437226,
+      "blink": 0.9999999999999563,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 7203.300000000745,
+      "time": 6.4671895424844275,
+      "position": [
+        1.0995273460732515,
+        -0.09819760356739687,
+        0.3896937471079527
+      ],
+      "cameraTarget": [
+        0.7992640410540913,
+        -0.07449036388131608,
+        0.1999641232022469
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.4033206128822527,
+      "puppyEarAngles": [
+        -0.148130631716958,
+        0.148130631716958
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430564,
+      "tailAngle": 0.21892792959586665,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 7235,
+      "time": 6.497661097852393,
+      "position": [
+        1.1094776348039397,
+        -0.09430881111570037,
+        0.3866577862633165
+      ],
+      "cameraTarget": [
+        0.8298353946906951,
+        -0.07644345933276592,
+        0.19996765883799456
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.41898705321250296,
+      "puppyEarAngles": [
+        -0.13882470366023564,
+        0.13882470366023564
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.600954601343056,
+      "tailAngle": 0.21769098144259932,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 7299.89999999851,
+      "time": 6.560633484164137,
+      "position": [
+        1.133158853290832,
+        -0.09079546098416354,
+        0.38810088952176025
+      ],
+      "cameraTarget": [
+        0.8869051653751467,
+        -0.07914376298513817,
+        0.19997374377025742
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.3913734774855874,
+      "puppyEarAngles": [
+        -0.11346606853857442,
+        0.11346606853857442
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.600954601343055,
+      "tailAngle": 0.17529952914001776,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 7328,
+      "time": 6.590859728508538,
+      "position": [
+        1.1454758252916153,
+        -0.09261810064024999,
+        0.39048249745559227
+      ],
+      "cameraTarget": [
+        0.9125327754285527,
+        -0.0804792396059763,
+        0.1999763460934194
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.35063965093727056,
+      "puppyEarAngles": [
+        -0.10169101809366139,
+        0.10169101809366139
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430542,
+      "tailAngle": 0.13836821099797073,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 7486.89999999851,
+      "time": 6.743233532935046,
+      "position": [
+        1.1811126680149917,
+        -0.12672613432691757,
+        0.38863526256367026
+      ],
+      "cameraTarget": [
+        0.9846154209779426,
+        -0.09289118335882701,
+        0.19998269443226
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.03241933963951606,
+      "puppyEarAngles": [
+        -0.09650159231645145,
+        0.09650159231645145
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430533,
+      "tailAngle": -0.11288210865192695,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 7674.39999999851,
+      "time": 6.916296296295068,
+      "position": [
+        1.2435527324367506,
+        -0.1263989290735451,
+        0.39621322948511895
+      ],
+      "cameraTarget": [
+        1.0541101484560622,
+        -0.10188413861788749,
+        0.19998733897617363
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.4032542804401222,
+      "puppyEarAngles": [
+        -0.1538136052975088,
+        0.1538136052975088
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.600954601343053,
+      "tailAngle": -0.20647283848810608,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 7831.800000000745,
+      "time": 7.0705882352939895,
+      "position": [
+        1.2955606787936274,
+        -0.10217548789702809,
+        0.3883869309464592
+      ],
+      "cameraTarget": [
+        1.1189116971812094,
+        -0.10196233221092649,
+        0.19999073699709016
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.2927880488013874,
+      "puppyEarAngles": [
+        -0.11915808003424312,
+        0.11915808003424312
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430516,
+      "tailAngle": 0.0035282346411643333,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 8012.599999997765,
+      "time": 7.243890274313555,
+      "position": [
+        1.3485207728676407,
+        -0.13590824424970713,
+        0.3886174265069923
+      ],
+      "cameraTarget": [
+        1.1805351845474552,
+        -0.11107288446328724,
+        0.19999322304230016
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.16904718413188616,
+      "puppyEarAngles": [
+        -0.09250027426336782,
+        0.09250027426336782
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430507,
+      "tailAngle": 0.21689006541869132,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 8197.800000000745,
+      "time": 7.430000000001266,
+      "position": [
+        1.418335570667836,
+        -0.13404695105155054,
+        0.3933098043310203
+      ],
+      "cameraTarget": [
+        1.2443570916126194,
+        -0.11723876487511625,
+        0.1999950418718301
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.37620472768469654,
+      "puppyEarAngles": [
+        -0.1481381467218308,
+        0.1481381467218308
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.60095460134305,
+      "tailAngle": 0.05448438012322409,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 8640.099999997765,
+      "time": 7.828012422360289,
+      "position": [
+        1.544637292281412,
+        -0.15369522371315217,
+        0.3907290683127687
+      ],
+      "cameraTarget": [
+        1.3249476044088895,
+        -0.12702310865119518,
+        0.19999637255594058
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.41307951365914214,
+      "puppyEarAngles": [
+        -0.10926861333359907,
+        0.10926861333359907
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430485,
+      "tailAngle": -0.045377731956914476,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 8675.599999997765,
+      "time": 7.875668789812364,
+      "position": [
+        1.5667086888599469,
+        -0.15184931382418626,
+        0.3932749666590631
+      ],
+      "cameraTarget": [
+        1.3488411007704575,
+        -0.1294767080148781,
+        0.19999673105996377
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.41516956389997617,
+      "puppyEarAngles": [
+        -0.12900613526665608,
+        0.12900613526665608
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.600954601343048,
+      "tailAngle": 0.03797819091138374,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 8714.599999997765,
+      "time": 7.917446808512183,
+      "position": [
+        1.585161361177784,
+        -0.1440096137224641,
+        0.39238812543094564
+      ],
+      "cameraTarget": [
+        1.3830890881434643,
+        -0.13158284470543785,
+        0.19999720480105093
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.3722775029980718,
+      "puppyEarAngles": [
+        -0.14348809304968949,
+        0.14348809304968949
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430476,
+      "tailAngle": 0.10696121533345468,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 8885.300000000745,
+      "time": 8.072555555557901,
+      "position": [
+        1.6320702430853895,
+        -0.1169601966965128,
+        0.38833813698231534
+      ],
+      "cameraTarget": [
+        1.4499117388166916,
+        -0.12765835451642785,
+        0.19999795498876283
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.017122381362116912,
+      "puppyEarAngles": [
+        -0.13735147442201723,
+        0.13735147442201723
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.600954601343047,
+      "tailAngle": 0.2165319316224457,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 9137.599999997765,
+      "time": 8.325866666668157,
+      "position": [
+        1.6905751148396428,
+        -0.1545032693986299,
+        0.38979049420510986
+      ],
+      "cameraTarget": [
+        1.5145020276261891,
+        -0.1348631101130686,
+        0.19999850383781748
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.41452769246526183,
+      "puppyEarAngles": [
+        -0.09964768060591271,
+        0.09964768060591271
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.600954601343046,
+      "tailAngle": -0.1302310355275912,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 9673.89999999851,
+      "time": 8.85489999999924,
+      "position": [
+        1.8628509668449276,
+        -0.16128535498560206,
+        0.39201344424541174
+      ],
+      "cameraTarget": [
+        1.6079934385855148,
+        -0.1419544276850013,
+        0.1999989053843638
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": -0.3148585550261634,
+      "puppyEarAngles": [
+        -0.10154656773819942,
+        0.10154656773819942
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.600954601343046,
+      "tailAngle": 0.21741776684955702,
+      "blink": 1,
+      "interpolationMs": 60
+    },
+    {
+      "wall": 9914.800000000745,
+      "time": 9.08018306636158,
+      "position": [
+        1.9294986077839311,
+        -0.13263099549042112,
+        0.3884312028643346
+      ],
+      "cameraTarget": [
+        1.6942804012112354,
+        -0.13945216419940026,
+        0.19999919916209286
+      ],
+      "appearance": "puppy",
+      "puppyStats": {
+        "physicalAttachments": 18,
+        "triangles": 18248,
+        "draws": 44,
+        "geometryBytes": 382736,
+        "texturePixels": 65536
+      },
+      "puppyParts": 18,
+      "puppyTailAngle": 0.27990630317167836,
+      "puppyEarAngles": [
+        -0.1493288245567861,
+        0.1493288245567861
+      ],
+      "followCamera": true,
+      "cameraDistance": 2.6009546013430445,
+      "tailAngle": -0.08258905997170939,
+      "blink": 1,
+      "interpolationMs": 60
+    }
+  ]
+}

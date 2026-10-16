@@ -1,0 +1,35 @@
+import {test,expect} from '@playwright/test';
+
+test('articulated puppy walks with a trusted policy and appearance changes preserve the world',async({page})=>{
+  const errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.setViewportSize({width:1440,height:1050});
+  await page.goto('/');
+  await page.waitForFunction(()=>window.arenaPresentation?.puppyParts===18);
+  await expect(page.getByLabel('Appearance')).toHaveValue('puppy');
+  await page.getByRole('button',{name:/Close-up/}).click();
+  await page.waitForFunction(()=>window.arenaPresentation.cameraDistance<2.7);
+  await page.getByLabel('Motor policy').selectOption('baseline/curious-v2');
+  await page.waitForFunction(()=>window.arenaTelemetry.policy==='baseline/curious-v2');
+  await page.keyboard.down('w');
+  await page.waitForFunction(()=>window.arenaTelemetry.position[0]>.35);
+  expect(await page.evaluate(()=>window.arenaTelemetry.needsReset)).toBe(false);
+  await page.keyboard.up('w');
+  await page.getByRole('button',{name:'Pause simulation'}).click();
+  await page.waitForTimeout(350);
+  const before=await page.evaluate(()=>({physical:window.arenaTelemetry,art:window.arenaPresentation}));
+  await page.waitForTimeout(200);
+  const held=await page.evaluate(()=>window.arenaPresentation);
+  expect(held.puppyTailAngle).toBe(before.art.puppyTailAngle);
+  expect(held.puppyEarAngles).toEqual(before.art.puppyEarAngles);
+  await page.screenshot({path:'../artifacts/screens/puppy.png',fullPage:true});
+  await page.getByLabel('Appearance').selectOption('robot');
+  await page.waitForFunction(()=>window.arenaPresentation.appearance==='robot');
+  const robot=await page.evaluate(()=>window.arenaTelemetry);
+  expect(robot.position).toEqual(before.physical.position);
+  expect(robot.time).toBe(before.physical.time);
+  expect(robot.policy).toBe(before.physical.policy);
+  await page.getByLabel('Appearance').selectOption('puppy');
+  await page.waitForFunction(()=>window.arenaPresentation.appearance==='puppy');
+  expect(errors).toEqual([]);
+});

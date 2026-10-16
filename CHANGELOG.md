@@ -5,6 +5,16 @@ research prototype; the linked evidence describes what was actually tested.
 
 ## Unreleased
 
+### Golden puppy — 2026-10-16
+
+- Add an original articulated puppy appearance: rounded golden coat, muzzle,
+  glossy eyes, floppy ears, paws, curved tail and collar. The research robot
+  remains available in Appearance; switching skins preserves the physical world.
+- Batch static surface details by material and generate one small fur texture
+  locally; no external character asset or new package is downloaded.
+- Test trained walking, appearance isolation and paused puppy expressions, and
+  publish an actual browser screenshot, recording and measured render limitations.
+
 ### Presentation
 
 - Buffer physical poses by 60 ms and interpolate every body over the same pair

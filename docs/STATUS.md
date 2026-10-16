@@ -9,6 +9,7 @@ This file separates implemented paths from measured task success. See
 | PPO from fresh weights | Completed CPU runs; residual gait policies, not end-to-end torque learning |
 | First locomotion policy | Curious-v2: 0.340 m/s body-frame forward speed on five 12-second held-out trials; no falls |
 | Interactive browser | Tested desktop/mobile; buffered physical geometry, orbit/follow camera, keyboard, pause/reset, policy loading. Cosmetic expressions are separate from learned locomotion. |
+| Puppy appearance | Original stylized golden skin attached to 18 physical geometries; real policy walking and robot/puppy switching tested. Not photoreal or an anatomical canine rig. |
 | Multiple participants | Five simultaneous independent browser worlds tested; no shared-world collaboration |
 | Experiment comparison | Completed local runs discovered from real config/result files; compare equal protocols |
 | Plain-language commands | Local grammar; ball boop and behind-ball missions passed single deterministic physics trials; browser contact also verified |

@@ -10,7 +10,7 @@ hashes are recorded separately in `benchmarks/runpod-attempt-*/`.
 | `pytest -q` | 16 passed, no skipped/disabled/expected failures; one upstream AnyIO deprecation warning |
 | `ruff check src tests scripts` | Passed |
 | `npm run build` | Passed; one approximately 523 kB JS bundle produces Vite's size advisory |
-| `npm test` | 12 passed: eight browser checks including real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion, close-up/follow camera and frozen expressions on pause, mobile layout, five simultaneous browsers; four deterministic render timing/reset checks |
+| `npm test` | 13 passed: nine browser checks including real geometry/controls, experiment results and policy loading, command grammar, physical CPU-policy ball contact, GPU-policy locomotion, close-up/follow camera and frozen expressions on pause, mobile layout, five simultaneous browsers, golden-puppy walking/appearance isolation; four deterministic render timing/reset checks |
 | Post-optimization physical ball browser test | 1 passed; no contact assertions disabled |
 | `scripts/smoke.py` against saved startup | Passed health, built HTML, advancing real MuJoCo state and a functional control request |
 | `scripts/session_benchmark.py` | Final ten independent worlds: minimum 0.986 real-time ratio over 75 frames per session |

@@ -7,7 +7,7 @@ fresh PPO policies, and inspectable experiment results. Inspired by
 [robo-jev](https://github.com/STEERIX-home/robo-jev)'s separation of physical judgment
 and motor control. This repository's decision layer currently uses rules.
 
-![The RoboPup Arena browser prototype](docs/assets/arena.png)
+![Miso's articulated golden-puppy appearance in the actual browser](docs/assets/puppy.png)
 
 **Prototype, not a hardware controller.** The local arena runs on CPU; optional
 MJX physics runs on GPU. PPO learns joint-target residuals around an analytic trot,
@@ -19,11 +19,12 @@ GPU-trained demo checkpoints are included. See the [raw benchmark evidence](docs
 for compilation/setup time, a failed attempt, costs, and limits. Following,
 pushing-to-goal, learned recovery, and Jev integration remain incomplete.
 
-![Actual GPU-trained policy in the browser close-up camera](docs/assets/trained-walk.gif)
+![Actual GPU-trained policy wearing the golden-puppy skin](docs/assets/puppy-walk.gif)
 
 Actual browser capture of the bundled GPU-trained checkpoint, cropped and looped.
-[Full six-second recording](docs/assets/trained-walk.webm). Software WebGL capture
-was about 7 frames/s on this host; this is not a hardware-browser FPS benchmark.
+[Full six-second recording](docs/assets/puppy-walk.webm). The new puppy capture
+averaged about 5 frames/s using software WebGL; hardware-browser FPS is unmeasured.
+The puppy is original, stylized procedural artwork, not a photoreal canine asset.
 
 ## Start the yard
 
@@ -53,6 +54,8 @@ validated. PyTorch 2.9 does not support every older CPU/OS combination.
 - **WASD** steers; **Space** requests a standing pose.
 - **Pause** freezes physics; **Reset posture** resets the world, including the crate.
 - Select a locally trained policy to compare it with the analytic gait.
+- Switch **Appearance** between the golden puppy and the original research robot.
+  Both display the same physics and policy; this does not retrain or replace the gait.
 - Talk to Miso: **go to the ball**, **go behind the ball**, **follow me**, **push the crate**, **stop**.
   This is a local command grammar. Ball missions report completion from physics
   contacts or measured position; free-form language understanding is not implemented.
@@ -66,6 +69,11 @@ and blinking freeze with Pause. The renderer buffers snapshots by 60 ms and
 interpolates physical poses; it never invents extra locomotion. Obstacles and the crate
 collide physically. The ball has rolling friction and the yard has low physical
 boundary walls. The crate and ball are moved only by contact, never scripted forces.
+The puppy's rounded coat, muzzle, floppy ears, paws and collar are a visual skin
+attached to 18 physical geometries. Its silhouette is an approximation of the
+collision robot. All leg poses still come from MuJoCo. The skin uses 18,248
+triangles and a shared, generated 256×256 fur-bump texture, with no external asset
+downloads. This is a rendering upgrade, not an anatomically validated dog rig.
 
 ## Train your first policy
 

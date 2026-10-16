@@ -15,6 +15,9 @@ def test_environment_contract_and_seed():
     np.testing.assert_array_equal(a, b)
     assert env.model.nu == 12
     assert env.observation_space.contains(a)
+    scene = env.scene()
+    assert next(g for g in scene if g["name"] == "head")["body"] == "torso"
+    assert next(g for g in scene if g["name"] == "fl_foot")["body"] == "fl_shin"
 
 
 def test_gait_rollout_and_contacts():
