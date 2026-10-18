@@ -84,12 +84,17 @@ class Evaluator:
         camera.renderer.disable_segmentation_rendering()
         geom = labels[:, :, 1] == int(mujoco.mjtObj.mjOBJ_GEOM)
         counts = {}
+        centroids = {}
         names = ("ball_geom", "crate_geom", "home_pad", "beacon_geom")
         for name, geom_name in zip(OBJECTS, names, strict=True):
             geom_id = mujoco.mj_name2id(env.model, mujoco.mjtObj.mjOBJ_GEOM, geom_name)
-            counts[name] = int(((labels[:, :, 0] == geom_id) & geom).sum())
+            visible = (labels[:, :, 0] == geom_id) & geom
+            counts[name] = int(visible.sum())
+            columns = np.nonzero(visible)[1]
+            centroids[name] = float(columns.mean() / image.shape[1]) if columns.size else None
         self.record(identifier, image, source="fresh MuJoCo head camera; fixed scene/pose recipe",
                     labels=counts)
+        self.records[-1]["offline_evaluation_only_horizontal_centroids"] = centroids
 
     def recorded_frames(self, source):
         manifest = json.loads((source / "probe.json").read_text())

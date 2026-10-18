@@ -1,0 +1,16 @@
+{
+  "actual_model_calls": 8,
+  "raw_generation_records_retained": true,
+  "new_inference_in_rescoring": false,
+  "device": "cpu",
+  "dtype": "bfloat16",
+  "model_threads": 2,
+  "wall_seconds_total_calls": 343.61115571799746,
+  "wall_seconds_median_call": 39.77546904550036,
+  "wall_seconds_min_call": 36.587852247997944,
+  "wall_seconds_max_call": 63.13395696099906,
+  "generation_seconds_median": 39.44321801050137,
+  "first_load_seconds": 4.299207411997486,
+  "guard_ms_median": 32.06284349835187,
+  "note": "Planning only. Guard ran at one thread while model inference was not running in the final reproduction. Not interactive control or physical execution."
+}

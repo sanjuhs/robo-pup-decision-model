@@ -1,0 +1,115 @@
+{
+  "new_inference": false,
+  "unique_images": 3,
+  "note": "Two pairs share a baseline; not independent samples or a new model run",
+  "records": [
+    {
+      "id": "visual-choice",
+      "decision": {
+        "choice": "fetch",
+        "instruction_compliant": true,
+        "steps": [
+          {
+            "action": "look",
+            "object": "none"
+          },
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      },
+      "source": "benchmarks/vlm-2026-10-16/gpu-4090/case-002-visual-choice.json",
+      "source_sha256": "f5b50d68c601d33ed0a1d0a3515074746446d541ee74076e7992d07121cfd36e"
+    },
+    {
+      "id": "visual-choice-blank",
+      "decision": {
+        "choice": "fetch",
+        "instruction_compliant": true,
+        "steps": [
+          {
+            "action": "look",
+            "object": "none"
+          },
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      },
+      "source": "benchmarks/vlm-2026-10-16/gpu-4090/case-003-visual-choice-blank.json",
+      "source_sha256": "2eb3df93e349aafcf7625ab3246d949978580ddf837bb4c28f272f6f9b48970e"
+    },
+    {
+      "id": "visual-choice-turned",
+      "decision": {
+        "choice": "fetch",
+        "instruction_compliant": true,
+        "steps": [
+          {
+            "action": "look",
+            "object": "none"
+          },
+          {
+            "action": "fetch",
+            "object": "ball"
+          },
+          {
+            "action": "stop",
+            "object": "none"
+          }
+        ]
+      },
+      "source": "benchmarks/vlm-2026-10-16/gpu-4090/case-004-visual-choice-turned.json",
+      "source_sha256": "7124d6bccdf3f0a5ff21084dc3c474ecb670ae8d3a7ed3c9deb283ccd9e1b6af"
+    }
+  ],
+  "summary": {
+    "pairs": 2,
+    "valid_pairs": 2,
+    "decision_changed_pairs": 0,
+    "both_correct_pairs": 0,
+    "both_decisions_correct_pairs": 0,
+    "executable_plan_changed_pairs": 0,
+    "case_count": 3,
+    "correct_decision_cases": 1,
+    "correct_cases": 1,
+    "pair_results": [
+      {
+        "id": "archive-1",
+        "category": "archived_image_ablation",
+        "valid_both": true,
+        "decision_changed": false,
+        "executable_plan_changed": false,
+        "both_decisions_correct": false,
+        "both_correct": false,
+        "choices": [
+          "fetch",
+          "fetch"
+        ]
+      },
+      {
+        "id": "archive-2",
+        "category": "archived_image_ablation",
+        "valid_both": true,
+        "decision_changed": false,
+        "executable_plan_changed": false,
+        "both_decisions_correct": false,
+        "both_correct": false,
+        "choices": [
+          "fetch",
+          "fetch"
+        ]
+      }
+    ]
+  }
+}

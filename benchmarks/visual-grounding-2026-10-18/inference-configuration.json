@@ -1,0 +1,115 @@
+{
+  "recipes": [
+    {
+      "id": "missing",
+      "category": "missing_object",
+      "task": "presence",
+      "variants": [
+        {
+          "ball": [
+            1.8,
+            -0.7,
+            0.125
+          ]
+        },
+        {
+          "ball": [
+            1.8,
+            -0.7,
+            -5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "position",
+      "category": "changed_position",
+      "task": "position",
+      "variants": [
+        {
+          "ball": [
+            1.8,
+            0.7,
+            0.125
+          ]
+        },
+        {
+          "ball": [
+            1.8,
+            -0.7,
+            0.125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "occlusion",
+      "category": "occlusion",
+      "task": "presence",
+      "variants": [
+        {
+          "yaw": 90,
+          "ball": [
+            0.3,
+            0.9,
+            0.125
+          ]
+        },
+        {
+          "yaw": 90,
+          "ball": [
+            0.3,
+            1.8,
+            0.125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "novel-view",
+      "category": "unfamiliar_viewpoint",
+      "task": "position",
+      "variants": [
+        {
+          "yaw": 147,
+          "robot": [
+            -0.8,
+            -0.4
+          ],
+          "pitch": -12,
+          "relative_ball": [
+            1.8,
+            0.7,
+            0.125
+          ]
+        },
+        {
+          "yaw": 147,
+          "robot": [
+            -0.8,
+            -0.4
+          ],
+          "pitch": -12,
+          "relative_ball": [
+            1.8,
+            -0.7,
+            0.125
+          ]
+        }
+      ]
+    }
+  ],
+  "truth_min_pixels": 64,
+  "guard_thresholds": {
+    "posterior_threshold": 0.9,
+    "minimum_area_fraction": 0.00043402777777777775,
+    "minimum_pixels": 4
+  },
+  "source_commit": "9a5ca61b09c81f146e2fa166c160fd6b19844a33",
+  "script_sha256": "72dbd7a2bd3f4c43c96e14489c3646a7a178d310f36dd4c29ff92f3158b16a06",
+  "scorer_sha256": "15085f217e88d80a7929069f99dc9388411edcc2eabe73f7928f7db13eee2244",
+  "torch": "2.9.0+cpu",
+  "mujoco": "3.3.7",
+  "mujoco_gl": "egl",
+  "threads": 1
+}

@@ -1,0 +1,63 @@
+{
+  "id": "position-1",
+  "image_sha256": "5078a1f092f530beab13398c48c70898cbf0097c9f6d215c133b5ff367e10da9",
+  "actual_inference_attempted": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Look at the red ball, determine its position, and turn accordingly. If the ball is on the left, turn left; if on the right, turn right. If the ball is not visible, look at the arena.\",\n  \"steps\": [\n    {\n      \"action\": \"look\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"turn_left\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"turn_right\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"approach\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 63130.37024699952,
+      "queue": 0.0010920011845882982,
+      "total": 63132.045628000924
+    },
+    "metadata": {
+      "input_tokens": 1123,
+      "output_tokens": 157,
+      "device": "cpu",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "bfloat16",
+      "cpu_threads_config": 2,
+      "cpu_threads": 2,
+      "max_generation_seconds": 300,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": null,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "decision": {
+    "choice": "other",
+    "steps": [
+      {
+        "action": "look",
+        "object": "none"
+      },
+      {
+        "action": "turn_left",
+        "object": "none"
+      },
+      {
+        "action": "turn_right",
+        "object": "none"
+      },
+      {
+        "action": "approach",
+        "object": "ball"
+      },
+      {
+        "action": "stop",
+        "object": "none"
+      }
+    ]
+  },
+  "wall_ms": 63133.95696099906
+}

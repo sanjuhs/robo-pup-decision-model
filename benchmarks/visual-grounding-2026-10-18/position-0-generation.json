@@ -1,0 +1,55 @@
+{
+  "id": "position-0",
+  "image_sha256": "5a8da8e02106fd95de602950fc931f9de05b28156541df9b0ce154fb46459c66",
+  "actual_inference_attempted": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Look at the red ball, then turn left if it is on the left half of the image, otherwise turn right. If the ball is not visible, look at the scene.\",\n  \"steps\": [\n    {\n      \"action\": \"look\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"turn_left\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"turn_right\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 46347.934722998616,
+      "queue": 0.0010209987522102892,
+      "total": 46349.78235199742
+    },
+    "metadata": {
+      "input_tokens": 1123,
+      "output_tokens": 111,
+      "device": "cpu",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "bfloat16",
+      "cpu_threads_config": 2,
+      "cpu_threads": 2,
+      "max_generation_seconds": 300,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": null,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "decision": {
+    "choice": "other",
+    "steps": [
+      {
+        "action": "look",
+        "object": "none"
+      },
+      {
+        "action": "turn_left",
+        "object": "none"
+      },
+      {
+        "action": "turn_right",
+        "object": "none"
+      }
+    ]
+  },
+  "wall_ms": 46351.51792599936
+}

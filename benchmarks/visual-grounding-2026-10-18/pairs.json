@@ -1,0 +1,543 @@
+[
+  {
+    "id": "missing",
+    "category": "missing_object",
+    "task": "presence",
+    "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+    "energy": 0.9,
+    "held": false,
+    "cases": [
+      {
+        "id": "missing-0",
+        "image": "missing-0-rgb.png",
+        "sha256": "5078a1f092f530beab13398c48c70898cbf0097c9f6d215c133b5ff367e10da9",
+        "expected_decision": "fetch",
+        "offline_truth_ball_pixels": 902,
+        "offline_truth_ball_x": 0.7446242147080562,
+        "guard": {
+          "gate": "accept",
+          "outcome": "correct_accept",
+          "reason": null
+        },
+        "guard_report": {
+          "source": "learned arena pixel classifier applied to eye RGB",
+          "checkpoint_version": "arena-rgb-transformer-v4",
+          "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+          "trained_parameters": 821,
+          "width": 384,
+          "height": 384,
+          "thresholds": {
+            "posterior": 0.9,
+            "minimum_area_fraction": 0.00043402777777777775,
+            "minimum_connected_pixels": 64
+          },
+          "objects": {
+            "ball": {
+              "visible": true,
+              "confident_pixels": 821,
+              "largest_component_pixels": 821,
+              "maximum_posterior": 0.9865828156471252,
+              "mean_qualified_posterior": 0.9685915112495422
+            },
+            "crate": {
+              "visible": true,
+              "confident_pixels": 3055,
+              "largest_component_pixels": 3055,
+              "maximum_posterior": 0.9808290600776672,
+              "mean_qualified_posterior": 0.9706034064292908
+            },
+            "home": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.0006462477031163871,
+              "mean_qualified_posterior": null
+            },
+            "beacon": {
+              "visible": true,
+              "confident_pixels": 207,
+              "largest_component_pixels": 207,
+              "maximum_posterior": 0.9973155856132507,
+              "mean_qualified_posterior": 0.964785635471344
+            }
+          },
+          "visible_objects": [
+            "ball",
+            "crate",
+            "beacon"
+          ],
+          "coordinates_used": false,
+          "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+        },
+        "guard_ms": 32.26551899933838
+      },
+      {
+        "id": "missing-1",
+        "image": "missing-1-rgb.png",
+        "sha256": "f6cc1c151f0f3bec82f5f5e41de50175734c2358bcedc99180eddc71d131b62e",
+        "expected_decision": "look",
+        "offline_truth_ball_pixels": 0,
+        "offline_truth_ball_x": null,
+        "guard": {
+          "gate": "reject_ungrounded",
+          "outcome": "correct_abstention",
+          "reason": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first"
+        },
+        "guard_report": {
+          "source": "learned arena pixel classifier applied to eye RGB",
+          "checkpoint_version": "arena-rgb-transformer-v4",
+          "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+          "trained_parameters": 821,
+          "width": 384,
+          "height": 384,
+          "thresholds": {
+            "posterior": 0.9,
+            "minimum_area_fraction": 0.00043402777777777775,
+            "minimum_connected_pixels": 64
+          },
+          "objects": {
+            "ball": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.5353932976722717,
+              "mean_qualified_posterior": null
+            },
+            "crate": {
+              "visible": true,
+              "confident_pixels": 3055,
+              "largest_component_pixels": 3055,
+              "maximum_posterior": 0.9808290600776672,
+              "mean_qualified_posterior": 0.9706034064292908
+            },
+            "home": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.0006462477031163871,
+              "mean_qualified_posterior": null
+            },
+            "beacon": {
+              "visible": true,
+              "confident_pixels": 207,
+              "largest_component_pixels": 207,
+              "maximum_posterior": 0.9973155856132507,
+              "mean_qualified_posterior": 0.964785635471344
+            }
+          },
+          "visible_objects": [
+            "crate",
+            "beacon"
+          ],
+          "coordinates_used": false,
+          "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+        },
+        "guard_ms": 23.609402000147384
+      }
+    ]
+  },
+  {
+    "id": "position",
+    "category": "changed_position",
+    "task": "position",
+    "instruction": "Inspect the image. If a red ball is visible on the left half of the image, turn left then stop. If it is on the right half, turn right then stop. If you cannot see a red ball, look then stop. Do not fetch it.",
+    "energy": 0.9,
+    "held": false,
+    "cases": [
+      {
+        "id": "position-0",
+        "image": "position-0-rgb.png",
+        "sha256": "5a8da8e02106fd95de602950fc931f9de05b28156541df9b0ce154fb46459c66",
+        "expected_decision": "turn_left",
+        "offline_truth_ball_pixels": 902,
+        "offline_truth_ball_x": 0.25277161862527714,
+        "guard": {
+          "gate": "accept",
+          "outcome": "correct_accept",
+          "reason": null
+        },
+        "guard_report": {
+          "source": "learned arena pixel classifier applied to eye RGB",
+          "checkpoint_version": "arena-rgb-transformer-v4",
+          "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+          "trained_parameters": 821,
+          "width": 384,
+          "height": 384,
+          "thresholds": {
+            "posterior": 0.9,
+            "minimum_area_fraction": 0.00043402777777777775,
+            "minimum_connected_pixels": 64
+          },
+          "objects": {
+            "ball": {
+              "visible": true,
+              "confident_pixels": 818,
+              "largest_component_pixels": 818,
+              "maximum_posterior": 0.9923729300498962,
+              "mean_qualified_posterior": 0.9688133597373962
+            },
+            "crate": {
+              "visible": true,
+              "confident_pixels": 3055,
+              "largest_component_pixels": 3055,
+              "maximum_posterior": 0.9808290600776672,
+              "mean_qualified_posterior": 0.9706034064292908
+            },
+            "home": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.0006462477031163871,
+              "mean_qualified_posterior": null
+            },
+            "beacon": {
+              "visible": true,
+              "confident_pixels": 176,
+              "largest_component_pixels": 176,
+              "maximum_posterior": 0.9973155856132507,
+              "mean_qualified_posterior": 0.9703913331031799
+            }
+          },
+          "visible_objects": [
+            "ball",
+            "crate",
+            "beacon"
+          ],
+          "coordinates_used": false,
+          "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+        },
+        "guard_ms": 33.556323000084376
+      },
+      {
+        "id": "position-1",
+        "image": "position-1-rgb.png",
+        "sha256": "5078a1f092f530beab13398c48c70898cbf0097c9f6d215c133b5ff367e10da9",
+        "expected_decision": "turn_right",
+        "offline_truth_ball_pixels": 902,
+        "offline_truth_ball_x": 0.7446242147080562,
+        "guard": {
+          "gate": "accept",
+          "outcome": "correct_accept",
+          "reason": null
+        },
+        "guard_report": {
+          "source": "learned arena pixel classifier applied to eye RGB",
+          "checkpoint_version": "arena-rgb-transformer-v4",
+          "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+          "trained_parameters": 821,
+          "width": 384,
+          "height": 384,
+          "thresholds": {
+            "posterior": 0.9,
+            "minimum_area_fraction": 0.00043402777777777775,
+            "minimum_connected_pixels": 64
+          },
+          "objects": {
+            "ball": {
+              "visible": true,
+              "confident_pixels": 821,
+              "largest_component_pixels": 821,
+              "maximum_posterior": 0.9865828156471252,
+              "mean_qualified_posterior": 0.9685915112495422
+            },
+            "crate": {
+              "visible": true,
+              "confident_pixels": 3055,
+              "largest_component_pixels": 3055,
+              "maximum_posterior": 0.9808290600776672,
+              "mean_qualified_posterior": 0.9706034064292908
+            },
+            "home": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.0006462477031163871,
+              "mean_qualified_posterior": null
+            },
+            "beacon": {
+              "visible": true,
+              "confident_pixels": 207,
+              "largest_component_pixels": 207,
+              "maximum_posterior": 0.9973155856132507,
+              "mean_qualified_posterior": 0.964785635471344
+            }
+          },
+          "visible_objects": [
+            "ball",
+            "crate",
+            "beacon"
+          ],
+          "coordinates_used": false,
+          "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+        },
+        "guard_ms": 37.70449500007089
+      }
+    ]
+  },
+  {
+    "id": "occlusion",
+    "category": "occlusion",
+    "task": "presence",
+    "instruction": "Inspect the image. If you see a red ball, fetch it then stop. If you cannot see a red ball, look then stop.",
+    "energy": 0.9,
+    "held": false,
+    "cases": [
+      {
+        "id": "occlusion-0",
+        "image": "occlusion-0-rgb.png",
+        "sha256": "c138f2beef9aa9351618f9dfe83f8497c62f8c7d77ee98b98838a26dbb41d0e1",
+        "expected_decision": "fetch",
+        "offline_truth_ball_pixels": 6557,
+        "offline_truth_ball_x": 0.7770572003202685,
+        "guard": {
+          "gate": "accept",
+          "outcome": "correct_accept",
+          "reason": null
+        },
+        "guard_report": {
+          "source": "learned arena pixel classifier applied to eye RGB",
+          "checkpoint_version": "arena-rgb-transformer-v4",
+          "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+          "trained_parameters": 821,
+          "width": 384,
+          "height": 384,
+          "thresholds": {
+            "posterior": 0.9,
+            "minimum_area_fraction": 0.00043402777777777775,
+            "minimum_connected_pixels": 64
+          },
+          "objects": {
+            "ball": {
+              "visible": true,
+              "confident_pixels": 6382,
+              "largest_component_pixels": 6382,
+              "maximum_posterior": 0.9938026666641235,
+              "mean_qualified_posterior": 0.9794827103614807
+            },
+            "crate": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.07175630331039429,
+              "mean_qualified_posterior": null
+            },
+            "home": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.021542081609368324,
+              "mean_qualified_posterior": null
+            },
+            "beacon": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.05300302803516388,
+              "mean_qualified_posterior": null
+            }
+          },
+          "visible_objects": [
+            "ball"
+          ],
+          "coordinates_used": false,
+          "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+        },
+        "guard_ms": 37.73180600182968
+      },
+      {
+        "id": "occlusion-1",
+        "image": "occlusion-1-rgb.png",
+        "sha256": "a39576ec5300ac2ac2c8eae64d0c13c3b6099ca3247baa7bbdccd7996b1fd680",
+        "expected_decision": "look",
+        "offline_truth_ball_pixels": 0,
+        "offline_truth_ball_x": null,
+        "guard": {
+          "gate": "reject_ungrounded",
+          "outcome": "correct_abstention",
+          "reason": "Cannot start fetch: ball is not grounded in the current eye image; look or turn first"
+        },
+        "guard_report": {
+          "source": "learned arena pixel classifier applied to eye RGB",
+          "checkpoint_version": "arena-rgb-transformer-v4",
+          "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+          "trained_parameters": 821,
+          "width": 384,
+          "height": 384,
+          "thresholds": {
+            "posterior": 0.9,
+            "minimum_area_fraction": 0.00043402777777777775,
+            "minimum_connected_pixels": 64
+          },
+          "objects": {
+            "ball": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.04176799952983856,
+              "mean_qualified_posterior": null
+            },
+            "crate": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.011279805563390255,
+              "mean_qualified_posterior": null
+            },
+            "home": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.021542081609368324,
+              "mean_qualified_posterior": null
+            },
+            "beacon": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.021765217185020447,
+              "mean_qualified_posterior": null
+            }
+          },
+          "visible_objects": [],
+          "coordinates_used": false,
+          "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+        },
+        "guard_ms": 27.266585999313975
+      }
+    ]
+  },
+  {
+    "id": "novel-view",
+    "category": "unfamiliar_viewpoint",
+    "task": "position",
+    "instruction": "Inspect the image. If a red ball is visible on the left half of the image, turn left then stop. If it is on the right half, turn right then stop. If you cannot see a red ball, look then stop. Do not fetch it.",
+    "energy": 0.9,
+    "held": false,
+    "cases": [
+      {
+        "id": "novel-view-0",
+        "image": "novel-view-0-rgb.png",
+        "sha256": "9b39f57e277a9cf0f8f4cd6a67da796cf703cfe9a36d1bb9d0b4a484b9e2e144",
+        "expected_decision": "turn_left",
+        "offline_truth_ball_pixels": 924,
+        "offline_truth_ball_x": 0.25354268127705626,
+        "guard": {
+          "gate": "accept",
+          "outcome": "correct_accept",
+          "reason": null
+        },
+        "guard_report": {
+          "source": "learned arena pixel classifier applied to eye RGB",
+          "checkpoint_version": "arena-rgb-transformer-v4",
+          "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+          "trained_parameters": 821,
+          "width": 384,
+          "height": 384,
+          "thresholds": {
+            "posterior": 0.9,
+            "minimum_area_fraction": 0.00043402777777777775,
+            "minimum_connected_pixels": 64
+          },
+          "objects": {
+            "ball": {
+              "visible": true,
+              "confident_pixels": 825,
+              "largest_component_pixels": 825,
+              "maximum_posterior": 0.9805670380592346,
+              "mean_qualified_posterior": 0.9625102281570435
+            },
+            "crate": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.06981520354747772,
+              "mean_qualified_posterior": null
+            },
+            "home": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.00013044278603047132,
+              "mean_qualified_posterior": null
+            },
+            "beacon": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.0032362763304263353,
+              "mean_qualified_posterior": null
+            }
+          },
+          "visible_objects": [
+            "ball"
+          ],
+          "coordinates_used": false,
+          "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+        },
+        "guard_ms": 31.86016799736535
+      },
+      {
+        "id": "novel-view-1",
+        "image": "novel-view-1-rgb.png",
+        "sha256": "d573540c2e7b56bf1d332816ddbf0f0a9c1c6885d96a2e8001351c7fd7c6dd42",
+        "expected_decision": "turn_right",
+        "offline_truth_ball_pixels": 921,
+        "offline_truth_ball_x": 0.7438076818675353,
+        "guard": {
+          "gate": "accept",
+          "outcome": "correct_accept",
+          "reason": null
+        },
+        "guard_report": {
+          "source": "learned arena pixel classifier applied to eye RGB",
+          "checkpoint_version": "arena-rgb-transformer-v4",
+          "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+          "trained_parameters": 821,
+          "width": 384,
+          "height": 384,
+          "thresholds": {
+            "posterior": 0.9,
+            "minimum_area_fraction": 0.00043402777777777775,
+            "minimum_connected_pixels": 64
+          },
+          "objects": {
+            "ball": {
+              "visible": true,
+              "confident_pixels": 825,
+              "largest_component_pixels": 825,
+              "maximum_posterior": 0.9834083318710327,
+              "mean_qualified_posterior": 0.9656485319137573
+            },
+            "crate": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.0735812857747078,
+              "mean_qualified_posterior": null
+            },
+            "home": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.00013044278603047132,
+              "mean_qualified_posterior": null
+            },
+            "beacon": {
+              "visible": false,
+              "confident_pixels": 0,
+              "largest_component_pixels": 0,
+              "maximum_posterior": 0.0035253921523690224,
+              "mean_qualified_posterior": null
+            }
+          },
+          "visible_objects": [
+            "ball"
+          ],
+          "coordinates_used": false,
+          "limitation": "Bounded arena colours; not visible means ungrounded, not nonexistent"
+        },
+        "guard_ms": 29.100594998453744
+      }
+    ]
+  }
+]

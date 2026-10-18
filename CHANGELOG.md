@@ -284,3 +284,14 @@ for release source `0a9beda`: 30 Python and 18 browser/render tests.
 
 See [benchmarks](docs/BENCHMARKS.md), [validation](docs/VALIDATION.md), and
 [feature status](docs/STATUS.md) for protocols, failures, cost estimates, and limits.
+
+## 2026-10-18 — Paired visual decision diagnostics
+
+- Added reproducible image pairs and independent raw-VLM / fixed-candidate gate
+  scoring, with frozen image hashes and retained generation failures.
+- Reused the existing eye evaluator and Qwen runtime; added offline pixel
+  centroids for image-side truth and a cheap no-model CI evaluation.
+- Added tests for unchanged hallucinated plans, contradictory decisions, missing
+  generations, shared baselines, gate abstentions and the inference input boundary.
+- No model training, guard threshold changes, or physical behavior improvements
+  are claimed by these evaluation changes.
