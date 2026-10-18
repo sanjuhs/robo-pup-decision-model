@@ -1,0 +1,12 @@
+{
+  "source": "existing frozen pixel gate, fixed fetch candidates, held=False",
+  "reused_observations_from_dataset": false,
+  "summary": {
+    "correct_accept": 6,
+    "unsafe_accept": 0,
+    "false_abstention": 0,
+    "correct_abstention": 2
+  },
+  "semantic_absence_rejections": 0,
+  "note": "reject_ungrounded is abstention, not proof of absence; no action executed"
+}

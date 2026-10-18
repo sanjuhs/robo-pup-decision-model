@@ -1,0 +1,47 @@
+{
+  "id": "novel-view-1",
+  "image_sha256": "d573540c2e7b56bf1d332816ddbf0f0a9c1c6885d96a2e8001351c7fd7c6dd42",
+  "actual_inference_attempted": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Look at the red ball and determine its position. If it is on the left half, turn left; if on the right half, turn right. If the ball is not visible, look at the arena.\",\n  \"steps\": [\n    {\n      \"action\": \"look\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 36767.61953499954,
+      "queue": 0.001272001100005582,
+      "total": 36769.19738400102
+    },
+    "metadata": {
+      "input_tokens": 1123,
+      "output_tokens": 79,
+      "device": "cpu",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "bfloat16",
+      "cpu_threads_config": 2,
+      "cpu_threads": 2,
+      "max_generation_seconds": 300,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": null,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "decision": {
+    "choice": "other",
+    "steps": [
+      {
+        "action": "look",
+        "object": "none"
+      }
+    ]
+  },
+  "wall_ms": 36770.85381999859
+}

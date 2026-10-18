@@ -25,6 +25,8 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1-mesa-dri
       - run: ROBOPUP_MJX=1 bash scripts/setup.sh
       - run: uv run --frozen --extra dev --extra mjx ruff check src scripts tests services
+      - name: Counterfactual scene and archived-model scoring (no VLM inference)
+        run: uv run --frozen --extra dev --extra mjx python scripts/evaluate_visual_grounding.py --out artifacts/visual-grounding-ci --replay-original
       - run: npx playwright install --with-deps chromium
         working-directory: web
       - run: npm test

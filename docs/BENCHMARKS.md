@@ -520,3 +520,17 @@ uv run python -m robopup.tasks --model artifacts/recheck/curious/policy.zip --ou
 Training is seeded but bitwise reproducibility across platforms is not guaranteed.
 The earliest run predates source-hash capture and has weaker provenance; later
 runs include source digests. No checkpoint or prior result is overwritten.
+
+## 2026-10-18 paired visual decisions
+
+[Executed evidence](../benchmarks/visual-grounding-2026-10-18/README.md): eight
+genuine CPU Qwen calls over four paired interventions (seven unique RGB images),
+0/4 both-correct pairs, 2/8 correct branch decisions, 1/8 strict instruction
+successes; 2/4 executable-plan changes but no semantic-choice changes. The fixed
+fetch guard independently had 6 correct accepts and 2 correct abstentions, with
+zero unsafe accepts/false abstentions. Median call wall time: 39.775 s on CPU
+bfloat16. These are new raw model decisions and separate guard measurements, not
+new physical mission or interactive GPU results. Archived genuine outputs are
+re-scored separately; no model training or threshold changes occurred. See the
+[reproduction protocol](VISUAL_GROUNDING_EVALUATION.md) for compute-free scoring
+and opt-in actual inference.

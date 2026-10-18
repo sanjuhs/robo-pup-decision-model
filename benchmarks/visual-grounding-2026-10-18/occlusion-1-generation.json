@@ -1,0 +1,55 @@
+{
+  "id": "occlusion-1",
+  "image_sha256": "a39576ec5300ac2ac2c8eae64d0c13c3b6099ca3247baa7bbdccd7996b1fd680",
+  "actual_inference_attempted": true,
+  "generation": {
+    "raw_text": "```json\n{\n  \"summary\": \"Look at the red ball, then fetch it and stop.\",\n  \"steps\": [\n    {\n      \"action\": \"look\",\n      \"object\": \"none\"\n    },\n    {\n      \"action\": \"fetch\",\n      \"object\": \"ball\"\n    },\n    {\n      \"action\": \"stop\",\n      \"object\": \"none\"\n    }\n  ]\n}\n```",
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "provider": "transformers-local",
+    "timing_ms": {
+      "load": 0.0,
+      "generation": 39493.45617400104,
+      "queue": 0.0015029982023406774,
+      "total": 39495.11492399688
+    },
+    "metadata": {
+      "input_tokens": 1098,
+      "output_tokens": 85,
+      "device": "cpu",
+      "deterministic_decoding": true,
+      "parameter_count": 2127532032,
+      "dtype": "torch.bfloat16",
+      "dtype_config": "bfloat16",
+      "cpu_threads_config": 2,
+      "cpu_threads": 2,
+      "max_generation_seconds": 300,
+      "timeout_is_cooperative": true,
+      "token_limit_reached": false,
+      "time_limit_reached": false,
+      "truncated": false,
+      "peak_cuda_allocated_bytes": null,
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "image_width": 384,
+      "image_height": 384,
+      "max_new_tokens": 256
+    }
+  },
+  "decision": {
+    "choice": "fetch",
+    "steps": [
+      {
+        "action": "look",
+        "object": "none"
+      },
+      {
+        "action": "fetch",
+        "object": "ball"
+      },
+      {
+        "action": "stop",
+        "object": "none"
+      }
+    ]
+  },
+  "wall_ms": 39496.82959599886
+}

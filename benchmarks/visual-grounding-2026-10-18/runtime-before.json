@@ -1,0 +1,18 @@
+{
+  "ready": true,
+  "phase": "available",
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "available": true,
+  "status": "available",
+  "reason": "Local checkpoint available; it has not been loaded or tested by this process",
+  "provider": "transformers-local",
+  "model_loaded": false,
+  "checkpoint_available": true,
+  "dependencies_available": true,
+  "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "detail": "Local checkpoint available; it has not been loaded or tested by this process",
+  "last_error": null,
+  "dtype_config": "bfloat16",
+  "cpu_threads_config": 2,
+  "max_generation_seconds": 300
+}

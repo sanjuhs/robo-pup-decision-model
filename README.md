@@ -291,3 +291,10 @@ Original code and primitive geometry: [MIT](LICENSE). Dependencies retain their
 own licenses; see [third-party notices](THIRD_PARTY_NOTICES.md). The project is
 named RoboPup Arena; its connected GitHub repository is
 `sanjuhs/robo-pup-decision-model`.
+
+### Counterfactual visual-grounding evaluation
+
+The [paired evaluation guide](docs/VISUAL_GROUNDING_EVALUATION.md) separates raw
+Qwen decisions from the existing visibility gate, using missing targets, changed
+positions, occlusion and a rotated/pitched viewpoint. It reuses existing rendering,
+labels, guard and archived model probes; genuine inference is opt-in.

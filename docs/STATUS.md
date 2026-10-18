@@ -1,6 +1,6 @@
 # Prototype status
 
-Updated 2026-10-16. The native arena now has a **genuine pretrained Qwen3-VL
+Updated 2026-10-18 (mission evidence below remains from 2026-10-16). The native arena now has a **genuine pretrained Qwen3-VL
 vision-language planner**, alongside the compact trained v4 planner and PPO motor.
 A real model-generated fetch → hop → stop mission passed on CPU and an RTX 4090.
 The GPU trial took **23.45 wall seconds for 19.98 simulated seconds**, with physics
@@ -13,6 +13,18 @@ contact/lift/release/landing checks are retained with the
 [full actual recording](../benchmarks/vlm-2026-10-16/browser-guarded/actual-run.webm).
 This confirms one complete browser workflow, with long CPU waits; it does not
 establish interactive GPU latency or broad VLM task reliability.
+
+**New 2026-10-18 counterfactual evidence:** eight genuine CPU Qwen calls on
+four image pairs produced **0/4 both-correct pairs**, **2/8 correct visual branch
+decisions** and **1/8 strict instruction-following cases**. Executable plans
+changed in 2/4 pairs but semantic choices did not change. Independently, the
+existing fixed-fetch gate had 6 correct accepts and 2 correct abstentions, with
+no unsafe accepts or false abstentions. Eight cases contain seven unique images;
+all still use the arena renderer. Median Qwen call wall time was 39.775 seconds
+on CPU bfloat16; these were planning calls, not physical missions. Raw outputs,
+replay-vs-inference provenance, limitations and checks are in the
+[paired evaluation record](../benchmarks/visual-grounding-2026-10-18/README.md)
+and [protocol](VISUAL_GROUNDING_EVALUATION.md). No model or guard training is claimed.
 
 **Reliable visual planning remains incomplete:** a conditional command produced
 the same look/fetch/stop plan for real, blank and turned images. The blank-image
@@ -47,7 +59,7 @@ and the evidence.
 | Voice | Offline English PocketSphinx command grammar; synthetic fixture tested. Transcript requires Send; human accent/noise accuracy unmeasured |
 | Browser presentation | Original procedural research robot with head optics and the existing contact-gated magnetic lifting tool; alternate golden-puppy skin remains selectable. Geometry follows physical poses |
 | Appearance boundary | No photoreal dog, downloaded anatomical asset or independently simulated six-axis picking arm is claimed |
-| Application checks | Latest full Python suite: **226 passed in 23.60 s**, with explicit dev/MJX/VLM extras; Ruff passed. Isolated browser suite: **21/21 in 117.847 s**; initial timeout retained |
+| Application checks | Latest full Python suite: **237 passed in 12.98 s** (2026-10-18), with dev/MJX/VLM dependencies installed; Ruff passed. Browser code unchanged; earlier isolated browser suite: **21/21 in 117.847 s**; initial timeout retained |
 | Genuine VLM browser | Guarded actual-Qwen mission passed on CPU with no model-response fixture or reset; **403.790 s** mission wall, **0.3621 m** held lift, fetch release **0.3901 m** from home, **0.28 s** hop flight and four-foot landing |
 | Participants | Independent browser worlds and fresh-policy experiments. Earlier five-browser isolation and short compact-v4 capacity probes passed; no shared world or VLM multi-user capacity measurement |
 | Local model serving | Private `/v1/chat/completions` route serves the configured local VLM; mandatory workshop key, bounded inline PNG/text requests and two pending/running serving slots. Controlled-adapter HTTP tests cover its contract |
@@ -66,7 +78,7 @@ research scaffold. The small live model is `ArenaPlannerV4`; the optional large
 model is an unchanged pretrained Qwen checkpoint. Their checkpoints and training
 claims are separate.
 
-The latest full local suite passed **226 Python tests in 23.60 seconds**, with
+The 2026-10-16 full local suite passed **226 Python tests in 23.60 seconds**, with
 explicit dev/MJX/VLM extras; the browser/render suite passed **21 checks**. The first browser-suite run had twenty passes and a puppy-control
 30-second timeout; the unchanged targeted and isolated full reruns passed, without
 altering assertions, physical thresholds or test timeouts. That fixture-based
@@ -80,7 +92,7 @@ Hosted checks passed for guard source `2c0eeffa58ccf35fde7ae0ca00aecbd8a0f684f5`
 ([run 38921051265](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38921051265)).
 The final runtime/frontend source `8ef5721cbdefe36f7f575ca0d721d9d74f66fdc0`
 also passed [run 38921897635](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38921897635).
-The latest [full local 226-test record](../benchmarks/vlm-2026-10-16/final-local-validation.json)
+The 2026-10-16 [full local 226-test record](../benchmarks/vlm-2026-10-16/final-local-validation.json)
 includes the credential-scanner changes. Its source
 `77bf40c1f0819cab5175621d3090d2991b850eae` also **passed**
 [run 38923264485](https://github.com/sanjuhs/robo-pup-decision-model/actions/runs/38923264485),
@@ -93,3 +105,6 @@ photoreal assets, real mobile FPS, human voice accuracy, Windows/Apple Silicon
 installation, long-duration concurrent VLM planning or a full two-hour workshop
 soak. The private workshop server has a 12-session limit and optional workshop
 access-key/origin controls; it is not a multi-tenant public robotics service.
+
+The 2026-10-18 evaluation changes passed **237 local tests in 12.98 s** and Ruff.
+Hosted checks for this new branch are separate from the October 16 runs above.

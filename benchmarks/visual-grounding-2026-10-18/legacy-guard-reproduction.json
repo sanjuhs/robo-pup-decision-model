@@ -1,0 +1,100 @@
+{
+  "configuration": {
+    "posterior_threshold": 0.9,
+    "minimum_area_fraction": 0.00043402777777777775,
+    "minimum_pixels": 4,
+    "fresh_positions": [
+      [
+        -0.45,
+        0.2
+      ],
+      [
+        0.55,
+        -0.3
+      ],
+      [
+        -0.2,
+        -0.55
+      ]
+    ],
+    "fresh_yaw_degrees": [
+      -80,
+      -25,
+      25,
+      105,
+      180
+    ],
+    "seed_start": 1741,
+    "occlusion_seed": 1839,
+    "occlusion_robot_position": [
+      0,
+      0
+    ],
+    "occlusion_robot_yaw_degrees": 90,
+    "occlusion_ball_positions": [
+      [
+        0.3,
+        0.9,
+        0.125
+      ],
+      [
+        0.3,
+        1.8,
+        0.125
+      ]
+    ],
+    "thresholds_frozen_before_fresh_rendering": true
+  },
+  "checkpoint_sha256": "a464d92e975ee86ae297ddc23ddab10b52c2f83460550468317b37f3f2b1ae89",
+  "implementation_sha256": "e5c014f9dead7d4b436411ba9e7e98ddf5bac478ff7cbd7e71513bd62dbe3a5f",
+  "evaluation_script_sha256": "d4cfe606dd32ed7e01cca48bf7dd6bd1c4fd7e342159159e6fc7f137f926552b",
+  "runtime": {
+    "torch": "2.9.0+cpu",
+    "device": "cpu",
+    "threads": 1,
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "mujoco_gl": "egl"
+  },
+  "trained_pixel_parameters": 821,
+  "new_training_performed": false,
+  "model_input": "RGB image only; no coordinates, IDs, segmentation or target truth",
+  "evaluation_labels": "Renderer IDs only count true object pixels offline in fresh frames",
+  "fresh_cases": 17,
+  "recorded_gpu_cases": 7,
+  "fresh_summary_at_ground_truth_min64_pixels": {
+    "ball": {
+      "visible_truth_min64": 5,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 12
+    },
+    "crate": {
+      "visible_truth_min64": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 13
+    },
+    "home": {
+      "visible_truth_min64": 6,
+      "true_positive": 6,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 11
+    },
+    "beacon": {
+      "visible_truth_min64": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 14
+    }
+  },
+  "limitations": [
+    "18 positive and 50 negative same-colour/renderer checks, not generalization evidence",
+    "Posterior/area thresholds are engineering abstention rules, not probability calibration",
+    "No grounding can mean an occluded, small, shadowed or out-of-domain object",
+    "Visibility does not establish task completion or prevent repeats of a visible target"
+  ]
+}

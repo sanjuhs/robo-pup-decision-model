@@ -1,0 +1,18 @@
+{
+  "python_suite": "237 passed, 5 warnings in 12.98s",
+  "python_command": "env -u ALL_PROXY -u all_proxy -u HTTPS_PROXY -u https_proxy -u HTTP_PROXY -u http_proxy MUJOCO_GL=egl uv run --no-sync pytest -q",
+  "extras_installed": [
+    "dev",
+    "mjx",
+    "vlm"
+  ],
+  "ruff_command": "uv run --no-sync ruff check src tests scripts",
+  "ruff": "passed",
+  "diff_check": "passed",
+  "image_reproduction": "8/8 case image hashes identical; 7 unique RGB images",
+  "score_reproduction": "exact final summary equality from retained actual generation records",
+  "model_inference": "8 actual CPU calls; separate from controlled unit tests and archived replay",
+  "browser_tests": "not rerun; no browser code changed",
+  "paid_compute_allocated": false,
+  "hosted_ci": "not checked yet"
+}
